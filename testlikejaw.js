@@ -65,9 +65,9 @@ app.post('/register', function(request, response){
     var username=request.body.username;
     var userpass=request.body.userpass;
     var useremail=request.body.useremail;
-    var userplace=request.body.userplace;
     var userphone=request.body.userphone;
-    console.log(request.body.username);
+    var userplace=request.body.userplace;
+    console.log(request.body.userplace);
     console.log("okkkkkkkkkk");
     let query1 = "INSERT INTO customer (username,useremail,userpass,userphone,userplace) VALUES('"+username
     +"','"+useremail+"','"+userpass+"','"+userphone+"','"+userplace+"') ";
