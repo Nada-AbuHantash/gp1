@@ -90,6 +90,67 @@ app.post('/register', function(request, response){
         //return response;
     });
 });
+app.post('/registerdelivery', function(request, response){
+    console.log("sgin");
+    var username=request.body.deliveryname;
+    var userpass=request.body.deliverypass;
+    var useremail=request.body.deliveryemail;
+    var userphone=request.body.deliveryphone;
+    var userplace=request.body.deliveryplace;
+    console.log(request.body.deliveryplace);
+    console.log("okkkkkkkkkk");
+    let query1 = "INSERT INTO delivery (deliveryname,deliveryemail,deliverypass,deliveryphone,deliveryplace) VALUES('"+username
+    +"','"+useremail+"','"+userpass+"','"+userphone+"','"+userplace+"') ";
+    //let query1="Select * from nada where name=? and pass=?";
+    
+    pool.query(query1,[username,useremail,userpass,userphone,userplace],function(error,data,results){
+        console.log("done qurey");
+        
+        // if (error || error.code=="ER_DUP_ENTRY") {
+        //     response.status(400).send("falid");
+        //     console.log("falid");
+        // }
+        if ( error ){
+            response.status(400).send('Error in database operation');
+        }
+        else{
+            response.send("Success");
+
+        }
+        //return response;
+    });
+});
+
+app.post('/registerseller', function(request, response){
+    console.log("sgin");
+    var username=request.body.sellername;
+    var userpass=request.body.sellerpass;
+    var useremail=request.body.selleremail;
+    var userphone=request.body.sellerphone;
+    var userplace=request.body.sellerplace;
+    console.log(request.body.sellerplace);
+    console.log("okkkkkkkkkk");
+    let query1 = "INSERT INTO sellers (sellername,selleremail,sellerpass,sellerphone,sellerplace) VALUES('"+username
+    +"','"+useremail+"','"+userpass+"','"+userphone+"','"+userplace+"') ";
+    //let query1="Select * from nada where name=? and pass=?";
+    
+    pool.query(query1,[username,useremail,userpass,userphone,userplace],function(error,data,results){
+        console.log("done qurey");
+        
+        // if (error || error.code=="ER_DUP_ENTRY") {
+        //     response.status(400).send("falid");
+        //     console.log("falid");
+        // }
+        if ( error ){
+            response.status(400).send('Error in database operation');
+        }
+        else{
+            response.send("Success");
+
+        }
+        //return response;
+    });
+});
 app.listen(3000, function () {
     console.log('Express server is listening on port 3000');
 });
