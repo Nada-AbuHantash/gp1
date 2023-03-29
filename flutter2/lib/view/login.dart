@@ -10,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'package:flutter2/view/mainpage.dart';
-
+rest_api fetch=new rest_api();
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
 
@@ -22,6 +22,7 @@ class _loginState extends State<login> {
   final TextEditingController emailcntoraler = TextEditingController();
   final TextEditingController passcntoraler = TextEditingController();
   bool showSpinner = false;
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -181,7 +182,7 @@ class _loginState extends State<login> {
 
   dologin(String email, String pass) async {
       // try {
-    var res = await userlogin(email.trim(), pass.trim());
+    var res = await fetch.userlogin(email.trim(), pass.trim());
 
       print("dologin");
  if (res.body.contains("@")) {
@@ -191,7 +192,7 @@ class _loginState extends State<login> {
       setState(() {
                           showSpinner = true;
                         });
-                        userlogin(emailc.replaceAll(' ', ''), pass)
+                        fetch.userlogin(emailc.replaceAll(' ', ''), pass)
                             .then((user) {
                                print(emailc);
                           if (user != null) {

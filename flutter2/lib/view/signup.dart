@@ -12,7 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'init.dart';
-
+rest_api fetch=new rest_api();
 const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
 
  class signup extends StatefulWidget{
@@ -330,7 +330,7 @@ Padding(
  String userpalce=dropdownValue;
  print(userpalce);
 if(f==0){
-var res=await usersignup(username, useremail,userpass,userphone,userpalce).then((res) {
+var res=await fetch.usersignup(username, useremail,userpass,userphone,userpalce).then((res) {
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
@@ -356,7 +356,7 @@ Route route=MaterialPageRoute(builder: (_)=>login());
 }
 else if(f==1){
 
-var res=await sellersignup(username, useremail,userpass,userphone,userpalce).then((res) {
+var res=await fetch.sellersignup(username, useremail,userpass,userphone,userpalce).then((res) {
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
@@ -380,6 +380,31 @@ Route route=MaterialPageRoute(builder: (_)=>login());
    
 });
 
+}else if (f==2){
+
+  var res=await fetch.deliverysignup(username, useremail,userpass,userphone,userpalce).then((res) {
+
+if(res==null){  print("Duplication");
+AlertDialog alert = const AlertDialog(
+         content: Text("this email is used before it "),
+        
+        );
+        
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+}
+else{
+print(res.toString());
+Route route=MaterialPageRoute(builder: (_)=>login());
+      navigator?.pushReplacement(route);
+
+}
+   
+});
 }
   }//do signup
   

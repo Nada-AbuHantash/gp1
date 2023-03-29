@@ -5,6 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "gp1test",
+            "request": "launch",
+            "type": "dart"
+          },
+          {
+            "name": "gp1test",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+          },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",

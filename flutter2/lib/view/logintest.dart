@@ -13,7 +13,7 @@ import 'package:get/get.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/main.dart';
 
-
+rest_api fetch=new rest_api();
 
 
 
@@ -149,7 +149,7 @@ color: globalcolors.besiccolor,
   }
   
     dologin(String name, String pass)async {
-    var res= await userlogin(name.trim(), pass.trim());
+    var res= await fetch.userlogin(name.trim(), pass.trim());
     
     // if(res){
       Route route=MaterialPageRoute(builder: (_)=>init());

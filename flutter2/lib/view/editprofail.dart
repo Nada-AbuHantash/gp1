@@ -11,8 +11,16 @@ import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
-import 'init.dart';
 
+ late String namejaw="";
+late String passjaw="";
+late String emailjaw="";
+late String placejaw="";
+late String phonejaw="";
+rest_api fetch1=new rest_api();
+
+
+  var jsonString;
 const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
 
  class editprofail extends StatefulWidget{
@@ -24,6 +32,28 @@ const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
 }
 
 class _editprofailState extends State<editprofail> {
+  
+  @override
+  void initState() {
+    
+  int h=1;
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+    // do something
+    getinfo();
+ 
+    print("Build Completed"); 
+  });
+  }
+   void getinfo() async {
+jsonString=await fetch1.getinfo1();
+namejaw=jsonString.elementAt(0)['username'];
+passjaw=jsonString.elementAt(0)['userpass'];
+emailjaw=jsonString.elementAt(0)['useremail'];
+placejaw=jsonString.elementAt(0)['userplace'];
+phonejaw=jsonString.elementAt(0)['userphone'].toString();
+print(namejaw);
+  }
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
    final TextEditingController phonecntoraler= TextEditingController();
@@ -60,7 +90,7 @@ Widget build(BuildContext context){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       
-                    Text("${getLang(context, "SIGNUP")}\n",
+                    Text("${getLang(context, "Profile")}\n",
                       style: TextStyle(fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                        color: globalcolors.maincolor)
@@ -76,7 +106,7 @@ Widget build(BuildContext context){
 
 
                  textfiledformat(controller:namecntoraler,
-                 text:"${getLang(context, "name")}",
+                 text:namejaw,
             obscure: false,
             textInputType: TextInputType.text,
             icon: new Icon(Icons.person_outline_rounded),
@@ -324,7 +354,7 @@ Padding(
  var idd=uuid.v4();
  String userpalce=dropdownValue;
  print(userpalce);
-var res=await usersignup(username, useremail,userpass,userphone,userpalce).then((res) {
+var res=await fetch1.usersignup(username, useremail,userpass,userphone,userpalce).then((res) {
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
@@ -346,7 +376,8 @@ Route route=MaterialPageRoute(builder: (_)=>login());
 }
    
 });
+  
+  
   }
   
-   
 }
