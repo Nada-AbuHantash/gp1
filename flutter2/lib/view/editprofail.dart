@@ -90,7 +90,7 @@ Widget build(BuildContext context){
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       
-                    Text("${getLang(context, "Profile")}\n",
+                    Text("profile",
                       style: TextStyle(fontSize: 30.0,
                       fontWeight: FontWeight.bold,
                        color: globalcolors.maincolor)

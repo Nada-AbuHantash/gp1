@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
+import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/mainpage.dart';
 import 'package:flutter2/view/signup.dart';
+import 'package:flutter2/view/dil.dart';
+import 'package:flutter2/view/seller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:const signup(),
+      home:const seller(),
        
        localizationsDelegates: [
           applocal.delegate,
