@@ -6,11 +6,13 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/rest_api.dart';
+import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
+import 'dil.dart';
 import 'init.dart';
 rest_api fetch=new rest_api();
 const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
@@ -27,7 +29,6 @@ class _signupState extends State<signup> {
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
    final TextEditingController phonecntoraler= TextEditingController();
-   // late final TextEditingController placecntoraler= TextEditingController();
      final TextEditingController namecntoraler= TextEditingController();
       final TextEditingController moneycntoraler= TextEditingController();
       String dropdownValue = list.first;
@@ -310,7 +311,8 @@ Padding(
          
                        }
                        else{Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
-          textColor: globalcolors.besiccolor);}
+          textColor: globalcolors.notetcolor);
+          }
               },   
                     ),
               ),
@@ -373,7 +375,7 @@ AlertDialog alert = const AlertDialog(
 }
 else{
 print(res.toString());
-Route route=MaterialPageRoute(builder: (_)=>login());
+Route route=MaterialPageRoute(builder: (_)=>seller());
       navigator?.pushReplacement(route);
 
 }
@@ -399,7 +401,7 @@ AlertDialog alert = const AlertDialog(
 }
 else{
 print(res.toString());
-Route route=MaterialPageRoute(builder: (_)=>login());
+Route route=MaterialPageRoute(builder: (_)=>dil());
       navigator?.pushReplacement(route);
 
 }

@@ -10,6 +10,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'package:flutter2/view/mainpage.dart';
+
+import 'addproduct.dart';
 rest_api fetch=new rest_api();
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -181,13 +183,16 @@ class _loginState extends State<login> {
   }
 
   dologin(String email, String pass) async {
-      // try {
-    var res = await fetch.userlogin(email.trim(), pass.trim());
-
+   
+   var res = await fetch.userlogin(email.trim(), pass.trim());
+var res1=await fetch.deliverylogin(email.trim(), pass.trim());
+var res2=await fetch.sellerlogin(email.trim(), pass.trim());
       print("dologin");
  if (res.body.contains("@")) {
       var jsonString = json.decode(res.body)as List;
+    
       String  emailc=jsonString.elementAt(0)['useremail'];
+      
  if (emailc!='' && pass!='') {
       setState(() {
                           showSpinner = true;
@@ -203,6 +208,7 @@ class _loginState extends State<login> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) => home()));
                           } else {
+                            
                             print("Login Failed");
                             setState(() {
                               showSpinner = false;
@@ -214,8 +220,83 @@ class _loginState extends State<login> {
                       }
                      // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
 
-        return const home();
-      } else {
+      
+      }
+       else if (res1.body.contains("@")) {
+      var jsonString = json.decode(res1.body)as List;
+    
+      String  emailc=jsonString.elementAt(0)['deliveryemail'];
+      int flag=jsonString.elementAt(0)['flag_req'];
+ if (emailc!='' && pass!='' && flag ==0 ) {
+      setState(() {
+                          showSpinner = true;
+                        });
+                        fetch.deliverylogin(emailc.replaceAll(' ', ''), pass)
+                            .then((user) {
+                               print(emailc);
+                          if (user != null) {
+                            print("Login Sucessfull");
+                            setState(() {
+                              showSpinner = false;
+                            });
+                            
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => home()));
+              
+                          } else {
+                            
+                            print("Login Failed");
+                            setState(() {
+                              showSpinner = false;
+                            });
+                          }
+                        });
+                      } else {
+                        AlertDialog alert = const AlertDialog(
+         content: Text("You don't have the authority to login because admin not respond to your request"),
+        );
+                      }
+                     // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
+
+      
+      } else 
+if (res2.body.contains("@")) {
+      var jsonString = json.decode(res2.body)as List;
+  
+      String  emailc=jsonString.elementAt(0)['selleremail'];  
+      int flag1=jsonString.elementAt(0)['flag_req'];
+ if (emailc!='' && pass!='' && flag1==0) {
+      setState(() {
+                          showSpinner = true;
+                        });
+                        fetch.sellerlogin(emailc.replaceAll(' ', ''), pass)
+                            .then((user) {
+                               print(emailc);
+                          if (user != null) {
+                            print("Login Sucessfull");
+                            setState(() {
+                              showSpinner = false;
+                            });
+                            
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => addproduct()));
+                          } else {
+                            
+                            print("Login Failed");
+                            setState(() {
+                              showSpinner = false;
+                            });
+                          }
+                        });
+                      } else {
+                        print("Please fill form correctly & You do not have the authority ");
+                        
+                      }
+                     // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
+
+      
+      }
+      else{
         print("failed1");
         AlertDialog alert = const AlertDialog(
          content: Text("please try again"),
@@ -230,9 +311,7 @@ class _loginState extends State<login> {
         );
       }
       }
-    // } catch (e) {
-    //   print("no login");
-    // }
+    
 
    
   

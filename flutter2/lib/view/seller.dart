@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/home.dart';
+import 'package:flutter2/view/login.dart';
+import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../components/applocal.dart';
 import 'about/about.dart';
-
-
 
 
 class seller extends StatefulWidget {
@@ -20,22 +25,29 @@ class seller extends StatefulWidget {
 
 class _sellerState extends State<seller> {
     final TextEditingController niscntoraler = TextEditingController();
-
+final TextEditingController namesupercntoraler = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: globalcolors.maincolor,
+      backgroundColor: globalcolors.besiccolor,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
+           
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+               SizedBox(height: 45,),
                  Text(
-                  '\n\nDear seller,\n'
+                  'Dear seller,',
+                  
+                  style: TextStyle(
+                      color:globalcolors.textcolor,
+                      fontWeight:  FontWeight.bold, fontSize: 25,),
+                ), 
+                 SizedBox(height: 45,),
+                  Text(
                       'welcome to the SALE app ,'
                       ' in this app we offers to you the fastest way to show and sell your product ,'
                       'by Adding the product, and then we take care of advertising '
@@ -44,13 +56,19 @@ class _sellerState extends State<seller> {
                       'It will be a small percentage of each product you add to your'
                       ' list and it is predetermined by us ,'
                       'If you agree to this You can complete the procedures and we '
-                      'will contact you personally by our administrator in your store.'
-                      '\n\nًًYou must set a budget to make it easier for us to deal with profits.',
+                      'will contact you personally by our administrator in your store.',
                   style: TextStyle(
                       color:globalcolors.textcolor,
-                      fontWeight:  FontWeight.bold, fontSize: 20, height: 1.5),
+                      fontWeight:  FontWeight.bold, fontSize: 18,),
                 ),
-                SizedBox(width: 5,height: 20,),
+                SizedBox(height: 60),
+                Text(
+                  "ً* You must set a budget to make it easier for us to deal with profits.and your name os supermarket",
+                  style: TextStyle(
+                      color:globalcolors.notetcolor,
+                      fontWeight:  FontWeight.normal, fontSize: 15),
+                ),
+                SizedBox(height: 10,),
                 Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:<Widget> [
@@ -62,7 +80,7 @@ class _sellerState extends State<seller> {
                      textfiledformat(
                     controller: niscntoraler,
                     text: "your wallet",
-                    obscure: true,
+                    obscure: false,
                     textInputType: TextInputType.text,
                     icon: new Icon(Icons.wallet),
 
@@ -75,6 +93,32 @@ class _sellerState extends State<seller> {
                    
                 ],
               ),
+               SizedBox(height: 10,),
+                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:<Widget> [
+                   Flexible(
+                 child: Column(
+                    children:<Widget> [
+                      
+                  Container( child:
+                     textfiledformat(
+                    controller: namesupercntoraler,
+                    text: "Supermarket name",
+                    obscure: false,
+                    textInputType: TextInputType.text,
+                    icon: new Icon(Icons.maps_home_work_outlined),
+
+                  ),
+                  )
+                    ],
+                    
+                  ),
+                   ),
+                   
+                ],
+              ),
+              SizedBox(height: 10,),
                   Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
@@ -93,11 +137,13 @@ class _sellerState extends State<seller> {
                        minimumSize:  Size(250, 50), 
                     ),
                     child: Text("I agree",
-              style: TextStyle(color: globalcolors.textcolor,fontSize: 25),
+              style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
               ),
-                      onPressed: ()  { 
-                           navigator?.push(MaterialPageRoute(builder: (_)=>AboutScreen()));
-      
+                      onPressed: ()  {  if( niscntoraler.text.isNotEmpty && namesupercntoraler.text.isNotEmpty )
+                       {
+                          putcard(namesupercntoraler.text,niscntoraler.text);
+      }else{Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
+          textColor: globalcolors.besiccolor);}
               },   
                     ),
               ),
@@ -118,4 +164,18 @@ class _sellerState extends State<seller> {
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+  
+ putcard(String name, String card)async {
+final prefs = await SharedPreferences.getInstance();
+  String nameperson= prefs.get("emailemail").toString();
+var res=await fetch1.sellercard1(name,card,nameperson).then((res) {
+
+print(res.toString());
+Route route=MaterialPageRoute(builder: (_)=>home());
+      navigator?.pushReplacement(route);
+
+
+   
+});
+}
 }

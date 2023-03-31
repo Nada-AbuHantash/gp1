@@ -27,6 +27,109 @@ Future userlogin(String email, String pass) async {
     print('no');
   }
 }
+Future deliverylogin(String email, String pass) async {
+   var jsonString;
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'logindelivery'),
+        headers: {"Accept": "Application/json"},
+        body: {'deliveryemail': email, 'deliverypass': pass});
+    if (use.body.contains("@")) {
+       if (use.statusCode == 200) {
+Sharedsession shared = new Sharedsession();
+      await shared.savename(email, pass);
+    } else {
+      // show error
+      print("Try Again");
+    }
+      print("yes ");
+      
+      ///////////saved////////////
+    } else
+      print("failed");
+    return use;
+  } catch (e) {
+    print('no');
+  }
+}
+Future sellerlogin(String email, String pass) async {
+   var jsonString;
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'loginseller'),
+        headers: {"Accept": "Application/json"},
+        body: {'selleremail': email, 'sellerpass': pass});
+    if (use.body.contains("@")) {
+       if (use.statusCode == 200) {
+Sharedsession shared = new Sharedsession();
+      await shared.savename(email, pass);
+    } else {
+      // show error
+      print("Try Again");
+    }
+      print("yes ");
+      
+      ///////////saved////////////
+    } else
+      print("failed");
+    return use;
+  } catch (e) {
+    print('no');
+  }
+}
+Future sellercard1(String name, String card,String nameperson) async {
+   
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'walletseller'),
+        headers: {"Accept": "Application/json"},
+        body: {'suparmarketname': name, 'sellercard': card,
+        'selleremail':nameperson});
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+     
+      return data;
+    }
+      print("yes ");
+      
+      ///////////saved////////////
+    
+  } catch (e) {
+    print('no');
+  }
+}
+
+
+Future deliverycard1(String card,String nameperson) async {
+   
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'walletdelivery'),
+        headers: {"Accept": "Application/json"},
+        body: { 'deliverycard': card,
+        'deliveryemail':nameperson});
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+     
+      return data;
+    }
+      print("yes ");
+      
+      ///////////saved////////////
+    
+  } catch (e) {
+    print('no');
+  }
+}
+
 
 Future usersignup(
     String name, String email, String pass, String phone, String place) async {
@@ -76,7 +179,8 @@ Future deliverysignup(
       // return null;
       print("Failed to update");
     } else {
-      //return model.fromJson(data["data"]);
+      Sharedsession shared = new Sharedsession();
+      await shared.savename(email, pass);
       return data;
     }
   } catch (e) {
@@ -104,6 +208,8 @@ Future sellersignup(
       // return null;
       print("Failed to update");
     } else {
+      Sharedsession shared = new Sharedsession();
+      await shared.savename(email, pass);
       //return model.fromJson(data["data"]);
       return data;
     }
@@ -112,6 +218,37 @@ Future sellersignup(
   }
 }
 
+Future putpro(
+    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson) async {
+  try {
+    var s = 200;
+    final http.Response use =
+        await http.post(Uri.parse(utils.basurl + 'registerproduct'), headers: {
+      "Accept": "Application/json"
+    }, body: {
+      'productcount':count,
+      'productname': namepro,
+      'oldprice': oldprice,
+      'newprice': newprice,
+      'producttype': type,
+      '	productimage': path,
+      'nameperson':nameperson,
+
+    });
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+    
+      //return model.fromJson(data["data"]);
+      return data;
+    }
+  } catch (e) {
+    print("no register");
+  }
+}
 Future getinfo1() async {
   final prefs = await SharedPreferences.getInstance();
   String A = prefs.get("emailemail").toString();
