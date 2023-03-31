@@ -20,11 +20,5 @@
 "singass":"Sign up as",
     "ascustomer":"customer",
     "asseller":"seller",
-    "asdeliry":"delivery",
-    "productname": "Product Name ",
-    "oldprice": "Old Price ",
-    "newprice": "New Price ",
-    "count": "Count",
-    "added":"Add product",
-    "addedimage":"Add image"
+    "asdeliry":"delivery"
 }
