@@ -278,8 +278,8 @@ if (res2.body.contains("@")) {
                               showSpinner = false;
                             });
                             
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => addproduct()));
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (_) => addproduct()));
                           } else {
                             
                             print("Login Failed");
