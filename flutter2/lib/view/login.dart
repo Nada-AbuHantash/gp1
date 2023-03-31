@@ -259,8 +259,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                      // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
 
       
-      } else 
-if (res2.body.contains("@")) {
+      } else if (res2.body.contains("@")) {
       var jsonString = json.decode(res2.body)as List;
   
       String  emailc=jsonString.elementAt(0)['selleremail'];  
@@ -278,8 +277,8 @@ if (res2.body.contains("@")) {
                               showSpinner = false;
                             });
                             
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (_) => addproduct()));
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => addproduct()));
                           } else {
                             
                             print("Login Failed");
@@ -299,7 +298,7 @@ if (res2.body.contains("@")) {
       else{
         print("failed1");
         AlertDialog alert = const AlertDialog(
-         content: Text("please try again"),
+         content: Text("please try again , email must include @"),
         );
         // show the dialog
         // ignore: use_build_context_synchronously

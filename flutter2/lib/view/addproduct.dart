@@ -7,6 +7,7 @@ import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,8 @@ class _addproductState extends State<addproduct> {
   final TextEditingController oldpricecntoraler= TextEditingController();
   final TextEditingController newpricecntoraler= TextEditingController();
   final TextEditingController countcntoraler= TextEditingController();
+  late String pathimg="";
+  rest_api fetch=new rest_api();
 
   String dropdownValue = list.first;
   File? pickedImage;
@@ -123,11 +126,11 @@ class _addproductState extends State<addproduct> {
                   }).toList(),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
 
@@ -150,12 +153,13 @@ class _addproductState extends State<addproduct> {
                         onPressed: ()  async {
                           final ImagePicker _picker = ImagePicker();
                           final XFile? image =
-                          await _picker.pickImage(source: ImageSource.gallery);
+                          await _picker.pickImage(source: ImageSource.camera);
                           if (image != null) {
                             pickedImage = File(image.path);
                             setState(() {
                               isPicked = true;
                             });
+                            pathimg=image.path;
                           }
                         },
                       ),
@@ -180,14 +184,29 @@ class _addproductState extends State<addproduct> {
 
                               borderRadius: BorderRadius.circular(20.0)),
                           foregroundColor: globalcolors.maincolor,
-                          backgroundColor: globalcolors.notetcolor,
+                          backgroundColor: globalcolors.textcolor,
                           minimumSize: Size(250, 50),
                         ),
                         child:
                         Text("${getLang(context, "added")}",
                           style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
                         ),
-                        onPressed: ()  {},
+                        onPressed: ()  {
+                          if(countcntoraler.text.isNotEmpty && namecntoraler.text.isNotEmpty
+                          && oldpricecntoraler.text.isNotEmpty && newpricecntoraler.text.isNotEmpty
+                           && pathimg.isNotEmpty){
+                           putproduct(countcntoraler.text,namecntoraler.text,oldpricecntoraler.text,
+                           newpricecntoraler.text,dropdownValue,pathimg);
+
+                          }else{
+
+Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
+          textColor: globalcolors.notetcolor);
+                          }
+
+
+
+                        },
                       ),
                     ),
                   ],
@@ -198,5 +217,24 @@ class _addproductState extends State<addproduct> {
         ),
       ),
     );
+  }
+  
+  void putproduct(String count, String name, String oldprice, String newprice, String type, String pathimg)async {
+final prefs = await SharedPreferences.getInstance();
+  String nameperson= prefs.get("supermarket").toString();
+ const uuid = Uuid();
+ var idd=uuid.v4();
+
+var res=await fetch.putpro(count,name,oldprice,newprice,type,pathimg,nameperson,idd).then((res) {
+
+print(res.toString());
+Route route=MaterialPageRoute(builder: (_)=>home());
+      navigator?.pushReplacement(route);
+
+
+   
+});
+
+
   }
 }

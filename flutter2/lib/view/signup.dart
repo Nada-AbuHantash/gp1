@@ -8,7 +8,6 @@ import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
-import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
@@ -223,7 +222,7 @@ Padding(
               ),
                       onPressed: ()  { 
                         int flag=0;
-                      // print(dropdownValue);
+                    
                      dosignup(flag,namecntoraler.text,emailcntoraler.text,passcntoraler.text,phonecntoraler.text,dropdownValue);
       
               },   
@@ -327,8 +326,7 @@ Padding(
 }
 
   dosignup(int f,String username,String useremail,String userpass,String userphone, dropdownValue) async {
- const uuid = Uuid();
- var idd=uuid.v4();
+
  String userpalce=dropdownValue;
  print(userpalce);
 if(f==0){

@@ -59,10 +59,11 @@ Future sellerlogin(String email, String pass) async {
         Uri.parse(utils.basurl + 'loginseller'),
         headers: {"Accept": "Application/json"},
         body: {'selleremail': email, 'sellerpass': pass});
-    if (use.body.contains("@")) {
+     if (use.body.contains("@")) {
        if (use.statusCode == 200) {
 Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
+     // await shared.savenamesuper(shared.getsupermarket());
     } else {
       // show error
       print("Try Again");
@@ -91,7 +92,8 @@ Future sellercard1(String name, String card,String nameperson) async {
       // return null;
       print("Failed to update");
     } else {
-     
+     Sharedsession shared = new Sharedsession();
+      await shared.savenamesuper(name);
       return data;
     }
       print("yes ");
@@ -115,7 +117,6 @@ Future deliverycard1(String card,String nameperson) async {
     var encodeFirst = json.encode(use.body);
     var data = json.decode(encodeFirst);
     if (use.statusCode == 400) {
-      // return null;
       print("Failed to update");
     } else {
      
@@ -219,7 +220,7 @@ Future sellersignup(
 }
 
 Future putpro(
-    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson) async {
+    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson, String id) async {
   try {
     var s = 200;
     final http.Response use =
@@ -232,7 +233,8 @@ Future putpro(
       'newprice': newprice,
       'producttype': type,
       '	productimage': path,
-      'nameperson':nameperson,
+      'namesupermarket':nameperson,
+      'productid':id,
 
     });
     var encodeFirst = json.encode(use.body);

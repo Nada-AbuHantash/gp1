@@ -13,6 +13,18 @@ class Sharedsession{
 final prefs = await SharedPreferences.getInstance();
  prefs.setString("emailemail", A);
  prefs.setString("passpass", B);
+ 
+
+}
+  savenamesuper(String A) async{
+final prefs = await SharedPreferences.getInstance();
+ prefs.setString("supermarket", A);
+
+}
+ getsupermarket()async{
+     final supermarket = await SharedPreferences.getInstance();
+
+     await supermarket.getString("supermarket");
 
 }
 savelang(String e)async{
@@ -25,4 +37,5 @@ savelang(String e)async{
      await lang.getString("translations");
 
 }
+
 }

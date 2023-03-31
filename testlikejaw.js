@@ -164,31 +164,29 @@ app.post('/registerseller', function (request, response) {
     });
 });
 app.post('/registerproduct', function (request, response) {
-    console.log("sgin");
+    console.log("add pro");
     var name = request.body.productname;
     var count = request.body.productcount;
     var paht = request.body.productimage;
     var type = request.body.producttype;
     var newprice = request.body.newprice;
     var oldprice = request.body.oldprice;
-    //var nameperson = request.body.nameperson;
-    var nameperson=nn;
-    console.log(request.body.sellerplace);
+    var nameperson = request.body.namesupermarket;
+    var id= request.body.productid;
+    //var nameperson=nn;
+    console.log(id);
     console.log("okkkkkkkkkk");
-    let query1 = "INSERT INTO products (productname,productcount,productimage,producttype,newprice,oldprice,namesupermarket)"
-    " VALUES('" + name
-        + "','" + count + "','" + paht + "','" + type + "','" + newprice + "','"+oldprice+"','"+nameperson+"')";
+    let query1 = "INSERT INTO `products` (`productname`,`productcount`,`productimage`,`producttype`,`newprice`,`oldprice`,`namesupermarket`,`productid`) VALUES('" + name
+        + "','" + count + "','" + paht + "','" + type + "','" + newprice + "','"+oldprice+"','"+nameperson+"','"+id+"')";
     //let query1="Select * from nada where name=? and pass=?";
 
-    pool.query(query1, function (error, data, results) {
+    pool.query(query1,[name,count,paht,type,newprice,oldprice,nameperson,id] ,function (error, data, results) {
         console.log("done qurey");
 
-        // if (error || error.code=="ER_DUP_ENTRY") {
-        //     response.status(400).send("falid");
-        //     console.log("falid");
-        // }
         if (error) {
+            console.log(error);
             response.status(400).send('Error in database operation');
+            
         }
         else {
             response.send("Success");
@@ -212,6 +210,7 @@ let query1=`UPDATE sellers SET suparmarketname='${suparmarketname}' , sellercard
             response.status(400).send('Error in database operation');
         }
         else {
+
             response.send("Success");
 
         }
