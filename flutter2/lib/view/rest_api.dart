@@ -232,7 +232,7 @@ Future putpro(
       'oldprice': oldprice,
       'newprice': newprice,
       'producttype': type,
-      '	productimage': path,
+      'productimage': path,
       'namesupermarket':nameperson,
       'productid':id,
 

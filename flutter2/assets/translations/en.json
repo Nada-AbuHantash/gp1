@@ -21,10 +21,12 @@
     "ascustomer":"customer",
     "asseller":"seller",
     "asdeliry":"delivery",
+    "addproducts":"Add product",
     "productname": "Product Name ",
     "oldprice": "Old Price ",
     "newprice": "New Price ",
     "count": "Count",
     "added":"Add product",
-    "addedimage":"Add image"
+    "addedimage":"Add image",
+    "nophoto":"no photo select"
 }

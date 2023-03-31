@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter2/view/editprofail.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -26,6 +27,7 @@ class _addproductState extends State<addproduct> {
   final TextEditingController oldpricecntoraler= TextEditingController();
   final TextEditingController newpricecntoraler= TextEditingController();
   final TextEditingController countcntoraler= TextEditingController();
+ late TextEditingController pathcntoraler= TextEditingController();
   late String pathimg="";
   rest_api fetch=new rest_api();
 
@@ -46,7 +48,7 @@ class _addproductState extends State<addproduct> {
             children: [
               const SizedBox(height: 40),
               Text("${getLang(context, "addproducts")}",
-                style: TextStyle(fontSize: 18.0,
+                style: TextStyle(fontSize: 20.0,
                     fontWeight: FontWeight.w400,
                     color: globalcolors.textcolor)
                 ,),
@@ -55,7 +57,7 @@ class _addproductState extends State<addproduct> {
                 text:"${getLang(context, "productname")}",
                 obscure: false,
                 textInputType: TextInputType.text,
-                icon: new Icon(Icons.production_quantity_limits),
+                icon: const Icon(Icons.production_quantity_limits),
               ),
               const SizedBox(height: 20),
               textfiledformat(controller:oldpricecntoraler,
@@ -63,7 +65,7 @@ class _addproductState extends State<addproduct> {
                 text:"${getLang(context, "oldprice")}",
                 obscure: false,
                 textInputType: TextInputType.number,
-                icon: new Icon(Icons.money_off),
+                icon: const Icon(Icons.money_off),
               ),
               const SizedBox(height: 20),
               textfiledformat(controller:newpricecntoraler,
@@ -71,7 +73,7 @@ class _addproductState extends State<addproduct> {
                 text:"${getLang(context, "newprice")}",
                 obscure: false,
                 textInputType: TextInputType.number,
-                icon: new Icon(Icons.attach_money),
+                icon: const Icon(Icons.attach_money),
               ),
               const SizedBox(height: 20),
               textfiledformat(controller:countcntoraler,
@@ -79,7 +81,7 @@ class _addproductState extends State<addproduct> {
                 text:"${getLang(context, "count")}",
                 obscure: false,
                 textInputType: TextInputType.number,
-                icon: new Icon(Icons.numbers),
+                icon: const Icon(Icons.numbers),
               ),
               const SizedBox(height: 20),
               Container(height:55,
@@ -126,47 +128,109 @@ class _addproductState extends State<addproduct> {
                   }).toList(),
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
+              
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                padding: const EdgeInsets.only(right: 25,left: 25),
+                child: 
+                 ListTile(
+                 title: Row(
                   children: [
-                    SizedBox(
-
-
-                      child: ElevatedButton(
-
-                        style: ElevatedButton.styleFrom(
-
-                          shape: RoundedRectangleBorder(
-
-                              borderRadius: BorderRadius.circular(20.0)),
-                          foregroundColor: globalcolors.maincolor,
-                          backgroundColor: globalcolors.notetcolor,
-                          minimumSize: Size(250, 50),
-                        ),
-                        child:
-                        Text("${getLang(context, "addedimage")}",
-                          style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-                        ),
-                        onPressed: ()  async {
-                          final ImagePicker _picker = ImagePicker();
-                          final XFile? image =
-                          await _picker.pickImage(source: ImageSource.camera);
-                          if (image != null) {
-                            pickedImage = File(image.path);
-                            setState(() {
-                              isPicked = true;
-                            });
-                            pathimg=image.path;
-                          }
-                        },
-                      ),
+                    
+                   
+                      
+                      Expanded(child:  Container(
+                        height:55,
+                  width: 200,
+                
+                  padding: const EdgeInsets.only(top: 3, left: 25,right: 25),
+                    decoration: BoxDecoration(
+                      
+                      color: globalcolors.besiccolor,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.15),
+                          blurRadius: 20,
+                        )
+                      ]
                     ),
+                    child: TextFormField(
+                      style: TextStyle(color:globalcolors.textcolor), 
+                      controller: pathcntoraler,
+                      keyboardType:TextInputType.text ,
+                      obscureText: false,
+                  decoration: InputDecoration(
+              iconColor: globalcolors.textcolor,
+               
+                    hintText:"${getLang(context, "nophoto")}", 
+                    icon: const Icon(Icons.monochrome_photos_outlined),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.all(0),
+                    hintStyle: TextStyle(
+                      height: 1,
+                      color: globalcolors.textcolor,
+                    )
+                  ),
+              
+                    ),
+                   
+                  ),
+                    ),
+              
+                     Expanded(child:   ElevatedButton(
+              
+                              style: ElevatedButton.styleFrom(
+              
+                                shape: RoundedRectangleBorder(
+              
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                foregroundColor: globalcolors.maincolor,
+                                backgroundColor: globalcolors.notetcolor,
+                               
+                              ),
+                              child:
+                              Text("+",
+                                style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
+                              ),
+                              onPressed: ()  async {
+                                final ImagePicker _picker = ImagePicker();
+                                final XFile? image =
+                                await _picker.pickImage(source: ImageSource.camera);
+                                if (image != null) {
+                                  pickedImage = File(image.path);
+                                  setState(() {
+                                    isPicked = true;
+                                  });
+                                  pathimg=image.path.split("/").last;
+                                  pathcntoraler=TextEditingController(text: pathimg);
+                                  print(pathimg);
+                                }
+                              },
+                            ),
+                     ),
+                          
+                    
                   ],
                 ),
+                 ),
               ),
+              // SizedBox(
+
+
+                   
+              //       ),
+               const SizedBox(height: 20),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Row(
+                  
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+                   
+              //     ],
+              //   ),
+              // ),
               const SizedBox(height: 20),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -203,8 +267,6 @@ class _addproductState extends State<addproduct> {
 Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
           textColor: globalcolors.notetcolor);
                           }
-
-
 
                         },
                       ),
