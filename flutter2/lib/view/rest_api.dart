@@ -159,7 +159,34 @@ Future usersignup(
     print("no register");
   }
 }
+Future userupdate(
+    String name, String email, String pass, String phone, String place , String a) async {
+  try {
+    var s = 200;
+    final http.Response use =
+        await http.post(Uri.parse(utils.basurl + 'userupdate'), headers: {
+      "Accept": "Application/json"
+    }, body: {
+      'username': name,
+      'useremail': email,
+      'userpass': pass,
+      'userphone': phone,
+      'userplace': place,
 
+    });
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+      //return model.fromJson(data["data"]);
+      return data;
+    }
+  } catch (e) {
+    print("no register");
+  }
+}
 Future deliverysignup(
     String name, String email, String pass, String phone, String place) async {
   try {
@@ -257,18 +284,26 @@ Future getinfo1() async {
   String B = prefs.get("passpass").toString();
   var jsonString;
   try {
-    // await http.post(Uri.parse(utils.basurl + 'registerseller'), headers: {
+    
     http.Response res = await http.get(
         Uri.parse(
-            utils.basurl + '/editprofile?useremail=' + A + '&&userpass=' + 'B'),
-        headers: {'Content-Type': 'application/json'});
+            utils.basurl+'editprofile?useremail=$A'),
+        headers: {'Content-Type': 'application/json'},
+        // body: {
+        //       'useremail':A,
+        //       'userpass':B}
+        );
     if (res.statusCode == 200) {
       jsonString = json.decode(res.body) as List;
+      
     } else {
       // show error
+      print(res.statusCode);
       print("Try Again");
     }
+    return jsonString;
   } catch (e) {
+    print(e);
     print("no info");
   }
   return jsonString;
