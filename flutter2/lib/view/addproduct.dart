@@ -29,7 +29,7 @@ class _addproductState extends State<addproduct> {
   final TextEditingController countcntoraler= TextEditingController();
  late TextEditingController pathcntoraler= TextEditingController();
   late String pathimg="";
-  rest_api fetch=new rest_api();
+  
 
   String dropdownValue = list.first;
   File? pickedImage;
@@ -284,10 +284,9 @@ Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
   void putproduct(String count, String name, String oldprice, String newprice, String type, String pathimg)async {
 final prefs = await SharedPreferences.getInstance();
   String nameperson= prefs.get("supermarket").toString();
- const uuid = Uuid();
- var idd=uuid.v4();
 
-var res=await fetch.putpro(count,name,oldprice,newprice,type,pathimg,nameperson,idd).then((res) {
+
+var res=await fetch1.putpro(count,name,oldprice,newprice,type,pathimg,nameperson).then((res) {
 
 print(res.toString());
 Route route=MaterialPageRoute(builder: (_)=>home());

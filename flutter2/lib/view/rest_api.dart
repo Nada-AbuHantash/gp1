@@ -55,12 +55,12 @@ Sharedsession shared = new Sharedsession();
 Future sellerlogin(String email, String pass) async {
    var jsonString;
   try {
-    final http.Response use = await http.post(
+    final http.Response use1 = await http.post(
         Uri.parse(utils.basurl + 'loginseller'),
         headers: {"Accept": "Application/json"},
         body: {'selleremail': email, 'sellerpass': pass});
-     if (use.body.contains("@")) {
-       if (use.statusCode == 200) {
+     if (use1.body.contains("@")) {
+       if (use1.statusCode == 200) {
 Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
      // await shared.savenamesuper(shared.getsupermarket());
@@ -73,7 +73,7 @@ Sharedsession shared = new Sharedsession();
       ///////////saved////////////
     } else
       print("failed");
-    return use;
+    return use1;
   } catch (e) {
     print('no');
   }
@@ -220,7 +220,7 @@ Future sellersignup(
 }
 
 Future putpro(
-    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson, String id) async {
+    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson) async {
   try {
     var s = 200;
     final http.Response use =
@@ -234,7 +234,7 @@ Future putpro(
       'producttype': type,
       'productimage': path,
       'namesupermarket':nameperson,
-      'productid':id,
+     
 
     });
     var encodeFirst = json.encode(use.body);

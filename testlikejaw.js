@@ -1,3 +1,6 @@
+
+
+
 const mysql = require("mysql");
 const util = require("util");
 var express = require('express');
@@ -149,11 +152,9 @@ app.post('/registerseller', function (request, response) {
     pool.query(query1, [username, useremail, userpass, userphone, userplace], function (error, data, results) {
         console.log("done qurey");
 
-        // if (error || error.code=="ER_DUP_ENTRY") {
-        //     response.status(400).send("falid");
-        //     console.log("falid");
-        // }
+        
         if (error) {
+            console.log(error);
             response.status(400).send('Error in database operation');
         }
         else {
@@ -172,15 +173,15 @@ app.post('/registerproduct', function (request, response) {
     var newprice = request.body.newprice;
     var oldprice = request.body.oldprice;
     var nameperson = request.body.namesupermarket;
-    var id= request.body.productid;
-    //var nameperson=nn;
-    console.log(id);
+  
+   
+    
     console.log("okkkkkkkkkk");
-    let query1 = "INSERT INTO `products` (`productname`,`productcount`,`productimage`,`producttype`,`newprice`,`oldprice`,`namesupermarket`,`productid`) VALUES('" + name
-        + "','" + count + "','" + paht + "','" + type + "','" + newprice + "','"+oldprice+"','"+nameperson+"','"+id+"')";
+    let query1 = "INSERT INTO `products` (`productname`,`productcount`,`productimage`,`producttype`,`newprice`,`oldprice`,`namesupermarket`) VALUES('" + name
+        + "','" + count + "','" + paht + "','" + type + "','" + newprice + "','"+oldprice+"','"+nameperson+"')";
     //let query1="Select * from nada where name=? and pass=?";
 
-    pool.query(query1,[name,count,paht,type,newprice,oldprice,nameperson,id] ,function (error, data, results) {
+    pool.query(query1,[name,count,paht,type,newprice,oldprice,nameperson] ,function (error, data, results) {
         console.log("done qurey");
 
         if (error) {

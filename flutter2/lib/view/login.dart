@@ -259,7 +259,8 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                      // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
 
       
-      } else if (res2.body.contains("@")) {
+      } 
+    else if (res2.body.contains("@")) {
       var jsonString = json.decode(res2.body)as List;
   
       String  emailc=jsonString.elementAt(0)['selleremail'];  
@@ -300,8 +301,6 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
         AlertDialog alert = const AlertDialog(
          content: Text("please try again , email must include @"),
         );
-        // show the dialog
-        // ignore: use_build_context_synchronously
         showDialog(
           context: context,
           builder: (BuildContext context) {
