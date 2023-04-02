@@ -141,7 +141,7 @@ class _addproductState extends State<addproduct> {
                       
                       Expanded(child:  Container(
                         height:55,
-                  width: 200,
+                  width: 250,
                 
                   padding: const EdgeInsets.only(top: 3, left: 25,right: 25),
                     decoration: BoxDecoration(
@@ -174,40 +174,44 @@ class _addproductState extends State<addproduct> {
                   ),
               
                     ),
-                   
+                 
                   ),
                     ),
-              
-                     Expanded(child:   ElevatedButton(
-              
-                              style: ElevatedButton.styleFrom(
-              
-                                shape: RoundedRectangleBorder(
-              
-                                    borderRadius: BorderRadius.circular(15.0)),
-                                foregroundColor: globalcolors.maincolor,
-                                backgroundColor: globalcolors.notetcolor,
-                               
+                SizedBox(width: 10,),
+                     Expanded(child:   SizedBox(
+                      width:5,
+                      
+                       child: ElevatedButton(
+                                   
+                                style: ElevatedButton.styleFrom(
+                                   
+                                  shape: RoundedRectangleBorder(
+                                   
+                                      borderRadius: BorderRadius.circular(15.0)),
+                                  foregroundColor: globalcolors.maincolor,
+                                  backgroundColor: globalcolors.notetcolor,
+                                 
+                                ),
+                                child:
+                                Text("+",
+                                  style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
+                                ),
+                                onPressed: ()  async {
+                                  final ImagePicker _picker = ImagePicker();
+                                  final XFile? image =
+                                  await _picker.pickImage(source: ImageSource.camera);
+                                  if (image != null) {
+                                    pickedImage = File(image.path);
+                                    setState(() {
+                                      isPicked = true;
+                                    });
+                                    pathimg=image.path.split("/").last;
+                                    pathcntoraler=TextEditingController(text: pathimg);
+                                    print(pathimg);
+                                  }
+                                },
                               ),
-                              child:
-                              Text("+",
-                                style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-                              ),
-                              onPressed: ()  async {
-                                final ImagePicker _picker = ImagePicker();
-                                final XFile? image =
-                                await _picker.pickImage(source: ImageSource.camera);
-                                if (image != null) {
-                                  pickedImage = File(image.path);
-                                  setState(() {
-                                    isPicked = true;
-                                  });
-                                  pathimg=image.path.split("/").last;
-                                  pathcntoraler=TextEditingController(text: pathimg);
-                                  print(pathimg);
-                                }
-                              },
-                            ),
+                     ),
                      ),
                           
                     

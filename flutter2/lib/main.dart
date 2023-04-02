@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
+import 'package:flutter2/view/addproduct.dart';
+import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/mainpage.dart';
+import 'package:flutter2/view/signup.dart';
+import 'package:flutter2/view/dil.dart';
+import 'package:flutter2/view/seller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 import 'components/applocal.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-//import 'package:flutter2/view/logintest.dart';
-import 'dart:ui';
-import 'package:flutter/widgets.dart';
-import 'package:flutter2/view/homecust.dart';
-
 // SharedPreferences ?mySharedPreferences;
 Sharedsession language = new Sharedsession();
 void main() async{
@@ -45,7 +44,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:mainpage(),
+      home:init(),
        
        localizationsDelegates: [
           applocal.delegate,

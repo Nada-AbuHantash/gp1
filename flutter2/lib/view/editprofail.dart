@@ -7,6 +7,7 @@ import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -40,8 +41,8 @@ class _editprofailState extends State<editprofail> {
     super.initState();
      WidgetsBinding.instance.addPostFrameCallback((_) {
     // do something
-    getinfo();
- 
+     getinfo();
+ var jsonString;
     print("Build Completed"); 
   });
   }
@@ -57,9 +58,9 @@ print(namejaw);
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
    final TextEditingController phonecntoraler= TextEditingController();
-   // late final TextEditingController placecntoraler= TextEditingController();
+   late final TextEditingController placecntoraler= TextEditingController();
      final TextEditingController namecntoraler= TextEditingController();
-      String dropdownValue = list.first;
+     // String dropdownValue = placejaw;
        
 @override
 Widget build(BuildContext context){
@@ -97,7 +98,7 @@ Widget build(BuildContext context){
                       ,)
                     ],
                   ),
-                Text("${getLang(context, "signdis")}",
+                Text("${getLang(context, "profiledis")}",
                       style: TextStyle(fontSize: 18.0,
                       fontWeight: FontWeight.w400,
                       color: globalcolors.textcolor)
@@ -116,7 +117,7 @@ Widget build(BuildContext context){
 
                  textfiledformat(controller:emailcntoraler,
                  
-                 text:"${getLang(context, "Email")}",
+                 text:emailjaw,
             obscure: false,
             textInputType: TextInputType.emailAddress,
             icon: new Icon(Icons.alternate_email),
@@ -125,7 +126,7 @@ Widget build(BuildContext context){
 
 
               textfiledformat(controller:passcntoraler,
-             text:"${getLang(context, "password")}",
+             text:passjaw,
             obscure: true,
             textInputType: TextInputType.text,
             icon: new Icon(Icons.password),
@@ -134,61 +135,20 @@ Widget build(BuildContext context){
 
 
                  textfiledformat(controller:phonecntoraler,
-                 text:"${getLang(context, "phone")}",
+                 text:phonejaw,
             obscure: false,
             textInputType: TextInputType.phone,
             icon: new Icon(Icons.phone_iphone_rounded),
             ),
             const SizedBox(height: 20),
            
-
-            Container(height:55,
-                        width: 350,
-              padding: const EdgeInsets.only(top: 3, left: 25,right: 25),
-              decoration: BoxDecoration(
-        
-              color: globalcolors.besiccolor,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.15),
-                  blurRadius: 20,
-                  
-                          )
-                       ]
-                   ),
-                   
-              child: DropdownButtonFormField<String>(
-                 decoration: InputDecoration(
-         prefixIcon: Icon(Icons.place_outlined,color: globalcolors.textcolor,),
-
-         ),
-                  value: dropdownValue,
-                  elevation: 40,
-                  style:  TextStyle(color: globalcolors.notetcolor),
-                  onChanged: (String? value) {
-                    BoxDecoration(
-                      
-                      color: globalcolors.besiccolor);
-
-                    setState(() {
-                      dropdownValue = value!;
-                    });
-                  },
-                  items: list.map<DropdownMenuItem<String>>((String value) {
-                  
-                    return DropdownMenuItem<String>(
-                      value: value, 
-                      child: Text(value,style: TextStyle(
-                         color: globalcolors.textcolor,fontSize: 15),),
-                    );
-                  }).toList(),
-                ),
+textfiledformat(controller:placecntoraler,
+                 text:placejaw,
+            obscure: false,
+            textInputType: TextInputType.text,
+            icon: new Icon(Icons.place_outlined),
             ),
-
-
-
+           
 
             const SizedBox(height: 20),
             Padding(
@@ -215,146 +175,31 @@ Widget build(BuildContext context){
               style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
               ),
                       onPressed: ()  { 
-                      if( emailcntoraler.text.isNotEmpty && passcntoraler.text.isNotEmpty
-                          && phonecntoraler.text.isNotEmpty&& namecntoraler.text.isNotEmpty)
-                       {
-         
-                            showDialog(
-          context: context,
-          builder: (BuildContext context) =>
-          AlertDialog(
-            title: Text("${getLang(context, "singass")}"),
-            titleTextStyle: TextStyle(color: globalcolors.notetcolor,fontSize: 20),
-            backgroundColor: globalcolors.besiccolor,
-            
-            actions: [
-Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                  child: ElevatedButton(
-                    
-                    style: ElevatedButton.styleFrom(
-                      
-                       shape: RoundedRectangleBorder(
-                        
-                  borderRadius: BorderRadius.circular(20.0)),
-                     foregroundColor: globalcolors.maincolor,
-                       backgroundColor: globalcolors.textcolor,
-                       minimumSize: Size(250, 50), 
-                    ),
-                    child: Text("${getLang(context, "ascustomer")}",
-                    
-              style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-              ),
-                      onPressed: ()  { 
                       // print(dropdownValue);
-                     dosignup(namecntoraler.text,emailcntoraler.text,passcntoraler.text,phonecntoraler.text,dropdownValue);
+                     doupdate(namecntoraler.text,emailcntoraler.text,passcntoraler.text,phonecntoraler.text,placecntoraler.text);
       
               },   
-                    ),
-              ),
-              
-                      
+                   
+                  ),
+                  ),
                 ],
-            
-              ),
-            ),
-             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                  child: ElevatedButton(
-                    
-                    style: ElevatedButton.styleFrom(
-                      
-                       shape: RoundedRectangleBorder(
-                        
-                  borderRadius: BorderRadius.circular(20.0)),
-                      foregroundColor: globalcolors.maincolor,
-                       backgroundColor: globalcolors.textcolor,
-                       minimumSize: const Size(250, 50), 
-                    ),
-                    child: Text("${getLang(context, "asseller")}",
-              style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-              ),
-                      onPressed: ()  { 
-                        
-      
-              },   
-                    ),
-              ),
-              
-                 
-                ],
-            
-              ),
-            ),
-             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                  child: ElevatedButton(
-                    
-                    style: ElevatedButton.styleFrom(
-                      
-                       shape: RoundedRectangleBorder(
-                        
-                  borderRadius: BorderRadius.circular(20.0)),
-                      foregroundColor: globalcolors.maincolor,
-                       backgroundColor: globalcolors.textcolor,
-                       minimumSize: const Size(250, 50), 
-                    ),
-                    child:  Text("${getLang(context, "asdeliry")}",
-              style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-              ),
-                      onPressed: ()  { 
-                        
-      
-              },   
-                    ),
-              ),
-              
-                 
-                ],
-            
-              ),
-            ),
-             const SizedBox(height: 20),
-            ],
-           
-          )
-          
-        );
-         
-                       }
-                       else{Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
-          textColor: globalcolors.besiccolor);}
-              },   
-                    ),
-              ),
-                ],
-              ),
-            ),
-            ],
+                  ),  
+                  ),
+            ],      
          ),
+               
                 ),
               ),
         );
 }
 
-  dosignup(String username,String useremail,String userpass,String userphone, dropdownValue) async {
+  doupdate(String username,String useremail,String userpass,String userphone, String place) async {
  const uuid = Uuid();
  var idd=uuid.v4();
- String userpalce=dropdownValue;
- print(userpalce);
-var res=await fetch1.usersignup(username, useremail,userpass,userphone,userpalce).then((res) {
+
+final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+var res=await fetch1.userupdate(username, useremail,userpass,userphone,place,A).then((res) {
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(

@@ -196,6 +196,36 @@ app.post('/registerproduct', function (request, response) {
 
     });
 });
+app.post('/userupdate', function (request, response) {
+    console.log("update");
+    var username = request.body.username;
+    var userpass = request.body.userpass;
+    var useremail = request.body.useremail;
+    var userphone = request.body.userphone;
+    var userplace = request.body.userplace;
+    
+    console.log("okkkkkkkkkk");
+   
+    let query1 = `UPDATE customer  SET username='${username}',useremail='${useremail}
+    ',userpass='${userpass}',userphone='${userphone}',userplace='${userplace}' WHERE useremail='${useremail}'`;
+    //let query1=`UPDATE sellers SET suparmarketname='${suparmarketname}' , sellercard='${card}' WHERE selleremail='${email}'`;
+    pool.query(query1,[username,useremail,userpass,userphone,userplace] ,function (error, data, results) {
+     
+        console.log("done qurey");
+
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+            
+        }
+        else {
+           // console.log(username);
+            response.send("Success");
+
+        }
+
+    });
+});
 app.post('/walletseller', function (request, response) {
     console.log("add card");
     var suparmarketname = request.body.suparmarketname;
@@ -243,15 +273,18 @@ let query1=`UPDATE delivery SET  deliverycard='${card}' WHERE deliveryemail='${e
 
 app.get('/editprofile', function (request, response) {
     console.log("editprofile");
-
-    let query1 = `SELECT *  FROM customer where useremail='${request.body.useremail}' `;
+// var email=request.body.useremail;
+// var pass =request.body.userpass;
+    let query1 = `SELECT *  FROM customer where useremail='${request.query.useremail}'`;
 
     pool.query(query1, function (error, results) {
         if (error) {
+            console.log(error);
             response.status(400).send('Error in database operation');
         } else {
             console.log(results);
-            response.send(results);
+           // console.log(results);
+            response.status(200).send(results);
         }
     });
 });
