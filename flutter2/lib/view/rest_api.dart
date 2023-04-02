@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
+import 'package:flutter2/models/product.dart';
 
 class utils {
   static const String basurl = "http://192.168.225.52:3000/";
@@ -272,5 +273,27 @@ Future getinfo1() async {
     print("no info");
   }
   return jsonString;
+}
+Future <List<Product>> most() async {
+  late  List<Product> myList=[];
+
+  http.Response res = await http.get(Uri.parse(utils.basurl+'most'),
+      headers: {'Content-Type': 'application/json'});
+
+  if (res.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+
+    var jsonString = json.decode(res.body);
+    List<Product> list =
+    List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
+// List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
+    myList = list;
+
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load album');
+  } return myList;
 }
 }
