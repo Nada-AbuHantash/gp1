@@ -13,6 +13,7 @@ import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
+import 'package:intl/intl.dart';
 import 'init.dart';
 const List<String> list = <String>['لحوم طازجة', 'ألبان وبيض', 'معلبات','سكاكر وشكلاتة'];
 class addproduct extends StatefulWidget{
@@ -28,12 +29,21 @@ class _addproductState extends State<addproduct> {
   final TextEditingController newpricecntoraler= TextEditingController();
   final TextEditingController countcntoraler= TextEditingController();
  late TextEditingController pathcntoraler= TextEditingController();
+  TextEditingController dateInput = TextEditingController();
+
   late String pathimg="";
   
 
   String dropdownValue = list.first;
   File? pickedImage;
   bool isPicked = false;
+  @override
+  void initState() {
+    dateInput.text = ""; //set the initial value of text field
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context){
     double width=MediaQuery.of(context).size.width;
@@ -75,7 +85,52 @@ class _addproductState extends State<addproduct> {
                 textInputType: TextInputType.number,
                 icon: const Icon(Icons.attach_money),
               ),
-              const SizedBox(height: 20),
+
+              Container(
+                  padding:
+                  const EdgeInsets.only(left: 25,right: 25),
+
+                  height: MediaQuery.of(context).size.width / 3,
+                  child: Center(
+                      child: TextField(
+                        controller: dateInput,
+                        style: TextStyle(color:globalcolors.textcolor),
+                        //editing controller of this TextField
+                        decoration: InputDecoration(
+                            hintStyle: TextStyle(
+                             // height: 1,
+                              color: globalcolors.textcolor,
+                            ),
+                            iconColor: globalcolors.textcolor,
+
+                            icon: Icon(Icons.calendar_today), //icon of text field
+                            labelText: "Enter Date" //label text of field
+                        ),
+                        readOnly: true,
+                        //set it true, so that user will not able to edit text
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1950),
+                              //DateTime.now() - not to allow to choose before today.
+                              lastDate: DateTime(2100));
+
+                          if (pickedDate != null) {
+                            print(
+                                pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                            String formattedDate =
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
+                            print(
+                                formattedDate); //formatted date output using intl package =>  2021-03-16
+                            setState(() {
+                              dateInput.text =
+                                  formattedDate; //set output date to TextField value.
+                            });
+                          } else {}
+                        },
+                      ))),
+
               textfiledformat(controller:countcntoraler,
 
                 text:"${getLang(context, "count")}",
