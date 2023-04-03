@@ -90,11 +90,12 @@ class _addproductState extends State<addproduct> {
 
               Container(
                   padding:
-                  const EdgeInsets.only(left: 25,right: 25),
+                  const EdgeInsets.only(left: 45,right: 45),
 
                   height: MediaQuery.of(context).size.width / 3,
                   child: Center(
                       child: TextField(
+                       // cursorColor: Colors.lightGreen,
                         controller: dateInput,
                         style: TextStyle(color:globalcolors.textcolor),
                         //editing controller of this TextField
@@ -106,8 +107,12 @@ class _addproductState extends State<addproduct> {
                             iconColor: globalcolors.textcolor,
 
                             icon: Icon(Icons.calendar_today), //icon of text field
-                            labelText: "Enter Date" //label text of field
+                            labelText:
+                             "Enter Date" //label text of field
+
                         ),
+
+
                         readOnly: true,
                         //set it true, so that user will not able to edit text
                         onTap: () async {
