@@ -6,24 +6,26 @@ enum Shade { orange, green }
 
 class Product {
   final String namesupermarket;
-  final String productName;
+  final String productname;
   // final int  quantity;
   final int price;
-  final String manufacturing;
+  final int newprice;
+  final String exp;
   // final String expiryDate;
   // final int productNumber;
 // final List<int> image;
-  final String? description;
+  // final String? description;
   final bool inCart;
   final Shade shade;
   final  String   image;
 
   factory Product.fromJson(Map<String,dynamic> json) => Product(
     namesupermarket: json['namesupermarket']  == null ? '' : json['namesupermarket']as String,
-    productName: json['productName']  == null ? '' : json['productName']as String,
+    productname: json['productname']  == null ? '' : json['productname']as String,
     // quantity: json['quantity']  == null ? 0 : json['quantity'] as int,
-    price: json['price'] == null ? 0 : json['price'] as int,
-    manufacturing: json['manufacturing']  == null ? '' : json['manufacturing']as String,
+    price: json['oldprice'] == null ? 0 : json['oldprice'] as int,
+     newprice: json['newprice'] == null ? 0 : json['newprice'] as int,
+    exp: json['exp']  == null ? '' : json['exp']as String,
     //  image: json['image'] as List<int>?,
     // image: Uint8List.fromList((json['image'] as List)
     //          .map((e) => e as int).toList())
@@ -31,18 +33,18 @@ class Product {
     // productNumber: json['productNumber']   == null ? 0 : json['productNumber'] as int,
     //  image : List<int>.from(json["image"]),
     //  image: json['image'] as Map<String,dynamic> ,
-    image: json['image']  == null ? '' : json['image']as String,
+    image: json['productimage']  == null ? '' : json['productimage']as String,
   );
 
   Product({
     required this.namesupermarket,
-    required this.productName,
-    // required this.quantity,
+    required this.productname,
+    // required this.image,
     required this.price,
-    required this.manufacturing,
-
+    required this.newprice,
+    required this.exp,
     required this.image,
-    this.description,
+    // this.description,
     this.inCart = false,
     this.shade = Shade.green,
   });
@@ -57,11 +59,11 @@ class Product {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['namesupermarket'] = this.namesupermarket;
-    data['productName'] = this.productName;
-    //  data['quantity'] = this.quantity;
-    data['price'] = this.price;
-
-    data['manufacturing'] = this.manufacturing;
+    data['productname'] = this.productname;
+    //  data['productimage'] = this.image;
+    data['oldprice'] = this.price;
+data['newprice'] = this.newprice;
+    data['exp'] = this.exp;
 
 //بتحكيلك جوناء اسم الفنكشن بالفيتش راتا موست
     return data;

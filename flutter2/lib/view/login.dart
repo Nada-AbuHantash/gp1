@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/editprofail.dart';
 import 'package:flutter2/view/home.dart';
+import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
@@ -12,6 +13,7 @@ import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'package:flutter2/view/mainpage.dart';
 
+import '../utils/Sharedsession.dart';
 import 'addproduct.dart';
 rest_api fetch=new rest_api();
 class login extends StatefulWidget {
@@ -207,7 +209,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                               showSpinner = false;
                             });
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => editprofail()));
+                                MaterialPageRoute(builder: (_) => mainpage()));
                           } else {
                             
                             print("Login Failed");
@@ -271,9 +273,14 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                           showSpinner = true;
                         });
                         fetch.sellerlogin(emailc.replaceAll(' ', ''), pass)
-                            .then((user) {
+                            .then((user) async {
                                print(emailc);
                           if (user != null) {
+                              String  supermarket=jsonString.elementAt(0)['suparmarketname']; 
+                              Sharedsession shared = new Sharedsession();
+                               
+                             await shared.savenamesuper(supermarket); 
+                             print(supermarket);
                             print("Login Sucessfull");
                             setState(() {
                               showSpinner = false;

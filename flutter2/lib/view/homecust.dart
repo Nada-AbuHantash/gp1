@@ -17,6 +17,7 @@ const double kDefaultPadding = 10;
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
 TextEditingController productPriceController = TextEditingController();
+TextEditingController productnewPriceController = TextEditingController();
 TextEditingController productMarketController = TextEditingController();
 TextEditingController productManufactureingController = TextEditingController();
 
@@ -31,7 +32,7 @@ void _runFilter(String enteredKeyword) {
     results = myList;
   } else {
     results = myList
-        .where((user) => user.productName
+        .where((user) => user.productname
         .toLowerCase()
         .contains(enteredKeyword.toLowerCase()))
         .toList();
@@ -116,7 +117,7 @@ class _MyHomePageState extends State<homecust> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      post.productName,
+                      post.productname,
                       style: const TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold),
                     ),
@@ -125,7 +126,7 @@ class _MyHomePageState extends State<homecust> {
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     Text(
-                      post.manufacturing,
+                      post.exp,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     SizedBox(
@@ -135,9 +136,18 @@ class _MyHomePageState extends State<homecust> {
                       "\$ ${post.price}",
                       style: const TextStyle(
                           fontSize: 13,
-                          color: Colors.black,
+                          color: Colors.red,
                           fontWeight: FontWeight.bold),
                     ),
+                    // SizedBox(height: 10,),
+                    //  Text(
+                    //   "\$ ${post.newprice}",
+                    //   style: const TextStyle(
+                    //       fontSize: 13,
+                    //       color: Colors.green,
+                    //       fontWeight: FontWeight.bold),
+                    // ),
+                    // SizedBox(height: 10,),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 

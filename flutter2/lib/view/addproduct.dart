@@ -16,7 +16,7 @@ import '../components/applocal.dart';
 import 'package:intl/intl.dart';
 import 'init.dart';
 const List<String> list = <String>['لحوم طازجة', 'ألبان وبيض', 'معلبات','سكاكر وشكلاتة'];
-const List<String> listper = <String>['20','15','10','8'];
+
 class addproduct extends StatefulWidget{
 
   const addproduct({Key?key}):super(key: key);
@@ -36,7 +36,7 @@ class _addproductState extends State<addproduct> {
   
 
   String dropdownValue = list.first;
-  String per=listper.first;
+  String per="0.2";
   File? pickedImage;
   bool isPicked = false;
   @override

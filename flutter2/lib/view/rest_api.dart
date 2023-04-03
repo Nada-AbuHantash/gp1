@@ -5,7 +5,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://192.168.33.52:3000/";
+  static const String basurl = "http://192.168.193.52:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -64,10 +64,10 @@ Future sellerlogin(String email, String pass) async {
        if (use1.statusCode == 200) {
 Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
-       namesuper = json.decode();
-     // await shared.savenamesuper(shared.getsupermarket());
+      
+     print(namesuper);
     } else {
-      // show error
+      // show error 
       print("Try Again");
     }
 
