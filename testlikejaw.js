@@ -183,7 +183,7 @@ app.post('/registerproduct', function (request, response) {
     console.log("add pro");
     var name = request.body.productname;
     var count = request.body.productcount;
-    var paht = request.body.productimage;
+    var paht = "assets/images"+request.body.productimage;
     var type = request.body.producttype;
     var newprice = request.body.newprice;
     var oldprice = request.body.oldprice;
@@ -192,8 +192,9 @@ app.post('/registerproduct', function (request, response) {
     var per=request.body.per;
  var percent=newprice*count*(per);
  console.log(percent);
-   let query=`SELECT * FROM sellers WHERE suparmarketname='${request.query.namesupermarket}'`;
-   pool.query(query,function (error, data, results) {
+ var card;
+   let query="Select * from sellers where suparmarketname=?";
+   pool.query(query,[nameperson],function (error, data, results1) {
     console.log("done qurey");
 
     if (error) {
@@ -202,9 +203,9 @@ app.post('/registerproduct', function (request, response) {
         
     }
     else {
-       let card=56;
-      // response.send(results);
-    //   const card=results[0].sellercard;
+        card=56;
+    //   // response.send(results1);
+    // card=results1[0].sellercard;
     //    console.log(card);
         if(card>percent){
         console.log("okkkkkkkkkk");
