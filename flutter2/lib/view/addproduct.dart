@@ -16,6 +16,7 @@ import '../components/applocal.dart';
 import 'package:intl/intl.dart';
 import 'init.dart';
 const List<String> list = <String>['لحوم طازجة', 'ألبان وبيض', 'معلبات','سكاكر وشكلاتة'];
+const List<String> listper = <String>['20','15','10','8'];
 class addproduct extends StatefulWidget{
 
   const addproduct({Key?key}):super(key: key);
@@ -35,6 +36,7 @@ class _addproductState extends State<addproduct> {
   
 
   String dropdownValue = list.first;
+  String per=listper.first;
   File? pickedImage;
   bool isPicked = false;
   @override
@@ -318,8 +320,12 @@ class _addproductState extends State<addproduct> {
                           if(countcntoraler.text.isNotEmpty && namecntoraler.text.isNotEmpty
                           && oldpricecntoraler.text.isNotEmpty && newpricecntoraler.text.isNotEmpty
                            && pathimg.isNotEmpty){
+                            if(dropdownValue==list.first){per="0.20";}
+                            else if(dropdownValue==list.last){per="0.15";}
+                            else if(2==list.indexOf(dropdownValue)){per="0.08";}
+                            else if(1==list.indexOf(dropdownValue)){per="0.10";}
                            putproduct(countcntoraler.text,namecntoraler.text,oldpricecntoraler.text,
-                           newpricecntoraler.text,dropdownValue,pathimg);
+                           newpricecntoraler.text,dropdownValue,pathimg,dateInput.text,per);
 
                           }else{
 
@@ -340,12 +346,12 @@ Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
     );
   }
   
-  void putproduct(String count, String name, String oldprice, String newprice, String type, String pathimg)async {
+  void putproduct(String count, String name, String oldprice, String newprice, String type, String pathimg,String exp,String per )async {
 final prefs = await SharedPreferences.getInstance();
   String nameperson= prefs.get("supermarket").toString();
 
 
-var res=await fetch1.putpro(count,name,oldprice,newprice,type,pathimg,nameperson).then((res) {
+var res=await fetch1.putpro(count,name,oldprice,newprice,type,pathimg,nameperson,exp,per).then((res) {
 
 print(res.toString());
 Route route=MaterialPageRoute(builder: (_)=>home());

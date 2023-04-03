@@ -5,7 +5,7 @@ import 'dart:convert';
 enum Shade { orange, green }
 
 class Product {
-  final String marketName;
+  final String namesupermarket;
   final String productName;
   // final int  quantity;
   final int price;
@@ -19,7 +19,7 @@ class Product {
   final  String   image;
 
   factory Product.fromJson(Map<String,dynamic> json) => Product(
-    marketName: json['marketName']  == null ? '' : json['marketName']as String,
+    namesupermarket: json['namesupermarket']  == null ? '' : json['namesupermarket']as String,
     productName: json['productName']  == null ? '' : json['productName']as String,
     // quantity: json['quantity']  == null ? 0 : json['quantity'] as int,
     price: json['price'] == null ? 0 : json['price'] as int,
@@ -35,15 +35,13 @@ class Product {
   );
 
   Product({
-    required this.marketName,
+    required this.namesupermarket,
     required this.productName,
     // required this.quantity,
     required this.price,
     required this.manufacturing,
 
     required this.image,
-    // required this.expiryDate,
-    // required this.productNumber,
     this.description,
     this.inCart = false,
     this.shade = Shade.green,
@@ -58,7 +56,7 @@ class Product {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['marketName'] = this.marketName;
+    data['namesupermarket'] = this.namesupermarket;
     data['productName'] = this.productName;
     //  data['quantity'] = this.quantity;
     data['price'] = this.price;

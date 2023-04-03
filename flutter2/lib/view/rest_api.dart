@@ -5,7 +5,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://192.168.225.52:3000/";
+  static const String basurl = "http://192.168.33.52:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -54,7 +54,7 @@ Sharedsession shared = new Sharedsession();
   }
 }
 Future sellerlogin(String email, String pass) async {
-   var jsonString;
+   var namesuper;
   try {
     final http.Response use1 = await http.post(
         Uri.parse(utils.basurl + 'loginseller'),
@@ -64,11 +64,13 @@ Future sellerlogin(String email, String pass) async {
        if (use1.statusCode == 200) {
 Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
+       namesuper = json.decode();
      // await shared.savenamesuper(shared.getsupermarket());
     } else {
       // show error
       print("Try Again");
     }
+
       print("yes ");
       
       ///////////saved////////////
@@ -248,7 +250,7 @@ Future sellersignup(
 }
 
 Future putpro(
-    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson) async {
+    String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson ,String exp,String per) async {
   try {
     var s = 200;
     final http.Response use =
@@ -262,6 +264,8 @@ Future putpro(
       'producttype': type,
       'productimage': path,
       'namesupermarket':nameperson,
+      'exp':exp,
+      'per':per,
      
 
     });
@@ -312,7 +316,7 @@ Future getinfo1() async {
 Future <List<Product>> most() async {
   late  List<Product> myList=[];
 
-  http.Response res = await http.get(Uri.parse(utils.basurl+'most'),
+  http.Response res = await http.get(Uri.parse(utils.basurl+'viewpro'),
       headers: {'Content-Type': 'application/json'});
 
   if (res.statusCode == 200) {

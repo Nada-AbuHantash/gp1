@@ -121,7 +121,7 @@ class _MyHomePageState extends State<homecust> {
                           fontSize: 17, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      post.marketName,
+                      post.namesupermarket,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     Text(
