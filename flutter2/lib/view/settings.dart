@@ -21,9 +21,9 @@ class _profileScreenState extends State<settings> {
   int _selectedIndex = 0;
   static List<Widget> _pages = <Widget>[
     editprofail(),
-    home(),
+    logintest(),
     AboutScreen(),
-    homecust(),
+    home(),
   ];
   @override
   Widget build(BuildContext context) {

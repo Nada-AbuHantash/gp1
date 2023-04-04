@@ -45,6 +45,9 @@ class MyHomePage1 extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage1> {
   int _currentIndex = 0;
+  static List<Widget> _pages = <Widget>[
+    settings(),
+  ];
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -104,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 3:
         return const homecust();
       case 4:
+        _pages[0];
         return const settings();
       default:
         return const homecust();

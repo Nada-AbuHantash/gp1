@@ -87,8 +87,71 @@ class _addproductState extends State<addproduct> {
                 textInputType: TextInputType.number,
                 icon: const Icon(Icons.attach_money),
               ),
+              const SizedBox(height: 20),
+
 
               Container(
+            height:55,
+            width: 350,
+
+            padding: const EdgeInsets.only(top: 3, left: 25,right: 25),
+            decoration: BoxDecoration(
+
+                color: globalcolors.besiccolor,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    blurRadius: 20,
+                  )
+                ]
+            ),
+            child: TextFormField(
+              style: TextStyle(color:globalcolors.textcolor),
+              controller: dateInput,
+              keyboardType: TextInputType.datetime,
+              obscureText: false,
+              decoration: InputDecoration(
+                  iconColor: globalcolors.textcolor,
+
+                  hintText: "${getLang(context, "date")}",
+                  icon: Icon(Icons.calendar_today),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(0),
+                  hintStyle: TextStyle(
+                    height: 1,
+                    color: globalcolors.textcolor,
+                  )
+              ),
+              readOnly: true,
+              //set it true, so that user will not able to edit text
+              onTap: () async {
+                DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1950),
+                    //DateTime.now() - not to allow to choose before today.
+                    lastDate: DateTime(2100));
+
+                if (pickedDate != null) {
+                  print(
+                      pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                  String formattedDate =
+                  DateFormat('yyyy-MM-dd').format(pickedDate);
+                  print(
+                      formattedDate); //formatted date output using intl package =>  2021-03-16
+                  setState(() {
+                    dateInput.text =
+                        formattedDate; //set output date to TextField value.
+                  });
+                } else {}
+              },
+
+            ),
+            ),
+              const SizedBox(height: 20),
+
+              /* Container(
                   padding:
                   const EdgeInsets.only(left: 45,right: 45),
 
@@ -136,7 +199,7 @@ class _addproductState extends State<addproduct> {
                             });
                           } else {}
                         },
-                      ))),
+                      ))),*/
 
               textfiledformat(controller:countcntoraler,
 
