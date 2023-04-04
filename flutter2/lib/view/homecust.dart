@@ -43,7 +43,6 @@ void _runFilter(String enteredKeyword) {
 
 }
 
-
 class homecust extends StatefulWidget {
   const homecust({Key? key}) : super(key: key);
   @override
@@ -61,6 +60,8 @@ class _MyHomePageState extends State<homecust> {
 
   @override
   rest_api fetch=new rest_api();
+
+
   void initState()  {
     super.initState();
     _textEditingController.text = text;
@@ -84,7 +85,11 @@ class _MyHomePageState extends State<homecust> {
   void getlist() async{
     myList=await fetch.most();
   }
-
+  // int daysBetween(DateTime from, DateTime to) {
+  //    from = DateTime(from.year, from.month, from.day);
+  //    to = DateTime(to.year, to.month, to.day);
+  //  return (to.difference(from).inHours / 24).round();
+  // }
   void getPostsData() async{
 
     List<Widget> listItems = [];
@@ -94,6 +99,9 @@ class _MyHomePageState extends State<homecust> {
 
     myList.forEach((post) {
 
+// final dd= DateTime(post.exp as int);
+//  final date2 = DateTime.now();
+//    final difference = daysBetween(dd as DateTime, date2);
 
 
       listItems.add(Container(

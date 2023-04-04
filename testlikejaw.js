@@ -81,8 +81,17 @@ app.get('/viewpro', function (request, response) {
     // var place = request.body.userplace;
     // console.log(place);
     console.log("okkkkkkkkkk");
+    let ts = Date.now();
 
-let query1=`Select * from products ORDER BY date(exp) ASC`;
+let date_ob = new Date(ts);
+let date = date_ob.getDate();
+let month = date_ob.getMonth() + 1;
+let year = date_ob.getFullYear();
+let currentdate=year + "-" + month + "-" + date;
+// let datebase = new Date();
+//  if (currentdate<="2023-4-1"){console.log(currentdate);}
+
+let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp) ASC `;
     pool.query(query1, function (error, results) {
         if (error) {
             
@@ -183,7 +192,7 @@ app.post('/registerproduct', function (request, response) {
     console.log("add pro");
     var name = request.body.productname;
     var count = request.body.productcount;
-    var paht = "assets/images"+request.body.productimage;
+    var paht = "assets/images/"+request.body.productimage;
     var type = request.body.producttype;
     var newprice = request.body.newprice;
     var oldprice = request.body.oldprice;
