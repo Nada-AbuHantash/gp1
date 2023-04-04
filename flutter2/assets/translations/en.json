@@ -29,5 +29,6 @@
     "added":"Add product",
     "addedimage":"Add image",
     "nophoto":"no photo select",
-    "profiledis":"You can modify your information"
+    "profiledis":"You can modify your information",
+    "date": "Exp date"
 }

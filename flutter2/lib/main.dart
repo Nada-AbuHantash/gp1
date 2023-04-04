@@ -7,6 +7,7 @@ import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/logintest.dart';
 import 'package:flutter2/view/mainpage.dart';
+import 'package:flutter2/view/settings.dart';
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:logintest(),
+      home:addproduct(),
        
        localizationsDelegates: [
           applocal.delegate,
