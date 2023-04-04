@@ -46,6 +46,7 @@ class _logintestState extends State<logintest> {
 
   final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
+// var lang =mySharedPreferences?.getString("translations");
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +66,9 @@ class _logintestState extends State<logintest> {
              Container(
             alignment: Alignment.center,
             
-             //child: Text("${mySharedPreferences!.getString('translations')}",
-              //  child: Text("${getLang(context, "login")}",
-             child: Text(language.getlan(),
+            //  child: Text("${mySharedPreferences!.getString('translations')}",
+               child: Text("${getLang(context, "login")}",
+             //child: Text('loginbuttun'.tr,
             
               style: TextStyle(
                 color: globalcolors.notetcolor,
@@ -107,12 +108,12 @@ class _logintestState extends State<logintest> {
            const SizedBox(height: 20),
            ElevatedButton(
           onPressed: ()  { 
-            if(language.getlan()=="en"){
+            if(mySharedPreferences!.getString('translations')=="en"){
            var locale= Locale("ar","");
             Get.updateLocale(locale);
             // language.savelang("ar");
             }
-            else{
+            else if (mySharedPreferences!.getString('translations')=="ar"){
               var locale= Locale("en","");
             Get.updateLocale(locale);
             // language.savelang("en");
