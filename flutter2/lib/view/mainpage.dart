@@ -13,6 +13,7 @@ import 'package:flutter2/view/login.dart';
 //import 'package:flutter2/view/logintest.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
+import 'package:flutter2/view/settings.dart';
 import 'home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,8 +70,8 @@ class _MyHomePageState extends State<MyHomePage1> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
-              label: 'profile',
+              icon: const Icon(Icons.notifications),
+              label: 'notfication',
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.shopping_cart_outlined),
@@ -80,10 +81,12 @@ class _MyHomePageState extends State<MyHomePage1> {
               icon: const Icon(Icons.chat_outlined),
               label: 'Chat',
             ),
+
             BottomNavigationBarItem(
-              icon: const Icon(Icons.notifications),
-              label: 'notfication',
+              icon: const Icon(Icons.settings),
+              label: 'Settings',
             ),
+
           ],
         ),
       ),
@@ -101,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 3:
         return const homecust();
       case 4:
-        return  homecust();
+        return const settings();
       default:
         return const homecust();
     }
