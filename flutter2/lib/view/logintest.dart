@@ -24,9 +24,11 @@ import 'package:get/get.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/main.dart';
 
+import '../utils/Sharedsession.dart';
+
 rest_api fetch=new rest_api();
 
-
+// Sharedsession language = new Sharedsession();
 
 class logintest extends StatefulWidget {
  // const logintest({super.key});
