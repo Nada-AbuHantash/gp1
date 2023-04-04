@@ -23,12 +23,12 @@ import 'package:get/get.dart';
 //import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/main.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import '../utils/Sharedsession.dart';
 
 rest_api fetch=new rest_api();
 
-// Sharedsession language = new Sharedsession();
+Sharedsession language = new Sharedsession();
 
 class logintest extends StatefulWidget {
  // const logintest({super.key});
@@ -64,10 +64,10 @@ class _logintestState extends State<logintest> {
               const SizedBox(height: 70),
              Container(
             alignment: Alignment.center,
-             
+            
              //child: Text("${mySharedPreferences!.getString('translations')}",
-               child: Text("${getLang(context, "login")}",
-             //child: Text('loginbuttun'.tr,
+              //  child: Text("${getLang(context, "login")}",
+             child: Text(language.getlan(),
             
               style: TextStyle(
                 color: globalcolors.notetcolor,
@@ -107,12 +107,15 @@ class _logintestState extends State<logintest> {
            const SizedBox(height: 20),
            ElevatedButton(
           onPressed: ()  { 
-            if(language.getlan()=='en'){
-           var locale= Locale('ar','');
-            Get.updateLocale(locale);}
-            else{
-              var locale= Locale('en','');
+            if(language.getlan()=="en"){
+           var locale= Locale("ar","");
             Get.updateLocale(locale);
+            // language.savelang("ar");
+            }
+            else{
+              var locale= Locale("en","");
+            Get.updateLocale(locale);
+            // language.savelang("en");
             }
           }, child: Text('changlang'),
           
