@@ -69,11 +69,26 @@ Widget build(BuildContext context){
   double height=MediaQuery.of(context).size.height;
  
  return  Scaffold(
-        
+        appBar: AppBar(
+          elevation: 0,
+           backgroundColor: globalcolors.maincolor,
+          title: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Profile",
+              
+              style:  TextStyle(color: globalcolors.textcolor,
+              fontSize: 30,),
+              
+              
+              ),
+            ],
+          ),
+        ),
         body: 
-         
-              Container(
-                color: globalcolors.besiccolor,
+         SingleChildScrollView(
+             child: Container(
+                color: globalcolors.maincolor,
                 width: width,
                 height: height,
                 child: SingleChildScrollView(
@@ -81,10 +96,13 @@ Widget build(BuildContext context){
                      // mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: height*0.25,
-                width: width*0.50,
-                child: Image.asset('assets/images/logoo1.png',fit: BoxFit.fill,),
-               
+               child: SizedBox(
+                height: 120,
+                width: 120,
+                child:ClipRRect( borderRadius:BorderRadius.circular(100),
+                child:
+                Image.asset('assets/images/logoo1.png',fit: BoxFit.fill,),)
+                ),
               ),
               const SizedBox(height: 10),
                   Row(
@@ -190,6 +208,7 @@ textfiledformat(controller:placecntoraler,
                
                 ),
               ),
+         ),
         );
 }
 
