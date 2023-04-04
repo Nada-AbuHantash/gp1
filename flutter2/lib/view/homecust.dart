@@ -105,8 +105,8 @@ class _MyHomePageState extends State<homecust> {
 
 
       listItems.add(Container(
-          height: 100,
-          width: 300,
+          height: 150,
+          width: 400,
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
 
@@ -147,15 +147,15 @@ class _MyHomePageState extends State<homecust> {
                           color: Colors.red,
                           fontWeight: FontWeight.bold),
                     ),
-                    // SizedBox(height: 10,),
-                    //  Text(
-                    //   "\$ ${post.newprice}",
-                    //   style: const TextStyle(
-                    //       fontSize: 13,
-                    //       color: Colors.green,
-                    //       fontWeight: FontWeight.bold),
-                    // ),
-                    // SizedBox(height: 10,),
+                    SizedBox(height: 10,),
+                     Text(
+                      "\$ ${post.newprice}",
+                      style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 10,),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 

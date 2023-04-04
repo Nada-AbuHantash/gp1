@@ -14,7 +14,9 @@ import 'package:flutter2/view/login.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/settings.dart';
+import 'MyHomePage.dart';
 import 'home.dart';
+import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -108,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage1> {
         return const homecust();
       case 4:
         _pages[0];
-        return const settings();
+        return  NavDrawer();
       default:
         return const homecust();
     }

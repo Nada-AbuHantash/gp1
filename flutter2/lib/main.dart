@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
+import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/editprofail.dart';
 import 'package:flutter2/view/home.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:homecust(),
+      home:mainpage(),
        
        localizationsDelegates: [
           applocal.delegate,
