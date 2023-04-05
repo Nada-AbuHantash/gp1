@@ -7,6 +7,7 @@ import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
+import 'about/abo2.dart';
 import 'logintest.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -19,7 +20,7 @@ class NavDrawer extends StatelessWidget {
           const SizedBox(height: 30),
           ListTile(
             leading: Icon(Icons.person,color: globalcolors.textcolor),
-            title: Text('Profile'),
+            title: Text('Profile',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
               Navigator.push(
                 context,
@@ -29,7 +30,7 @@ class NavDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.language,color: globalcolors.textcolor),
-            title: Text('Language'),
+            title: Text('Language',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
               Navigator.push(
             context,
@@ -40,21 +41,24 @@ class NavDrawer extends StatelessWidget {
 
           ListTile(
             leading: Icon(Icons.info_outline,color: globalcolors.textcolor),
-            title: Text('About us'),
+            title: Text('About us',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
-              //Navigator.of(context).pop()
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const About()),
+              )
             },
           ),
           ListTile(
             leading: Icon(Icons.border_color,color: globalcolors.textcolor),
-            title: Text('Feedback'),
+            title: Text('Feedback',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
             //  Navigator.of(context).pop()
             },
           ),
           ListTile(
             leading: Icon(Icons.exit_to_app,color: globalcolors.textcolor),
-            title: Text('Logout'),
+            title: Text('Logout',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
 
               showDialog(
