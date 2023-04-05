@@ -197,7 +197,7 @@ Widget build(BuildContext context){
             backgroundColor: globalcolors.besiccolor,
             
             actions: [
-Padding(
+         Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

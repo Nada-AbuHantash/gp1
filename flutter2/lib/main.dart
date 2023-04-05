@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter2/view/addproduct.dart';
-import 'package:flutter2/view/editprofile.dart';
-import 'package:flutter2/view/profile.dart';
+
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/logintest.dart';
 import 'package:flutter2/view/mainpage.dart';
-import 'package:flutter2/view/settings.dart';
+
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
@@ -38,7 +37,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-// get mySharedPreferences => 'en';
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:MyHomePage1(),
+      home:logintest(),
        
        localizationsDelegates: [
           applocal.delegate,
@@ -61,7 +60,6 @@ class _MyAppState extends State<MyApp> {
          
          supportedLocales: [
           const Locale("en", ""),
-          
           const Locale("ar", ""),
         ],
        localeResolutionCallback: (currentLang, supportLang) {

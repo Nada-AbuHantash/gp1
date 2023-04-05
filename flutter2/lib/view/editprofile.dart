@@ -23,7 +23,7 @@ rest_api fetch1=new rest_api();
 String now = DateFormat("yyyy-MM-dd").format(DateTime.now());  
 
   var jsonString;
-const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
+const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
  class editprofile extends StatefulWidget{
 

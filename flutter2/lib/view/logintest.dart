@@ -4,6 +4,7 @@ import 'package:flutter2/models/product.dart';/////اسم البرودكتس ز�
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:convert';
@@ -20,7 +21,7 @@ import 'package:flutter2/view/widgets/socialogin.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-//import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/main.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -46,7 +47,7 @@ class _logintestState extends State<logintest> {
 
   final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
-// var lang =mySharedPreferences?.getString("translations");
+ //var lang =mySharedPreferences?.getString("translations");
 
   @override
   Widget build(BuildContext context) {
@@ -108,16 +109,16 @@ class _logintestState extends State<logintest> {
            const SizedBox(height: 20),
            ElevatedButton(
           onPressed: ()  { 
-          //   if(mySharedPreferences!.getString('translations')=="en"){
-          //  var locale= Locale("ar","");
-          //   Get.updateLocale(locale);
-          //   // language.savelang("ar");
-          //   }
-          //   else if (mySharedPreferences!.getString('translations')=="ar"){
-          //     var locale= Locale("en","");
-          //   Get.updateLocale(locale);
-          //   // language.savelang("en");
-          //   }
+           //  if(mySharedPreferences!.getString('translations')=="en"){
+           // var locale= Locale("ar","");
+           //  Get.updateLocale(locale);
+           //  // language.savelang("ar");
+           //  }
+           //  else if (mySharedPreferences!.getString('translations')=="ar"){
+           //    var locale= Locale("en","");
+           //  Get.updateLocale(locale);
+           //  // language.savelang("en");
+           //  }
           }, child: Text('changlang'),
           
         ),
