@@ -6,6 +6,7 @@ import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'about/abo2.dart';
 import 'logintest.dart';
@@ -53,7 +54,67 @@ class NavDrawer extends StatelessWidget {
             leading: Icon(Icons.border_color,color: globalcolors.textcolor),
             title: Text('Feedback',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
-            //  Navigator.of(context).pop()
+
+            showDialog(
+            context: context,
+            builder: (BuildContext context) =>
+            AlertDialog(
+
+            actions: [
+            const SizedBox(height: 20),
+              RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemCount: 5,
+                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  print(rating);
+                },
+              ),
+              const SizedBox(height: 20),
+            Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            SizedBox(
+            child: ElevatedButton(
+
+            style: ElevatedButton.styleFrom(
+
+            shape: RoundedRectangleBorder(
+
+            borderRadius: BorderRadius.circular(20.0)),
+            foregroundColor: globalcolors.maincolor,
+            backgroundColor: globalcolors.notetcolor,
+            minimumSize: const Size(250, 50),
+            ),
+            child: Text("${getLang(context, "feed")}",
+            style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
+            ),
+            onPressed: ()  {
+            ////the value of the rate in rating **added it to the database
+            },
+            ),
+            ),
+
+
+            ],
+
+            ),
+            ),
+
+            const SizedBox(height: 20),
+
+            ],
+
+            )),
             },
           ),
           ListTile(
@@ -65,10 +126,6 @@ class NavDrawer extends StatelessWidget {
               context: context,
               builder: (BuildContext context) =>
                   AlertDialog(
-                   // title:
-                    //Text("${getLang(context, "singass")}"),
-                   // titleTextStyle: TextStyle(color: globalcolors.notetcolor,fontSize: 20),
-                  //  backgroundColor: globalcolors.besiccolor,
 
                     actions: [
                       const SizedBox(height: 20),
@@ -138,6 +195,21 @@ class NavDrawer extends StatelessWidget {
                       ),
 
                       const SizedBox(height: 20),
+                      RatingBar.builder(
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: true,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      ),
                     ],
 
                   )

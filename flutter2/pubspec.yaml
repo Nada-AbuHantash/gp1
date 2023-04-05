@@ -30,6 +30,7 @@ flutter_localization:
 # versions available, run `flutter pub outdated`.
 dependencies:
 
+  flutter_rating_bar: ^4.0.1
 
   flutter:
     sdk: flutter
