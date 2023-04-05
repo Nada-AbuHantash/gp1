@@ -270,10 +270,10 @@ app.post('/userupdate', function (request, response) {
     
     console.log("okkkkkkkkkk");
    
-    let query1 = `UPDATE customer  SET username='${username}',useremail='${useremail}
-    ',userpass='${userpass}',userphone='${userphone}',userplace='${userplace}' WHERE useremail='${useremail}'`;
+    let query1 = `UPDATE customer  SET username='${username}'
+    ,userpass='${userpass}',userphone='${userphone}',userplace='${userplace}' WHERE useremail='${useremail}'`;
     //let query1=`UPDATE sellers SET suparmarketname='${suparmarketname}' , sellercard='${card}' WHERE selleremail='${email}'`;
-    pool.query(query1,[username,useremail,userpass,userphone,userplace] ,function (error, data, results) {
+    pool.query(query1,[username,userpass,userphone,userplace] ,function (error, data, results) {
      
         console.log("done qurey");
 
@@ -283,7 +283,7 @@ app.post('/userupdate', function (request, response) {
             
         }
         else {
-           // console.log(username);
+           // console.log(username)~;
             response.send("Success");
 
         }
