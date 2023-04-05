@@ -17,12 +17,12 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/applocal.dart';
-// SharedPreferences ?mySharedPreferences;
+SharedPreferences ?mySharedPreferences;
 Sharedsession language = new Sharedsession();
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
-    //   mySharedPreferences = await SharedPreferences.getInstance();
-    //  await mySharedPreferences!.setString("translations","en");
+      mySharedPreferences = await SharedPreferences.getInstance();
+     await mySharedPreferences!.setString("translations","en");
     language.savelang("en");
     
   runApp(const MyApp());
@@ -65,8 +65,8 @@ class _MyAppState extends State<MyApp> {
           if (currentLang != null) {
             for (Locale locale in supportLang) {
               if (locale.languageCode == currentLang.languageCode) {
-              //  mySharedPreferences!.setString("translations",currentLang.languageCode); 
-                 language.savelang(currentLang.languageCode);
+               mySharedPreferences!.setString("translations",currentLang.languageCode); 
+                //  language.savelang(currentLang.languageCode);
                 return currentLang;
               }
             }

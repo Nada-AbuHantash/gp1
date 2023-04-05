@@ -109,16 +109,16 @@ class _logintestState extends State<logintest> {
            const SizedBox(height: 20),
            ElevatedButton(
           onPressed: ()  { 
-           //  if(mySharedPreferences!.getString('translations')=="en"){
-           // var locale= Locale("ar","");
-           //  Get.updateLocale(locale);
-           //  // language.savelang("ar");
-           //  }
-           //  else if (mySharedPreferences!.getString('translations')=="ar"){
-           //    var locale= Locale("en","");
-           //  Get.updateLocale(locale);
-           //  // language.savelang("en");
-           //  }
+            if(mySharedPreferences!.getString('translations')=="en"){
+           var locale= Locale("ar","");
+            Get.updateLocale(locale);
+            // language.savelang("ar");
+            }
+            else if (mySharedPreferences!.getString('translations')=="ar"){
+              var locale= Locale("en","");
+            Get.updateLocale(locale);
+            // language.savelang("en");
+            }
           }, child: Text('changlang'),
           
         ),
