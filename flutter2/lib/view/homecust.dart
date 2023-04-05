@@ -195,9 +195,10 @@ class _MyHomePageState extends State<homecust> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          elevation: 0,
           title: const Text('Welcome to SALE !'),
           backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          foregroundColor: globalcolors.textcolor,
 
         ),
         body: Container(
