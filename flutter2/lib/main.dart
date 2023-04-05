@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/MyHomePage.dart';
+import 'package:flutter2/view/Rating.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
