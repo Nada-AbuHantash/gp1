@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/MyHomePage.dart';
-import 'package:flutter2/view/Rating.dart';
 import 'package:flutter2/view/addproduct.dart';
-
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/logintest.dart';
 import 'package:flutter2/view/mainpage.dart';
-
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
