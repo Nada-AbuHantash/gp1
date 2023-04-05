@@ -50,11 +50,11 @@ class NavDrawer extends StatelessWidget {
               )
             },
           ),
+     //////////////     /////////////////////////////////////////////////////////////
           ListTile(
             leading: Icon(Icons.border_color,color: globalcolors.textcolor),
             title: Text('Feedback',style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
-
             showDialog(
             context: context,
             builder: (BuildContext context) =>
@@ -62,7 +62,15 @@ class NavDrawer extends StatelessWidget {
 
             actions: [
             const SizedBox(height: 20),
+              Padding(
+
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
               RatingBar.builder(
+
                 initialRating: 3,
                 minRating: 1,
                 direction: Axis.horizontal,
@@ -77,7 +85,11 @@ class NavDrawer extends StatelessWidget {
                   print(rating);
                 },
               ),
+            ],
+            ),
+            ),
               const SizedBox(height: 20),
+
             Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
@@ -117,6 +129,7 @@ class NavDrawer extends StatelessWidget {
             )),
             },
           ),
+ ///////////////////////////         /////////////////////////////////////////////////////
           ListTile(
             leading: Icon(Icons.exit_to_app,color: globalcolors.textcolor),
             title: Text('Logout',style: TextStyle(color: globalcolors.textcolor)),
