@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/profile.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';

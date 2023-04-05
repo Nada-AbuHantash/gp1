@@ -1,6 +1,6 @@
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:fluttertoast/fluttertoast.dart';

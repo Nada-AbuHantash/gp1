@@ -163,7 +163,7 @@ Future usersignup(
   }
 }
 Future userupdate(
-    String name, String email, String pass, String phone, String place , String a) async {
+    String name, String pass, String phone, String place , String email) async {
   try {
     var s = 200;
     final http.Response use =

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/addproduct.dart';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/editprofile.dart';
+import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/init.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
+// get mySharedPreferences => 'en';
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:homecust(),
+      home:home(),
        
        localizationsDelegates: [
           applocal.delegate,
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
          
          supportedLocales: [
           const Locale("en", ""),
+          
           const Locale("ar", ""),
         ],
        localeResolutionCallback: (currentLang, supportLang) {

@@ -2,7 +2,7 @@ import 'package:flutter2/components/applocal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter2/utils/globalColors.dart';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/about/about.dart';
@@ -20,7 +20,7 @@ class _profileScreenState extends State<settings> {
 
   int _selectedIndex = 0;
   static List<Widget> _pages = <Widget>[
-    editprofail(),
+    profile(),
     logintest(),
     AboutScreen(),
     home(),

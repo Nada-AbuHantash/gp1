@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/rest_api.dart';
@@ -209,7 +209,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                               showSpinner = false;
                             });
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => mainpage()));
+                                MaterialPageRoute(builder: (_) => profile()));
                           } else {
                             
                             print("Login Failed");
