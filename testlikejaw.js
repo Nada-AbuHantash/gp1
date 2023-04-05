@@ -273,6 +273,7 @@ app.post('/userupdate', function (request, response) {
     let query1 = `UPDATE customer  SET username='${username}'
     ,userpass='${userpass}',userphone='${userphone}',userplace='${userplace}' WHERE useremail='${useremail}'`;
     //let query1=`UPDATE sellers SET suparmarketname='${suparmarketname}' , sellercard='${card}' WHERE selleremail='${email}'`;
+    
     pool.query(query1,[username,userpass,userphone,userplace] ,function (error, data, results) {
      
         console.log("done qurey");
@@ -284,8 +285,43 @@ app.post('/userupdate', function (request, response) {
         }
         else {
            // console.log(username)~;
-            response.send("Success");
+           // response.send("Success");
+            let query = `UPDATE delivery  SET deliveryname='${username}'
+            ,deliverypass='${userpass}',deliveryphone='${userphone}',deliveryplace='${userplace}' WHERE deliveryemail='${useremail}'`;
+    pool.query(query,[username,userpass,userphone,userplace] ,function (error, data, results) {
+     
+        console.log("done qurey");
 
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+            
+        }
+        else {
+           // console.log(username)~;
+           // response.send("Success");
+            let query2 = `UPDATE sellers  SET sellername='${username}'
+            ,sellerpass='${userpass}',sellerphone='${userphone}',sellerplace='${userplace}' WHERE selleremail='${useremail}'`;
+    pool.query(query2,[username,userpass,userphone,userplace] ,function (error, data, results) {
+     
+        console.log("done qurey");
+
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+            
+        }
+        else {
+           // console.log(username)~;
+            response.send("Success");
+          
+        }
+
+    });
+        }
+
+    });
+          
         }
 
     });

@@ -17,10 +17,13 @@ Future userlogin(String email, String pass) async {
         headers: {"Accept": "Application/json"},
         body: {'useremail': email, 'userpass': pass});
     if (use.body.contains("@")) {
-      print("yes ");
-      Sharedsession shared = new Sharedsession();
+         if (use.statusCode == 200) {
+Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
-      ///////////saved////////////
+    } else {
+      // show error
+      print("Try Again");
+    }
     } else
       print("failed");
     return use;

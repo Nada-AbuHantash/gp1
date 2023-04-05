@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:flutter2/view/profile.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -34,7 +35,23 @@ const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 }
 
 class _editprofileState extends State<editprofile> {
-  
+   @override
+  void initState() {
+    
+  int h=1;
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+    // do something
+     getinfo();
+ var jsonString;
+    print("Build Completed"); 
+  });
+  }
+   void getinfo() async {
+jsonString=await fetch1.getinfo1();
+emailjaw=jsonString.elementAt(0)['useremail'];
+print(namejaw);
+  }
   
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
@@ -205,7 +222,7 @@ Widget build(BuildContext context){
                   ),
                           onPressed: ()  { 
                           // print(dropdownValue);
-                         doupdate(namecntoraler.text,passcntoraler.text,phonecntoraler.text,placecntoraler.text);
+                         doupdate(namecntoraler.text,passcntoraler.text,phonecntoraler.text,dropdownValue);
       
                   },   
                        
@@ -223,7 +240,7 @@ Widget build(BuildContext context){
         );
 }
 
-  doupdate(String username,String userpass,String userphone, String place) async {
+  doupdate(String username,String userpass,String userphone, String place ) async {
  const uuid = Uuid();
  var idd=uuid.v4();
 
@@ -245,7 +262,7 @@ AlertDialog alert = const AlertDialog(
 }
 else{
 print(res.toString());
-Route route=MaterialPageRoute(builder: (_)=>login());
+Route route=MaterialPageRoute(builder: (_)=>profile());
       navigator?.pushReplacement(route);
 
 }

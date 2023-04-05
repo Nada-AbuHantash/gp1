@@ -56,12 +56,7 @@ placejaw=jsonString.elementAt(0)['userplace'];
 phonejaw=jsonString.elementAt(0)['userphone'].toString();
 print(namejaw);
   }
-  //   final TextEditingController emailcntoraler= TextEditingController();
-  // final TextEditingController passcntoraler= TextEditingController();
-  //  final TextEditingController phonecntoraler= TextEditingController();
-  //  late final TextEditingController placecntoraler= TextEditingController();
-  //    final TextEditingController namecntoraler= TextEditingController();
-     // String dropdownValue = placejaw;
+  
        
 @override
 Widget build(BuildContext context){
@@ -228,37 +223,7 @@ profilemenuwidget(
         );
 }
 
-//   doupdate(String username,String useremail,String userpass,String userphone, String place) async {
-//  const uuid = Uuid();
-//  var idd=uuid.v4();
 
-// final prefs = await SharedPreferences.getInstance();
-//   String A = prefs.get("emailemail").toString();
-// var res=await fetch1.userupdate(username, useremail,userpass,userphone,place,A).then((res) {
-
-// if(res==null){  print("Duplication");
-// AlertDialog alert = const AlertDialog(
-//          content: Text("this email is used before it "),
-//         );
-        
-//         showDialog(
-//           context: context,
-//           builder: (BuildContext context) {
-//             return alert;
-//           },
-//         );
-// }
-// else{
-// print(res.toString());
-// Route route=MaterialPageRoute(builder: (_)=>login());
-//       navigator?.pushReplacement(route);
-
-// }
-   
-// });
-  
-  
-//   }
   
 }
 
@@ -306,23 +271,7 @@ final bool encode;
     
                                 ,),
     
-                        //         trailing:encode? Container(
-    
-                        //   width: 40,
-    
-                        //   height: 40,
-    
-                        //   decoration: BoxDecoration(
-    
-                        //     borderRadius: BorderRadius.circular(100),
-    
-                        //     color: globalcolors.besiccolor.withOpacity(0.1),
-    
-                        //   ),
-    
-                        //   child:  Icon(Icons.chevron_right,color: globalcolors.notetcolor,),
-    
-                        //  ) : null,
+                       
     
     
                           );

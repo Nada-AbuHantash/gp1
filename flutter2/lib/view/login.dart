@@ -209,7 +209,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                               showSpinner = false;
                             });
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => profile()));
+                                MaterialPageRoute(builder: (_) => MyHomePage1()));
                           } else {
                             
                             print("Login Failed");
