@@ -5,7 +5,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://192.168.193.52:3000/";
+  static const String basurl = "http://192.168.1.7:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -316,7 +316,7 @@ Future getinfo1() async {
 Future <List<Product>> most() async {
   late  List<Product> myList=[];
 
-  http.Response res = await http.get(Uri.parse(utils.basurl+'viewpro'),
+  http.Response res = await http.get(Uri.parse(utils.basurl + 'viewpro'),
       headers: {'Content-Type': 'application/json'});
 
   if (res.statusCode == 200) {

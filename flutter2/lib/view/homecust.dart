@@ -105,8 +105,9 @@ class _MyHomePageState extends State<homecust> {
 
 
       listItems.add(Container(
-          height: 150,
-          width: 400,
+          height: 120,
+          width: 330,
+          padding: const EdgeInsets.only(left: 30,),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
 
@@ -122,6 +123,7 @@ class _MyHomePageState extends State<homecust> {
 
               children: <Widget>[
                 Column(
+                  
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
@@ -133,7 +135,7 @@ class _MyHomePageState extends State<homecust> {
                       post.namesupermarket,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
-                    Text(
+                    Text("avilable up to "+
                       post.exp,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
@@ -141,18 +143,19 @@ class _MyHomePageState extends State<homecust> {
                       height: 10,
                     ),
                     Text(
-                      "\$ ${post.price}",
-                      style: const TextStyle(
+                      "the old price : \$ ${post.price}",
+                      style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
                           fontSize: 13,
-                          color: Colors.red,
+                          color: globalcolors.notetcolor,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 5,),
                      Text(
-                      "\$ ${post.newprice}",
-                      style: const TextStyle(
+                      "the new price : \$ ${post.newprice}",
+                      style: TextStyle(
                           fontSize: 13,
-                          color: Colors.green,
+                          color: globalcolors.besiccolor,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 10,),
@@ -256,12 +259,12 @@ class _MyHomePageState extends State<homecust> {
                             fit: BoxFit.cover),
                         border: Border.all(
 
-                            color: Color.fromARGB(255, 221, 161, 71),
+                            color: globalcolors.besiccolor,
                             width: 5.0,
                             style: BorderStyle.solid
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color:Color.fromARGB(255, 172, 220, 90).withOpacity(0.5),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
                       ),
                       child: const Center (
 
@@ -280,12 +283,12 @@ class _MyHomePageState extends State<homecust> {
                                 "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png"),
                             fit: BoxFit.cover),
                         border: Border.all(
-                            color: Color.fromARGB(255, 221, 161, 71),
+                            color: globalcolors.besiccolor,
                             width: 5.0,
                             style: BorderStyle.solid
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color:Color.fromARGB(255, 172, 220, 90).withOpacity(0.5),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
                       ),
                       child: const Center (
 
@@ -302,12 +305,12 @@ class _MyHomePageState extends State<homecust> {
                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU"),
                             fit: BoxFit.cover),
                         border: Border.all(
-                            color: Color.fromARGB(255, 221, 161, 71),
+                            color: globalcolors.besiccolor,
                             width: 5.0,
                             style: BorderStyle.solid
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color:Color.fromARGB(255, 172, 220, 90).withOpacity(0.5),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
                       ),
                       child: const Center (
                           child: Text('')
@@ -323,12 +326,12 @@ class _MyHomePageState extends State<homecust> {
                                 "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg"),
                             fit: BoxFit.cover),
                         border: Border.all(
-                            color:Color.fromARGB(255, 221, 161, 71),
+                            color:globalcolors.besiccolor,
                             width: 5.0,
                             style: BorderStyle.solid
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color:Color.fromARGB(255, 172, 220, 90).withOpacity(0.5),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
                       ),
                       child: const Center (
                           child: Text('')

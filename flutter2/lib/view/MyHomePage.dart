@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
-import 'package:flutter2/view/editprofail.dart';
+import 'package:flutter2/view/editprofile.dart';
 import 'package:flutter2/view/homecust.dart';
 
 import 'logintest.dart';
