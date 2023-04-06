@@ -35,26 +35,26 @@ class _dilState extends State<dil> {
             <Widget>[
              SizedBox(height: 45,),
                  Text(
-                'Dear driver,',
+                  " ${getLang(context, "del")}",
                   style: TextStyle(
                       color:globalcolors.textcolor,
                       fontWeight:  FontWeight.bold, fontSize: 25,),
                 ), 
                  SizedBox(height: 45,),
                   Text(
-                ' welcome to the SALE app , In this application, you will use your car or bike to deliver orders from stores to customers in your area.\n You can get money quickly and take advantage of your free time. If you are a professional driver with a clean record of accidents and problems, and you want to participate with us in this application, just complete the necessary procedures to get an account. and we will contact you soon through our administrator',
+                "${getLang(context, "deli")}",
                 style: TextStyle(
                       color:globalcolors.textcolor,
-                      fontWeight:  FontWeight.bold, fontSize: 18,),
+                      fontWeight:  FontWeight.bold, fontSize: 20,),
                 ),
                 SizedBox(height: 90),
                 Text(
-                  "ً* You must set a budget to make it easier for us to deal with profits.",
+                  "${getLang(context, "de")}",
                   style: TextStyle(
                       color:globalcolors.notetcolor,
-                      fontWeight:  FontWeight.normal, fontSize: 15),
+                      fontWeight:  FontWeight.normal, fontSize: 18),
                 ),
-                SizedBox(height: 12,),
+                SizedBox(height: 8,),
                  Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:<Widget> [
@@ -65,7 +65,7 @@ class _dilState extends State<dil> {
                   Container( child:
                      textfiledformat(
                     controller: niscntoraler,
-                    text: "your wallet",
+                    text:  "${getLang(context, "d")}",
                     obscure: false,
                     textInputType: TextInputType.text,
                     icon: new Icon(Icons.wallet),
@@ -98,7 +98,7 @@ class _dilState extends State<dil> {
                        backgroundColor: globalcolors.textcolor,
                        minimumSize: const Size(250, 50), 
                     ),
-                    child: Text("I agree",
+                    child: Text("${getLang(context, "yes")}",
               style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
               ),
                       onPressed: ()  {  

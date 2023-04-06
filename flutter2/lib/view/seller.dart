@@ -40,7 +40,7 @@ final TextEditingController namesupercntoraler = TextEditingController();
               children: <Widget>[
                SizedBox(height: 45,),
                  Text(
-                  'Dear seller,',
+                   "${getLang(context, "s1")}",
                   
                   style: TextStyle(
                       color:globalcolors.textcolor,
@@ -48,22 +48,14 @@ final TextEditingController namesupercntoraler = TextEditingController();
                 ), 
                  SizedBox(height: 45,),
                   Text(
-                      'welcome to the SALE app ,'
-                      ' in this app we offers to you the fastest way to show and sell your product ,'
-                      'by Adding the product, and then we take care of advertising '
-                      'and delivering it to the largest number of customers in your area ,'
-                      ' All this for a small price that you pay us for these services ,'
-                      'It will be a small percentage of each product you add to your'
-                      ' list and it is predetermined by us ,'
-                      'If you agree to this You can complete the procedures and we '
-                      'will contact you personally by our administrator in your store.',
+                    "${getLang(context, "s2")}",
                   style: TextStyle(
                       color:globalcolors.textcolor,
                       fontWeight:  FontWeight.bold, fontSize: 18,),
                 ),
                 SizedBox(height: 60),
                 Text(
-                  "ً* You must set a budget to make it easier for us to deal with profits.and your name os supermarket",
+                  "${getLang(context, "s3")}",
                   style: TextStyle(
                       color:globalcolors.notetcolor,
                       fontWeight:  FontWeight.normal, fontSize: 15),
@@ -79,7 +71,7 @@ final TextEditingController namesupercntoraler = TextEditingController();
                   Container( child:
                      textfiledformat(
                     controller: niscntoraler,
-                    text: "your wallet",
+                    text: "${getLang(context, "d")}",
                     obscure: false,
                     textInputType: TextInputType.text,
                     icon: new Icon(Icons.wallet),
@@ -104,7 +96,7 @@ final TextEditingController namesupercntoraler = TextEditingController();
                   Container( child:
                      textfiledformat(
                     controller: namesupercntoraler,
-                    text: "Supermarket name",
+                    text: "${getLang(context, "s4")}",
                     obscure: false,
                     textInputType: TextInputType.text,
                     icon: new Icon(Icons.maps_home_work_outlined),
@@ -136,7 +128,7 @@ final TextEditingController namesupercntoraler = TextEditingController();
                        backgroundColor: globalcolors.notetcolor,
                        minimumSize:  Size(250, 50), 
                     ),
-                    child: Text("I agree",
+                    child: Text("${getLang(context, "yes")}",
               style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
               ),
                       onPressed: ()  {  if( niscntoraler.text.isNotEmpty && namesupercntoraler.text.isNotEmpty )

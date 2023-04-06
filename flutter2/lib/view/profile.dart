@@ -23,7 +23,7 @@ rest_api fetch1=new rest_api();
 
 
   var jsonString;
-const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
+const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
  class profile extends StatefulWidget{
 
@@ -78,7 +78,7 @@ Widget build(BuildContext context){
             toolbarTextStyle: TextStyle(color: globalcolors.textcolor,
             ),
           title: 
-              Text("Profile",
+              Text("${getLang(context, "pro")}",
               
               style:  TextStyle(color: globalcolors.textcolor,
               fontSize: 30,),
@@ -163,7 +163,7 @@ Widget build(BuildContext context){
                            minimumSize: Size(250, 50), 
                         ),
                         child: 
-                        Text("Edit Profile",
+                        Text("${getLang(context, "editpro")}",
                   style: TextStyle(color: globalcolors.maincolor,fontSize: 20),
                   ),
                           onPressed: ()  { 

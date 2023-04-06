@@ -6,7 +6,7 @@ import 'package:flutter2/view/init.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-import '../logintest.dart';
+
 import '../rest_api.dart';
 
 

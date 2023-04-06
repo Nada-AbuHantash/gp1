@@ -14,7 +14,7 @@ import '../components/applocal.dart';
 import 'dil.dart';
 import 'init.dart';
 rest_api fetch=new rest_api();
-const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
+const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
  class signup extends StatefulWidget{
 
