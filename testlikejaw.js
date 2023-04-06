@@ -97,7 +97,7 @@ app.post('/loginseller', function (request, response) {
             
             response.status(400).send('Error in database operation');
         } else {
-            response.send("ok");
+            response.send(results);
         }
     });
 });
