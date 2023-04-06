@@ -241,115 +241,46 @@ class _MyHomePageState extends State<homecust> {
                     2
                 ),
                 height: 200.0,
-
-                child: ListView(
-                  // This next line does the trick.
-
-
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    //  Image.asset("assets/images/of_main_bg.png",
-
-                    //                           ),
-                    //                             Image.asset("assets/images/of_main_bg.png",
-                    //                           height: 100, width: 120
-                    //                           ),
-                    //                             Image.asset("assets/images/b.jpg",
-                    //                           height: 100, width: 120
-                    //                           ),
-                    Container(
-
-                      margin: EdgeInsets.all(
-                          5
-                      ),width: 150,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://thumbs.dreamstime.com/z/d-isometric-vector-concept-mobile-grocery-list-shopping-app-flat-181622871.jpg"),
-                            fit: BoxFit.cover),
-                        border: Border.all(
-
-                            color: globalcolors.besiccolor,
-                            width: 5.0,
-                            style: BorderStyle.solid
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color:globalcolors.notetcolor.withOpacity(0.5),
-                      ),
-                      child: const Center (
-
-                      ),
-
-                    ),
-                    Container(
-
-                      margin: EdgeInsets.all(
-                          5
-                      ),width: 150,
-
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png"),
-                            fit: BoxFit.cover),
-                        border: Border.all(
-                            color: globalcolors.besiccolor,
-                            width: 5.0,
-                            style: BorderStyle.solid
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color:globalcolors.notetcolor.withOpacity(0.5),
-                      ),
-                      child: const Center (
-
+                child:  Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CarouselSlider(
+                      items: imagesList.map((imageUrl) {
+                        return Image.network(imageUrl, fit: BoxFit.cover);
+                      }).toList(),
+                      options: CarouselOptions(
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        enlargeCenterPage: true,
+                        aspectRatio: 16 / 9,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentImageIndex = index;
+                          });
+                        },
                       ),
                     ),
-                    Container(
-
-                      margin: EdgeInsets.all(
-                          5
-                      ),width: 150,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU"),
-                            fit: BoxFit.cover),
-                        border: Border.all(
-                            color: globalcolors.besiccolor,
-                            width: 5.0,
-                            style: BorderStyle.solid
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color:globalcolors.notetcolor.withOpacity(0.5),
-                      ),
-                      child: const Center (
-                          child: Text('')
-                      ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: imagesList.map((imageUrl) {
+                        int index = imagesList.indexOf(imageUrl);
+                        return Container(
+                          width: 5,
+                          height: 5,
+                          margin: EdgeInsets.symmetric(horizontal: 4),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _currentImageIndex == index
+                                ? Colors.blueAccent
+                                : Colors.grey,
+                          ),
+                        );
+                      }).toList(),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(
-                          5
-                      ),width: 150,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg"),
-                            fit: BoxFit.cover),
-                        border: Border.all(
-                            color:globalcolors.besiccolor,
-                            width: 5.0,
-                            style: BorderStyle.solid
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        color:globalcolors.notetcolor.withOpacity(0.5),
-                      ),
-                      child: const Center (
-                          child: Text('')
-                      ),
-                    ),
-
                   ],
                 ),
+
               ),
               const SizedBox(
                 height: 12,
