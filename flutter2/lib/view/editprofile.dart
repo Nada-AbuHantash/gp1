@@ -15,11 +15,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
 
- late String namejaw="";
-late String passjaw="";
 late String emailjaw="";
-late String placejaw="";
-late String phonejaw="";
+
 rest_api fetch1=new rest_api();
 String now = DateFormat("yyyy-MM-dd").format(DateTime.now());  
 
@@ -38,7 +35,7 @@ class _editprofileState extends State<editprofile> {
    @override
   void initState() {
     
-  int h=1;
+  
     super.initState();
      WidgetsBinding.instance.addPostFrameCallback((_) {
     // do something
@@ -221,9 +218,14 @@ Widget build(BuildContext context){
                   style: TextStyle(color: globalcolors.maincolor,fontSize: 20),
                   ),
                           onPressed: ()  { 
-                          // print(dropdownValue);
+                         if(  passcntoraler.text.isNotEmpty
+                          && phonecntoraler.text.isNotEmpty&& namecntoraler.text.isNotEmpty)
+                       {
                          doupdate(namecntoraler.text,passcntoraler.text,phonecntoraler.text,dropdownValue);
-      
+      }else{
+Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
+          textColor: globalcolors.notetcolor);
+      }
                   },   
                        
                       ),
