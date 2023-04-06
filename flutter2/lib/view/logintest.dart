@@ -1,31 +1,15 @@
-import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter2/models/product.dart';/////اسم البرودكتس زي مهي بالتيبل عشان تنعرض هون
 import 'package:flutter2/utils/globalColors.dart';
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:math';
-import 'dart:typed_data';
-import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter2/components/applocal.dart';
-import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/widgets/button.dart';
 import 'package:flutter2/view/widgets/socialogin.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/main.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import '../utils/Sharedsession.dart';
 
 rest_api fetch=new rest_api();
 
