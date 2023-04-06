@@ -153,7 +153,7 @@ class _MyHomePageState extends State<homecust> {
                       height: 10,
                     ),
                     Text(
-                      "${getLang(context, "old")}\$ ${post.price}",
+                      "${getLang(context, "old")}"+ "\$ ${post.price}",
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           fontSize: 13,
@@ -162,7 +162,7 @@ class _MyHomePageState extends State<homecust> {
                     ),
                     SizedBox(height: 5,),
                     Text(
-                      "${getLang(context, "new")} \$ ${post.newprice}",
+                      "${getLang(context, "new")}"+" \$ ${post.newprice}",
                       style: TextStyle(
                           fontSize: 13,
                           color: globalcolors.besiccolor,
