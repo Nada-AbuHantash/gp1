@@ -240,7 +240,7 @@ class _MyHomePageState extends State<homecust> {
                 margin: EdgeInsets.all(
                     2
                 ),
-                height: 200.0,
+                height: 150.0,
                 child:  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -252,7 +252,7 @@ class _MyHomePageState extends State<homecust> {
                         autoPlay: true,
                         autoPlayInterval: Duration(seconds: 3),
                         enlargeCenterPage: true,
-                        aspectRatio: 16 / 9,
+                        aspectRatio: 16 / 5,
                         onPageChanged: (index, reason) {
                           setState(() {
                             _currentImageIndex = index;
@@ -266,14 +266,14 @@ class _MyHomePageState extends State<homecust> {
                       children: imagesList.map((imageUrl) {
                         int index = imagesList.indexOf(imageUrl);
                         return Container(
-                          width: 5,
-                          height: 5,
+                          width: 7,
+                          height: 7,
                           margin: EdgeInsets.symmetric(horizontal: 4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentImageIndex == index
-                                ? Colors.blueAccent
-                                : Colors.grey,
+                                ? globalcolors.textcolor
+                                : globalcolors.besiccolor
                           ),
                         );
                       }).toList(),

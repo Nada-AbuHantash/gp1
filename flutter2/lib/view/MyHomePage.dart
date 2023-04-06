@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 import '../main.dart';
 import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
-import 'logintest.dart';
+
 rest_api fetch=new rest_api();
 final date = DateTime.now();
 var rate;
