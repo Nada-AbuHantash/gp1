@@ -131,7 +131,7 @@ class _MyHomePageState extends State<homecust> {
 
               children: <Widget>[
                 Column(
-                  
+
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
@@ -144,7 +144,7 @@ class _MyHomePageState extends State<homecust> {
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     Text("avilable up to "+
-                      post.exp,
+                        post.exp,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     SizedBox(
@@ -153,13 +153,13 @@ class _MyHomePageState extends State<homecust> {
                     Text(
                       "the old price : \$ ${post.price}",
                       style: TextStyle(
-                        decoration: TextDecoration.lineThrough,
+                          decoration: TextDecoration.lineThrough,
                           fontSize: 13,
                           color: globalcolors.notetcolor,
                           fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 5,),
-                     Text(
+                    Text(
                       "the new price : \$ ${post.newprice}",
                       style: TextStyle(
                           fontSize: 13,
@@ -228,57 +228,145 @@ class _MyHomePageState extends State<homecust> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               _buildSearchBar(),
-                              CarouselSlider(
-                                items: imagesList.map((imageUrl) {
-                                  return Image.network(imageUrl, fit: BoxFit.cover);
-                                }).toList(),
-                                options: CarouselOptions(
-                                  autoPlay: true,
-                                  autoPlayInterval: Duration(seconds: 5),
-                                  enlargeCenterPage: true,
-                                  aspectRatio: 16 / 9,
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      _currentImageIndex = index;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: imagesList.map((imageUrl) {
-                                  int index = imagesList.indexOf(imageUrl);
-                                  return Container(
-                                    width: 8,
-                                    height: 8,
-                                    margin: EdgeInsets.symmetric(horizontal: 4),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: _currentImageIndex == index
-                                          ? Colors.blueAccent
-                                          : Colors.grey,
-                                    ),
-                                  );
-                                }).toList(),
-                              ),
                             ],
                           ),
                         ),
                       ),
                     ),
-
                   ),
-
                 ],
+              ),Container(
+                // margin: const EdgeInsets.symmetric(vertical: 20.0),
+                margin: EdgeInsets.all(
+                    2
+                ),
+                height: 200.0,
 
+                child: ListView(
+                  // This next line does the trick.
+
+
+                  scrollDirection: Axis.horizontal,
+                  children: <Widget>[
+                    //  Image.asset("assets/images/of_main_bg.png",
+
+                    //                           ),
+                    //                             Image.asset("assets/images/of_main_bg.png",
+                    //                           height: 100, width: 120
+                    //                           ),
+                    //                             Image.asset("assets/images/b.jpg",
+                    //                           height: 100, width: 120
+                    //                           ),
+                    Container(
+
+                      margin: EdgeInsets.all(
+                          5
+                      ),width: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://thumbs.dreamstime.com/z/d-isometric-vector-concept-mobile-grocery-list-shopping-app-flat-181622871.jpg"),
+                            fit: BoxFit.cover),
+                        border: Border.all(
+
+                            color: globalcolors.besiccolor,
+                            width: 5.0,
+                            style: BorderStyle.solid
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
+                      ),
+                      child: const Center (
+
+                      ),
+
+                    ),
+                    Container(
+
+                      margin: EdgeInsets.all(
+                          5
+                      ),width: 150,
+
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png"),
+                            fit: BoxFit.cover),
+                        border: Border.all(
+                            color: globalcolors.besiccolor,
+                            width: 5.0,
+                            style: BorderStyle.solid
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
+                      ),
+                      child: const Center (
+
+                      ),
+                    ),
+                    Container(
+
+                      margin: EdgeInsets.all(
+                          5
+                      ),width: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU"),
+                            fit: BoxFit.cover),
+                        border: Border.all(
+                            color: globalcolors.besiccolor,
+                            width: 5.0,
+                            style: BorderStyle.solid
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
+                      ),
+                      child: const Center (
+                          child: Text('')
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.all(
+                          5
+                      ),width: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg"),
+                            fit: BoxFit.cover),
+                        border: Border.all(
+                            color:globalcolors.besiccolor,
+                            width: 5.0,
+                            style: BorderStyle.solid
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color:globalcolors.notetcolor.withOpacity(0.5),
+                      ),
+                      child: const Center (
+                          child: Text('')
+                      ),
+                    ),
+
+                  ],
+                ),
               ),
-
-              const SizedBox(height: 12,),
-
+              const SizedBox(
+                height: 12,
+              ),
+              Expanded(
+                  child: ListView.builder(
+                      controller: controller,
+                      itemCount: itemsData.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Align(
+                            heightFactor: 1,
+                            alignment: Alignment.topCenter,
+                            child: itemsData[index]);
+                      })),
             ],
           ),
-
         ),
       ),
     );
