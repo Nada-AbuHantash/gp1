@@ -124,39 +124,7 @@ Widget build(BuildContext context){
             
               ),
             ),
-            //  Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       SizedBox(
-            //       child: ElevatedButton(
-                    
-            //         style: ElevatedButton.styleFrom(
-                      
-            //            shape: RoundedRectangleBorder(
-                        
-            //       borderRadius: BorderRadius.circular(20.0)),
-            //           foregroundColor: globalcolors.maincolor,
-            //            backgroundColor: globalcolors.textcolor,
-            //            minimumSize: Size(250, 50), 
-            //         ),
-            //        child: Text("${getLang(context, "Postyourad")}",
-            //   style: TextStyle(color: globalcolors.besiccolor,fontSize: 25),
-            //   ),
-            //           onPressed: ()  { 
-                        
-      
-            //   },   
-            //         ),
-            //   ),
-              
-                 
-            //     ],
-            
-            //   ),
-            // ),
-            //  const SizedBox(height: 20),
+             const SizedBox(height: 20),
              
             ],
          ),

@@ -63,13 +63,7 @@ class _loginState extends State<login> {
                   )
                 ],
               ),
-              Text(
-                "${getLang(context, "dislogin")}",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w400,
-                    color: globalcolors.textcolor),
-              ),
+
               const SizedBox(height: 40),
               Row(
                  mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +250,8 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                         });
                       } else {
                         AlertDialog alert = const AlertDialog(
-         content: Text("You don't have the authority to login because admin not respond to your request"),
+         content: Text("You can't log in ,Verify that the administrator has approved your request through your email.\n"
+             "لا يمكنك تسجيل الدخول ، تحقق من موافقة المسؤول على طلبك من خلال بريدك الإلكتروني ."),
         );
                       }
                      // Navigator.of(context).push(MaterialPageRoute(builder: (c) => home()));
@@ -307,7 +302,8 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
       else{
         print("failed1");
         AlertDialog alert = const AlertDialog(
-         content: Text("please try again , email must include @"),
+         content: Text("please try again , email must include @\n"
+             "الرجاء اعادة المحاولة ، يجب أن يحتوي البريد الالكتروني على @ "),
         );
         showDialog(
           context: context,

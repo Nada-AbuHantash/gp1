@@ -13,6 +13,8 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../components/applocal.dart';
+
 List<String> imagesList = [
   "https://thumbs.dreamstime.com/z/d-isometric-vector-concept-mobile-grocery-list-shopping-app-flat-181622871.jpg",
   "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png",
@@ -143,7 +145,7 @@ class _MyHomePageState extends State<homecust> {
                       post.namesupermarket,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
-                    Text("avilable up to "+
+                    Text("${getLang(context, "avi")}"+
                         post.exp,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
@@ -151,7 +153,7 @@ class _MyHomePageState extends State<homecust> {
                       height: 10,
                     ),
                     Text(
-                      "the old price : \$ ${post.price}",
+                      "${getLang(context, "old")}\$ ${post.price}",
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           fontSize: 13,
@@ -160,7 +162,7 @@ class _MyHomePageState extends State<homecust> {
                     ),
                     SizedBox(height: 5,),
                     Text(
-                      "the new price : \$ ${post.newprice}",
+                      "${getLang(context, "new")} \$ ${post.newprice}",
                       style: TextStyle(
                           fontSize: 13,
                           color: globalcolors.besiccolor,
@@ -202,10 +204,14 @@ class _MyHomePageState extends State<homecust> {
     return SafeArea(
 
       child: Scaffold(
+
         backgroundColor: Colors.white,
         appBar: AppBar(
+
           elevation: 0,
-          title: const Text('Welcome to SALE !'),
+          title:
+          Text("${getLang(context,"wel")}"),
+          centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
 
@@ -240,7 +246,7 @@ class _MyHomePageState extends State<homecust> {
                 margin: EdgeInsets.all(
                     2
                 ),
-                height: 150.0,
+                height: 200.0,
                 child:  Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -266,14 +272,14 @@ class _MyHomePageState extends State<homecust> {
                       children: imagesList.map((imageUrl) {
                         int index = imagesList.indexOf(imageUrl);
                         return Container(
-                          width: 7,
-                          height: 7,
+                          width: 5,
+                          height: 5,
                           margin: EdgeInsets.symmetric(horizontal: 4),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentImageIndex == index
-                                ? globalcolors.textcolor
-                                : globalcolors.besiccolor
+                                ? Colors.blueAccent
+                                : Colors.grey,
                           ),
                         );
                       }).toList(),

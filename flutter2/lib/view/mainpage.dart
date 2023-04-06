@@ -2,7 +2,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/profile.dart';
+import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/widgets/button.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -15,6 +17,7 @@ import 'package:flutter2/view/login.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
 
+import '../components/applocal.dart';
 import 'MyHomePage.dart';
 import 'home.dart';
 import 'package:flutter2/view/MyHomePage.dart';
@@ -30,11 +33,7 @@ class mainpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //title: 'Grocery Freebie',
-      // theme: ThemeData(
-      //     primarySwatch: Colors.blue,
-      //     primaryColor: kPrimaryColor,
-      //     scaffoldBackgroundColor: const Color(0xffffffff)),
+
       home: const MyHomePage1(),
     );
   }
@@ -71,24 +70,24 @@ class _MyHomePageState extends State<MyHomePage1> {
             BottomNavigationBarItem(
 
               icon: const Icon(Icons.home),
-              label: 'Home',
+              label:"${getLang(context, "p1")}",
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.notifications),
-              label: 'notfication',
+              label:"${getLang(context, "p2")}",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_cart_outlined),
-              label: 'Cart',
+              icon: const Icon(Icons.shopping_cart),
+              label: "${getLang(context, "p3")}",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.chat_outlined),
-              label: 'Chat',
+              icon: const Icon(Icons.chat),
+              label: "${getLang(context, "p4")}",
             ),
 
             BottomNavigationBarItem(
               icon: const Icon(Icons.settings),
-              label: 'Settings',
+              label: "${getLang(context, "p5")}",
             ),
 
           ],
@@ -102,11 +101,11 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 0:
         return const homecust();
       case 1:
-        return const profile();
+        return const seller();
       case 2:
-        return  homecust();
+        return  dil();
       case 3:
-        return const homecust();
+        return const home();
       case 4:
 
         return  NavDrawer();

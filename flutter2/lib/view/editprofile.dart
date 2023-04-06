@@ -79,7 +79,7 @@ Widget build(BuildContext context){
             toolbarTextStyle: TextStyle(color: globalcolors.textcolor,
             ),
           title:
-              Text(" Edit Profile",
+              Text("${getLang(context, "editpro")}",
               
               style:  TextStyle(color: globalcolors.textcolor,
               fontSize: 30,),
@@ -214,7 +214,7 @@ Widget build(BuildContext context){
                            minimumSize: Size(250, 50), 
                         ),
                         child: 
-                        Text("Edit Profile",
+                        Text("${getLang(context, "editpro")}",
                   style: TextStyle(color: globalcolors.maincolor,fontSize: 20),
                   ),
                           onPressed: ()  { 

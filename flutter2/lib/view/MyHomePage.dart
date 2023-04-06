@@ -33,7 +33,7 @@ class NavDrawer extends StatelessWidget {
           const SizedBox(height: 30),
           ListTile(
             leading: Icon(Icons.person,color: globalcolors.textcolor),
-            title: Text('Profile',style: TextStyle(color: globalcolors.textcolor)),
+            title: Text(" ${getLang(context, "pro")}",style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
               Navigator.push(
                 context,
@@ -42,10 +42,15 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-             title: Text('About us',
+             title: Text(" ${getLang(context, "About")}",
              style: TextStyle(color: globalcolors.textcolor)),
             leading: Icon(Icons.info_outline,color: globalcolors.textcolor),
-              
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const About()),
+              )
+            },
           ),
 
           SwitchListTile(
@@ -77,7 +82,7 @@ class NavDrawer extends StatelessWidget {
      //////////////     /////////////////////////////////////////////////////////////
           ListTile(
             leading: Icon(Icons.border_color,color: globalcolors.textcolor),
-            title: Text('Feedback',style: TextStyle(color: globalcolors.textcolor)),
+            title: Text(" ${getLang(context, "feed")}",style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
             showDialog(
             context: context,
@@ -132,7 +137,7 @@ class NavDrawer extends StatelessWidget {
             backgroundColor: globalcolors.besiccolor,
             minimumSize: const Size(250, 50),
             ),
-            child: Text("${getLang(context, "feed")}",
+            child: Text("${getLang(context, "feedi")}",
             style: TextStyle(color: globalcolors.textcolor,fontSize: 25),
             ),
             onPressed: ()  {
@@ -158,7 +163,7 @@ class NavDrawer extends StatelessWidget {
  ///////////////////////////         /////////////////////////////////////////////////////
           ListTile(
             leading: Icon(Icons.exit_to_app,color: globalcolors.textcolor),
-            title: Text('Logout',style: TextStyle(color: globalcolors.textcolor)),
+            title: Text(" ${getLang(context, "logout")}",style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
 
               showDialog(
