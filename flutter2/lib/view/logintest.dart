@@ -29,7 +29,7 @@ import '../utils/Sharedsession.dart';
 
 rest_api fetch=new rest_api();
 
-Sharedsession language = new Sharedsession();
+//Sharedsession language = new Sharedsession();
 
 class logintest extends StatefulWidget {
  // const logintest({super.key});
@@ -110,7 +110,7 @@ class _logintestState extends State<logintest> {
            ElevatedButton(
           onPressed: ()  { 
             if(mySharedPreferences!.getString('translations')=="en"){
-           var locale= Locale("ar","");
+           var locale= const Locale("ar","");
             Get.updateLocale(locale);
             // language.savelang("ar");
             }
@@ -126,7 +126,7 @@ class _logintestState extends State<logintest> {
           onPressed: ()  { 
        emailcntoraler.text.isNotEmpty && passcntoraler.text.isNotEmpty
             ? dologin(emailcntoraler.text,passcntoraler.text)
-          : Fluttertoast.showToast(msg: 'all field are required ',textColor: Color.fromARGB(255, 244, 54, 203));
+          : Fluttertoast.showToast(msg: 'all field are required ',textColor:globalcolors.notetcolor);
       
           }, child: Text('login'),
           

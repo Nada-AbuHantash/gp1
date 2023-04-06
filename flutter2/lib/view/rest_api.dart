@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
@@ -9,7 +10,28 @@ class utils {
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
+Future Feedback(double rate, DateTime date,String email) async {
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'feedback'),
+        headers: {"Accept": "Application/json"},
+        body: {'email': email, 'rate': rate,'date':date});
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+         if (use.statusCode == 400) {
 
+    } else {
+      // show error
+        return data;
+      
+    }
+   
+  
+  } catch (e) {
+    print(e);
+    print('no00');
+  }
+}
 Future userlogin(String email, String pass) async {
   try {
     final http.Response use = await http.post(

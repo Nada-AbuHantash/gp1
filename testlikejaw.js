@@ -39,6 +39,25 @@ app.post('/infouser', function (request, response) {
         }
     });
 });
+app.post('/feedback', function (request, response) {
+    console.log("feedback");
+    var date = request.body.date;
+    var rate = request.body.rate;
+    var email = request.body.email;
+    //console.log(request.body.useremail);
+    console.log("okkkkkkkkkk");
+
+    let query1 = "INSERT INTO feedback (email,date,rate) VALUES('" + email
+    + "','" + date + "','" + rate + "') ";
+
+    pool.query(query1, [email, date,rate], function (error, results) {
+        if (error) {
+            response.status(400).send('Error in database operation');
+        } else {
+            response.status(200).send(results);
+        }
+    });
+});
 app.post('/logindelivery', function (request, response) {
     console.log("login delivery");
     var email = request.body.deliveryemail;
@@ -72,7 +91,7 @@ app.post('/loginseller', function (request, response) {
             
             response.status(400).send('Error in database operation');
         } else {
-            response.send(results);
+            response.send("ok");
         }
     });
 });
@@ -114,7 +133,7 @@ app.post('/register', function (request, response) {
     console.log(request.body.userplace);
     console.log("okkkkkkkkkk");
     let query1 = "INSERT INTO customer (username,useremail,userpass,userphone,userplace) VALUES('" + username
-        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "') ;";
+        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "') ";
     //let query1="Select * from nada where name=? and pass=?";
 
     pool.query(query1, [username, useremail, userpass, userphone, userplace], function (error, data, results) {
