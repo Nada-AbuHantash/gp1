@@ -12,6 +12,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import '../main.dart';
+import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
 import 'logintest.dart';
 rest_api fetch=new rest_api();
@@ -218,7 +219,8 @@ class NavDrawer extends StatelessWidget {
                                   style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
                                 ),
                                 onPressed: ()  {
-                                  navigator?.push(MaterialPageRoute(builder: (_)=>home()));
+                                  // navigator?.push(MaterialPageRoute(builder: (_)=>home()));
+                                  logout();
                                    },
                               ),
                             ),
@@ -253,6 +255,13 @@ var res=await fetch.Feedback(rate,date,A);
   }
   
   void setState(Null Function() param0) {}
+  
+  void logout()async {
+Sharedsession shared = new Sharedsession();
+      await shared.savename("", "");
+      await shared.savenamesuper("");
+navigator?.push(MaterialPageRoute(builder: (_)=>home()));
+  }
 
 
 }
