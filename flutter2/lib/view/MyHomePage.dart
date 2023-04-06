@@ -40,14 +40,15 @@ class NavDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-             title: Text('About us',style: TextStyle(color: globalcolors.textcolor)),
+             title: Text('About us',
+             style: TextStyle(color: globalcolors.textcolor)),
             leading: Icon(Icons.info_outline,color: globalcolors.textcolor),
               
           ),
 
           SwitchListTile(
             
-           title: Text("${getLang(context, "login")}",
+           title: Text("${getLang(context, "lang")}",
            style: TextStyle(color: globalcolors.textcolor)),
            onChanged: (bool value) {
             value: _lights;
