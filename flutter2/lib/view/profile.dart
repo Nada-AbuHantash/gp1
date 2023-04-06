@@ -23,7 +23,7 @@ rest_api fetch1=new rest_api();
 
 
   var jsonString;
-const List<String> list = <String>['Nablus', 'TolKarm', 'Jenen'];
+
 
  class profile extends StatefulWidget{
 
