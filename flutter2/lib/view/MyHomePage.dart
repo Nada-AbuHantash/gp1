@@ -46,8 +46,10 @@ class NavDrawer extends StatelessWidget {
 
           SwitchListTile(
             
-           title: Text('Language',style: TextStyle(color: globalcolors.textcolor)),
+           title: Text("${getLang(context, "login")}",
+           style: TextStyle(color: globalcolors.textcolor)),
            onChanged: (bool value) {
+            value: _lights;
        setState(() {
            _lights = value;
 
