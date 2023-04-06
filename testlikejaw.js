@@ -220,21 +220,21 @@ app.post('/registerproduct', function (request, response) {
     var per=request.body.per;
  var percent=newprice*count*(per);
  console.log(percent);
- var card;
-   let query="Select * from sellers where suparmarketname=?";
+ 
+   let query=`SELECT *  FROM sellers where suparmarketname='${nameperson}'`;
    pool.query(query,[nameperson],function (error, data, results1) {
     console.log("done qurey");
 
     if (error) {
-        console.log(error);
+        
         response.status(400).send('Error in database operation');
         
     }
     else {
         card=56;
-    //   // response.send(results1);
-    // card=results1[0].sellercard;
-    //    console.log(card);
+//       response.send(results1);
+//    const card=results1[0].sellercard;
+//        console.log(card);
         if(card>percent){
         console.log("okkkkkkkkkk");
         let query1 = "INSERT INTO `products` (`productname`,`productcount`,`productimage`,`producttype`,`newprice`,`oldprice`,`namesupermarket`,`exp`,`percent`) VALUES('" + name
