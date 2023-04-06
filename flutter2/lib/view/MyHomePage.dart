@@ -20,9 +20,14 @@ rest_api fetch=new rest_api();
 var rate;
 bool _lights=false;
 
-class NavDrawer extends StatelessWidget {
+class NavDrawer extends StatefulWidget {
  
 
+  @override
+  State<NavDrawer> createState() => _NavDrawerState();
+}
+
+class _NavDrawerState extends State<NavDrawer> {
   @override
   Widget build(BuildContext context) {
     var _lights;
@@ -253,7 +258,7 @@ class NavDrawer extends StatelessWidget {
       ),
     );
   }
-  
+
   Future feedback(rate) async {
 
 
@@ -261,15 +266,13 @@ final prefs = await SharedPreferences.getInstance();
   String A = prefs.get("emailemail").toString();
 var res=await fetch.Feedback(rate,A);
   }
-  
-  void setState(Null Function() param0) {}
-  
+
+ 
+
   void logout()async {
 Sharedsession shared = new Sharedsession();
       await shared.savename("", "");
       await shared.savenamesuper("");
 navigator?.push(MaterialPageRoute(builder: (_)=>home()));
   }
-
-
 }
