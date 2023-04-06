@@ -10,12 +10,12 @@ class utils {
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
-Future Feedback(double rate, DateTime date,String email) async {
+Future Feedback( rate,String email) async {
   try {
     final http.Response use = await http.post(
         Uri.parse(utils.basurl + 'feedback'),
         headers: {"Accept": "Application/json"},
-        body: {'email': email, 'rate': rate,'date':date});
+        body: {'email': email, 'rate': rate.toString(),});
     var encodeFirst = json.encode(use.body);
     var data = json.decode(encodeFirst);
          if (use.statusCode == 400) {

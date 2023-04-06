@@ -41,16 +41,22 @@ app.post('/infouser', function (request, response) {
 });
 app.post('/feedback', function (request, response) {
     console.log("feedback");
-    var date = request.body.date;
+    let ts = Date.now();
+
+let date_ob = new Date(ts);
+let date = date_ob.getDate();
+let month = date_ob.getMonth() + 1;
+let year = date_ob.getFullYear();
+let currentdate=year + "-" + month + "-" + date;
     var rate = request.body.rate;
     var email = request.body.email;
     //console.log(request.body.useremail);
     console.log("okkkkkkkkkk");
 
     let query1 = "INSERT INTO feedback (email,date,rate) VALUES('" + email
-    + "','" + date + "','" + rate + "') ";
+    + "','" + currentdate + "','" + rate + "') ";
 
-    pool.query(query1, [email, date,rate], function (error, results) {
+    pool.query(query1, [email, currentdate,rate], function (error, results) {
         if (error) {
             response.status(400).send('Error in database operation');
         } else {

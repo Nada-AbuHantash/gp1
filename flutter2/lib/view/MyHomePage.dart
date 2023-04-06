@@ -16,11 +16,13 @@ import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
 
 rest_api fetch=new rest_api();
-final date = DateTime.now();
+//final  date = DateTime.now();
 var rate;
 bool _lights=false;
 
 class NavDrawer extends StatelessWidget {
+ 
+
   @override
   Widget build(BuildContext context) {
     var _lights;
@@ -105,7 +107,7 @@ class NavDrawer extends StatelessWidget {
                 ),
                 onRatingUpdate: (rating) {
                   rate=rating ;
-                  print(rating);
+                  print(rate);
                 },
               ),
             ],
@@ -134,7 +136,7 @@ class NavDrawer extends StatelessWidget {
             style: TextStyle(color: globalcolors.textcolor,fontSize: 25),
             ),
             onPressed: ()  {
-               feedback(rate ,date);
+               feedback(rate);
             ////the value of the rate in rating **added it to the database
             },
             ),
@@ -247,12 +249,12 @@ class NavDrawer extends StatelessWidget {
     );
   }
   
-  Future<void> feedback(rate, DateTime date) async {
+  Future feedback(rate) async {
 
 
 final prefs = await SharedPreferences.getInstance();
   String A = prefs.get("emailemail").toString();
-var res=await fetch.Feedback(rate,date,A);
+var res=await fetch.Feedback(rate,A);
   }
   
   void setState(Null Function() param0) {}
