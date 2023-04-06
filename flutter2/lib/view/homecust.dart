@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/models/product.dart';/////اسم البرودكتس زي مهي بالتيبل عشان تنعرض هون
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
+import 'package:carousel_slider/carousel_slider.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
 import 'dart:typed_data';
@@ -11,7 +13,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-
+List<String> imagesList = [
+  "https://thumbs.dreamstime.com/z/d-isometric-vector-concept-mobile-grocery-list-shopping-app-flat-181622871.jpg",
+  "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU",
+  "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg",
+];
+int _currentImageIndex = 0;
 const double kDefaultPadding = 10;
 
 TextEditingController productNameController = TextEditingController();
@@ -192,6 +200,7 @@ class _MyHomePageState extends State<homecust> {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
+
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
