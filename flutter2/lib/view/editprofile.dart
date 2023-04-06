@@ -250,7 +250,7 @@ var res=await fetch1.userupdate(username,userpass,userphone,place,A).then((res) 
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
-         content: Text("this email is used before it "),
+         content: Text("somthing wrong no save new data "),
         );
         
         showDialog(
