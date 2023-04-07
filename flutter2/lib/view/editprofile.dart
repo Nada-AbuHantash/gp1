@@ -32,10 +32,9 @@ const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 }
 
 class _editprofileState extends State<editprofile> {
+  rest_api fetch=new rest_api();
    @override
   void initState() {
-    
-  
     super.initState();
      WidgetsBinding.instance.addPostFrameCallback((_) {
     // do something
@@ -45,7 +44,7 @@ class _editprofileState extends State<editprofile> {
   });
   }
    void getinfo() async {
-jsonString=await fetch1.getinfo1();
+jsonString=await fetch.getinfo1();
 emailjaw=jsonString.elementAt(0)['useremail'];
 print(namejaw);
   }
@@ -252,7 +251,7 @@ var res=await fetch1.userupdate(username,userpass,userphone,place,A).then((res) 
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
-         content: Text("somthing wrong no save new data "),
+         content: Text("somthing wrong not update data,شيئ ما خطأ لم يتم تعديل المعلومات  "),
         );
         
         showDialog(

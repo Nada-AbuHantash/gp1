@@ -339,10 +339,10 @@ class _addproductState extends State<addproduct> {
                           if(countcntoraler.text.isNotEmpty && namecntoraler.text.isNotEmpty
                           && oldpricecntoraler.text.isNotEmpty && newpricecntoraler.text.isNotEmpty
                            && pathimg.isNotEmpty){
-                            if(dropdownValue==list.first){per="0.20";}
-                            else if(dropdownValue==list.last){per="0.15";}
-                            else if(2==list.indexOf(dropdownValue)){per="0.08";}
-                            else if(1==list.indexOf(dropdownValue)){per="0.10";}
+                            if(dropdownValue==list.first){per="0.10";}
+                            else if(dropdownValue==list.last){per="0.06";}
+                            else if(2==list.indexOf(dropdownValue)){per="0.03";}
+                            else if(1==list.indexOf(dropdownValue)){per="0.08";}
                            putproduct(countcntoraler.text,namecntoraler.text,oldpricecntoraler.text,
                            newpricecntoraler.text,dropdownValue,pathimg,dateInput.text,per);
 

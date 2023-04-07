@@ -302,8 +302,9 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
       else{
         print("failed1");
         AlertDialog alert = const AlertDialog(
-         content: Text("please try again , email must include @\n"
-             "الرجاء اعادة المحاولة ، يجب أن يحتوي البريد الالكتروني على @ "),
+         content: Text("please try again , email must include @\nYou can't log in ,Verify that the administrator has approved your request through your email.\n"
+             "الرجاء اعادة المحاولة ، يجب أن يحتوي البريد الالكتروني على @ "
+             "او لا يمكنك تسجيل الدخول ، تحقق من موافقة المسؤول على طلبك من خلال بريدك الإلكتروني ."),
         );
         showDialog(
           context: context,

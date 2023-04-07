@@ -117,7 +117,7 @@ class _MyHomePageState extends State<homecust> {
       listItems.add(Container(
           height: 120,
           width: 330,
-          padding: const EdgeInsets.only(left: 30,),
+          padding: const EdgeInsets.only(left: 20,right: 20),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
 
@@ -145,15 +145,14 @@ class _MyHomePageState extends State<homecust> {
                       post.namesupermarket,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
-                    Text("${getLang(context, "avi")}"+
-                        post.exp,
+                    Text("Available up to :"+ post.exp,
                       style: const TextStyle(fontSize: 13, color: Colors.grey),
                     ),
                     SizedBox(
                       height: 10,
                     ),
                     Text(
-                      "${getLang(context, "old")}"+ "\$ ${post.price}",
+                      "The old price : \₪ ${post.price}",
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           fontSize: 13,
@@ -162,7 +161,7 @@ class _MyHomePageState extends State<homecust> {
                     ),
                     SizedBox(height: 5,),
                     Text(
-                      "${getLang(context, "new")}"+" \$ ${post.newprice}",
+                      "The new price : \₪ ${post.newprice}",
                       style: TextStyle(
                           fontSize: 13,
                           color: globalcolors.besiccolor,
@@ -278,8 +277,8 @@ class _MyHomePageState extends State<homecust> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentImageIndex == index
-                                ? Colors.blueAccent
-                                : Colors.grey,
+                                ? globalcolors.besiccolor
+                                : globalcolors.textcolor
                           ),
                         );
                       }).toList(),

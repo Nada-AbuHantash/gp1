@@ -332,7 +332,7 @@ var res=await fetch.usersignup(username, useremail,userpass,userphone,userpalce)
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
-         content: Text("this email is used before it "),
+         content: Text("this email is used before it\n هذا البريد مستخدم من قبل "),
         
         );
         
