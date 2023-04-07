@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:home(),
+      home:MyHomePage1(),
        
        localizationsDelegates: [
           applocal.delegate,
