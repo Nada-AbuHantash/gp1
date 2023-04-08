@@ -6,6 +6,7 @@ const util = require("util");
 var express = require('express');
 var app = express();
 var bodyparser = require('body-parser');
+const { log } = require("console");
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 var TABLE = 'customer';
@@ -127,7 +128,20 @@ let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp)
     });
 });
 
-
+app.get('/viewproseller', function (request, response) {
+    console.log("view proseller");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from products where namesupermarket='${request.query.namesupermarket}' ORDER BY date(exp) ASC `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
 
 app.post('/register', function (request, response) {
     console.log("sgin");
