@@ -29,6 +29,7 @@ flutter_localization:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  url_launcher: ^6.0.0
   path_provider: ^2.0.2
   carousel_slider: ^4.2.1
   custom_navigator: ^0.3.0

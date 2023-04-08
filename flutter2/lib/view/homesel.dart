@@ -15,12 +15,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../components/applocal.dart';
 
-List<String> imagesList = [
-  'assets/images/market.png',
-  'assets/images/shop.png',
-  'assets/images/p1.jpg',
-  'assets/images/p4.jpg',
-];
+
 int _currentImageIndex = 0;
 const double kDefaultPadding = 10;
 
@@ -53,13 +48,13 @@ void _runFilter(String enteredKeyword) {
 
 }
 
-class homecust extends StatefulWidget {
-  const homecust({Key? key}) : super(key: key);
+class homesel extends StatefulWidget {
+  const homesel({Key? key}) : super(key: key);
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _homeselState createState() => _homeselState();
 }
 
-class _MyHomePageState extends State<homecust> {
+class _homeselState extends State<homesel> {
 
   @override
 
@@ -138,7 +133,7 @@ class _MyHomePageState extends State<homecust> {
                   children: <Widget>[
                     SizedBox(height: 6,),
                     Text(
-                      
+
                       post.productname,
                       style:  TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
@@ -239,67 +234,11 @@ class _MyHomePageState extends State<homecust> {
                     ),
                   ),
                 ],
-              ),Container(
-                // margin: const EdgeInsets.symmetric(vertical: 20.0),
-                margin: EdgeInsets.all(
-                    2
-                ),
-                height: 200.0,
-                child:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CarouselSlider(
-                      items: imagesList.map((imageUrl) {
-                        return Image.asset(imageUrl, fit: BoxFit.cover);
-                      }).toList(),
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 3),
-                        enlargeCenterPage: true,
-                        aspectRatio: 16 / 6.5,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _currentImageIndex = index;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: imagesList.map((imageUrl) {
-                        int index = imagesList.indexOf(imageUrl);
-                        return Container(
-                          width: 5,
-                          height: 5,
-                          margin: EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _currentImageIndex == index
-                                ? globalcolors.besiccolor
-                                : globalcolors.textcolor
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-
               ),
               const SizedBox(
                 height: 8,
               ),
-              Expanded(
-                  child: ListView.builder(
-                      controller: controller,
-                      itemCount: itemsData.length,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Align(
-                            heightFactor: 1,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[index]);
-                      })),
+
             ],
           ),
         ),
@@ -320,9 +259,9 @@ class _MyHomePageState extends State<homecust> {
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.15),
-                          blurRadius: 20,
+                        blurRadius: 20,
                         offset: const Offset(10, 15)
-                        ),
+                    ),
                   ]),
               child: Padding(
                 padding: const EdgeInsets.only(left: 25,right: 25, top: 4),
@@ -333,7 +272,7 @@ class _MyHomePageState extends State<homecust> {
                       border: InputBorder.none,
                       hintText: text,
                       hintStyle: TextStyle(
-                        color: globalcolors.textcolor
+                          color: globalcolors.textcolor
                       ),
                       suffixIcon: Icon(
                         Icons.search,
