@@ -16,7 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import '../components/applocal.dart';
 
 List<String> imagesList = [
-  // "assets/images/p5.jpg",
+  //"https://www.vecteezy.com/vector-art/1166625-online-shopping-with-cart-and-packages-design",
   "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU",
   "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg",
@@ -316,16 +316,17 @@ class _MyHomePageState extends State<homecust> {
         Expanded(
             child: Container(
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
+                  color: globalcolors.besiccolor,
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.grey.shade300,
-                        blurRadius: 30,
-                        offset: const Offset(0, 5)),
+                        color: Colors.black.withOpacity(0.15),
+                          blurRadius: 20,
+                        offset: const Offset(10, 15)
+                        ),
                   ]),
               child: Padding(
-                padding: const EdgeInsets.only(left: 10, top: 4),
+                padding: const EdgeInsets.only(left: 25,right: 25, top: 4),
                 child: TextField(
                   onChanged: (value) => {_runFilter(value),getPostsData(),getlist()},
                   controller: _textEditingController,
@@ -333,11 +334,11 @@ class _MyHomePageState extends State<homecust> {
                       border: InputBorder.none,
                       hintText: text,
                       hintStyle: TextStyle(
-                        color: Color.fromARGB(255, 7, 0, 0),
+                        color: globalcolors.textcolor
                       ),
                       suffixIcon: Icon(
                         Icons.search,
-                        color: Color.fromARGB(255, 9, 9, 9).withOpacity(0.30),
+                        color: globalcolors.textcolor,
                       )),
                 ),
               ),
