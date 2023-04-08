@@ -19,6 +19,7 @@ import 'package:flutter2/view/homecust.dart';
 
 import '../components/applocal.dart';
 import 'MyHomePage.dart';
+import 'chat.dart';
 import 'home.dart';
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/material.dart';
@@ -26,18 +27,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 
-class mainpage extends StatelessWidget {
-  const mainpage({Key? key}) : super(key: key);
+// class mainpage extends StatelessWidget {
+//   const mainpage({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
 
-      home: const MyHomePage1(),
-    );
-  }
-}
+//       home: const MyHomePage1(),
+//     );
+//   }
+// }
 
 class MyHomePage1 extends StatefulWidget {
   const MyHomePage1({Key? key}) : super(key: key);
@@ -105,9 +106,8 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 2:
         return  dil();
       case 3:
-        return const home();
+        return const chat();
       case 4:
-
         return  NavDrawer();
       default:
         return const homecust();
