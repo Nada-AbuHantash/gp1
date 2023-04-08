@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/dil.dart';
+import 'package:flutter2/view/homesel.dart';
 import 'package:flutter2/view/nav2.dart';
 
 import 'package:flutter2/view/seller.dart';
@@ -73,7 +74,7 @@ class _selhomState extends State<selhom> {
   Widget _buildPageContent() {
     switch (_currentIndex) {
       case 0:
-        return const homecust();
+        return const homesel();
       case 1:
         return const seller();
       case 2:

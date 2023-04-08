@@ -90,11 +90,7 @@ class _homeselState extends State<homesel> {
   void getlist() async{
     myList=await fetch.most();
   }
-  // int daysBetween(DateTime from, DateTime to) {
-  //    from = DateTime(from.year, from.month, from.day);
-  //    to = DateTime(to.year, to.month, to.day);
-  //  return (to.difference(from).inHours / 24).round();
-  // }
+
   void getPostsData() async{
 
     List<Widget> listItems = [];
@@ -103,10 +99,6 @@ class _homeselState extends State<homesel> {
       myList=await fetch.most();
 
     myList.forEach((post) {
-
-// final dd= DateTime(post.exp as int);
-//  final date2 = DateTime.now();
-//    final difference = daysBetween(dd as DateTime, date2);
 
 
       listItems.add(Container(
@@ -207,7 +199,23 @@ class _homeselState extends State<homesel> {
           centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
+          actions: [
+            PopupMenuButton<String>(
+              icon: Icon(Icons.filter_alt_outlined, color: globalcolors.textcolor),
+              onSelected: _handleMenuItemPressed,
+              itemBuilder: (context) => [
+                PopupMenuItem<String>(
+                  value: 'item1',
+                  child: Text("${getLang(context,"item1")}", style: TextStyle(fontSize: 16,color: globalcolors.textcolor, fontWeight: FontWeight.bold)),
+                ),
+                PopupMenuItem<String>(
+                  value: 'item2',
+                  child: Text("${getLang(context,"item2")}", style: TextStyle(fontSize: 16,color: globalcolors.textcolor, fontWeight: FontWeight.bold)),
+                ),
 
+              ],
+            ),
+          ],
         ),
         body: Container(
           height: size.height,
@@ -283,6 +291,20 @@ class _homeselState extends State<homesel> {
             )),
       ],
     );
+  }
+  void _handleMenuItemPressed(String value) {
+    // Perform an action based on the selected menu item
+    switch (value) {
+      case 'item1':
+      // Do something for menu item 1
+        break;
+      case 'item2':
+      // Do something for menu item 2
+        break;
+
+      default:
+        break;
+    }
   }
 }
 
