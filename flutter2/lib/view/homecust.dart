@@ -16,10 +16,13 @@ import 'package:image_picker/image_picker.dart';
 import '../components/applocal.dart';
 
 List<String> imagesList = [
-  // "assets/images/p5.jpg",
-  "https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU",
-  "https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg",
+  'assets/images/p9.jpg',
+  "assets/images/p1.jpg",
+  "assets/images/shop.png",
+  "assets/images/market.png",
+  //"https://barn2.com/wp-content/uploads/2018/03/Create-a-WooCommerce-Price-List-Blog-Header-820x369.png",
+  //"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz94eeo8JMzupDzTlwT0gQ41B9h-BCLUOZ4g&usqp=CAU",
+  //"https://www.evolutionnutrition.com/sites/default/files/article-images/Online%20Grocery%20Inside.jpg",
 ];
 int _currentImageIndex = 0;
 const double kDefaultPadding = 10;
@@ -210,6 +213,7 @@ class _MyHomePageState extends State<homecust> {
           elevation: 0,
           title:
           Text("${getLang(context,"wel")}"),
+
           centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
@@ -251,7 +255,7 @@ class _MyHomePageState extends State<homecust> {
                   children: [
                     CarouselSlider(
                       items: imagesList.map((imageUrl) {
-                        return Image.network(imageUrl, fit: BoxFit.cover);
+                        return Image.asset(imageUrl, fit: BoxFit.cover);
                       }).toList(),
                       options: CarouselOptions(
                         autoPlay: true,

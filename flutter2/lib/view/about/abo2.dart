@@ -47,7 +47,7 @@ class _AboutState extends State<About> {
               const Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
-                  child: Text("Welcome to SALE , let's shop!",
+                  child: Text("Welcome to SALE !",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,

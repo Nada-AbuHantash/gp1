@@ -47,7 +47,7 @@ class _AboutScreenState extends State<AboutScreen> {
               const Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
-                  child: Text("Welcome to SALE , let's shop!",
+                  child: Text("Welcome to SALE , lets the journey begin !",
                        textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class _AboutScreenState extends State<AboutScreen> {
       child: Row( 
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-         Text("Don't miss sign up ",
+         Text("${getLang(context, "m")}",
         style: TextStyle(color: globalcolors.textcolor,fontSize: 16),),
         InkWell(
           onTap: () => {

@@ -37,6 +37,7 @@ class _dilState extends State<dil> {
                  Text(
                   " ${getLang(context, "del")}",
                   style: TextStyle(
+
                       color:globalcolors.textcolor,
                       fontWeight:  FontWeight.bold, fontSize: 25,),
                 ), 
