@@ -35,7 +35,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
 
   flutter:
-    sdk: flutter
+   sdk: flutter
   intl: ^0.17.0
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,15 +48,22 @@ dependencies:
   shared_preferences: any
   fluttertoast: any
   flutter_localizations:
-    sdk: flutter
+   sdk: flutter
   provider: ^6.0.5
   lottie: ^2.2.0
   uuid: ^3.0.7
   image_picker: ^0.8.7
- 
   curved_navigation_bar: ^1.0.3
   google_nav_bar: ^5.0.6
+  dio: ^4.0.0
+  flutter_polyline_points: ^0.2.6
+  google_maps_flutter: ^2.0.2 
+  latlong2: ^0.8.1
+  flutter_map: ^3.1.0
+  geocoding: ^2.1.0
+  geolocator: ^9.0.2
   
+
   #easy_localization: any
   
   
