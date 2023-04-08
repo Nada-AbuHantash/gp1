@@ -213,6 +213,10 @@ app.post('/registerseller', function (request, response) {
 
     });
 });
+
+
+    let query1 = "Select * from sellers where selleremail=? and sellerpass=?";
+
 app.post('/registerproduct', function (request, response) {
     console.log("add pro");
     var name = request.body.productname;
@@ -227,12 +231,12 @@ app.post('/registerproduct', function (request, response) {
  var percent=newprice*count*(per);
  console.log(percent);
  
-   let query=`SELECT *  FROM sellers where suparmarketname='${nameperson}'`;
-   pool.query(query,[nameperson],function (error, data, results1) {
+ let query1 = "Select * from sellers where suparmarketname=?";
+   pool.query(query1,[nameperson],function (error, data, results1) {
     console.log("done qurey");
 
     if (error) {
-        
+        console.log(error);
         response.status(400).send('Error in database operation');
         
     }
@@ -241,7 +245,7 @@ app.post('/registerproduct', function (request, response) {
     else {
         card=56;
 //       response.send(results1);
-//    const card=results1[0].sellercard;
+//   const card=results1[0].sellercard;
 //        console.log(card);
         if(card>percent){
         console.log("okkkkkkkkkk");
@@ -398,6 +402,48 @@ let query1=`UPDATE delivery SET  deliverycard='${card}' WHERE deliveryemail='${e
     });
 });
 
+app.post('/locationseller', function (request, response) {
+    console.log("location seller");
+    var email=request.body.email;
+    var x= request.body.xlocation;
+    var y=request.body.ylocation;
+    console.log(email);
+let query1=`UPDATE sellers SET xlocation='${x}' , ylocation='${y}' WHERE selleremail='${email}'`;
+    
+    pool.query(query1, [x,y], function (error, data, results) {
+        console.log("done qurey");
+
+        if (error) {
+            response.status(400).send('Error in database operation');
+        }
+        else {
+            response.send("Success");
+
+        }
+
+    });
+});
+app.post('/updatecard', function (request, response) {
+    console.log("update card");
+    var email=request.body.email;
+    var card= request.body.card;
+    
+    console.log(email);
+let query1=`UPDATE sellers SET sellercard='${card}'  WHERE selleremail='${email}'`;
+    
+    pool.query(query1, [card], function (error, data, results) {
+        console.log("done qurey");
+
+        if (error) {
+            response.status(400).send('Error in database operation');
+        }
+        else {
+            response.send("Success");
+
+        }
+
+    });
+});
 
 app.get('/editprofile', function (request, response) {
     console.log("editprofile");

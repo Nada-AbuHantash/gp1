@@ -19,8 +19,7 @@ List<String> imagesList = [
   'assets/images/market.png',
   'assets/images/shop.png',
   'assets/images/p1.jpg',
-
-  'assets/images/p9.jpg',
+  'assets/images/p4.jpg',
 ];
 int _currentImageIndex = 0;
 const double kDefaultPadding = 10;
@@ -137,20 +136,22 @@ class _MyHomePageState extends State<homecust> {
 
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    SizedBox(height: 6,),
                     Text(
+                      
                       post.productname,
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
+                      style:  TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
                     ),
                     Text(
                       post.namesupermarket,
-                      style: const TextStyle(fontSize: 13, color: Colors.grey),
+                      style:  TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
                     ),
                     Text("Available up to :"+ post.exp,
-                      style: const TextStyle(fontSize: 13, color: Colors.grey),
+                      style: TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 8,
                     ),
                     Text(
                       "The old price : \₪ ${post.price}",
@@ -160,7 +161,7 @@ class _MyHomePageState extends State<homecust> {
                           color: globalcolors.notetcolor,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(height: 3,),
                     Text(
                       "The new price : \₪ ${post.newprice}",
                       style: TextStyle(
@@ -258,7 +259,7 @@ class _MyHomePageState extends State<homecust> {
                         autoPlay: true,
                         autoPlayInterval: Duration(seconds: 3),
                         enlargeCenterPage: true,
-                        aspectRatio: 16 / 5,
+                        aspectRatio: 16 / 6.5,
                         onPageChanged: (index, reason) {
                           setState(() {
                             _currentImageIndex = index;
@@ -289,7 +290,7 @@ class _MyHomePageState extends State<homecust> {
 
               ),
               const SizedBox(
-                height: 12,
+                height: 8,
               ),
               Expanded(
                   child: ListView.builder(

@@ -251,7 +251,7 @@ var res=await fetch1.userupdate(username,userpass,userphone,place,A).then((res) 
 
 if(res==null){  print("Duplication");
 AlertDialog alert = const AlertDialog(
-         content: Text("somthing wrong not update data,شيئ ما خطأ لم يتم تعديل المعلومات  "),
+         content: Text("something wrong ,not update the data\n,شيئ ما خطأ, لم يتم تعديل المعلومات "),
         );
         
         showDialog(
