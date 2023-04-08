@@ -236,6 +236,8 @@ app.post('/registerproduct', function (request, response) {
         response.status(400).send('Error in database operation');
         
     }
+
+    
     else {
         card=56;
 //       response.send(results1);
