@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../components/applocal.dart';
 
 
@@ -81,10 +82,12 @@ class _homeselState extends State<homesel> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlist() async{
+    final prefs = await SharedPreferences.getInstance();
+  String name= prefs.get("supermarket").toString();
     if(flag==2){
       myList=await fetch.most2(name);}
     else{
-    myList=await fetch.most();
+    myList=await fetch.most2(name);
     }
   }
 
@@ -93,10 +96,12 @@ class _homeselState extends State<homesel> {
     List<Widget> listItems = [];
     List<Product> A = [];
     if(myList.isEmpty){
+      final prefs = await SharedPreferences.getInstance();
+  String name= prefs.get("supermarket").toString();
       if(flag==2){
         myList=await fetch.most2(name);}
       else{
-        myList=await fetch.most();
+        myList=await fetch.most2(name);
       }
     }
 
