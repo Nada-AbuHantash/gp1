@@ -23,7 +23,7 @@ rest_api fetch1=new rest_api();
 
 
   var jsonString;
-  var json;
+  // var json;
 const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
  class profile extends StatefulWidget{
@@ -50,7 +50,7 @@ class _profileState extends State<profile> {
   }
    void getinfo() async {
 jsonString=await fetch1.getinfo1();
-json=await fetch1.getinfo2();
+// json=await fetch1.getinfo2();
 final prefs = await SharedPreferences.getInstance();
 String email= prefs.get("emailemail").toString();
 if(jsonString !=null){
@@ -59,14 +59,14 @@ passjaw=jsonString.elementAt(0)['userpass'];
 emailjaw=jsonString.elementAt(0)['useremail'];
 placejaw=jsonString.elementAt(0)['userplace'];
 phonejaw=jsonString.elementAt(0)['userphone'].toString();
-print(namejaw);
-}else {
-namejaw=json.elementAt(0)['sellername'];
-passjaw=json.elementAt(0)['sellerpass'];
-emailjaw=json.elementAt(0)['selleremail'];
-placejaw=json.elementAt(0)['sellerplace'];
-phonejaw=json.elementAt(0)['sellerphone'].toString();
-}
+print(namejaw);}
+// else {
+// namejaw=json.elementAt(0)['sellername'];
+// passjaw=json.elementAt(0)['sellerpass'];
+// emailjaw=json.elementAt(0)['selleremail'];
+// placejaw=json.elementAt(0)['sellerplace'];
+// phonejaw=json.elementAt(0)['sellerphone'].toString();
+// }
   }
  
        

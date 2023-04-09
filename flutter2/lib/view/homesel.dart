@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter2/models/product.dart';/////اسم البرودكتس زي مهي بالتيبل عشان تنعرض هون
+import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
