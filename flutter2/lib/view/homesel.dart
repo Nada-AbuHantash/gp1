@@ -330,7 +330,7 @@ class _homeselState extends State<homesel> {
       case 'item2':
         flag=1;
         print("tow");
-      //  getPostsData();getlist();
+        //  getPostsData();getlist();
         // Do something for menu item `2
         break;
       default:
