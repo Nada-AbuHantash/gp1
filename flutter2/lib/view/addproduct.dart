@@ -207,18 +207,21 @@ class _addproductState extends State<addproduct> {
               const SizedBox(height: 20),
               
               Padding(
-                padding: const EdgeInsets.only(right: 25,left: 25),
+                padding: const EdgeInsets.only(right: 10,left: 10),
                 child: 
                  ListTile(
                  title: Row(
+                   
                   children: [
                     
-                   
+                
                       
-                      Expanded(child:  Container(
+                      Expanded(
+                         flex: 4,
+                        child:  Container(
                         height:55,
                   width: 250,
-                
+                 
                   padding: const EdgeInsets.only(top: 3, left: 25,right: 25),
                     decoration: BoxDecoration(
                       
@@ -231,6 +234,7 @@ class _addproductState extends State<addproduct> {
                         )
                       ]
                     ),
+                  
                     child: TextFormField(
                       style: TextStyle(color:globalcolors.textcolor), 
                       controller: pathcntoraler,
@@ -254,7 +258,9 @@ class _addproductState extends State<addproduct> {
                   ),
                     ),
                 SizedBox(width: 10,),
-                     Expanded(child:   SizedBox(
+                     Expanded(
+                       flex: 1,
+                       child:   SizedBox(
                       width:5,
                       
                        child: ElevatedButton(

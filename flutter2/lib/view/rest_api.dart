@@ -449,4 +449,24 @@ Future <List<Product>> most() async {
     throw Exception('Failed to load album');
   } return myList;
 }
+Future <List<Product>> most2(String name) async {
+  late  List<Product> myList=[];
+
+  http.Response res = await http.get(Uri.parse(utils.basurl + 'viewproseller?namesupermarket=$name'),
+      headers: {'Content-Type': 'application/json'});
+
+  if (res.statusCode == 200) {
+   
+
+    var jsonString = json.decode(res.body);
+    List<Product> list =
+    List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
+// List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
+    myList = list;
+
+  } else {
+   
+    throw Exception('Failed to load album');
+  } return myList;
+}
 }
