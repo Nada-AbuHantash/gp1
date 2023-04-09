@@ -16,7 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import '../components/applocal.dart';
 
 
-int _currentImageIndex = 0;
+
 const double kDefaultPadding = 10;
 
 TextEditingController productNameController = TextEditingController();
@@ -246,7 +246,17 @@ class _homeselState extends State<homesel> {
               const SizedBox(
                 height: 8,
               ),
-
+              Expanded(
+                  child: ListView.builder(
+                      controller: controller,
+                      itemCount: itemsData.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Align(
+                            heightFactor: 1,
+                            alignment: Alignment.topCenter,
+                            child: itemsData[index]);
+                      })),
             ],
           ),
         ),
