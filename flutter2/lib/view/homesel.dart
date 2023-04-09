@@ -23,11 +23,16 @@ late int count=1;
 late int flag=1;
 
 late  List<Product> myList=[];
-
+late  List<Product> myList2=[];
 void _runFilter(String enteredKeyword) {
   List<Product> results = [];
   if (enteredKeyword.isEmpty) {
-    results = myList;
+    if(flag==2){
+      results = myList2;}
+    else{
+      results = myList;
+    }
+
   }
   else {
     results = myList
@@ -83,11 +88,13 @@ class _homeselState extends State<homesel> {
   List<Widget> itemsData = [];
   void getlist() async{
     final prefs = await SharedPreferences.getInstance();
-  String name= prefs.get("supermarket").toString();
+    String name= prefs.get("supermarket").toString();
     if(flag==2){
-      myList=await fetch.most2(name);}
+      myList2=await fetch.most2(name);
+      myList = myList2;
+    }
     else{
-    myList=await fetch.most2(name);
+      myList=await fetch.most();
     }
   }
 
@@ -97,11 +104,13 @@ class _homeselState extends State<homesel> {
     List<Product> A = [];
     if(myList.isEmpty){
       final prefs = await SharedPreferences.getInstance();
-  String name= prefs.get("supermarket").toString();
+      String name= prefs.get("supermarket").toString();
       if(flag==2){
-        myList=await fetch.most2(name);}
+        myList2=await fetch.most2(name);
+        myList = myList2;
+      }
       else{
-        myList=await fetch.most2(name);
+        myList=await fetch.most();
       }
     }
 
@@ -315,17 +324,19 @@ class _homeselState extends State<homesel> {
       case 'item1':
         flag=2;
         print("one");
-      // Do something for menu item 1
+        // getPostsData();getlist();
+        // Do something for menu item 1
         break;
       case 'item2':
         flag=1;
         print("tow");
-      // Do something for menu item 2
+      //  getPostsData();getlist();
+        // Do something for menu item `2
         break;
       default:
         flag=1;
         break;
     }
+    getPostsData();getlist();
   }
 }
-
