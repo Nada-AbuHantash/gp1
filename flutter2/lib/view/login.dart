@@ -5,6 +5,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
+import 'package:flutter2/view/selhom.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
@@ -259,10 +260,12 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
       
       } 
     else if (res2.body.contains("@")) {
+      
       var jsonString = json.decode(res2.body)as List;
   
       String  emailc=jsonString.elementAt(0)['selleremail'];  
       int flag1=jsonString.elementAt(0)['flag_req'];
+     
  if (emailc!='' && pass!='' && flag1==0) {
       setState(() {
                           showSpinner = true;
@@ -282,7 +285,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                             });
                             
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => addproduct()));
+                                MaterialPageRoute(builder: (_) => selhom()));
                           } else {
                             
                             print("Login Failed");

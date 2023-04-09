@@ -79,7 +79,7 @@ Sharedsession shared = new Sharedsession();
   }
 }
 Future sellerlogin(String email, String pass) async {
-   var namesuper;
+  //  var namesuper;
   try {
     final http.Response use1 = await http.post(
         Uri.parse(utils.basurl + 'loginseller'),
@@ -90,7 +90,7 @@ Future sellerlogin(String email, String pass) async {
 Sharedsession shared = new Sharedsession();
       await shared.savename(email, pass);
       
-     print(namesuper);
+    //  print(namesuper);
     } else {
       // show error 
       print("Try Again");
@@ -318,6 +318,36 @@ Future getinfo1() async {
     http.Response res = await http.get(
         Uri.parse(
             utils.basurl+'editprofile?useremail=$A'),
+        headers: {'Content-Type': 'application/json'},
+        // body: {
+        //       'useremail':A,
+        //       'userpass':B}
+        );
+    if (res.statusCode == 200) {
+      jsonString = json.decode(res.body) as List;
+      
+    } else {
+      // show error
+      print(res.statusCode);
+      print("Try Again");
+    }
+    return jsonString;
+  } catch (e) {
+    print(e);
+    print("no info");
+  }
+  return jsonString;
+}
+Future getinfo2() async {
+  final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  String B = prefs.get("passpass").toString();
+  var jsonString;
+  try {
+    
+    http.Response res = await http.get(
+        Uri.parse(
+            utils.basurl+'profileseller?useremail=$A'),
         headers: {'Content-Type': 'application/json'},
         // body: {
         //       'useremail':A,
