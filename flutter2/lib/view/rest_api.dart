@@ -187,6 +187,35 @@ Future usersignup(
     print("no register");
   }
 }
+
+Future updatecard(
+     String email, String card ) async {
+  try {
+    var s = 200;
+    final http.Response use =
+        await http.post(Uri.parse(utils.basurl + 'updatecard'), headers: {
+      "Accept": "Application/json"
+    }, body: {
+      
+      'email': email,
+      'card': card,
+      
+
+    });
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+      //return model.fromJson(data["data"]);
+      return data;
+    }
+  } catch (e) {
+    print("no register");
+  }
+}
+
 Future userupdate(
     String name, String pass, String phone, String place , String email) async {
   try {
@@ -348,6 +377,36 @@ Future getinfo2() async {
     http.Response res = await http.get(
         Uri.parse(
             utils.basurl+'profileseller?useremail=$A'),
+        headers: {'Content-Type': 'application/json'},
+        // body: {
+        //       'useremail':A,
+        //       'userpass':B}
+        );
+    if (res.statusCode == 200) {
+      jsonString = json.decode(res.body) as List;
+      
+    } else {
+      // show error
+      print(res.statusCode);
+      print("Try Again");
+    }
+    return jsonString;
+  } catch (e) {
+    print(e);
+    print("no info");
+  }
+  return jsonString;
+}
+Future getinfo3() async {
+  final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  String B = prefs.get("passpass").toString();
+  var jsonString;
+  try {
+    
+    http.Response res = await http.get(
+        Uri.parse(
+            utils.basurl+'profildel?useremail=$A'),
         headers: {'Content-Type': 'application/json'},
         // body: {
         //       'useremail':A,

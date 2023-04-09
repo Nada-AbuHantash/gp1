@@ -33,21 +33,21 @@ const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
 class _editprofileState extends State<editprofile> {
   rest_api fetch=new rest_api();
-   @override
-  void initState() {
-    super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-    // do something
-     getinfo();
- var jsonString;
-    print("Build Completed"); 
-  });
-  }
-   void getinfo() async {
-jsonString=await fetch.getinfo1();
-emailjaw=jsonString.elementAt(0)['useremail'];
-print(namejaw);
-  }
+//    @override
+//   void initState() {
+//     super.initState();
+//      WidgetsBinding.instance.addPostFrameCallback((_) {
+//     // do something
+//      getinfo();
+//  var jsonString;
+//     print("Build Completed"); 
+//   });
+//   }
+//    void getinfo() async {
+// jsonString=await fetch.getinfo1();
+// emailjaw=jsonString.elementAt(0)['useremail'];
+// print(namejaw);
+//   }
   
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
@@ -70,7 +70,7 @@ Widget build(BuildContext context){
            
            backgroundColor: globalcolors.maincolor,
            leading:
-           IconButton(onPressed: ()=> Get.back(), 
+           IconButton(onPressed: ()=>  Navigator.pop(context),
            icon:new Icon( Icons.arrow_back_ios_new_outlined),
           
             color: globalcolors.textcolor, 
@@ -263,8 +263,7 @@ AlertDialog alert = const AlertDialog(
 }
 else{
 print(res.toString());
-Route route=MaterialPageRoute(builder: (_)=>profile());
-      navigator?.pushReplacement(route);
+  Navigator.pop(context);
 
 }
    

@@ -1,3 +1,4 @@
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/components/applocal.dart';
@@ -5,7 +6,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/editprofile.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
-import 'package:flutter2/view/profile.dart';
+import 'package:flutter2/view/profileseller.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -17,18 +18,53 @@ import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
 
 rest_api fetch=new rest_api();
-//final  date = DateTime.now();
+late String cardnada="";
 var rate;
 bool _lights=false;
+var jsonString;
 
+// void _runFilter(String enteredKeyword) {
+
+
+//  if (enteredKeyword.isEmpty) {
+//    getinfo();
+// }
+// }
+//   void getinfo() async {
+// jsonString=await fetch.getinfo2();
+
+// if(jsonString !=null){
+// cardnada=jsonString.elementAt(0)['sellercard'].toString();
+// print(cardnada);}
+//   }
 class nav2 extends StatefulWidget {
 
 
   @override
   State<nav2> createState() => _nav2State();
+
+  
 }
 
 class _nav2State extends State<nav2> {
+
+    @override
+  void initState() {
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+    // do something
+     getinfo();
+    print("Build Completed"); 
+  });
+  }
+   void getinfo() async {
+jsonString=await fetch.getinfo2();
+
+if(jsonString !=null){
+cardnada=jsonString.elementAt(0)['sellercard'].toString();
+print(cardnada);}
+
+  }
   final TextEditingController niscntoraler = TextEditingController();
 
   @override
@@ -45,7 +81,7 @@ class _nav2State extends State<nav2> {
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const profile()),
+                MaterialPageRoute(builder: (context) => const profileseller()),
               )
             },
           ),
@@ -128,13 +164,13 @@ class _nav2State extends State<nav2> {
             title: Text(" ${getLang(context, "d")}",style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
               showDialog(
+                
                   context: context,
                   builder: (BuildContext context) =>
                       AlertDialog(
-
+                         title: Text(cardnada,),
+                          titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 15),
                         actions: [
-
-                          const SizedBox(height: 20),
 
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -185,6 +221,7 @@ class _nav2State extends State<nav2> {
                               style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
                             ),
                             onPressed: ()  {
+                              updatecard(niscntoraler.text);
                             },
                           ),
             ],
@@ -312,5 +349,32 @@ class _nav2State extends State<nav2> {
     await shared.savename("", "");
     await shared.savenamesuper("");
     navigator?.push(MaterialPageRoute(builder: (_)=>home()));
+  }
+  
+  Future<void> updatecard(String card) async {
+
+    final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+var res=await fetch.updatecard(A,card).then((res) {
+
+if(res==null){  print("Duplication");
+AlertDialog alert = const AlertDialog(
+         content: Text("something wrong ,not update the data\n,شيئ ما خطأ, لم يتم تعديل المعلومات "),
+        );
+        
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return alert;
+          },
+        );
+}
+else{
+Fluttertoast.showToast(msg: "${getLang(context, "updatedone")}",
+          textColor: globalcolors.besiccolor);
+
+}
+   
+});
   }
 }
