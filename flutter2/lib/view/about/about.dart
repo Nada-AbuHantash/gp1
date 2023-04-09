@@ -56,7 +56,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
               ),
               AspectRatio(
-                aspectRatio: 0.99,
+                aspectRatio: 0.90,
                 
                 child: PageView.builder(
                     itemCount: dataList.length,
@@ -71,7 +71,7 @@ class _AboutScreenState extends State<AboutScreen> {
         ),
       ),
          bottomNavigationBar: Container(
-      height: 100,
+      height: 70,
       color: globalcolors.besiccolor,
       alignment: Alignment.center,
       child: Row( 

@@ -379,9 +379,8 @@ final prefs = await SharedPreferences.getInstance();
 var res=await fetch1.putpro(count,name,oldprice,newprice,type,pathimg,nameperson,exp,per).then((res) {
 
 print(res.toString());
-Route route=MaterialPageRoute(builder: (_)=>home());
-      navigator?.pushReplacement(route);
-
+Fluttertoast.showToast(msg: "${getLang(context, "addpro")}",
+          textColor: globalcolors.besiccolor);
 
    
 });
