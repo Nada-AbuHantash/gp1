@@ -2,17 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
-import 'package:carousel_slider/carousel_slider.dart';
-
 import 'package:flutter/cupertino.dart';
-import 'dart:math';
-import 'dart:typed_data';
-import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-
 import '../components/applocal.dart';
 
 
@@ -27,15 +19,16 @@ TextEditingController productMarketController = TextEditingController();
 TextEditingController productManufactureingController = TextEditingController();
 
 late int count=1;
+late int flag=1;
 
 late  List<Product> myList=[];
 
 void _runFilter(String enteredKeyword) {
   List<Product> results = [];
   if (enteredKeyword.isEmpty) {
-    // if the search field is empty or only contains white-space, we'll display all users
     results = myList;
-  } else {
+  }
+  else {
     results = myList
         .where((user) => user.productname
         .toLowerCase()
@@ -88,15 +81,24 @@ class _homeselState extends State<homesel> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlist() async{
+    if(flag==2){
+      myList=await fetch.most2(name);}
+    else{
     myList=await fetch.most();
+    }
   }
 
   void getPostsData() async{
 
     List<Widget> listItems = [];
     List<Product> A = [];
-    if(myList.isEmpty)
-      myList=await fetch.most();
+    if(myList.isEmpty){
+      if(flag==2){
+        myList=await fetch.most2(name);}
+      else{
+        myList=await fetch.most();
+      }
+    }
 
     myList.forEach((post) {
 
@@ -306,13 +308,17 @@ class _homeselState extends State<homesel> {
     // Perform an action based on the selected menu item
     switch (value) {
       case 'item1':
+        flag=2;
+        print("one");
       // Do something for menu item 1
         break;
       case 'item2':
+        flag=1;
+        print("tow");
       // Do something for menu item 2
         break;
-
       default:
+        flag=1;
         break;
     }
   }
