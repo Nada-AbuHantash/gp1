@@ -476,7 +476,23 @@ app.get('/editprofile', function (request, response) {
         }
     });
 });
+app.get('/profileseller', function (request, response) {
+    console.log("editprofile");
+// var email=request.body.useremail;
+// var pass =request.body.userpass;
+    let query1 = `SELECT *  FROM sellers where selleremail='${request.query.useremail}'`;
 
+    pool.query(query1, function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+            console.log(results);
+           // console.log(results);
+            response.status(200).send(results);
+        }
+    });
+});
 app.listen(3000, function () {
     console.log('Express server is listening on port 3000');
 });
