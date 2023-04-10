@@ -8,6 +8,7 @@ import 'package:flutter2/view/init.dart';
 import 'package:flutter2/view/login.dart';
 import 'package:flutter2/view/mainpage.dart';
 import 'package:flutter2/view/map.dart';
+import 'package:flutter2/view/mapGPT.dart';
 import 'package:flutter2/view/selhom.dart';
 import 'package:flutter2/view/about/about.dart';
 import 'package:flutter2/view/signup.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:MapSample(),
+      home:mapgpt(),
        
        localizationsDelegates: [
           applocal.delegate,
