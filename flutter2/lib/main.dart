@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:mapgpt(),
+      home:MapSample(),
        
        localizationsDelegates: [
           applocal.delegate,

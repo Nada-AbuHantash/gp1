@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
@@ -469,4 +470,13 @@ Future <List<Product>> most2(String name) async {
     throw Exception('Failed to load album');
   } return myList;
 }
+
+// Future<void> myAsyncMethod() async {
+//   try {
+//     // Call platform-specific API
+//   } on PlatformException catch (e) {
+//     // Handle the exception
+//   }
+// }
+
 }

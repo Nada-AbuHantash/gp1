@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapSample extends StatefulWidget {
@@ -17,7 +18,7 @@ class MapSampleState extends State<MapSample> {
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 12,
   );
 
   static const CameraPosition _kLake = CameraPosition(
@@ -45,7 +46,9 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _goToTheLake() async {
+    try{
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
+    }on PlatformException catch (e){}
   }
 }
