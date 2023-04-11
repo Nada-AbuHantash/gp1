@@ -50,6 +50,7 @@ class _nav2State extends State<nav2> {
 
     @override
   void initState() {
+    profileseller();
     super.initState();
      WidgetsBinding.instance.addPostFrameCallback((_) {
     // do something
@@ -372,6 +373,7 @@ AlertDialog alert = const AlertDialog(
 else{
 Fluttertoast.showToast(msg: "${getLang(context, "updatedone")}",
           textColor: globalcolors.besiccolor);
+          
 
 }
    

@@ -7,7 +7,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://192.168.100.52:3000/";
+  static const String basurl = "http://192.168.134.52:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{

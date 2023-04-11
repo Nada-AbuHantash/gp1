@@ -437,6 +437,25 @@ let query1=`UPDATE sellers SET xlocation='${x}' , ylocation='${y}' WHERE sellere
 
     });
 });
+
+
+// app.get('/getlocation', function(request, response){
+//     console.log("getlocation");
+//     let query1 = `SELECT *  FROM  sellers `;
+    
+//     pool.query(query1, function(error, results){
+//         if ( error ){
+//             response.status(400).send('Error in database operation');
+//         } else {
+             
+//             response.send(results);
+            
+//         }
+//     });
+// });
+
+
+
 app.post('/updatecard', function (request, response) {
     console.log("update card");
     var email=request.body.email;

@@ -28,6 +28,11 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
+    @override
+  void initState() {
+    profile();
+   
+  }
   @override
   Widget build(BuildContext context) {
     var _lights;
