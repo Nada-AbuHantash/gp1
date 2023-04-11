@@ -28,7 +28,7 @@ class _mapgptState extends State<mapgpt> {
     ),
  markers: {
     Marker(
-      markerId: MarkerId('marker_1'),
+      markerId: MarkerId("'marker_1'"),
       position: LatLng(37.7749, -122.4194),
       infoWindow: InfoWindow(
         title: 'San Francisco',
