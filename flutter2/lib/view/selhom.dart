@@ -3,6 +3,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/homesel.dart';
+import 'package:flutter2/view/map.dart';
 import 'package:flutter2/view/nav2.dart';
 
 import 'package:flutter2/view/seller.dart';
@@ -80,7 +81,7 @@ class _selhomState extends State<selhom> {
       case 2:
         return  addproduct();
       case 3:
-        return  homecust();
+        return  map();
       case 4:
         return  nav2();
       default:

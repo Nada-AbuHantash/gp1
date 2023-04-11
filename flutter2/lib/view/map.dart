@@ -1,54 +1,45 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
-class MapSample extends StatefulWidget {
-  const MapSample({Key? key}) : super(key: key);
 
+class map extends StatefulWidget {
   @override
-  State<MapSample> createState() => MapSampleState();
+  _mapState createState() => _mapState();
 }
 
-class MapSampleState extends State<MapSample> {
-  final Completer<GoogleMapController> _controller =
-  Completer<GoogleMapController>();
-
-  static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
-  static const CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
+class _mapState extends State<map> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.hybrid,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
+      appBar: AppBar(
+
+        title: Text("Add your location!"),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
+      body: Container(
+        child: FlutterMap(
+          options:
+          MapOptions(center: LatLng(32.309718, 35.112541), zoom: 13.0),
+          layers: [
+            TileLayerOptions(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+            MarkerLayerOptions(markers: [
+              Marker(
+                  width: 30.0,
+                  height: 30.0,
+                  point: LatLng(32.309718, 35.112541),
+                  builder: (ctx) => Container(
+                      child: Container(
+                        child: Icon(
+                          Icons.location_on,
+                          color: Colors.blueAccent,
+                          size: 40,
+                        ),
+                      )))
+            ])
+          ],
+        ),
       ),
     );
-  }
-
-  Future<void> _goToTheLake() async {
-    try{
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-    }on PlatformException catch (e){}
   }
 }
