@@ -1,6 +1,4 @@
 
-
-
 const mysql = require("mysql");
 const util = require("util");
 var express = require('express');
@@ -531,3 +529,26 @@ app.get('/profildel', function (request, response) {
 app.listen(3000, function () {
     console.log('Express server is listening on port 3000');
 });
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/database";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCzXZnhc3GZOwa9d8PSkTTCfFe5YDpHprU",
+  authDomain: "nadatest-111bf.firebaseapp.com",
+  projectId: "nadatest-111bf",
+  storageBucket: "nadatest-111bf.appspot.com",
+  messagingSenderId: "643510721336",
+  appId: "1:643510721336:web:4a41c6d00cf4af166c7fcd",
+  measurementId: "G-3C0B12SGTE"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
