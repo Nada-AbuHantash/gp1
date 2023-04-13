@@ -33,8 +33,9 @@ dependencies:
   flutter_osm_plugin: ^0.53.2
   awesome_dialog: ^3.0.2
   location: ^4.4.0
-  latlng: any
-  latlong: ^0.6.1
+
+
+
   flutter_map: ^0.14.0
   geolocator: ^9.0.1
   url_launcher: ^6.0.0
@@ -43,6 +44,8 @@ dependencies:
   custom_navigator: ^0.3.0
   flutter_rating_bar: ^4.0.1
   geolocator_android: ^4.1.7
+  geocoding: ^2.0.4
+
   flutter:
     sdk: flutter
   intl: ^0.17.0
