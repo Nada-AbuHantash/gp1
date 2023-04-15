@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/profile.dart';
@@ -25,10 +25,11 @@ class login extends StatefulWidget {
 }
 
 class _loginState extends State<login> {
+
   final TextEditingController emailcntoraler = TextEditingController();
   final TextEditingController passcntoraler = TextEditingController();
   bool showSpinner = false;
-  
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -133,7 +134,23 @@ class _loginState extends State<login> {
                           style: TextStyle(
                               color: globalcolors.maincolor, fontSize: 25),
                         ),
-                        onPressed: () {
+                        onPressed: ()async {
+  setState(() {
+                    showSpinner = true;
+                  });
+                  try {
+                    final user = await _auth.signInWithEmailAndPassword(
+                        email: emailcntoraler.text, password: passcntoraler.text);
+                    if (user != null) {
+                      
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    }
+                  } catch (e) {
+                    print(e);
+                  }
+                
                           emailcntoraler.text.isNotEmpty &&
                                   passcntoraler.text.isNotEmpty
                               ? dologin(emailcntoraler.text, passcntoraler.text)

@@ -1,6 +1,6 @@
 
 import 'dart:convert';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/home.dart';
@@ -23,7 +23,7 @@ const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
   @override
   State<signup> createState() => _signupState();
 }
-
+  final _auth = FirebaseAuth.instance;
 class _signupState extends State<signup> {
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
@@ -183,10 +183,20 @@ Widget build(BuildContext context){
                     Text("${getLang(context, "Signup")}",
               style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
               ),
-                      onPressed: ()  { 
+                      onPressed: () async { 
+
                       if( emailcntoraler.text.isNotEmpty && passcntoraler.text.isNotEmpty
                           && phonecntoraler.text.isNotEmpty&& namecntoraler.text.isNotEmpty)
                        {
+                     
+                  try {
+                    final newUser = await _auth.createUserWithEmailAndPassword(
+                        email: emailcntoraler.text, password: passcntoraler.text);
+                        print(newUser);
+                  } catch (e) {
+                    print(e);
+                  }
+                
          
                             showDialog(
           context: context,

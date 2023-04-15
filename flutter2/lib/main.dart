@@ -15,15 +15,19 @@ import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/slider.dart';
+import 'package:flutter2/view/about/about.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'components/applocal.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 SharedPreferences ?mySharedPreferences;
 Sharedsession language = new Sharedsession();
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
       mySharedPreferences = await SharedPreferences.getInstance();
      await mySharedPreferences!.setString("translations","en");
     language.savelang("en");
@@ -51,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:selhom(),
+      home:login(),
        
        localizationsDelegates: [
           applocal.delegate,
