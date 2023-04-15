@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "643510721336",
+    "firebase_url": "https://nadatest-111bf-default-rtdb.firebaseio.com",
+    "project_id": "nadatest-111bf",
+    "storage_bucket": "nadatest-111bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643510721336:android:1f92bb1a2e8af4816c7fcd",
+        "android_client_info": {
+          "package_name": "com.example.flutter2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643510721336-0emnic304hpujeuc92h30manonchk7je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaVyQwDuLM95xkysb-tKg2BEp_vMfu-bY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643510721336-0emnic304hpujeuc92h30manonchk7je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:643510721336:android:77910505c58945366c7fcd",
+        "android_client_info": {
+          "package_name": "com.example.ichat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "643510721336-0emnic304hpujeuc92h30manonchk7je.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaVyQwDuLM95xkysb-tKg2BEp_vMfu-bY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "643510721336-0emnic304hpujeuc92h30manonchk7je.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

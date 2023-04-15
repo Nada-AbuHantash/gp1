@@ -29,7 +29,7 @@ flutter_localization:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  latlong2: ^0.8.1
+  #latlong2: ^0.8.1
   flutter_osm_plugin: ^0.53.2
   awesome_dialog: ^3.0.2
   location: ^4.4.0
@@ -72,6 +72,12 @@ dependencies:
   google_maps_flutter: ^2.2.5
   #geolocator_android: ^4.1.7
   #easy_localization: any
+  
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.1
+  cloud_firestore: ^4.5.1
+  #google_sign_in: ^6.1.0
+  #firebase_auth: ^4.4.1
   
   
   

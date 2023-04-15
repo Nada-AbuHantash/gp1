@@ -106,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 2:
         return  dil();
       case 3:
-        return const chat();
+        return const ChatScreen();
       case 4:
         return  NavDrawer();
       default:
