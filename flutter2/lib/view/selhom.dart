@@ -78,7 +78,7 @@ class _selhomState extends State<selhom> {
       case 0:
         return const homesel();
       case 1:
-        return  map2();
+        return  map1();
       case 2:
         return  addproduct();
       case 3:
