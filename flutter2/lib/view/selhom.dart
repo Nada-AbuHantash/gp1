@@ -4,6 +4,7 @@ import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/homesel.dart';
 import 'package:flutter2/view/map.dart';
+import 'package:flutter2/view/mapGPT.dart';
 import 'package:flutter2/view/nav2.dart';
 
 import 'package:flutter2/view/seller.dart';
@@ -77,7 +78,7 @@ class _selhomState extends State<selhom> {
       case 0:
         return const homesel();
       case 1:
-        return const seller();
+        return  map2();
       case 2:
         return  addproduct();
       case 3:
