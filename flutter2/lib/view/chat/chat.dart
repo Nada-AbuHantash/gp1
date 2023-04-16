@@ -60,15 +60,15 @@ String? messagetext;
             Text('MessageMe')
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              _auth.signOut();
-              Navigator.pop(context);
-            },
-            icon: Icon(Icons.close),
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     onPressed: () {
+        //       _auth.signOut();
+        //       Navigator.pop(context);
+        //     },
+        //     icon: Icon(Icons.close),
+        //   )
+        // ],
       ),
       body: SafeArea(
         child: Container(
@@ -114,6 +114,7 @@ String? messagetext;
                                 'text':messagetext,
                                 'sender':signedInUser.email,
                                 'time':FieldValue.serverTimestamp(),
+                                'name':signedInUser.displayName,
                               });
                             },
                             child: Text(
@@ -158,11 +159,12 @@ class msgstreambluder extends StatelessWidget {
                               for(var mas in massege?.toList() ?? []){
               final msgtext=mas.get('text');
               final msgsen=mas.get('sender');
+              final name=mas.get('name');
               final cutrrentuser=signedInUser.email;
 
 if(cutrrentuser==msgsen){}
 
-              final msgw=msgline(sender: msgsen,text: msgtext,isme:cutrrentuser==msgsen ,);
+              final msgw=msgline(sender: msgsen,text: msgtext,isme:cutrrentuser==msgsen ,name:name);
               msgwide.add(msgw);
               }
               
@@ -181,9 +183,10 @@ if(cutrrentuser==msgsen){}
   }
 }
 class msgline extends StatelessWidget {
-  const msgline({this.text, this.sender,required this.isme,Key? key}):super(key : key);
+  const msgline({this.text, this.sender,required this.isme,this.name,Key? key}):super(key : key);
 final String? text;
 final String? sender;
+final String? name;
 final bool isme;
   @override
   Widget build(BuildContext context) {
@@ -192,7 +195,7 @@ final bool isme;
       child: Column(
       crossAxisAlignment: isme? CrossAxisAlignment.end:CrossAxisAlignment.start,
         children: [
-          Text('$sender',
+          Text('$name',
           style: TextStyle(color: globalcolors.textcolor,
           fontSize: 10),),
           Material(

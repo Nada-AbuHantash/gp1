@@ -140,7 +140,7 @@ class _loginState extends State<login> {
                   });
                   try {
                     final user = await _auth.signInWithEmailAndPassword(
-                        email: emailcntoraler.text, password: passcntoraler.text);
+                        email: emailcntoraler.text, password: passcntoraler.text,);
                     if (user != null) {
                       
                       setState(() {

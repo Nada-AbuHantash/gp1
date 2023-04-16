@@ -11,7 +11,7 @@ import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/homecust.dart';
 import '../components/applocal.dart';
 import 'MyHomePage.dart';
-import 'chat.dart';
+import 'chat/chat.dart';
 import 'package:flutter/services.dart';
 
 

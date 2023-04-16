@@ -19,7 +19,8 @@ import 'package:flutter2/view/homecust.dart';
 
 import '../components/applocal.dart';
 import 'MyHomePage.dart';
-import 'chat.dart';
+import 'chat/chat.dart';
+import 'chat/searchchat.dart';
 import 'home.dart';
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,8 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 2:
         return  dil();
       case 3:
-        return const ChatScreen();
+      return searchchat();
+       // return const ChatScreen();
       case 4:
         return  NavDrawer();
       default:

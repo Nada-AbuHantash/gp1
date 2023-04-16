@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -13,6 +14,7 @@ import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'dil.dart';
 import 'init.dart';
+ final _firestore=FirebaseFirestore.instance;
 rest_api fetch=new rest_api();
 const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
@@ -190,9 +192,16 @@ Widget build(BuildContext context){
                        {
                      
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: emailcntoraler.text, password: passcntoraler.text);
-                        print(newUser);
+                      UserCredential userCrendetial = await _auth.createUserWithEmailAndPassword(
+        email: emailcntoraler.text, password: passcntoraler.text);
+                          userCrendetial.user!.updateDisplayName(namecntoraler.text);
+
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+      "name": namecntoraler.text,
+      "email": emailcntoraler.text,
+      "status": "Unavalible",
+      "uid": _auth.currentUser!.uid,
+    });
                   } catch (e) {
                     print(e);
                   }

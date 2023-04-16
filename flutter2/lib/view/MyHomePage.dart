@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -28,6 +29,7 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
+   final _auth = FirebaseAuth.instance;
     @override
   void initState() {
     profile();
@@ -275,6 +277,7 @@ var res=await fetch.Feedback(rate,A);
  
 
   void logout()async {
+     _auth.signOut();
 Sharedsession shared = new Sharedsession();
       await shared.savename("", "");
       await shared.savenamesuper("");
