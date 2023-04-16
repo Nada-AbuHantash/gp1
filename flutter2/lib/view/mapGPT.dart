@@ -24,7 +24,7 @@ class _map1State extends State<map1> {
               MapTileLayer(
                 initialFocalLatLng: MapLatLng(
                     currentLocation.latitude!, currentLocation.longitude!),
-                initialZoomLevel: 5,
+                initialZoomLevel: 15,
                 initialMarkersCount: 1,
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 markerBuilder: (BuildContext context, int index) {
