@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/home.dart';
 
 import 'ChatRoom.dart';
@@ -78,7 +79,7 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Screen"),
+        title: Text("search to chat"),
         // actions: [
         //   IconButton(icon: Icon(Icons.logout), onPressed: () => home())
         // ],
@@ -108,7 +109,7 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
                       decoration: InputDecoration(
                         hintText: "Search",
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(30),
                         ),
                       ),
                     ),
@@ -141,17 +142,17 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
                             ),
                           );
                         },
-                        leading: Icon(Icons.account_box, color: Colors.black),
+                        leading: Icon(Icons.account_circle_sharp, color: globalcolors.textcolor),
                         title: Text(
                           userMap!['name'],
                           style: TextStyle(
-                            color: Colors.black,
+                            color: globalcolors.textcolor,
                             fontSize: 17,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         subtitle: Text(userMap!['email']),
-                        trailing: Icon(Icons.chat, color: Colors.black),
+                        trailing: Icon(Icons.maps_ugc, color: globalcolors.notetcolor),
                       )
                     : Container(),
               ],

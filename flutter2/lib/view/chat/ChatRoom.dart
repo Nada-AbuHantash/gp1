@@ -107,6 +107,7 @@ class ChatRoom extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.data != null) {
               return Container(
+                color: globalcolors.besiccolor,
                 child: Column(
                   children: [
                     Text(userMap['name'], style: TextStyle(color: globalcolors.textcolor)),
