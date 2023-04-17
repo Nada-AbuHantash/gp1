@@ -1,62 +1,104 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
+import 'package:location/location.dart';
+import 'package:flutter2/utils/globalColors.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 
-import 'package:latlong2/latlong.dart';
-import 'package:flutter_map/flutter_map.dart';
 class map extends StatefulWidget {
   @override
   _mapState createState() => _mapState();
 }
 
 class _mapState extends State<map> {
-  late LatLng _pickedLocation = LatLng(32.309718, 35.112541);
-
-  void _handleTap(LatLng latLng) {
-    print('Tapped on map at $latLng');
-    setState(() {
-      _pickedLocation = latLng;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Map'),
-      ),
-      body:
-      GestureDetector(
-        onTap: () => _handleTap(_pickedLocation),
-        child: FlutterMap(
-          options: MapOptions(
-            center: LatLng(32.309718, 35.112541),
-            zoom: 13.0,
-          ),
-          layers: [
-            TileLayerOptions(
-              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              subdomains: ['a', 'b', 'c'],
-            ),
-            MarkerLayerOptions(
-              markers: [
-                Marker(
-                  width: 30.0,
-                  height: 30.0,
-                  point: _pickedLocation ?? LatLng(32.309718, 35.112541),
-                  builder: (ctx) => Container(
-                    child: Container(
-                      child: Icon(
-                        Icons.location_on,
-                        color: Colors.blueAccent,
-                        size: 40,
-                      ),
+    return FutureBuilder<LocationData?>(
+      future: _currentLocation(),
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapchat) {
+        if (snapchat.hasData) {
+          final LocationData currentLocation = snapchat.data;
+          return Column(
+            children: [
+              Expanded(
+                child: SfMaps(
+                  layers: [
+                    MapTileLayer(
+                      initialFocalLatLng: MapLatLng(
+                          currentLocation.latitude!, currentLocation.longitude!),
+                      initialZoomLevel: 15,
+                      initialMarkersCount: 1,
+                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      markerBuilder: (BuildContext context, int index) {
+                        return MapMarker(
+                          latitude: currentLocation.latitude!,
+                          longitude: currentLocation.longitude!,
+                          child: Icon(
+                            Icons.location_on,
+                            color: Colors.red[800],
+                          ),
+                          size: Size(20, 20),
+                        );
+                      },
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
-      ),
+              ),
+              Container(
+                height: 50,
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: ElevatedButton(
+
+                  style: ElevatedButton.styleFrom(
+
+                    shape: RoundedRectangleBorder(
+
+                        borderRadius: BorderRadius.circular(20.0)),
+                    foregroundColor: globalcolors.maincolor,
+                    backgroundColor: globalcolors.textcolor,
+                    minimumSize: Size(250, 50),
+                  ),
+                  child:
+                  Text("${getLang(context, "map1")}",
+                    style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
+                  ),
+                  onPressed: ()  {
+                    print(
+                        currentLocation.latitude!);
+                    print(
+                         currentLocation.longitude!);
+
+                  },
+                ),
+              ),
+            ],
+          );
+        }
+        return Center(child: CircularProgressIndicator());
+      },
     );
   }
+}
+Future<LocationData?> _currentLocation() async {
+  bool serviceEnabled;
+  PermissionStatus permissionGranted;
+
+  Location location = new Location();
+
+  serviceEnabled = await location.serviceEnabled();
+  if (!serviceEnabled) {
+    serviceEnabled = await location.requestService();
+    if (!serviceEnabled) {
+      return null;
+    }
+  }
+
+  permissionGranted = await location.hasPermission();
+  if (permissionGranted == PermissionStatus.denied) {
+    permissionGranted = await location.requestPermission();
+    if (permissionGranted != PermissionStatus.granted) {
+      return null;
+    }
+  }
+  return await location.getLocation();
 }
