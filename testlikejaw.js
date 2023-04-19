@@ -19,7 +19,10 @@ const pool = mysql.createConnection({
 });
 
 console.log("hii");
-pool.connect();
+pool.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to MySQL database');
+  });
 
 app.post('/infouser', function (request, response) {
     console.log("information");
@@ -112,8 +115,7 @@ let date = date_ob.getDate();
 let month = date_ob.getMonth() + 1;
 let year = date_ob.getFullYear();
 let currentdate=year + "-" + month + "-" + date;
-// let datebase = new Date();
-//  if (currentdate<="2023-4-1"){console.log(currentdate);}
+
 
 let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp) ASC `;
     pool.query(query1, function (error, results) {
@@ -126,6 +128,129 @@ let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp)
     });
 });
 
+app.get('/addpro', function (request, response) {
+    console.log("add cart");
+    var name = request.query.productname;
+    var count = request.query.productcount;
+    var paht = "assets/images/"+request.query.productimage;
+    var type = request.query.producttype;
+    var newprice = request.query.newprice;
+    var oldprice = request.query.oldprice;
+    var exp = request.query.exp;
+    var nameperson = request.query.namesupermarket;
+    var per=request.query.per;
+ var percent=newprice*count*(per);
+ console.log(percent);
+
+let query1=`Select * from sellers where suparmarketname='${request.query.namesupermarket}' `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error);
+           response.status(400).send('Error in database operation');
+        
+        } 
+            else {
+              
+               var card=results[0].sellercard;
+               console.log(card);
+                if(card>percent){
+                console.log("okkkkkkkkkk");
+                let query1 = `INSERT INTO products (productname,
+                    productcount,
+                    productimage,
+                    producttype,
+                    newprice,
+                    oldprice,
+                    namesupermarket,
+                    exp,
+                    percent) VALUES('${request.query.productname}',
+                '${request.query.productcount}',
+                '${paht}',
+                '${type}',
+                '${newprice}',
+                '${oldprice}',
+                '${nameperson}',
+                '${exp}',
+                '${percent}')`;
+                
+            
+                pool.query(query1,function (error, data, results) {
+                    console.log("done qurey");
+            
+                    if (error) {
+                        console.log(error);
+                        response.status(400).send('Error in database operation');
+                        
+                    }
+                    else {
+                       
+                        card=card-percent;
+                        let query2=`UPDATE sellers SET  sellercard='${card}' WHERE suparmarketname='${nameperson}'`;
+            
+            pool.query(query2, [card,nameperson], function (error, data, results) {
+                console.log("done qurey");
+        
+                if (error) {
+                    console.log(error);
+                    response.status(400).send('Error');
+                }
+                else {
+                    response.send("Success update card");
+        
+                }
+        
+            });
+                        // response.send("Success");
+            
+                    }
+            
+                });
+            }else{
+        
+                response.send("no badget with you");
+            }
+            }
+           // console.log(results[0].sellercard);
+            response.status(200);
+        
+   });
+});
+app.get('/addcart', function (request, response) {
+    console.log("add cart");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}' `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+       
+           response.status(400).send('Error in database operation');
+        
+        } if (results.length === 0) {
+                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}') `;
+        pool.query(query2, function (error, data, results2) {
+            console.log("done qurey");
+});
+
+        }
+        else {var namem=results[0].nameitem;
+            if(request.query.nameitem ==namem ){
+                console.log("update");
+                const v=Number(results[0].numitem);
+                const num=Number(request.query.numitem);
+                const number=v+num;
+            let query1 = `UPDATE cart SET  numitem='${number}' WHERE emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}'`;
+        
+            pool.query(query1, function (error, data, results1) {
+                console.log("done qurey");
+           
+            
+            console.log(number);
+        });
+            }
+            response.status(200)
+        }
+    });
+});
+       
 app.get('/viewproseller', function (request, response) {
     console.log("view proseller");
    //var supermarket=request.query.suparmarketname;
@@ -140,6 +265,36 @@ let query1=`Select * from products where namesupermarket='${request.query.namesu
         }
     });
 });
+app.get('/viewcart', function (request, response) {
+    console.log("view cart");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from cart where emailcust='${request.query.email}'  `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+/////////////////////////////////////////////////////////////
+app.get('/viewloca', function (request, response) {
+    console.log("view ,location");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select xlocation , ylocation from sellers `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+/////////////////////////////////////////////////////////////
 
 app.post('/register', function (request, response) {
     console.log("sgin");
@@ -227,82 +382,6 @@ app.post('/registerseller', function (request, response) {
 });
 
 
-    let query1 = "Select * from sellers where selleremail=? and sellerpass=?";
-
-app.post('/registerproduct', function (request, response) {
-    console.log("add pro");
-    var name = request.body.productname;
-    var count = request.body.productcount;
-    var paht = "assets/images/"+request.body.productimage;
-    var type = request.body.producttype;
-    var newprice = request.body.newprice;
-    var oldprice = request.body.oldprice;
-    var exp = request.body.exp;
-    var nameperson = request.body.namesupermarket;
-    var per=request.body.per;
- var percent=newprice*count*(per);
- console.log(percent);
- 
- let query1 = "Select * from sellers where suparmarketname=?";
-   pool.query(query1,[nameperson],function (error, data, results1) {
-    console.log("done qurey");
-
-    if (error) {
-        console.log(error);
-        response.status(400).send('Error in database operation');
-        
-    }
-
-    
-    else {
-        card=56;
-//       response.send(results1);
-//   const card=results1[0].sellercard;
-//        console.log(card);
-        if(card>percent){
-        console.log("okkkkkkkkkk");
-        let query1 = "INSERT INTO `products` (`productname`,`productcount`,`productimage`,`producttype`,`newprice`,`oldprice`,`namesupermarket`,`exp`,`percent`) VALUES('" + name
-            + "','" + count + "','" + paht + "','" + type + "','" + newprice + "','"+oldprice+"','"+nameperson+"','"+exp+"','"+percent+"')";
-        //let query1="Select * from nada where name=? and pass=?";
-    
-        pool.query(query1,[name,count,paht,type,newprice,oldprice,nameperson,exp,percent] ,function (error, data, results) {
-            console.log("done qurey");
-    
-            if (error) {
-                console.log(error);
-                response.status(400).send('Error in database operation');
-                
-            }
-            else {
-               
-                card=card-percent;
-                let query2=`UPDATE sellers SET  sellercard='${card}' WHERE suparmarketname='${nameperson}'`;
-    
-    pool.query(query2, [card,nameperson], function (error, data, results) {
-        console.log("done qurey");
-
-        if (error) {
-            console.log(error);
-            response.status(400).send('Error');
-        }
-        else {
-            response.send("Success update card");
-
-        }
-
-    });
-                // response.send("Success");
-    
-            }
-    
-        });
-    }else{
-
-        response.send("no badget with you");
-    }
-    }
-});
-});
 app.post('/userupdate', function (request, response) {
     console.log("update");
     var username = request.body.username;

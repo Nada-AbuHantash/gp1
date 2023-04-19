@@ -7,7 +7,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://172.20.10.9:3000/";
+  static const String basurl = "http://192.168.242.52:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -159,7 +159,28 @@ Future deliverycard1(String card,String nameperson) async {
     print('no');
   }
 }
-
+Future addcart( String num, String item) async {
+  final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  try {
+    
+    final http.Response use =
+        await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num'), headers: {
+      "Accept": "Application/json"
+    });
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+      //return model.fromJson(data["data"]);
+      return data;
+    }
+  } catch (e) {
+    print("no register");
+  }
+}
 
 Future usersignup(
     String name, String email, String pass, String phone, String place) async {
@@ -309,29 +330,16 @@ Future putpro(
   try {
     var s = 200;
     final http.Response use =
-        await http.post(Uri.parse(utils.basurl + 'registerproduct'), headers: {
+        await http.get(Uri.parse(utils.basurl + 'addpro?productcount=$count&productname=$namepro&oldprice=$oldprice&newprice=$newprice&producttype=$type&productimage=$path&exp=$exp&per=$per&namesupermarket=$nameperson'), headers: {
       "Accept": "Application/json"
-    }, body: {
-      'productcount':count,
-      'productname': namepro,
-      'oldprice': oldprice,
-      'newprice': newprice,
-      'producttype': type,
-      'productimage': path,
-      'namesupermarket':nameperson,
-      'exp':exp,
-      'per':per,
-     
-
     });
     var encodeFirst = json.encode(use.body);
     var data = json.decode(encodeFirst);
     if (use.statusCode == 400) {
-      // return null;
+      
       print("Failed to update");
     } else {
     
-      //return model.fromJson(data["data"]);
       return data;
     }
   } catch (e) {
@@ -441,15 +449,33 @@ Future <List<Product>> most() async {
     var jsonString = json.decode(res.body);
     List<Product> list =
     List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
-// List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
     myList = list;
 
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
+   
     throw Exception('Failed to load album');
   } return myList;
 }
+Future <List<Product>> cart() async {
+  late  List<Product> myList=[];
+final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  http.Response res = await http.get(Uri.parse(utils.basurl + 'viewcart?email=$A'),
+      headers: {'Content-Type': 'application/json'});
+
+  if (res.statusCode == 200) {
+   
+
+    var jsonString = json.decode(res.body);
+    List<Product> list =
+    List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
+    myList = list;
+
+  } else {
+    throw Exception('Failed to load album');
+  } return myList;
+}
+
 Future <List<Product>> most2(String name) async {
   late  List<Product> myList=[];
 
