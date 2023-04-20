@@ -7,7 +7,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://192.168.242.52:3000/";
+  static const String basurl = "http://172.20.10.9:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -133,7 +133,33 @@ Future sellercard1(String name, String card,String nameperson) async {
     print('no');
   }
 }
-
+Future addlocation(String email,double x,double y) async {
+   String  xlocation = x.toString(); 
+     String  ylocation = y.toString(); 
+  try {
+    final http.Response use = await http.post(
+        Uri.parse(utils.basurl + 'locationseller'),
+        headers: {"Accept": "Application/json"},
+        body: { 'email': email,
+        'xlocation':xlocation,
+        'ylocation':ylocation});
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      print("Failed to update");
+    } else {
+     
+      return data;
+    }
+      print("yes ");
+      
+      ///////////saved////////////
+    
+  } catch (e) {
+    print(e);
+    print('no');
+  }
+}
 
 Future deliverycard1(String card,String nameperson) async {
    
@@ -181,6 +207,7 @@ Future addcart( String num, String item) async {
     print("no register");
   }
 }
+
 
 Future usersignup(
     String name, String email, String pass, String phone, String place) async {

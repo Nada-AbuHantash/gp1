@@ -14,9 +14,10 @@ import 'package:uuid/uuid.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
+import '../utils/Sharedsession.dart';
 
-late String emailjaw="";
 
+  late String emailjaw="";
 rest_api fetch1=new rest_api();
 String now = DateFormat("yyyy-MM-dd").format(DateTime.now());  
 
@@ -29,25 +30,29 @@ const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
   @override
   State<editprofile> createState() => _editprofileState();
+ 
 }
 
 class _editprofileState extends State<editprofile> {
   rest_api fetch=new rest_api();
-//    @override
-//   void initState() {
-//     super.initState();
-//      WidgetsBinding.instance.addPostFrameCallback((_) {
-//     // do something
-//      getinfo();
-//  var jsonString;
-//     print("Build Completed"); 
-//   });
-//   }
-//    void getinfo() async {
-// jsonString=await fetch.getinfo1();
-// emailjaw=jsonString.elementAt(0)['useremail'];
-// print(namejaw);
-//   }
+  
+
+   @override
+  void initState() {
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+    // do something
+     getinfo();
+ var jsonString;
+    print("Build Completed"); 
+  });
+  }
+   void getinfo() async {
+final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  emailjaw=A;
+print(namejaw);
+  }
   
     final TextEditingController emailcntoraler= TextEditingController();
   final TextEditingController passcntoraler= TextEditingController();
@@ -116,6 +121,7 @@ Widget build(BuildContext context){
                      ],
                    ),
                   ),
+                  
                      SizedBox(height: 20,),
                   Text(emailjaw,
                           style: TextStyle(fontSize: 18.0,

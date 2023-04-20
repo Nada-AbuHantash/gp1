@@ -79,7 +79,8 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("search to chat"),
+        backgroundColor: globalcolors.besiccolor,
+        title: Text("search to chat",style: TextStyle(color: globalcolors.textcolor),),
         // actions: [
         //   IconButton(icon: Icon(Icons.logout), onPressed: () => home())
         // ],
@@ -103,13 +104,16 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
                   alignment: Alignment.center,
                   child: Container(
                     height: size.height / 14,
-                    width: size.width / 1.15,
+                    width:  350,
                     child: TextField(
                       controller: _search,
                       decoration: InputDecoration(
+                        
                         hintText: "Search",
+                        hintStyle: TextStyle(color: globalcolors.textcolor),
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(20),
+                          
                         ),
                       ),
                     ),
@@ -119,9 +123,22 @@ class _searchchatState extends State<searchchat> with WidgetsBindingObserver {
                   height: size.height / 50,
                 ),
                 ElevatedButton(
-                  onPressed: onSearch,
-                  child: Text("Search"),
-                ),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                         borderRadius: BorderRadius.circular(15.0)),
+                                foregroundColor: globalcolors.maincolor,
+                          backgroundColor: globalcolors.textcolor,
+                          minimumSize: Size(250, 50),
+                                ),
+                                   child: Text("Search",
+                                    style: TextStyle(color: globalcolors.maincolor,fontSize: 25),),
+                                        onPressed: onSearch,
+                    ),
+
+                                   
+              
+               
+               
                 SizedBox(
                   height: size.height / 30,
                 ),

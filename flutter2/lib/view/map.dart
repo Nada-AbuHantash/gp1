@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/components/applocal.dart';
+import 'package:flutter2/view/rest_api.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:location/location.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
-
+rest_api fetch1=new rest_api();
 class map extends StatefulWidget {
   @override
   _mapState createState() => _mapState();
@@ -67,6 +70,7 @@ class _mapState extends State<map> {
                         currentLocation.latitude!);
                     print(
                          currentLocation.longitude!);
+                         addlocayion(currentLocation.altitude,currentLocation.longitude);
 
                   },
                 ),
@@ -78,6 +82,17 @@ class _mapState extends State<map> {
       },
     );
   }
+  
+    Future<void> addlocayion(double? altitude, double? longitude) async {
+
+    final prefs = await SharedPreferences.getInstance();
+  String email= prefs.get("emailemail").toString();
+var res=await fetch1.addlocation(email,altitude!,longitude!).then((res) {
+
+print(res.toString());
+Fluttertoast.showToast(msg: "add location done",
+          textColor: globalcolors.besiccolor);
+  }); }
 }
 Future<LocationData?> _currentLocation() async {
   bool serviceEnabled;
