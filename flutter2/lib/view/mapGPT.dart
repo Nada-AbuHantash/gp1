@@ -1,72 +1,317 @@
+import 'package:flutter2/mudel/pos.dart';
+import 'package:flutter2/utils/globalColors.dart';
+import 'dart:convert';
+import 'package:flutter2/view/rest_api.dart';
+import 'dart:math';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:geolocator/geolocator.dart';
 
-import 'package:location/location.dart';
 
-import 'package:syncfusion_flutter_maps/maps.dart';
-
-
-class map1 extends StatefulWidget {
+class addBasket extends StatefulWidget {
+  const addBasket({Key? key}) : super(key: key);
   @override
-  _map1State createState() => _map1State();
+  _addBasket createState() => _addBasket();
 }
 
-class _map1State extends State<map1> {
-
+class _addBasket extends State<addBasket> {
   @override
+
   Widget build(BuildContext context) {
-    return FutureBuilder<LocationData?>(
-      future: _currentLocation(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapchat) {
-        if (snapchat.hasData) {
-          final LocationData currentLocation = snapchat.data;
-          return SfMaps(
-            layers: [
-              MapTileLayer(
-                initialFocalLatLng: MapLatLng(
-                    currentLocation.latitude!, currentLocation.longitude!),
-                initialZoomLevel: 15,
-                initialMarkersCount: 1,
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                markerBuilder: (BuildContext context, int index) {
-                  return MapMarker(
-                    latitude: currentLocation.latitude!,
-                    longitude: currentLocation.longitude!,
-                    child: Icon(
-                      Icons.location_on,
-                      color: Colors.red[800],
-                    ),
-                    size: Size(20, 20),
-                  );
-                },
-              ),
-            ],
-          );
-        }
-        return Center(child: CircularProgressIndicator());
-      },
+    return Scaffold(
+      body: MyMap(),
     );
   }
 }
-Future<LocationData?> _currentLocation() async {
-  bool serviceEnabled;
-  PermissionStatus permissionGranted;
 
-  Location location = new Location();
+class MyMap extends StatefulWidget {
+  @override
+  _MyMap createState() => new _MyMap();
+}
 
-  serviceEnabled = await location.serviceEnabled();
-  if (!serviceEnabled) {
-    serviceEnabled = await location.requestService();
-    if (!serviceEnabled) {
-      return null;
-    }
+class _MyMap extends State<MyMap> {
+  bool isChecked = false;
+  //fetchData _fetchData = fetchData();
+  // TextEditingController _lat = TextEditingController(); //x
+  // TextEditingController _long = TextEditingController(); //y
+  double _latPoint=32.22528;
+  double _longPoint=35.25972;
+
+  @override
+  void initState() {
+    distance=[];
+    pos();
+    super.initState();
+    fetchAllPoints();
+
+    /// connect with database and get all positions
   }
 
-  permissionGranted = await location.hasPermission();
-  if (permissionGranted == PermissionStatus.denied) {
-    permissionGranted = await location.requestPermission();
-    if (permissionGranted != PermissionStatus.granted) {
-      return null;
-    }
+  pos() async{
+//     await Geolocator.openAppSettings();
+// await Geolocator.openLocationSettings();
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    print(position.latitude);
+    print(position.longitude);
   }
-  return await location.getLocation();
+  @override
+  List<TaxiModel> _points = []; //x and y points
+  List<TaxiModel> _diff = [];
+  List<TaxiModel> _3KNN = [];
+  // final String _phone ='+09987777';
+  late List<double> distance;
+  late String _call;
+  late String _text;
+  Widget build(BuildContext context) {
+
+    return new Scaffold(
+        backgroundColor: globalcolors.besiccolor,
+
+        body: FlutterMap(
+          options: new MapOptions(
+            center: new LatLng(_latPoint, _longPoint),// my location
+            minZoom: 7.0,
+            zoom: 12,
+
+          ),
+
+          layers: [
+            new TileLayerOptions(
+                urlTemplate:
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                subdomains: ['a', 'b', 'c']),
+            MarkerLayerOptions( // taxis
+              markers: _points
+                  .map((e) => Marker(
+                width: 45.0,
+                height: 45.0,
+                point:
+                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+                builder: (context) => Container(
+                  child: IconButton(
+                      icon: Icon(Icons.local_taxi),
+                      color: Color.fromARGB(255, 26, 47, 99), // my icon
+                      onPressed: () {
+                        //my notification
+
+                        addMarker(e.user,e.phone);
+                        print('Marker tapped!');
+                      }),
+                ),
+              ))
+                  .toList(),
+            ),
+            MarkerLayerOptions( // taxis
+              markers: _diff.getRange(1, 3)
+                  .map((e) => Marker(
+                width: 45.0,
+                height: 45.0,
+                point:
+                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+                builder: (context) => Container(
+                  child: IconButton(
+                      icon: Icon(Icons.local_taxi),
+                      color: Color.fromARGB(255, 229, 128, 46),// my icon
+                      onPressed: () {
+                        //my notification
+                        addMarker(e.user,e.phone);
+                        print('near to you');
+                      }),
+                ),
+              ))
+                  .toList(),
+            ),
+            MarkerLayerOptions( // taxis
+              markers: _diff.getRange(0,1)
+                  .map((e) => Marker(
+                width: 45.0,
+                height: 45.0,
+                point:
+                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+                builder: (context) => Container(
+                  child: IconButton(
+                      icon: Icon(Icons.local_taxi),
+                      color: Colors.red,// my icon
+                      onPressed: () {
+                        addMarker(e.user,e.phone);
+                        //Calculate_KNN();
+                        print('near to you');
+                      }),
+                ),
+              ))
+                  .toList(),
+            ),
+            MarkerLayerOptions( // taxis
+                markers: [
+                  Marker(point: LatLng(_latPoint, _longPoint),
+                    builder: (context) => Container(
+                      child: IconButton(
+                          icon: Icon(Icons.location_pin),
+                          color: Color.fromARGB(255, 26, 47, 99), // my icon
+                          onPressed: () {
+                            //addMarker();
+                            print('My location');
+                          }),
+                    ),
+                  )
+                ]
+            ),
+
+          ],
+        ));
+  }
+
+  void fetchAllPoints() async {
+    var data = await FetchTaxis();
+    setState(() {
+      this._points = data;
+      this._diff= data;
+    });
+    Calculate_KNN();
+  }
+
+  Future addMarker(String name,String phone) async { // pop //up
+    await showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: Text(
+              '$name \n $phone',
+              style: TextStyle(
+                fontFamily: 'halter',
+                fontSize: 15,
+                package: 'flutter_credit_card',
+                color: Color.fromARGB(255, 26, 47, 99),
+
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            actions: <Widget>[
+              Center(
+                child: Column(
+                  children: [
+
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.6,
+                      child:  Container(
+                        decoration:
+                        ThemeHelper().buttonBoxDecoration(context),
+                        child: ElevatedButton(
+                          style: ThemeHelper().buttonStyle(),
+                          child: Padding(
+                            padding:
+                            EdgeInsets.fromLTRB(40, 10, 40, 10),
+                            child: Text(
+                              'Call',
+                              style: TextStyle(
+                                  fontFamily: 'halter',
+                                  fontSize: 18,
+                                  package: 'flutter_credit_card',
+                                  color: Colors.white),
+                            ),
+                          ),
+                          onPressed:()async{
+                            _call ='tel:$phone';
+                            if ( await canLaunch (_call) ){
+                              await launch(_call);
+                            }},
+                        ),
+                      ),),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.6,
+                      child:  Container(
+                        decoration:
+                        ThemeHelper().buttonBoxDecoration(context),
+                        child: ElevatedButton(
+                          style: ThemeHelper().buttonStyle(),
+                          child: Padding(
+                            padding:
+                            EdgeInsets.fromLTRB(40, 10, 40, 10),
+                            child: Text(
+                              'Message',
+                              style: TextStyle(
+                                  fontFamily: 'halter',
+                                  fontSize: 18,
+                                  package: 'flutter_credit_card',
+                                  color: Colors.white),
+                            ),
+                          ),
+                          onPressed:()async{
+                            _text ='sms:$phone';
+                            if ( await canLaunch (_text) ){
+                              await launch(_text);
+                            }},
+                        ),
+                      ),
+
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              )
+            ],
+          );
+        });
+  }
+  Future<List<TaxiModel>> FetchTaxis() async {
+    var res = await http.get(Uri.parse(utils.basurl + "/taxi"));
+    var body = jsonDecode(res.body) as List;
+
+    return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();
+  }
+
+  Future<List<TaxiModel>> Calculate_KNN() async{
+    distance.clear();
+    double min=0;
+    TaxiModel minSort;
+
+    for(int i=0;i<_points.length;i++){
+      distance.add(calculateDistance(_latPoint, _longPoint,
+          double.parse(_points.elementAt(i).lat), double.parse(_points.elementAt(i).long)));
+    }
+
+    print("hi before");
+    print(_points.elementAt(0).lat);
+    for(int i=0;i<_diff.length;i++){
+
+      for(int j=i+1;j<_points.length;j++){
+        if(distance[i]>distance[j]){
+          min=distance[i];
+          distance[i]=distance[j];
+          distance[j]=min;
+          minSort=_diff[i];
+          _diff[i]=_diff[j];
+          _diff[j]=minSort;
+        }
+      }
+
+    }
+    print("hi after");
+    print(_diff.elementAt(0).lat);
+    print(distance);
+
+    return _diff;
+  }
+  double calculateDistance( lat1, lon1,lat2, lon2){
+    var p = 0.017453292519943295;
+    var a = 0.5 - cos((lat2 - lat1) * p)/2 +
+        cos(lat1 * p) * cos(lat2 * p) *
+            (1 - cos((lon2 - lon1) * p))/2;
+    return 12742 * asin(sqrt(a));
+  }
+
 }
