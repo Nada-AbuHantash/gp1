@@ -7,7 +7,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 
 class utils {
-  static const String basurl = "http://172.20.10.9:3000/";
+  static const String basurl = "http://192.168.175.52:3000/";
   //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -185,13 +185,36 @@ Future deliverycard1(String card,String nameperson) async {
     print('no');
   }
 }
-Future addcart( String num, String item) async {
+Future addcart( String num, String item ,String id) async {
   final prefs = await SharedPreferences.getInstance();
   String A = prefs.get("emailemail").toString();
   try {
     
     final http.Response use =
-        await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num'), headers: {
+        await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num&id=$id'), headers: {
+      "Accept": "Application/json"
+    });
+    var encodeFirst = json.encode(use.body);
+    var data = json.decode(encodeFirst);
+    if (use.statusCode == 400) {
+      // return null;
+      print("Failed to update");
+    } else {
+      //return model.fromJson(data["data"]);
+      return data;
+    }
+  } catch (e) {
+    print("no register");
+  }
+}
+
+Future deletefromcart( String num, String item ,String id) async {
+  final prefs = await SharedPreferences.getInstance();
+  String A = prefs.get("emailemail").toString();
+  try {
+    
+    final http.Response use =
+        await http.get(Uri.parse(utils.basurl + 'deletefromcart?emailcust=$A&nameitem=$item&numitem=$num&id=$id'), headers: {
       "Accept": "Application/json"
     });
     var encodeFirst = json.encode(use.body);

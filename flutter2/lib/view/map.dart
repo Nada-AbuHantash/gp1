@@ -70,7 +70,7 @@ class _mapState extends State<map> {
                         currentLocation.latitude!);
                     print(
                          currentLocation.longitude!);
-                         addlocayion(currentLocation.altitude,currentLocation.longitude);
+                         addlocayion(currentLocation.latitude,currentLocation.longitude);
 
                   },
                 ),
