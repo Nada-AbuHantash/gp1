@@ -223,7 +223,9 @@ app.get('/addorder', function (request, response) {
         else{
             console.log(results[0].total_price);
                    const total=results[0].total_price;
-let query3=`INSERT INTO order (nameuser,orderstatus,orderprice) VALUES('${request.query.name}',request is done,'${total}')`;
+                   const r="request is done";
+
+let query3=`INSERT INTO \`order\`  (nameuser,orderstatus,orderprice) VALUES('${request.query.name}','${r}','${total}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
@@ -257,6 +259,7 @@ pool.query(query3,function (error, results0) {
 
 const count=Number(results0[0].productcount);
 const p=Number(results0[0].newprice);
+const supermarket=results0[0].namesupermarket;
 console.log(count);
 
 if(count>0 && (request.query.numitem<=count)){
@@ -271,7 +274,7 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
            response.status(400).send('Error in database operation');
         
         } if (results1.length === 0) {
-                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}') `;
+                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}') `;
         pool.query(query2, function (error, data, results2) {
             console.log("done qurey in");
 });
