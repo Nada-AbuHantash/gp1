@@ -13,7 +13,7 @@ const pool = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'gp1',
+    database: 'gp01',
     dateStrings: true
 
 });
@@ -346,7 +346,7 @@ let query1=`Select * from cart where emailcust='${request.query.email}'  `;
 app.get('/viewloca', function (request, response) {
     console.log("view ,location");
    //var supermarket=request.query.suparmarketname;
-let query1=`Select xlocation , ylocation from sellers `;
+let query1=`Select * from sellers `;
     pool.query(query1,function (error, results) {
         if (error) {
             
@@ -694,3 +694,6 @@ app.listen(3000, function () {
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
+
+
+

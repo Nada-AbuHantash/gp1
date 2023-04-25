@@ -17,11 +17,11 @@ class TaxiModel {
       );
 
   TaxiModel.fromJson(Map<String, dynamic> map) {
-    this.lat = map['lat'];
-    this.long= map['long'];
-    this.id = map['taxi_id'].toString();
-    this.user= map['driver_name'];
-    this.phone= map['phone'];
+    this.lat = map['xlocation'];
+    this.long= map['ylocation'];
+    this.id = map['superid'].toString();
+    this.user= map['suparmarketname'];
+    this.phone= map['sellerphone'].toString();
 
   }
 }
