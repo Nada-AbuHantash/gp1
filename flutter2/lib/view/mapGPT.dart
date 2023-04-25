@@ -105,7 +105,7 @@ class _MyMap extends State<MyMap> {
                   .toList(),
             ),
             MarkerLayerOptions( // taxis
-              markers: _diff.getRange(1, 3)
+              markers: _diff.getRange(1,3)
                   .map((e) => Marker(
                 width: 45.0,
                 height: 45.0,
@@ -268,7 +268,7 @@ class _MyMap extends State<MyMap> {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-    var res = await http.get(Uri.parse(utils.basurl + "/taxi"));
+    var res = await http.get(Uri.parse(utils.basurl + "/viewloca"));
     var body = jsonDecode(res.body) as List;
 
     return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();

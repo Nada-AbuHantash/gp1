@@ -14,7 +14,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 class utils {
-  static const String basurl = "http://172.20.10.9:3000/";
+  static const String basurl = "http://192.168.175.52:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -531,7 +531,7 @@ class rest_api{
     } return myList;
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-    var res = await http.get(Uri.parse(utils.basurl + "/taxi"));
+    var res = await http.get(Uri.parse(utils.basurl + "/viewloca"));
     var body = jsonDecode(res.body) as List;
     return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();
   }

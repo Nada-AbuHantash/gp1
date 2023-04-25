@@ -80,7 +80,8 @@ dependencies:
   #google_sign_in: ^6.1.0
   #firebase_auth: ^4.4.1
   modal_progress_hud_nsn: ^0.1.0-nullsafety-1
-
+  firebase_messaging: ^14.4.1
+  flutter_local_notifications: ^13.0.0
 
 
 dev_dependencies:

@@ -4,7 +4,7 @@ const util = require("util");
 var express = require('express');
 var app = express();
 var bodyparser = require('body-parser');
-const { log } = require("console");
+const { log, count } = require("console");
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 var TABLE = 'customer';
@@ -13,7 +13,7 @@ const pool = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'gp1',
+    database: 'gp01',
     dateStrings: true
 
 });
@@ -215,40 +215,106 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
         
    });
 });
+app.get('/addorder', function (request, response) {
+    console.log("add order");
+    let query =`Select SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' `;
+    pool.query(query,function (error, results) {
+        if (error) { response.status(400).send(error); }
+        else{
+            console.log(results[0].total_price);
+                   const total=results[0].total_price;
+                   const r="request is done";
+
+let query3=`INSERT INTO \`order\`  (nameuser,orderstatus,orderprice) VALUES('${request.query.name}','${r}','${total}')`;
+pool.query(query3,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+         response.status(200)
+    }
+
+});
+           
+             response.status(200)
+        }
+    });
+
+});
+app.get('/deletefromcart', function (request, response) {
+    console.log("delete cart");
+       //var supermarket=request.query.suparmarketname;
+let query3=`delete from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}' `;
+pool.query(query3,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+         response.status(200)
+    }
+
+});
+});
 app.get('/addcart', function (request, response) {
     console.log("add cart");
-   //var supermarket=request.query.suparmarketname;
-let query1=`Select * from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}' `;
-    pool.query(query1,function (error, results) {
+let query3=`Select * from products where productid='${request.query.id}' `;
+pool.query(query3,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+
+const count=Number(results0[0].productcount);
+const p=Number(results0[0].newprice);
+const supermarket=results0[0].namesupermarket;
+console.log(count);
+
+if(count>0 && (request.query.numitem<=count)){
+ 
+let query1=`Select * from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}'`;
+    pool.query(query1,function (error, results1) {
+        const pp=Number(request.query.numitem)
+        const total=p*pp;//price*count
+        console.log(total,"total price new frome query");
         if (error) {
        
            response.status(400).send('Error in database operation');
         
-        } if (results.length === 0) {
-                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}') `;
+        } if (results1.length === 0) {
+                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}') `;
         pool.query(query2, function (error, data, results2) {
-            console.log("done qurey");
+            console.log("done qurey in");
 });
 
         }
-        else {var namem=results[0].nameitem;
+        else {var namem=results1[0].nameitem;
             if(request.query.nameitem ==namem ){
                 console.log("update");
-                const v=Number(results[0].numitem);
+                const v=Number(results1[0].numitem);
                 const num=Number(request.query.numitem);
                 const number=v+num;
-            let query1 = `UPDATE cart SET  numitem='${number}' WHERE emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}'`;
+                const to=Number(results1[0].totalprice);
+                console.log(to," old total price");
+                // const t=Number(request.query.totalprice);
+                const tt=to+total;
+                console.log(tt,"totalprice after up");
+            let query1 = `UPDATE cart SET  numitem='${number}', totalprice='${tt}' WHERE emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}'`;
         
-            pool.query(query1, function (error, data, results1) {
-                console.log("done qurey");
+            pool.query(query1, function (error, data, results3) {
+                console.log("done qurey up");
            
             
-            console.log(number);
+            console.log(number,"new num if update in cart");
         });
             }
-            response.status(200)
+           // response.status(200)
         }
+        
+       const vv=Number(request.query.numitem);
+        const s=count-vv;
+        console.log(s,"new count");
+        let query4 = `UPDATE products set productcount='${s}' where productid='${request.query.id}' `;
+        pool.query(query4, function (error, data, results2) {
+            console.log("done qurey4444");
+});
     });
+}else{
+    response.send("count no enough");
+}
+});
 });
        
 app.get('/viewproseller', function (request, response) {
@@ -283,7 +349,7 @@ let query1=`Select * from cart where emailcust='${request.query.email}'  `;
 app.get('/viewloca', function (request, response) {
     console.log("view ,location");
    //var supermarket=request.query.suparmarketname;
-let query1=`Select xlocation , ylocation from sellers `;
+let query1=`Select * from sellers `;
     pool.query(query1,function (error, results) {
         if (error) {
             
@@ -631,3 +697,6 @@ app.listen(3000, function () {
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
+
+
+
