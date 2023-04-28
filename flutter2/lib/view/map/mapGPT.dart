@@ -2,6 +2,7 @@ import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
+import 'package:flutter2/view/widgets/marah1.dart';
 import 'dart:math';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -104,61 +105,61 @@ class _MyMap extends State<MyMap> {
               ))
                   .toList(),
             ),
-            MarkerLayerOptions( // taxis
-              markers: _diff.getRange(1,3)
-                  .map((e) => Marker(
-                width: 45.0,
-                height: 45.0,
-                point:
-                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-                builder: (context) => Container(
-                  child: IconButton(
-                      icon: Icon(Icons.local_taxi),
-                      color: Color.fromARGB(255, 229, 128, 46),// my icon
-                      onPressed: () {
-                        //my notification
-                        addMarker(e.user,e.phone);
-                        print('near to you');
-                      }),
-                ),
-              ))
-                  .toList(),
-            ),
-            MarkerLayerOptions( // taxis
-              markers: _diff.getRange(0,1)
-                  .map((e) => Marker(
-                width: 45.0,
-                height: 45.0,
-                point:
-                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-                builder: (context) => Container(
-                  child: IconButton(
-                      icon: Icon(Icons.local_taxi),
-                      color: Colors.red,// my icon
-                      onPressed: () {
-                        addMarker(e.user,e.phone);
-                        //Calculate_KNN();
-                        print('near to you');
-                      }),
-                ),
-              ))
-                  .toList(),
-            ),
-            MarkerLayerOptions( // taxis
-                markers: [
-                  Marker(point: LatLng(_latPoint, _longPoint),
-                    builder: (context) => Container(
-                      child: IconButton(
-                          icon: Icon(Icons.location_pin),
-                          color: Color.fromARGB(255, 26, 47, 99), // my icon
-                          onPressed: () {
-                            //addMarker();
-                            print('My location');
-                          }),
-                    ),
-                  )
-                ]
-            ),
+            // MarkerLayerOptions( // taxis
+            //   markers: _diff.getRange(1,3)
+            //       .map((e) => Marker(
+            //     width: 45.0,
+            //     height: 45.0,
+            //     point:
+            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+            //     builder: (context) => Container(
+            //       child: IconButton(
+            //           icon: Icon(Icons.local_taxi),
+            //           color: Color.fromARGB(255, 229, 128, 46),// my icon
+            //           onPressed: () {
+            //             //my notification
+            //             addMarker(e.user,e.phone);
+            //             print('near to you');
+            //           }),
+            //     ),
+            //   ))
+            //       .toList(),
+            // ),
+            // MarkerLayerOptions( // taxis
+            //   markers: _diff.getRange(0,1)
+            //       .map((e) => Marker(
+            //     width: 45.0,
+            //     height: 45.0,
+            //     point:
+            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+            //     builder: (context) => Container(
+            //       child: IconButton(
+            //           icon: Icon(Icons.local_taxi),
+            //           color: Colors.red,// my icon
+            //           onPressed: () {
+            //             addMarker(e.user,e.phone);
+            //             //Calculate_KNN();
+            //             print('near to you');
+            //           }),
+            //     ),
+            //   ))
+            //       .toList(),
+            // ),
+            // MarkerLayerOptions( // taxis
+            //     markers: [
+            //       Marker(point: LatLng(_latPoint, _longPoint),
+            //         builder: (context) => Container(
+            //           child: IconButton(
+            //               icon: Icon(Icons.location_pin),
+            //               color: Color.fromARGB(255, 26, 47, 99), // my icon
+            //               onPressed: () {
+            //                 //addMarker();
+            //                 print('My location');
+            //               }),
+            //         ),
+            //       )
+            //     ]
+            // ),
 
           ],
         ));

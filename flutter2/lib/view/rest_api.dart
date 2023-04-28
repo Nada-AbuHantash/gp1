@@ -14,7 +14,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 class utils {
-  static const String basurl = "http://192.168.175.52:3000/";
+  static const String basurl = "http://192.168.131.52:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -364,7 +364,8 @@ class rest_api{
     try {
       var s = 200;
       final http.Response use =
-      await http.get(Uri.parse(utils.basurl + 'addpro?productcount=$count&productname=$namepro&oldprice=$oldprice&newprice=$newprice&producttype=$type&productimage=$path&exp=$exp&per=$per&namesupermarket=$nameperson'), headers: {
+      await http.get(Uri.parse(utils.basurl + 'addpro?productcount=$count&productname=$namepro&oldprice=$oldprice&newprice=$newprice&producttype=$type&productimage=$path&exp=$exp&per=$per&namesupermarket=$nameperson'), 
+      headers: {
         "Accept": "Application/json"
       });
       var encodeFirst = json.encode(use.body);
@@ -533,7 +534,7 @@ class rest_api{
   Future<List<TaxiModel>> FetchTaxis() async {
     var res = await http.get(Uri.parse(utils.basurl + "/viewloca"));
     var body = jsonDecode(res.body) as List;
-    return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();
+    return body.map((i) => TaxiModel.fromJson(i)).toList();
   }
 
 // Future<void> myAsyncMethod() async {

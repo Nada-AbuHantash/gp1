@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/addproduct.dart';
-import 'package:flutter2/view/marah.dart';
+import 'package:flutter2/view/map/marah.dart';
 import 'package:flutter2/view/homesel.dart';
-import 'package:flutter2/view/map.dart';
-import 'package:flutter2/view/mapGPT.dart';
+import 'package:flutter2/view/map/map.dart';
+import 'package:flutter2/view/map/mapGPT.dart';
 import 'package:flutter2/view/nav2.dart';
 
 import 'package:flutter2/view/seller.dart';

@@ -129,7 +129,7 @@ let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp)
 });
 
 app.get('/addpro', function (request, response) {
-    console.log("add cart");
+    console.log("add pro");
     var name = request.query.productname;
     var count = request.query.productcount;
     var paht = "assets/images/"+request.query.productimage;
@@ -312,6 +312,11 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
 });
     });
 }else{
+    let msg="You need an extra amount";
+    let query8 = `INSERT INTO notification (namepro,id,count,msg,supetmarket) VALUES('${request.query.nameitem}','${request.query.id}','${count}','${msg}','${supermarket}') `;
+    pool.query(query8, function (error, data, results3) {
+        console.log("done qurey888");
+});
     response.send("count no enough");
 }
 });
@@ -355,7 +360,7 @@ let query1=`Select * from sellers `;
             
             response.status(400).send('Error in database operation');
         } else {
-           // console,log(results)
+            console,log(results)
             response.send(results);
         }
     });

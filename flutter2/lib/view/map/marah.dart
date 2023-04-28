@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flycar/pages/appbar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter2/utils/globalColors.dart';
-
-import 'package:flutter2/view/mapGPT.dart';
+import 'package:flutter2/view/map/mapGPT.dart';
 class Taxi extends StatefulWidget {
   @override
   State<Taxi> createState() => _TaxiState();

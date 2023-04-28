@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:http/http.dart' as http;
 class ChatRoom extends StatelessWidget {
   final Map<String, dynamic> userMap;
   final String chatRoomId;
@@ -93,6 +93,29 @@ class ChatRoom extends StatelessWidget {
     } else {
       print("Enter Some Text");
     }
+
+
+  //     Future<void> sendNotification(String title, String body, String token) async {
+  //   final String url = 'https://fcm.googleapis.com/fcm/send';
+  //   var notification;
+  //   notification =
+  //   '{"notification": {"body": "${body}", '
+  //       '"title": "${title}",'
+  //       ' "content_available": "true"},'
+  //       ' "priority": "high", '
+  //       '"to": "${token}",'
+  //       '}';
+  //   final response = await http.post(
+  //       Uri.parse(url),
+  //       headers: <String, String>{
+  //         "Content-Type": "application/json",
+  //         "Keep-Alive": "timeout=5",
+  //         "Authorization": "AAAAldQ6Wzg:APA91bHNeNNll-w8iXlXdeIxElxomf4JwqIjZD5a2hjTZ-i9Fhgtp5X2v0ZOta8x7IdsFVDXW8ccjOKsCs1-_9CN4wm7omjDdGONkO2axwzxgix9rw8tJ-1WGt4Noo7Q84Nw0Z6K9zTF"
+  //       },
+  //       body: notification
+  //   );
+  //   print(response.body);
+  // }
   }
 
   @override
