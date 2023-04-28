@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/addproduct.dart';
+import 'package:flutter2/view/cart.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/homesel.dart';
@@ -56,7 +57,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:homecust(),
+      home:cart1(),
        
        localizationsDelegates: [
           applocal.delegate,
