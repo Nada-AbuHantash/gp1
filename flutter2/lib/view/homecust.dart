@@ -3,7 +3,7 @@ import 'package:flutter2/models/product.dart';/////اسم البرودكتس ز�
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-
+import 'about/abo2.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
 import 'dart:typed_data';
@@ -93,7 +93,6 @@ class _MyHomePageState extends State<homecust> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlist() async{
-
     myList=await fetch.most();
   }
   // int daysBetween(DateTime from, DateTime to) {
@@ -115,31 +114,36 @@ class _MyHomePageState extends State<homecust> {
 //    final difference = daysBetween(dd as DateTime, date2);
 
 
-      listItems.add(Container(
+      listItems.add(InkWell(
+        onTap: () {
+          print("hi");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const About()),
+          );
+        },
+        child: Container(
           height: 120,
           width: 330,
           padding: const EdgeInsets.only(left: 20,right: 20),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
+              ]
+          ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
               children: <Widget>[
                 Column(
-
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 6,),
                     Text(
-                      
                       post.productname,
                       style:  TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
@@ -172,21 +176,29 @@ class _MyHomePageState extends State<homecust> {
                     ),
                     SizedBox(height: 10,),
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
-                        children:<Widget>[
-
-
-
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children:<Widget>[
+                        // add your row widgets here
+                      ],
+                    ),
                   ],
                 ),
-                Image.asset(post.image,width: 100,height: 80,),
-
-
+            GestureDetector(
+              onLongPress: () {
+                print("hi nada");
+              },
+              child: Image.asset(
+                post.image,
+                width: 100,
+                height: 80,
+              ),
+            ),
               ],
             ),
-          )));
+          ),
+        ),
+      ));
+
     });
     setState(() {
       itemsData = listItems;
@@ -251,7 +263,15 @@ class _MyHomePageState extends State<homecust> {
                   children: [
                     CarouselSlider(
                       items: imagesList.map((imageUrl) {
-                        return Image.asset(imageUrl, fit: BoxFit.cover);
+                        return
+                        GestureDetector(
+                          onTap: () {
+                            print("hi marah");
+                          },
+                          child: Image.asset(imageUrl, fit: BoxFit.cover)
+                        );
+
+
                       }).toList(),
                       options: CarouselOptions(
                         autoPlay: true,
@@ -275,10 +295,10 @@ class _MyHomePageState extends State<homecust> {
                           height: 5,
                           margin: EdgeInsets.symmetric(horizontal: 4),
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _currentImageIndex == index
-                                ? globalcolors.besiccolor
-                                : globalcolors.textcolor
+                              shape: BoxShape.circle,
+                              color: _currentImageIndex == index
+                                  ? globalcolors.besiccolor
+                                  : globalcolors.textcolor
                           ),
                         );
                       }).toList(),
@@ -321,9 +341,9 @@ class _MyHomePageState extends State<homecust> {
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.15),
-                          blurRadius: 20,
+                        blurRadius: 20,
                         offset: const Offset(10, 15)
-                        ),
+                    ),
                   ]),
               child: Padding(
                 padding: const EdgeInsets.only(left: 25,right: 25, top: 4),
@@ -334,7 +354,7 @@ class _MyHomePageState extends State<homecust> {
                       border: InputBorder.none,
                       hintText: text,
                       hintStyle: TextStyle(
-                        color: globalcolors.textcolor
+                          color: globalcolors.textcolor
                       ),
                       suffixIcon: Icon(
                         Icons.search,
