@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter2/view/map/marah.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/product1.dart';
 import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'dart:convert';
@@ -551,5 +552,46 @@ class rest_api{
 //     // Handle the exception
 //   }
 // }
+  Future <List<Product1>> showlistitem() async {
+    List<Product1> myList2 =[];
 
+    final prefs = await SharedPreferences.getInstance();
+    String A1=prefs.get("current-list").toString() ;
+    String A2=prefs.get("namename").toString() ;
+    http.Response res = await http.get(Uri.parse(utils.basurl+'listitems?listname='+A1+'&&userName='+A2),
+        headers: {'Content-Type': 'application/json'});
+
+
+    if (res.statusCode == 200) {
+      var jsonString = json.decode(res.body);
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+
+      myList2 = list;
+    } else {
+
+      throw Exception('Failed to load album');
+    }return myList2;
+  }
+  Future deleteitems(String nameproduct,int amount)async{
+    final prefs = await SharedPreferences.getInstance();
+    String n=prefs.get("namename").toString() ;
+    String n1=prefs.get("current-list").toString() ;
+
+
+    http.Response res = await http.get(Uri.parse(utils.basurl+'deleteproduct?username='+n
+        + '&&listname=' +
+        n1 +'&&nameproduct=' +
+        nameproduct +'&&amount=' +
+        '${amount}'
+    ),
+
+
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
 }
