@@ -6,6 +6,7 @@ import 'package:flutter2/view/cart2.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/seller.dart';
+import 'package:flutter2/view/test.dart';
 import 'package:flutter2/view/widgets/button.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -104,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 0:
         return const homecust();
       case 1:
-        return const seller();
+        // return  MapScreen();
       case 2:
         return  cart2();
       case 3:

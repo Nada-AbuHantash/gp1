@@ -117,7 +117,7 @@ let year = date_ob.getFullYear();
 let currentdate=year + "-" + month + "-" + date;
 
 
-let query1=`Select * from products where exp>'${currentdate}' ORDER BY date(exp) ASC `;
+let query1=`Select * from products where exp>'${currentdate}'and productcount>0 ORDER BY date(exp) ASC `;
     pool.query(query1, function (error, results) {
         if (error) {
             

@@ -107,22 +107,54 @@
 //
 // }
 import 'package:flutter/material.dart';
+import 'package:flutter2/view/dilevery/homedil.dart';
+import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-class MapScreen extends StatelessWidget {
-  final List<LatLng> points = [
-    LatLng(32.309718, 35.112541),
-    LatLng(32.309051, 35.114299),
-    LatLng(32.308295, 35.112941),
-  ];
+import '../models/test.dart';
+late  List<test11> myList=[];
+late List<LatLng> points = [];
+rest_api fetch=new rest_api();
+void _runFilter(String enteredKeyword) {
+  List<test11> results = [];
 
+    results = myList;
+
+  myList = results;
+}
+class MapScreen extends StatefulWidget {
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+   @override
+
+  void initState() {
+    super.initState();
+
+    myList=[];
+    getlistitem();
+  }
+   void getlistitem() async {
+    myList=await fetch.test();
+  
+   myList.forEach((post) {
+    points =[
+    // LatLng(myList.x, myList.y),
+    LatLng(double.parse(post.x), double.parse(post.y)),
+    // LatLng(32.308295, 35.112941),
+  ];
+   });
+   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: FlutterMap(
         options: MapOptions(
-          center: LatLng(32.309718, 35.112541),
+          center: LatLng(32.22528, 35.25972),
           zoom: 15.0,
         ),
         layers: [
@@ -152,5 +184,7 @@ class MapScreen extends StatelessWidget {
         ],
       ),
     );
+    
   }
+ 
 }

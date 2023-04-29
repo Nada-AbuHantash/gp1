@@ -5,7 +5,9 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/MyHomePage.dart';
+import 'package:flutter2/view/mainpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'about/abo2.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
@@ -72,20 +74,32 @@ class _cart2State extends State<cart2> {
 
 
   String text = "";
-
-
+int _countdown=60;
+late Timer _timer;
   @override
 
   void initState() {
     super.initState();
-
+super.initState();
+   _timer= Timer.periodic(Duration(seconds: 1), (Timer t) => _updateCountdown());
 
     _textEditingController.text = text;
     myList=[];
     getPostsData();
   }
 
-
+ void _updateCountdown() {
+    setState(() {
+      _countdown--;
+    });if (_countdown == 0) {
+      _timer.cancel();
+    }
+  }
+   @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
   ScrollController controller = ScrollController();
 
   bool closeTopContainer = false;
@@ -134,6 +148,7 @@ class _cart2State extends State<cart2> {
 
                     Text(
                       "count: ${post.amount}",
+                     
                      // "count: 3",
                       style:  TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -167,13 +182,69 @@ class _cart2State extends State<cart2> {
                             ),
                             onPressed: () async{
                               print("marah2");
+                               DateTime now = DateTime.now();
+    var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
+                           print(time);
                             },
                           ),
                           IconButton(
                             onPressed: () {
-                              delete(post.id);
+                               showDialog(
+                                
+              context: context,
+              builder: (BuildContext context) =>
+                  AlertDialog(
+
+                    actions: [
+                      const SizedBox(height: 20),
+                      Text("are you sure delete this itme ?"),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            
+                            SizedBox(
+                              child: ElevatedButton(
+
+                                style: ElevatedButton.styleFrom(
+
+                                  shape: RoundedRectangleBorder(
+
+                                      borderRadius: BorderRadius.circular(20.0)),
+                                  foregroundColor: globalcolors.maincolor,
+                                  backgroundColor: globalcolors.notetcolor,
+                                  minimumSize: Size(250, 50),
+                                ),
+                                child: Text("delete",
+
+                                  style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
+                                ),
+                                onPressed: ()  {
+                                     delete(post.id);
                                getlistitem();
                                getPostsData();
+                                    Fluttertoast.showToast(msg: "delete item done refrch to sure",
+                                   textColor: globalcolors.besiccolor);
+
+                                   },
+                              ),
+                            ),
+
+
+                          ],
+
+                        ),
+                      ),
+                     
+                      const SizedBox(height: 20),
+
+                    ],
+
+                  )
+
+          );
+                           
                             },
                             icon: Icon(Icons.delete_forever,color: globalcolors.textcolor), // The icon to display on the button.
                           ),

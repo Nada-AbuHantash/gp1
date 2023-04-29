@@ -18,12 +18,14 @@ import 'package:flutter/material.dart';
 
 
 
-class test1 extends StatefulWidget {
+class dil extends StatefulWidget {
   @override
-  _test1State createState() => _test1State();
+  _dilState createState() => _dilState();
+
+  
 }
 
-class _test1State extends State<test1> {
+class _dilState extends State<dil> {
 
   @override
   Widget build(BuildContext context) {

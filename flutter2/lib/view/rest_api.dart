@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/map/marah.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/product1.dart';
+
+import '../models/test.dart';
 import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'dart:convert';
@@ -15,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
+import 'package:flutter2/models/test.dart';
 class utils {
   static const String basurl = "http://192.168.52.52:3000/";
 //var url = Uri.parse('https://example.com');
@@ -533,7 +537,26 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList;
   }
+Future <List<test11>> test() async {
+    late  List<test11> myList=[];
 
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewloca'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<test11> list =
+      List<test11>.from(jsonString.map((i) => test11.fromJson(i)));
+// List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
+      myList = list;
+
+    } else {
+
+      throw Exception('Failed to load album');
+    } return myList;
+  }
   Future<List<TaxiModel>> FetchTaxis() async {
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
       print(res);
