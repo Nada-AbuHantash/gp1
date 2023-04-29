@@ -6,7 +6,8 @@ class Product1 {
 
   final int price;
   final int  amount;
-  final String manufacturing;
+  final int id;
+  // final String manufacturing;
   final String image;
   // final int productNumber;
 
@@ -15,11 +16,11 @@ class Product1 {
   final Shade shade;
 
   factory Product1.fromJson(Map<String,dynamic> json) => Product1(
-    marketName: json['marketName']  == null ? '' : json['marketName']as String,
-    productName: json['productName']  == null ? '' : json['productName']as String,
-    amount: json['amount']  == null ? 0 : json['amount'] as int,
-    price: json['price'] == null ? 0 : json['price'] as int,
-    manufacturing: json['manufacturing']  == null ? '' : json['manufacturing']as String,
+    marketName: json['namesuper']  == null ? '' : json['namesuper']as String,
+    productName: json['nameitem']  == null ? '' : json['nameitem']as String,
+    amount: json['numitem']  == null ? 0 : json['numitem'] as int,
+    price: json['totalprice'] == null ? 0 : json['totalprice'] as int,
+    id: json['idcart']  == null ? 0 : json['idcart']as int,
     image: json['image']  == null ? '' : json['image']as String,
     // productNumber: json['productNumber']   == null ? 0 : json['productNumber'] as int,
   );
@@ -29,7 +30,7 @@ class Product1 {
     required this.productName,
     required this.amount,
     required this.price,
-    required this.manufacturing,
+     required this.id,
     required this.image,
     // required this.productNumber,
     this.description,
@@ -43,12 +44,12 @@ class Product1 {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['marketName'] = this.marketName;
-    data['productName'] = this.productName;
-    data['amount'] = this.amount;
-    data['price'] = this.price;
+    data['namesuper'] = this.marketName;
+    data['nameitem'] = this.productName;
+    data['numitem'] = this.amount;
+    data['totalprice'] = this.price;
 
-    data['manufacturing'] = this.manufacturing;
+     data['idcart'] = this.id;
     data['image'] = this.image;
     // data['productNumber'] = this.productNumber;
 

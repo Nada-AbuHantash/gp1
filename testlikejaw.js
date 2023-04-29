@@ -242,7 +242,7 @@ pool.query(query3,function (error, results0) {
 app.get('/deletefromcart', function (request, response) {
     console.log("delete cart");
        //var supermarket=request.query.suparmarketname;
-let query3=`delete from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}' `;
+let query3=`delete from cart where idcart='${request.query.id}' `;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
@@ -259,12 +259,13 @@ pool.query(query3,function (error, results0) {
 
 const count=Number(results0[0].productcount);
 const p=Number(results0[0].newprice);
+const img=String(results0[0].productimage);
 const supermarket=results0[0].namesupermarket;
-console.log(count);
+console.log(img);
 
 if(count>0 && (request.query.numitem<=count)){
  
-let query1=`Select * from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}'`;
+let query1=`Select * from cart where emailcust='${request.query.emailcust}'and nameitem='${request.query.nameitem}' and namesuper='${supermarket}'`;
     pool.query(query1,function (error, results1) {
         const pp=Number(request.query.numitem)
         const total=p*pp;//price*count
@@ -274,7 +275,7 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
            response.status(400).send('Error in database operation');
         
         } if (results1.length === 0) {
-                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}') `;
+                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper,image) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}','${img}') `;
         pool.query(query2, function (error, data, results2) {
             console.log("done qurey in");
 });
@@ -309,6 +310,7 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
         let query4 = `UPDATE products set productcount='${s}' where productid='${request.query.id}' `;
         pool.query(query4, function (error, data, results2) {
             console.log("done qurey4444");
+            response.send(results2);
 });
     });
 }else{
@@ -316,10 +318,12 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
     let query8 = `INSERT INTO notification (namepro,id,count,msg,supetmarket) VALUES('${request.query.nameitem}','${request.query.id}','${count}','${msg}','${supermarket}') `;
     pool.query(query8, function (error, data, results3) {
         console.log("done qurey888");
+        response.send(null);
 });
-    response.send("count no enough");
+    //  response.send(null);
 }
 });
+
 });
        
 app.get('/viewproseller', function (request, response) {

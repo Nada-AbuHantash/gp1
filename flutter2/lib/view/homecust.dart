@@ -3,6 +3,7 @@ import 'package:flutter2/models/product.dart';/////اسم البرودكتس ز�
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter2/view/cart.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
@@ -118,13 +119,7 @@ class _MyHomePageState extends State<homecust> {
 
 
       listItems.add(InkWell(
-        onTap: () {
-          print("hi");
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const About()),
-          );
-        },
+        
         child: Container(
           height: 120,
           width: 330,
@@ -193,8 +188,15 @@ class _MyHomePageState extends State<homecust> {
                     post.price, post.newprice, post.image, post.exp);
                 print(post.id);
                 print(post.namesupermarket);
-//                 final prefs = await SharedPreferences.getInstance();
-// String email= prefs.get("emailemail").toString();
+                  Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => ProductPage(date: post.exp, 
+                                imageUrl: post.image, 
+                                name: post.productname,
+                                 nprice: post.newprice, 
+                                 oprice: post.price, 
+                                 sname: post.namesupermarket,
+                                 id:post.id)));
+
 
               },
               child: Image.asset(

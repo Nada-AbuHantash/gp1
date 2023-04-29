@@ -2,6 +2,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/cart2.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/seller.dart';
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 1:
         return const seller();
       case 2:
-        return  dil();
+        return  cart2();
       case 3:
       return searchchat();
        // return const ChatScreen();

@@ -5,6 +5,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/MyHomePage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'about/abo2.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
@@ -82,7 +83,6 @@ class _cart2State extends State<cart2> {
     _textEditingController.text = text;
     myList=[];
     getPostsData();
-
   }
 
 
@@ -92,26 +92,19 @@ class _cart2State extends State<cart2> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.showlistitem();
-
-
+    myList=await fetch.cart();
   }
-  void delete(String nameproduct,int amount) async {
-
-    await fetch.deleteitems(nameproduct,amount);
-
-
-  }
+ 
   void getPostsData() async{
     List<Widget> listItems = [];
     List<Product1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.showlistitem();
+      myList=await fetch.cart();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(Container(
           height: 190,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
               color: globalcolors.besiccolor,
@@ -119,7 +112,7 @@ class _cart2State extends State<cart2> {
                 BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
               ]),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -177,9 +170,9 @@ class _cart2State extends State<cart2> {
                           ),
                           IconButton(
                             onPressed: () {
-                              delete(post.productName,post.amount);
-                              getlistitem();
-                              getPostsData();
+                              delete(post.id);
+                               getlistitem();
+                               getPostsData();
                             },
                             icon: Icon(Icons.delete_forever,color: globalcolors.textcolor), // The icon to display on the button.
                           ),
@@ -213,7 +206,7 @@ class _cart2State extends State<cart2> {
           title: Text('My cart',style:  TextStyle(fontSize: 28, fontWeight: FontWeight.bold,)),
           backgroundColor: globalcolors.besiccolor,
           foregroundColor:globalcolors.textcolor,
-          centerTitle: true,
+           centerTitle: true,
         ),
         body: Container(
           height: size.height,
@@ -253,8 +246,15 @@ class _cart2State extends State<cart2> {
       ),
     );
   }
+ void delete(int id) async {
 
+  var res=  await fetch.deleteitems(id);
+ 
+if(res!=null){
 
+  Fluttertoast.showToast(msg: "delete id done refrch to sure",
+          textColor: globalcolors.besiccolor);
+}else{}
 }
-
+}
 

@@ -16,7 +16,7 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 class utils {
-  static const String basurl = "http://192.168.131.52:3000/";
+  static const String basurl = "http://192.168.52.52:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -194,13 +194,13 @@ class rest_api{
       print('no');
     }
   }
-  Future addcart( String num, String item) async {
+  Future addcart( int num, String item ,int id) async {
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     try {
 
       final http.Response use =
-      await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num'), headers: {
+      await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num&id=$id'), headers: {
         "Accept": "Application/json"
       });
       var encodeFirst = json.encode(use.body);
@@ -493,8 +493,8 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList;
   }
-  Future <List<Product>> cart() async {
-    late  List<Product> myList=[];
+  Future <List<Product1>> cart() async {
+    late  List<Product1> myList2=[];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     http.Response res = await http.get(Uri.parse(utils.basurl + 'viewcart?email=$A'),
@@ -504,13 +504,13 @@ class rest_api{
 
 
       var jsonString = json.decode(res.body);
-      List<Product> list =
-      List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
-      myList = list;
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+      myList2 = list;
 
     } else {
       throw Exception('Failed to load album');
-    } return myList;
+    } return myList2;
   }
 
   Future <List<Product>> most2(String name) async {
@@ -552,41 +552,10 @@ class rest_api{
 //     // Handle the exception
 //   }
 // }
-  Future <List<Product1>> showlistitem() async {
-    List<Product1> myList2 =[];
 
-    final prefs = await SharedPreferences.getInstance();
-    String A1=prefs.get("current-list").toString() ;
-    String A2=prefs.get("namename").toString() ;
-    http.Response res = await http.get(Uri.parse(utils.basurl+'listitems?listname='+A1+'&&userName='+A2),
-        headers: {'Content-Type': 'application/json'});
-
-
-    if (res.statusCode == 200) {
-      var jsonString = json.decode(res.body);
-      List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
-
-      myList2 = list;
-    } else {
-
-      throw Exception('Failed to load album');
-    }return myList2;
-  }
-  Future deleteitems(String nameproduct,int amount)async{
-    final prefs = await SharedPreferences.getInstance();
-    String n=prefs.get("namename").toString() ;
-    String n1=prefs.get("current-list").toString() ;
-
-
-    http.Response res = await http.get(Uri.parse(utils.basurl+'deleteproduct?username='+n
-        + '&&listname=' +
-        n1 +'&&nameproduct=' +
-        nameproduct +'&&amount=' +
-        '${amount}'
-    ),
-
-
+  Future deleteitems(int id)async{
+  
+    http.Response res = await http.get(Uri.parse(utils.basurl+'deletefromcart?id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
     } else {

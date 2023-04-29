@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../components/applocal.dart';
+import 'editprofile.dart';
 
 
 class cart1 extends StatelessWidget {
@@ -14,9 +19,10 @@ class cart1 extends StatelessWidget {
         name: 'Product Name',
         sname:'supermarket name',
         imageUrl: "assets/images/market.png",
-        oprice: 9.99,
+        oprice: 10,
         nprice: 8,
         date: 'mm/dd/yy',
+        id:32,
         //description: 'Product Description',
       ),
     );
@@ -27,18 +33,20 @@ class ProductPage extends StatefulWidget {
   final String name;
   final String sname;
   final String imageUrl;
-  final double oprice;
-  final double nprice;
+  final int oprice;
+  final int nprice;
   final String date;
+  final int id;
  // final String description;
 
-  const ProductPage({
+  const ProductPage( {
     required this.name,
     required this.sname,
     required this.imageUrl,
     required this.oprice,
     required this.nprice,
     required this.date,
+    required this.id,
    // this.description = '',
   });
 
@@ -70,10 +78,11 @@ class _ProductPageState extends State<ProductPage> {
           ),
 
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                //  SizedBox(height: 40,),
                 Text(
                   widget.name,
                   style: TextStyle(
@@ -82,7 +91,7 @@ class _ProductPageState extends State<ProductPage> {
                     color: globalcolors.textcolor,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 10.0),
                 Text(
                   widget.sname,
                   style: TextStyle(
@@ -90,13 +99,13 @@ class _ProductPageState extends State<ProductPage> {
                     color: globalcolors.textcolor,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 10.0),
                 Text(
                   widget.date,
                   style: TextStyle(fontSize: 20.0,color: globalcolors.textcolor,),
 
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -104,9 +113,10 @@ class _ProductPageState extends State<ProductPage> {
                     Text(
                       'Old Price ${widget.oprice}\₪',
                       style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red,
+                         decoration: TextDecoration.lineThrough,
+                        fontSize: 20.0,
+                        // fontWeight: FontWeight.bold,
+                        color: globalcolors.textcolor,
                       ),
                     ),
                     Row(
@@ -115,8 +125,8 @@ class _ProductPageState extends State<ProductPage> {
                         Text(
                           'New Price ${widget.nprice}\₪',
                           style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                            // fontWeight: FontWeight.bold,
                             color: Colors.green,
                           ),
                         ),
@@ -125,29 +135,28 @@ class _ProductPageState extends State<ProductPage> {
                   ],
                 ),
 
-                SizedBox(height: 16.0),
+                SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Quantity',
                 style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
                   color: globalcolors.textcolor,
                 ),),
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.remove),
+                          icon: Icon(Icons.remove,color: globalcolors.textcolor,),
                           onPressed: () {
                             setState(() {
                               _quantity = _quantity > 1 ? _quantity - 1 : 1;
                             });
                           },
                         ),
-                        Text('$_quantity'),
+                        Text('$_quantity',style: TextStyle(color: globalcolors.textcolor, fontSize: 20),),
                         IconButton(
-                          icon: Icon(Icons.add),
+                          icon: Icon(Icons.add,color: globalcolors.textcolor,),
                           onPressed: () {
                             setState(() {
                               _quantity++;
@@ -158,7 +167,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 32.0),
+                SizedBox(height: 110.0),
 
                 ElevatedButton(
 
@@ -176,6 +185,7 @@ class _ProductPageState extends State<ProductPage> {
                     style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
                   ),
                   onPressed: ()  {
+                    addtocart(widget.name,_quantity ,widget.id);
                     print(_quantity);
 
                   },
@@ -186,5 +196,25 @@ class _ProductPageState extends State<ProductPage> {
         ],
       ),
     );
+  }
+  
+  void addtocart( String name, int count,int id )async {
+
+var res=await fetch1.addcart(count,name,id).then((res) {
+if(res!=null){
+  
+Fluttertoast.showToast(msg: "The product has been added to the cart",
+          textColor: globalcolors.besiccolor);
+
+}else{
+print(res.toString());
+
+Fluttertoast.showToast(msg: "The quantity is not available",
+          textColor: globalcolors.besiccolor);
+
+}
+});
+
+
   }
 }
