@@ -102,7 +102,8 @@ class _cart2State extends State<cart2> {
       myList=await fetch.cart();
     // future: wish(myList);
     myList.forEach((post) {
-      listItems.add(Container(
+      listItems.add(
+          Container(
           height: 190,
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           decoration: BoxDecoration(
