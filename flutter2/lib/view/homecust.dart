@@ -3,6 +3,9 @@ import 'package:flutter2/models/product.dart';/////اسم البرودكتس ز�
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
@@ -184,8 +187,15 @@ class _MyHomePageState extends State<homecust> {
                   ],
                 ),
             GestureDetector(
-              onLongPress: () {
-                print("hi nada");
+              onTap: () async {
+                  Sharedsession shared = new Sharedsession();    
+                   await shared.savepro(post.productname, post.namesupermarket,
+                    post.price, post.newprice, post.image, post.exp);
+                print(post.id);
+                print(post.namesupermarket);
+//                 final prefs = await SharedPreferences.getInstance();
+// String email= prefs.get("emailemail").toString();
+
               },
               child: Image.asset(
                 post.image,

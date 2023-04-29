@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter2/view/map/marah.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
@@ -531,11 +532,17 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList;
   }
+
   Future<List<TaxiModel>> FetchTaxis() async {
-    var res = await http.get(Uri.parse(utils.basurl + "/viewloca"));
-    var body = jsonDecode(res.body) as List;
+    var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
+      print(res);
+    var body = json.decode(res.body) as List;
+  
     return body.map((i) => TaxiModel.fromJson(i)).toList();
+
   }
+
+   
 
 // Future<void> myAsyncMethod() async {
 //   try {

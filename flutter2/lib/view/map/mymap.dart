@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/view/map/marah.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../MyHomePage.dart';
+ late  List<TaxiModel>data=[];
 class map1 extends StatefulWidget {
   const map1({Key? key}) : super(key: key);
   @override
@@ -45,12 +48,24 @@ class _map1State extends State<map1> {
   double _longPoint=35.112541;
   @override
   void initState() {
+     super.initState();
     distance=[];
     pos1();
-    super.initState();
     fetchAllPoints();
 
     /// connect with database and get all positions
+  }
+  void fetchAllPoints() async {
+   
+   
+      data = await fetch.FetchTaxis();
+      print("data is $data");
+  setState(() {
+    this. _points = data;
+      this._diff= data;
+  });
+    print(_diff);
+    Calculate_KNN();
   }
   pos1() async{
 
@@ -59,7 +74,7 @@ class _map1State extends State<map1> {
     print(position.longitude);
   }
   @override
-  List<TaxiModel> _points = []; //x and y points
+   List<TaxiModel> _points = []; //x and y points
   List<TaxiModel> _diff = [];
   List<TaxiModel> _3KNN = [];
 
@@ -163,15 +178,18 @@ class _map1State extends State<map1> {
       ),
     );
   }
-  void fetchAllPoints() async {
-    var data = await FetchTaxis();
-    setState(() {
-      this._points = data;
-      this._diff= data;
-    });
-    print(_diff);
-    Calculate_KNN();
-  }
+  // void fetchAllPoints() async {
+   
+  //   late  List<TaxiModel>data=[];
+  //     data = await fetch.FetchTaxis();
+  //     print("data is $data");
+  
+  //    this. _points = data;
+  //     this._diff= data;
+   
+  //   print(_diff);
+  //   Calculate_KNN();
+  // }
   // Future addMarker(String name,String phone) async { // pop //up
   //   await showDialog(
   //       context: context,
@@ -266,20 +284,23 @@ class _map1State extends State<map1> {
   //         );
   //       });
   // }
-  Future<List<TaxiModel>> FetchTaxis() async {
-   const String basurl = "http://192.168.131.52:3000/";
- late  List<TaxiModel> myList=[];
-    var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
-    // var body = jsonDecode(res.body) as List;
-     var jsonString = json.decode(res.body);
-      List<TaxiModel> list =
-      List<TaxiModel>.from(jsonString.map((i) => TaxiModel.fromJson(i)));
-      myList = list;
 
-//  var encodeFirst = json.encode(res.body);
-//       var body = json.decode(encodeFirst) as List;
-    return myList;
-  }
+//  Future<List<TaxiModel>> FetchTaxis() async {
+//    const String basurl = "http://192.168.131.52:3000/";
+//  late  List<TaxiModel> myList=[];
+//     var res = await http.get(Uri.parse(utils.basurl + "viewloca"),headers: {'Content-Type': 'application/json'});
+//     // var body = jsonDecode(res.body) as List;
+//      var jsonString = json.decode(res.body) as List;
+//       List<TaxiModel> list =
+//       List<TaxiModel>.from(jsonString.map((Taxi) => TaxiModel.fromJson(Taxi)).toList());
+//       myList = list;
+// print(myList);
+                           
+
+// //  var encodeFirst = json.encode(res.body);
+// //       var body = json.decode(encodeFirst) as List;
+//     return myList;
+//   }
 
   Future<List<TaxiModel>> Calculate_KNN() async{
     distance.clear();

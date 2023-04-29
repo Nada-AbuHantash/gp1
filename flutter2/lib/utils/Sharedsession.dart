@@ -21,6 +21,18 @@ final prefs = await SharedPreferences.getInstance();
  prefs.setString("supermarket", A);
 
 }
+
+   savepro(String A,String B,int C,int D,String E,String F) async{
+final prefs = await SharedPreferences.getInstance();
+ prefs.setString("namepro", A);
+ prefs.setString("superpro", B);
+  prefs.setInt("old", C);
+  prefs.setInt("new", D);
+ prefs.setString("img", E);
+  prefs.setString("exp", F);
+
+}
+
  getsupermarket()async{
      final supermarket = await SharedPreferences.getInstance();
 
