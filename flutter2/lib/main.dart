@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/cart.dart';
+import 'package:flutter2/view/cart2.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/homesel.dart';
@@ -18,6 +19,7 @@ import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/slider.dart';
 import 'package:flutter2/view/about/about.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +59,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:cart1(),
+      home:cart2(),
        
        localizationsDelegates: [
           applocal.delegate,
