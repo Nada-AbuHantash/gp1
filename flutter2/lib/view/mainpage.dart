@@ -24,6 +24,7 @@ import '../components/applocal.dart';
 import 'MyHomePage.dart';
 import 'chat/chat.dart';
 import 'chat/searchchat.dart';
+import 'dilevery/orders.dart';
 import 'home.dart';
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 0:
         return const homecust();
       case 1:
-        // return  MapScreen();
+         return  orders();
       case 2:
         return  mycart();
       case 3:
