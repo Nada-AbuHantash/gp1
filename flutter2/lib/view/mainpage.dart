@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/cart2.dart';
 import 'package:flutter2/view/dil.dart';
+import 'package:flutter2/view/mycart.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/test.dart';
@@ -107,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 1:
         // return  MapScreen();
       case 2:
-        return  cart2();
+        return  mycart();
       case 3:
       return searchchat();
        // return const ChatScreen();
