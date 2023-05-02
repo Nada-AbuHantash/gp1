@@ -169,6 +169,7 @@ super.initState();
                             onSurface: Colors.grey,
                           ),
                           onPressed: () async{
+                            buy(post.id);
                            print("marah1");
                           },
                         ),
@@ -181,9 +182,10 @@ super.initState();
                               onSurface: Colors.grey,
                             ),
                             onPressed: () async{
+                              book(post.id);
                               print("marah2");
                                DateTime now = DateTime.now();
-    var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
+                             var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
                            print(time);
                             },
                           ),
@@ -197,7 +199,7 @@ super.initState();
 
                     actions: [
                       const SizedBox(height: 20),
-                      Text("are you sure delete this itme ?"),
+                       Text("are you sure delete this itme ?"),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -324,9 +326,30 @@ super.initState();
  
 if(res!=null){
 
-  Fluttertoast.showToast(msg: "delete id done refrch to sure",
+  Fluttertoast.showToast(msg: "delete item done refrch to sure",
           textColor: globalcolors.besiccolor);
 }else{}
 }
+
+  void book(int id) async {
+
+     var res=  await fetch.book(id);
+     if(res!=null){
+
+  Fluttertoast.showToast(msg: "book item done ",
+          textColor: globalcolors.besiccolor);
+}
+  }
+
+  
+  void buy(int id) async {
+
+     var res=  await fetch.buy(id);
+     if(res!=null){
+
+  Fluttertoast.showToast(msg: "ordered done",
+          textColor: globalcolors.besiccolor);
+}
+  }
 }
 

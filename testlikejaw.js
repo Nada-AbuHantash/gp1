@@ -251,6 +251,30 @@ pool.query(query3,function (error, results0) {
 
 });
 });
+app.get('/book', function (request, response) {
+    console.log("book cart");
+       //var supermarket=request.query.suparmarketname;
+let query3=`UPDATE cart SET  flag=1  WHERE idcart='${request.query.id}'`;
+pool.query(query3,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+         response.send(results0).status(200)
+    }
+
+});
+});
+app.get('/buy', function (request, response) {
+    console.log("buy cart");
+       //var supermarket=request.query.suparmarketname;
+let query3=`UPDATE cart SET  flag=2  WHERE idcart='${request.query.id}'`;
+pool.query(query3,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+         response.send(results0).status(200)
+    }
+
+});
+});
 app.get('/addcart', function (request, response) {
     console.log("add cart");
 let query3=`Select * from products where productid='${request.query.id}' `;
@@ -275,7 +299,7 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
            response.status(400).send('Error in database operation');
         
         } if (results1.length === 0) {
-                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper,image) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}','${img}') `;
+                  let query2 = `INSERT INTO cart (emailcust,nameitem,numitem,totalprice,namesuper,image,flag) VALUES('${request.query.emailcust}','${request.query.nameitem}','${request.query.numitem}','${total}','${supermarket}','${img}',0) `;
         pool.query(query2, function (error, data, results2) {
             console.log("done qurey in");
 });
@@ -341,9 +365,37 @@ let query1=`Select * from products where namesupermarket='${request.query.namesu
     });
 });
 app.get('/viewcart', function (request, response) {
-    console.log("view cart");
+    console.log("view cart all");
    //var supermarket=request.query.suparmarketname;
 let query1=`Select * from cart where emailcust='${request.query.email}'  `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/viewbook', function (request, response) {
+    console.log("view cart book");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from cart where emailcust='${request.query.email}' and flag=1 `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/viewbuy', function (request, response) {
+    console.log("view cart buy");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from cart where emailcust='${request.query.email}' and flag=2 `;
     pool.query(query1,function (error, results) {
         if (error) {
             

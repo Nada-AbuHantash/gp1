@@ -516,7 +516,44 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList2;
   }
+  Future <List<Product1>> viewbook() async {
+    late  List<Product1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbook?email=$A'),
+        headers: {'Content-Type': 'application/json'});
 
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+    Future <List<Product1>> viewbuy() async {
+    late  List<Product1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewuy?email=$A'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
   Future <List<Product>> most2(String name) async {
     late  List<Product> myList=[];
 
@@ -579,6 +616,26 @@ Future <List<test11>> test() async {
   Future deleteitems(int id)async{
   
     http.Response res = await http.get(Uri.parse(utils.basurl+'deletefromcart?id=$id'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
+
+   Future book(int id)async{
+  
+    http.Response res = await http.get(Uri.parse(utils.basurl+'book?id=$id'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
+   Future buy(int id)async{
+    http.Response res = await http.get(Uri.parse(utils.basurl+'buy?id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
     } else {
