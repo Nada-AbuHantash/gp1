@@ -3,7 +3,7 @@ import 'package:flutter2/models/product.dart';/////اسم البرودكتس ز�
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter2/view/cart.dart';
+import 'package:flutter2/view/cart/cart.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/addproduct.dart';
-import 'package:flutter2/view/cart.dart';
-import 'package:flutter2/view/cart2.dart';
+import 'package:flutter2/view/cart/cart.dart';
+import 'package:flutter2/view/cart/cart2.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';

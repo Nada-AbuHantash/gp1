@@ -8,7 +8,7 @@ import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter2/view/mainpage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'about/abo2.dart';
+import '../about/abo2.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:math';
 import 'dart:typed_data';
@@ -18,7 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../components/applocal.dart';
+import '../../components/applocal.dart';
 
 
 import 'dart:ui';
@@ -196,10 +196,12 @@ super.initState();
               context: context,
               builder: (BuildContext context) =>
                   AlertDialog(
-
+title:Text("are you sure delete this itme ?"),
+            titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 20),
+            backgroundColor: globalcolors.besiccolor,
                     actions: [
                       const SizedBox(height: 20),
-                       Text("are you sure delete this itme ?"),
+                     
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
@@ -334,6 +336,8 @@ if(res!=null){
   Fluttertoast.showToast(msg: "book item done ",
           textColor: globalcolors.besiccolor);
 }
+ getlistitem();
+                               getPostsData();
   }
 
   
@@ -345,6 +349,8 @@ if(res!=null){
   Fluttertoast.showToast(msg: "ordered done",
           textColor: globalcolors.besiccolor);
 }
+ getlistitem();
+                               getPostsData();
   }
 }
 

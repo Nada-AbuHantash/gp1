@@ -539,7 +539,7 @@ class rest_api{
     late  List<Product1> myList2=[];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewuy?email=$A'),
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuy?email=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {

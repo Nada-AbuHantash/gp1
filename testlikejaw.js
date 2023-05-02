@@ -217,7 +217,7 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
 });
 app.get('/addorder', function (request, response) {
     console.log("add order");
-    let query =`Select SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' `;
+    let query =`Select SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' and flag=0`;
     pool.query(query,function (error, results) {
         if (error) { response.status(400).send(error); }
         else{
@@ -246,7 +246,7 @@ let query3=`delete from cart where idcart='${request.query.id}' `;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
-         response.status(200)
+         response.send(results0).status(200)
     }
 
 });
@@ -367,7 +367,7 @@ let query1=`Select * from products where namesupermarket='${request.query.namesu
 app.get('/viewcart', function (request, response) {
     console.log("view cart all");
    //var supermarket=request.query.suparmarketname;
-let query1=`Select * from cart where emailcust='${request.query.email}'  `;
+let query1=`Select * from cart where emailcust='${request.query.email}' and flag=0 `;
     pool.query(query1,function (error, results) {
         if (error) {
             

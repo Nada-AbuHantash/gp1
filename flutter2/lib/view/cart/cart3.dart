@@ -27,13 +27,13 @@ void _runFilter(String enteredKeyword) {
 
 
 
-class cart3 extends StatefulWidget {
-  const cart3({Key? key}) : super(key: key);
+class cart03 extends StatefulWidget {
+  const cart03({Key? key}) : super(key: key);
   @override
-  _cart3State createState() => _cart3State();
+  _cart03State createState() => _cart03State();
 }
 
-class _cart3State extends State<cart3> {
+class _cart03State extends State<cart03> {
   Timer? _timer;
   int _elapsedSeconds = 86400;
   @override
@@ -82,23 +82,24 @@ class _cart3State extends State<cart3> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.cart();
+    myList=await fetch.viewbook();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
     List<Product1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.cart();
+      myList=await fetch.viewbook();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(
           Container(
-              height: 190,
+            
+              height: 80,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: globalcolors.besiccolor,
+                  color: globalcolors.notetcolor,
                   boxShadow: [
                     BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
                   ]),
@@ -109,54 +110,66 @@ class _cart3State extends State<cart3> {
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          post.productName,
-                          // "product name",
-                          style:  TextStyle(
-                            fontSize: 23, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-                        Text(
-                          post.marketName,
-                          //"supermarket name",
-                          style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
-                        ),
-
-                        Text(
-                          "count: ${post.amount}",
-
-                          // "count: 3",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),Text(
-                          "price: ${post.price} ₪",
-                          // "price:15 ₪",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(
+                      children: <Widget>[ Text(
                                 _formatDuration(Duration(seconds: _elapsedSeconds)),
                                 style: TextStyle(fontSize: 17),
                               ),
-                              SizedBox(width: 16.0),
+                        Text(
+                          post.productName+", "+post.marketName,
+                          // "product name",
+                          style:  TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.maincolor,),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                             Text(
+                          "count: ${post.amount}, price: ${post.price} ₪",
 
-                              IconButton(
+                          // "count: 3",
+                          style:  TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold,color: globalcolors.maincolor,),
+                        ),
+                         SizedBox(width: 20.0),
+
+                              
+                          ],
+                        ),
+                        
+                        // Text(
+                        //   post.marketName,
+                        //   //"supermarket name",
+                        //   style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
+                        // ),
+
+                       
+                        // Text(
+                        //   "price: ${post.price} ₪",
+                        //   // "price:15 ₪",
+                        //   style:  TextStyle(
+                        //     fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                        // ),
+
+                        
+
+
+                      ],
+                    ),
+                    IconButton(
                                 onPressed: () {
                                   showDialog(
 
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
-
+title:Text("are you sure delete this itme ?"),
+            titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 20),
+            backgroundColor: globalcolors.besiccolor,
                                             actions: [
-                                              const SizedBox(height: 20),
-                                              Text("are you sure delete this itme ?"),
+                                              // const SizedBox(height:10),
+                                              
                                               Padding(
-                                                padding: const EdgeInsets.all(8.0),
+                                                 padding: const EdgeInsets.all(8.0),
                                                 child: Row(
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
@@ -171,7 +184,7 @@ class _cart3State extends State<cart3> {
                                                               borderRadius: BorderRadius.circular(20.0)),
                                                           foregroundColor: globalcolors.maincolor,
                                                           backgroundColor: globalcolors.notetcolor,
-                                                          minimumSize: Size(250, 50),
+                                                           minimumSize: Size(250, 50),
                                                         ),
                                                         child: Text("delete",
 
@@ -194,7 +207,7 @@ class _cart3State extends State<cart3> {
                                                 ),
                                               ),
 
-                                              const SizedBox(height: 20),
+                                              // const SizedBox(height: 20),
 
                                             ],
 
@@ -205,12 +218,7 @@ class _cart3State extends State<cart3> {
                                 },
                                 icon: Icon(Icons.delete_forever,color: globalcolors.textcolor), // The icon to display on the button.
                               ),
-                            ])
-
-
-                      ],
-                    ),
-                    Image.asset(post.image,width: 100,height: 100,),
+                    // Image.asset(post.image,width: 100,height: 100,),
                     //  Image.asset('assets/images/p4.jpg',width: 100,height: 100,),
 
 
@@ -239,11 +247,13 @@ class _cart3State extends State<cart3> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
+                 
                   Expanded(
                     child: SafeArea(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: kDefaultPadding),
+                            horizontal: kDefaultPadding
+                            ),
 
                       ),
                     ),
@@ -253,6 +263,7 @@ class _cart3State extends State<cart3> {
               const SizedBox(
                 height: 12,
               ),
+               
               Expanded(
                   child: ListView.builder(
                       controller: controller,
@@ -263,8 +274,14 @@ class _cart3State extends State<cart3> {
                             heightFactor: 1,
                             alignment: Alignment.topCenter,
                             child: itemsData[index]);
-                      })),
+                            
+                      }
+                      )
+                      
+                      ),
+                        
             ],
+            
           ),
         ),
       ),
