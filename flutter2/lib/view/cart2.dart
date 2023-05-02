@@ -276,12 +276,7 @@ super.initState();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text('My cart',style:  TextStyle(fontSize: 28, fontWeight: FontWeight.bold,)),
-          backgroundColor: globalcolors.besiccolor,
-          foregroundColor:globalcolors.textcolor,
-           centerTitle: true,
-        ),
+
         body: Container(
           height: size.height,
           child: Column(
