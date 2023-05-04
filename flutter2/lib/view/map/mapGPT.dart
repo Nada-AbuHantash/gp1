@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:convert';
@@ -11,6 +13,8 @@ import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../chat/ChatRoom.dart';
+
 
 class addBasket extends StatefulWidget {
   const addBasket({Key? key}) : super(key: key);
@@ -18,7 +22,7 @@ class addBasket extends StatefulWidget {
   _addBasket createState() => _addBasket();
 }
 
-class _addBasket extends State<addBasket> {
+class _addBasket extends State<addBasket> with WidgetsBindingObserver{
   @override
 
   Widget build(BuildContext context) {
@@ -33,7 +37,69 @@ class MyMap extends StatefulWidget {
   _MyMap createState() => new _MyMap();
 }
 
-class _MyMap extends State<MyMap> {
+class _MyMap extends State<MyMap> with WidgetsBindingObserver{
+   Map<String, dynamic>? userMap;
+  bool isLoading = false;
+ // late final bool isme;
+  final TextEditingController _search = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  @override
+void initState() {
+    super.initState();
+     distance=[];
+    pos();
+    // super.initState();
+    fetchAllPoints();
+    WidgetsBinding.instance!.addObserver(this);
+    setStatus("Online");
+   
+  }
+
+  void setStatus(String status) async {
+    await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
+      "status": status,
+    });
+  }
+   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // online
+      setStatus("Online");
+    } else {
+      // offline
+      setStatus("Offline");
+    }
+  }
+
+  String chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2.toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
+    }
+  }
+
+  void onSearch() async {
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    setState(() {
+      isLoading = true;
+    });
+
+    await _firestore
+        .collection('users')
+        .where("name", isEqualTo: "ahmad")
+        .get()
+        .then((value) {
+      setState(() {
+        userMap = value.docs[0].data();
+        isLoading = false;
+      });
+      print("nnnnnnnnnnnnnnnn");
+    });
+  }
   bool isChecked = false;
   //fetchData _fetchData = fetchData();
   // TextEditingController _lat = TextEditingController(); //x
@@ -41,15 +107,15 @@ class _MyMap extends State<MyMap> {
   double _latPoint=32.22528;
   double _longPoint=35.25972;
 
-  @override
-  void initState() {
-    distance=[];
-    pos();
-    super.initState();
-    fetchAllPoints();
+  // @override
+  // void initState() {
+  //   distance=[];
+  //   pos();
+  //   super.initState();
+  //   fetchAllPoints();
 
-    /// connect with database and get all positions
-  }
+  //   /// connect with database and get all positions
+  // }
 
   pos() async{
 //     await Geolocator.openAppSettings();
@@ -57,6 +123,7 @@ class _MyMap extends State<MyMap> {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position.latitude);
     print(position.longitude);
+    
   }
   @override
   List<TaxiModel> _points = []; //x and y points
@@ -87,6 +154,7 @@ class _MyMap extends State<MyMap> {
             MarkerLayerOptions( // taxis
               markers: _points
                   .map((e) => Marker(
+
                 width: 45.0,
                 height: 45.0,
                 point:
@@ -95,9 +163,25 @@ class _MyMap extends State<MyMap> {
                   child: IconButton(
                       icon: Icon(Icons.local_taxi),
                       color: Color.fromARGB(255, 26, 47, 99), // my icon
-                      onPressed: () {
+                      onPressed: () async {
                         //my notification
+ FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+    setState(() {
+      isLoading = true;
+    });
+
+    await _firestore
+        .collection('users')
+        .where("name", isEqualTo: "ahmad")//e.user
+        .get()
+        .then((value) {
+      setState(() {
+        userMap = value.docs[0].data();
+        isLoading = false;
+      });
+      print("nnnnnnnnnnnnnnnn");
+    });
                         addMarker(e.user,e.phone);
                         print('Marker tapped!');
                       }),
@@ -172,6 +256,7 @@ class _MyMap extends State<MyMap> {
       this._diff= data;
     });
     Calculate_KNN();
+    
   }
 
   Future addMarker(String name,String phone) async { // pop //up
@@ -230,6 +315,8 @@ class _MyMap extends State<MyMap> {
                     SizedBox(
                       height: 20,
                     ),
+                     userMap != null
+                    ?
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1.6,
                       child:  Container(
@@ -249,15 +336,32 @@ class _MyMap extends State<MyMap> {
                                   color: Colors.white),
                             ),
                           ),
+                          //  userMap != null
+                    // ? ListTile():Column()
                           onPressed:()async{
-                            _text ='sms:$phone';
-                            if ( await canLaunch (_text) ){
-                              await launch(_text);
-                            }},
+                            
+                            // _text ='sms:$phone';
+                            // if ( await canLaunch (_text) ){
+                            //   await launch(_text);
+                            // }
+                             String roomId = chatRoomId(
+                              _auth.currentUser!.displayName!,
+                              userMap!['name']);
+
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ChatRoom(
+                                chatRoomId: roomId,
+                                userMap: userMap!,
+                              //  isme:  _auth.currentUser==userMap!['email'],
+                              ),
+                            ),
+                          );
+                            },
                         ),
                       ),
 
-                    ),
+                    ) :Column(),
                     SizedBox(
                       height: 20,
                     ),
@@ -269,7 +373,8 @@ class _MyMap extends State<MyMap> {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-    var res = await http.get(Uri.parse(utils.basurl + "/viewloca"));
+      const String basurl = "http://192.168.75.52:3000/";
+    var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
     return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();

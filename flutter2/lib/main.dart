@@ -61,7 +61,8 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home:MyHomePage1(),
+      //  home:addBasket(),//chatGPT
+       home:login(),
        
        localizationsDelegates: [
           applocal.delegate,

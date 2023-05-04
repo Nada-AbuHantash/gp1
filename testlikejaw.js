@@ -421,6 +421,21 @@ let query1=`Select * from sellers `;
         }
     });
 });
+
+
+// app.get("/taxi", function (request, response) {
+//     let query1 = `SELECT * FROM taxiapp`;
+//     pool.query(query1, function (error, results) {
+//       // console.log(results);
+//       if (error) {
+//         response.status(400).send("Error in database operation");
+//       } else {
+//         console.log(results);
+//         response.send(results);
+  
+//       }
+//     });
+//   });
 /////////////////////////////////////////////////////////////
 
 app.post('/register', function (request, response) {

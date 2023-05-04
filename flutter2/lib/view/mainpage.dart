@@ -5,6 +5,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/cart/cart2.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/cart/mycart.dart';
+import 'package:flutter2/view/map/mapGPT.dart';
 import 'package:flutter2/view/profile.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/test.dart';
@@ -107,7 +108,8 @@ class _MyHomePageState extends State<MyHomePage1> {
       case 0:
         return const homecust();
       case 1:
-         return  orders();
+        //  return  orders();
+        return addBasket();
       case 2:
         return  mycart();
       case 3:
