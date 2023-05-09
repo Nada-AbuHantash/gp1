@@ -44,7 +44,7 @@ class _cart4State extends State<cart4> {
 
   void initState() {
     super.initState();
-    super.initState();
+    
     _startTimer();
 
     _textEditingController.text = text;

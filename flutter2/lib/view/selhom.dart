@@ -76,8 +76,8 @@ class _selhomState extends State<selhom> {
     });
         flutterLocalNotificationsPlugin.show(
         0,
-        "check proudect",
-        "some proudect no enough count",
+        "Check the product",
+        "Some prodcuts do not have enough quantity",
         NotificationDetails(
             android: AndroidNotificationDetails(channel.id, channel.name,
                 importance: Importance.high,

@@ -189,61 +189,61 @@ void initState() {
               ))
                   .toList(),
             ),
-            MarkerLayerOptions( // taxis
-              markers: _diff.getRange(1,3)
-                  .map((e) => Marker(
-                width: 45.0,
-                height: 45.0,
-                point:
-                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-                builder: (context) => Container(
-                  child: IconButton(
-                      icon: Icon(Icons.home_work_rounded),
-                      color: globalcolors.textcolor,// my icon
-                      onPressed: () {
-                        //my notification
-                        addMarker(e.user,e.phone);
-                        print('near to you');
-                      }),
-                ),
-              ))
-                  .toList(),
-            ),
-            MarkerLayerOptions( // taxis
-              markers: _diff.getRange(0,1)
-                  .map((e) => Marker(
-                width: 45.0,
-                height: 45.0,
-                point:
-                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-                builder: (context) => Container(
-                  child: IconButton(
-                      icon: Icon(Icons.home_work_rounded),
-                      color: globalcolors.notetcolor,// my icon
-                      onPressed: () {
-                        addMarker(e.user,e.phone);
-                        //Calculate_KNN();
-                        print('near to you');
-                      }),
-                ),
-              ))
-                  .toList(),
-            ),
-            MarkerLayerOptions( // taxis
-                markers: [
-                  Marker(point: LatLng(_latPoint, _longPoint),
-                    builder: (context) => Container(
-                      child: IconButton(
-                          icon: Icon(Icons.location_pin),
-                          color: globalcolors.textcolor, // my icon
-                          onPressed: () {
-                            //addMarker();
-                            print('My location');
-                          }),
-                    ),
-                  )
-                ]
-            ),
+            // MarkerLayerOptions( // taxis
+            //   markers: _diff.getRange(1,3)
+            //       .map((e) => Marker(
+            //     width: 45.0,
+            //     height: 45.0,
+            //     point:
+            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+            //     builder: (context) => Container(
+            //       child: IconButton(
+            //           icon: Icon(Icons.home_work_rounded),
+            //           color: globalcolors.textcolor,// my icon
+            //           onPressed: () {
+            //             //my notification
+            //             addMarker(e.user,e.phone);
+            //             print('near to you');
+            //           }),
+            //     ),
+            //   ))
+            //       .toList(),
+            // ),
+            // MarkerLayerOptions( // taxis
+            //   markers: _diff.getRange(0,1)
+            //       .map((e) => Marker(
+            //     width: 45.0,
+            //     height: 45.0,
+            //     point:
+            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+            //     builder: (context) => Container(
+            //       child: IconButton(
+            //           icon: Icon(Icons.home_work_rounded),
+            //           color: globalcolors.notetcolor,// my icon
+            //           onPressed: () {
+            //             addMarker(e.user,e.phone);
+            //             //Calculate_KNN();
+            //             print('near to you');
+            //           }),
+            //     ),
+            //   ))
+            //       .toList(),
+            // ),
+            // MarkerLayerOptions( // taxis
+            //     markers: [
+            //       Marker(point: LatLng(_latPoint, _longPoint),
+            //         builder: (context) => Container(
+            //           child: IconButton(
+            //               icon: Icon(Icons.location_pin),
+            //               color: globalcolors.textcolor, // my icon
+            //               onPressed: () {
+            //                 //addMarker();
+            //                 print('My location');
+            //               }),
+            //         ),
+            //       )
+            //     ]
+            // ),
 
           ],
         ));

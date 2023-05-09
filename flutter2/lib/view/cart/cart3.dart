@@ -44,7 +44,7 @@ class _cart03State extends State<cart03> {
 
   void initState() {
     super.initState();
-    super.initState();
+  
     _startTimer();
 
     _textEditingController.text = text;
@@ -110,10 +110,11 @@ class _cart03State extends State<cart03> {
                   children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[ Text(
-                                _formatDuration(Duration(seconds: _elapsedSeconds)),
-                                style: TextStyle(fontSize: 17),
-                              ),
+                      children: <Widget>[ 
+                        // Text(
+                        //         _formatDuration(Duration(seconds: _elapsedSeconds)),
+                        //         style: TextStyle(fontSize: 17),
+                        //       ),
                         Text(
                           post.productName+", "+post.marketName,
                           // "product name",
