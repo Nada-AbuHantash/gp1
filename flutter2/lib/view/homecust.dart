@@ -134,6 +134,7 @@ class _MyHomePageState extends State<homecust> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -253,12 +254,67 @@ class _MyHomePageState extends State<homecust> {
                         const EdgeInsets.symmetric(
                             horizontal: kDefaultPadding),
                         child: SingleChildScrollView(
+
+
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              _buildSearchBar(),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  CarouselSlider(
+                                    items: imagesList.map((imageUrl) {
+                                      return
+                                        GestureDetector(
+                                            onTap: () {
+                                              print("hi marah");
+                                            },
+                                            child: Image.asset(imageUrl, fit: BoxFit.cover)
+                                        );
+
+
+                                    }).toList(),
+                                    options: CarouselOptions(
+                                      autoPlay: true,
+                                      autoPlayInterval: Duration(seconds: 3),
+                                      enlargeCenterPage: true,
+                                      aspectRatio: 16 / 6.5,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          _currentImageIndex = index;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: imagesList.map((imageUrl) {
+                                      int index = imagesList.indexOf(imageUrl);
+                                      return Container(
+                                        width: 5,
+                                        height: 5,
+                                        margin: EdgeInsets.symmetric(horizontal: 4),
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: _currentImageIndex == index
+                                                ? globalcolors.besiccolor
+                                                : globalcolors.textcolor
+                                        ),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  _buildSearchBar(),
+                                  // Add more widgets to the column here
+                                ],
+                              ),
                             ],
                           ),
+
                         ),
                       ),
                     ),
@@ -270,53 +326,53 @@ class _MyHomePageState extends State<homecust> {
                     2
                 ),
                 height: 200.0,
-                child:  Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CarouselSlider(
-                      items: imagesList.map((imageUrl) {
-                        return
-                        GestureDetector(
-                          onTap: () {
-                            print("hi marah");
-                          },
-                          child: Image.asset(imageUrl, fit: BoxFit.cover)
-                        );
-
-
-                      }).toList(),
-                      options: CarouselOptions(
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 3),
-                        enlargeCenterPage: true,
-                        aspectRatio: 16 / 6.5,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _currentImageIndex = index;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: imagesList.map((imageUrl) {
-                        int index = imagesList.indexOf(imageUrl);
-                        return Container(
-                          width: 5,
-                          height: 5,
-                          margin: EdgeInsets.symmetric(horizontal: 4),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _currentImageIndex == index
-                                  ? globalcolors.besiccolor
-                                  : globalcolors.textcolor
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
+                // child:  Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     CarouselSlider(
+                //       items: imagesList.map((imageUrl) {
+                //         return
+                //         GestureDetector(
+                //           onTap: () {
+                //             print("hi marah");
+                //           },
+                //           child: Image.asset(imageUrl, fit: BoxFit.cover)
+                //         );
+                //
+                //
+                //       }).toList(),
+                //       options: CarouselOptions(
+                //         autoPlay: true,
+                //         autoPlayInterval: Duration(seconds: 3),
+                //         enlargeCenterPage: true,
+                //         aspectRatio: 16 / 6.5,
+                //         onPageChanged: (index, reason) {
+                //           setState(() {
+                //             _currentImageIndex = index;
+                //           });
+                //         },
+                //       ),
+                //     ),
+                //     SizedBox(height: 20),
+                //     Row(
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: imagesList.map((imageUrl) {
+                //         int index = imagesList.indexOf(imageUrl);
+                //         return Container(
+                //           width: 5,
+                //           height: 5,
+                //           margin: EdgeInsets.symmetric(horizontal: 4),
+                //           decoration: BoxDecoration(
+                //               shape: BoxShape.circle,
+                //               color: _currentImageIndex == index
+                //                   ? globalcolors.besiccolor
+                //                   : globalcolors.textcolor
+                //           ),
+                //         );
+                //       }).toList(),
+                //     ),
+                //   ],
+                // ),
 
               ),
               const SizedBox(
