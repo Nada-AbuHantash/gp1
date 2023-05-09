@@ -217,7 +217,7 @@ class _homeselState extends State<homesel> {
           foregroundColor: globalcolors.textcolor,
           actions: [
             PopupMenuButton<String>(
-              icon: Icon(Icons.filter_alt_outlined, color: globalcolors.textcolor),
+              icon: Icon(Icons.dehaze, color: globalcolors.textcolor),
               onSelected: _handleMenuItemPressed,
               itemBuilder: (context) => [
                 PopupMenuItem<String>(

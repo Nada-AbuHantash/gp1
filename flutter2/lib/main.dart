@@ -29,14 +29,54 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'components/applocal.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 SharedPreferences ?mySharedPreferences;
 Sharedsession language = new Sharedsession();
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', //id
+    'High Importance Notifications', //title
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('A bg message just showed up : ${message.messageId}');
+}
+
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
       mySharedPreferences = await SharedPreferences.getInstance();
      await mySharedPreferences!.setString("translations","en");
     language.savelang("en");
+    WidgetsFlutterBinding.ensureInitialized();
+
+
+    await Firebase.initializeApp(
+    name: 'Sales',
+    options: FirebaseOptions(
+      apiKey: "XXX",
+      appId: "XXX",
+      messagingSenderId: "XXX",
+      projectId: "XXX",
+    ),
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
+   await  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
     
   runApp(const MyApp());
 }
@@ -61,8 +101,8 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      //  home:addBasket(),//chatGPT
-       home:login(),
+       // home:addBasket(),//chatGPT
+         home:login(),
        
        localizationsDelegates: [
           applocal.delegate,

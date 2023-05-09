@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/profile.dart';
@@ -9,11 +10,13 @@ import 'package:flutter2/view/selhom.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import '../components/applocal.dart';
 import 'package:flutter2/view/mainpage.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import '../main.dart';
 import '../utils/Sharedsession.dart';
 import 'addproduct.dart';
 rest_api fetch=new rest_api();
@@ -30,7 +33,62 @@ class _loginState extends State<login> {
   final TextEditingController passcntoraler = TextEditingController();
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
   @override
+  void initState() {
+    super.initState();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                color: Colors.pink,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+              ),
+            ));
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text("${notification.title}"),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text("${notification.body}")],
+                  ),
+                ),
+              );
+            });
+      }
+    });
+        flutterLocalNotificationsPlugin.show(
+        0,
+        "Imprtant Meassge!",
+        "Your teacher canceled your appointment",
+        NotificationDetails(
+            android: AndroidNotificationDetails(channel.id, channel.name,
+                importance: Importance.high,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher')));
+  }
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
@@ -326,6 +384,12 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
       }
       else{
         print("failed1");
+          setState(() {
+                              showSpinner = false;
+                            });
+                              setState(() {
+                        showSpinner = false;
+                      });
         AlertDialog alert = const AlertDialog(
          content: Text("please try again , email must include @\nYou can't log in ,Verify that the administrator has approved your request through your email.\n"
              "الرجاء اعادة المحاولة ، يجب أن يحتوي البريد الالكتروني على @ "

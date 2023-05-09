@@ -161,8 +161,8 @@ void initState() {
                 LatLng(double.parse(e.lat), double.parse(e.long)), //no change
                 builder: (context) => Container(
                   child: IconButton(
-                      icon: Icon(Icons.local_taxi),
-                      color: Color.fromARGB(255, 26, 47, 99), // my icon
+                      icon: Icon(Icons.home_work_rounded),
+                      color: globalcolors.textcolor, // my icon
                       onPressed: () async {
                         //my notification
  FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -189,61 +189,61 @@ void initState() {
               ))
                   .toList(),
             ),
-            // MarkerLayerOptions( // taxis
-            //   markers: _diff.getRange(1,3)
-            //       .map((e) => Marker(
-            //     width: 45.0,
-            //     height: 45.0,
-            //     point:
-            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-            //     builder: (context) => Container(
-            //       child: IconButton(
-            //           icon: Icon(Icons.local_taxi),
-            //           color: Color.fromARGB(255, 229, 128, 46),// my icon
-            //           onPressed: () {
-            //             //my notification
-            //             addMarker(e.user,e.phone);
-            //             print('near to you');
-            //           }),
-            //     ),
-            //   ))
-            //       .toList(),
-            // ),
-            // MarkerLayerOptions( // taxis
-            //   markers: _diff.getRange(0,1)
-            //       .map((e) => Marker(
-            //     width: 45.0,
-            //     height: 45.0,
-            //     point:
-            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-            //     builder: (context) => Container(
-            //       child: IconButton(
-            //           icon: Icon(Icons.local_taxi),
-            //           color: Colors.red,// my icon
-            //           onPressed: () {
-            //             addMarker(e.user,e.phone);
-            //             //Calculate_KNN();
-            //             print('near to you');
-            //           }),
-            //     ),
-            //   ))
-            //       .toList(),
-            // ),
-            // MarkerLayerOptions( // taxis
-            //     markers: [
-            //       Marker(point: LatLng(_latPoint, _longPoint),
-            //         builder: (context) => Container(
-            //           child: IconButton(
-            //               icon: Icon(Icons.location_pin),
-            //               color: Color.fromARGB(255, 26, 47, 99), // my icon
-            //               onPressed: () {
-            //                 //addMarker();
-            //                 print('My location');
-            //               }),
-            //         ),
-            //       )
-            //     ]
-            // ),
+            MarkerLayerOptions( // taxis
+              markers: _diff.getRange(1,3)
+                  .map((e) => Marker(
+                width: 45.0,
+                height: 45.0,
+                point:
+                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+                builder: (context) => Container(
+                  child: IconButton(
+                      icon: Icon(Icons.home_work_rounded),
+                      color: globalcolors.textcolor,// my icon
+                      onPressed: () {
+                        //my notification
+                        addMarker(e.user,e.phone);
+                        print('near to you');
+                      }),
+                ),
+              ))
+                  .toList(),
+            ),
+            MarkerLayerOptions( // taxis
+              markers: _diff.getRange(0,1)
+                  .map((e) => Marker(
+                width: 45.0,
+                height: 45.0,
+                point:
+                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
+                builder: (context) => Container(
+                  child: IconButton(
+                      icon: Icon(Icons.home_work_rounded),
+                      color: globalcolors.notetcolor,// my icon
+                      onPressed: () {
+                        addMarker(e.user,e.phone);
+                        //Calculate_KNN();
+                        print('near to you');
+                      }),
+                ),
+              ))
+                  .toList(),
+            ),
+            MarkerLayerOptions( // taxis
+                markers: [
+                  Marker(point: LatLng(_latPoint, _longPoint),
+                    builder: (context) => Container(
+                      child: IconButton(
+                          icon: Icon(Icons.location_pin),
+                          color: globalcolors.textcolor, // my icon
+                          onPressed: () {
+                            //addMarker();
+                            print('My location');
+                          }),
+                    ),
+                  )
+                ]
+            ),
 
           ],
         ));
@@ -373,7 +373,7 @@ void initState() {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-      const String basurl = "http://192.168.75.52:3000/";
+      const String basurl = "http://192.168.62.52:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
