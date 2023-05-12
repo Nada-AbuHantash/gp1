@@ -3,7 +3,9 @@ import 'package:flutter2/utils/Sharedsession.dart';
 import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/cart/cart.dart';
 import 'package:flutter2/view/cart/cart2.dart';
+import 'package:flutter2/view/dilevery/filter.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
+import 'package:flutter2/view/dilevery/orders.dart';
 import 'package:flutter2/view/home.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:flutter2/view/homesel.dart';
@@ -102,7 +104,7 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
        // home:addBasket(),//chatGPT
-         home:login(),
+         home:filter(),
        
        localizationsDelegates: [
           applocal.delegate,

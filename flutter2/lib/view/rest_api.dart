@@ -1,10 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter2/view/dilevery/homedil.dart';
+import 'package:flutter2/models/filtert1.dart';
+import 'package:flutter2/models/filtert1.dart';
+import 'package:flutter2/models/filtert1.dart';
+import 'package:flutter2/view/dilevery/all.dart';
 import 'package:flutter2/view/map/marah.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/filtert1.dart';
 import '../models/product1.dart';
 
 import '../models/test.dart';
@@ -642,5 +646,25 @@ Future <List<test11>> test() async {
 
       throw Exception('Failed to load album');
     }
+  }
+  //////////////////////////////////////////////////////
+  Future <List<filter1>> filter1() async {
+    late  List<filter1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewcart?email=$A'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<filter1> list =
+      List<filter1>.from(jsonString.map((i) => filter1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
   }
 }
