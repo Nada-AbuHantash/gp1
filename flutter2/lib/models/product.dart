@@ -8,6 +8,7 @@ class Product {
   final String namesupermarket;
   final String productname;
   final int  id;
+    final int  count;
   final int price;
   final int newprice;
   final String exp;
@@ -23,6 +24,7 @@ class Product {
     namesupermarket: json['namesupermarket']  == null ? '' : json['namesupermarket']as String,
     productname: json['productname']  == null ? '' : json['productname']as String,
     id: json['productid']  == null ? 0 : json['productid'] as int,
+     count: json['productcount']  == null ? 0 : json['productcount'] as int,
     price: json['oldprice'] == null ? 0 : json['oldprice'] as int,
      newprice: json['newprice'] == null ? 0 : json['newprice'] as int,
     exp: json['exp']  == null ? '' : json['exp']as String,
@@ -41,6 +43,7 @@ class Product {
     required this.productname,
     // required this.image,
     required this.id,
+    required this.count,
     required this.price,
     required this.newprice,
     required this.exp,
@@ -62,6 +65,7 @@ class Product {
     data['namesupermarket'] = this.namesupermarket;
     data['productname'] = this.productname;
      data['productid '] = this.id;
+     data['productcount'] = this.count;
     data['oldprice'] = this.price;
 data['newprice'] = this.newprice;
     data['exp'] = this.exp;

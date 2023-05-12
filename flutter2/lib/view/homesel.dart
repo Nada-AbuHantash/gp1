@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -5,8 +6,10 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../components/applocal.dart';
+import '../main.dart';
 
 
 
@@ -20,7 +23,7 @@ TextEditingController productMarketController = TextEditingController();
 TextEditingController productManufactureingController = TextEditingController();
 
 late int count=1;
-late int flag=1;
+late int flag;
 
 late  List<Product> myList=[];
 late  List<Product> myList2=[];
@@ -28,13 +31,15 @@ void _runFilter(String enteredKeyword) {
   List<Product> results = [];
   if (enteredKeyword.isEmpty) {
     if(flag==2){
-      results = myList2;}
+      results = myList2;
+      }
     else{
       results = myList;
     }
 
   }
   else {
+  
     results = myList
         .where((user) => user.productname
         .toLowerCase()
@@ -108,15 +113,78 @@ class _homeselState extends State<homesel> {
       if(flag==2){
         myList2=await fetch.most2(name);
         myList = myList2;
+       
       }
       else{
         myList=await fetch.most();
+       
       }
     }
 
     myList.forEach((post) {
 
+  if(post.count==0){
 
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+           
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                color: Colors.pink,
+                playSound: true,
+                icon: '@mipmap/ic_launcher',
+                
+                
+              ),
+            ));
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+  //Navigator.push(context,  MaterialPageRoute(builder: (_) => addproduct()));
+      if (notification != null && android != null) {
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text("${notification.title}"),
+                content: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [Text("${notification.body}")],
+                  ),
+                ),
+              );
+            });
+      }
+    });
+        flutterLocalNotificationsPlugin.show(
+        0,
+        "Check the product",
+        "Some prodcuts do not have enough quantity",
+        NotificationDetails(
+            android: AndroidNotificationDetails(channel.id, channel.name,
+                importance: Importance.high,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher')));
+  
+
+
+        }
+        
+       
       listItems.add(Container(
           height: 120,
           width: 330,
@@ -323,18 +391,18 @@ class _homeselState extends State<homesel> {
     switch (value) {
       case 'item1':
         flag=2;
-        print("one");
+        print("my pro");
         // getPostsData();getlist();
         // Do something for menu item 1
         break;
       case 'item2':
         flag=1;
-        print("tow");
+        print("all pro");
         //  getPostsData();getlist();
         // Do something for menu item `2
         break;
       default:
-        flag=1;
+        flag=2;
         break;
     }
     getPostsData();getlist();

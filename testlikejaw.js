@@ -242,15 +242,42 @@ pool.query(query3,function (error, results0) {
 app.get('/deletefromcart', function (request, response) {
     console.log("delete cart");
        //var supermarket=request.query.suparmarketname;
-let query3=`delete from cart where idcart='${request.query.id}' `;
-pool.query(query3,function (error, results0) {
+       let query4=`Select * from cart where idcart='${request.query.id}' `;
+pool.query(query4,function (error, results4) {
     if (error) { response.status(400).send(error); }
     else{
-         response.send(results0).status(200)
+        const name= results4[0].nameitem;
+        const super1 =results4[0].namesuper;
+        const cc=Number(results4[0].numitem);
+let query3=`delete from cart where idcart='${request.query.id}' `;
+pool.query(query3,function (error, results7) {
+    if (error) { response.status(400).send(error); }
+    else{
+       
+        let query2=` Select * from products where productname='${name}'and namesupermarket='${super1}' `;
+        pool.query(query2,function (error, results) {
+        if (error) { response.status(400).send(error); }
+           else{
+      
+            const c=Number(results[0].productcount);
+            var newc=c+cc;
+            console.log(newc);
+            let query1=`UPDATE products SET  productcount='${newc}' where productname='${name}'and namesupermarket='${super1}' `;
+pool.query(query1,function (error, results) {
+    if (error) { response.status(400).send(error); }
+    console.log("update done ");
+   // response.send(results4).status(200); 
+});
+} 
+        });
     }
+}); 
+  }
 
+  
 });
 });
+
 app.get('/book', function (request, response) {
     console.log("book cart");
        //var supermarket=request.query.suparmarketname;
@@ -339,11 +366,25 @@ let query1=`Select * from cart where emailcust='${request.query.emailcust}'and n
     });
 }else{
     let msg="You need an extra amount";
-    let query8 = `INSERT INTO notification (namepro,id,count,msg,supetmarket) VALUES('${request.query.nameitem}','${request.query.id}','${count}','${msg}','${supermarket}') `;
-    pool.query(query8, function (error, data, results3) {
+    let query8 = `Select * from notification where supetmarket='${supermarket}'and namepro='${request.query.nameitem}'`;
+    pool.query(query8, function (error, data, results44) {
         console.log("done qurey888");
-        response.send(null);
-});
+        if (error) {
+       
+            response.status(400).send('Error in database operation');
+         
+         } 
+        if(results44.length !== 0){
+            let query9 = `INSERT INTO notification (namepro,id,count,msg,supetmarket) VALUES('${request.query.nameitem}','${request.query.id}','${count}','${msg}','${supermarket}') `;
+        pool.query(query9, function (error, data, results3) {
+            console.log("done qurey858");
+           
+      
+   });
+}
+response.send(null);
+    });
+  
     //  response.send(null);
 }
 });
@@ -374,6 +415,20 @@ let query1=`Select * from cart where emailcust='${request.query.email}' and flag
             response.status(400).send('Error in database operation');
         } else {
            // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/viewnotif', function (request, response) {
+    console.log("view notification");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from notification where supetmarket='${request.query.super}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+            console,log(results)
             response.send(results);
         }
     });

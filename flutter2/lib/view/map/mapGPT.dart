@@ -161,7 +161,7 @@ void initState() {
                 LatLng(double.parse(e.lat), double.parse(e.long)), //no change
                 builder: (context) => Container(
                   child: IconButton(
-                      icon: Icon(Icons.home_work_rounded),
+                      icon: Icon(Icons.store),
                       color: globalcolors.textcolor, // my icon
                       onPressed: () async {
                         //my notification
@@ -198,7 +198,7 @@ void initState() {
             //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
             //     builder: (context) => Container(
             //       child: IconButton(
-            //           icon: Icon(Icons.home_work_rounded),
+            //           icon: Icon(Icons.store),
             //           color: globalcolors.textcolor,// my icon
             //           onPressed: () {
             //             //my notification
@@ -218,7 +218,7 @@ void initState() {
             //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
             //     builder: (context) => Container(
             //       child: IconButton(
-            //           icon: Icon(Icons.home_work_rounded),
+            //           icon: Icon(Icons.store),
             //           color: globalcolors.notetcolor,// my icon
             //           onPressed: () {
             //             addMarker(e.user,e.phone);
@@ -373,7 +373,7 @@ void initState() {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-      const String basurl = "http://192.168.62.52:3000/";
+      const String basurl = "http://192.168.1.5:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
