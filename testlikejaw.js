@@ -127,7 +127,18 @@ let query1=`Select * from products where exp>'${currentdate}'and productcount>0 
         }
     });
 });
-
+app.get('/vieworder', function (request, response) {
+    console.log("all order");
+let query1='SELECT * FROM `order`';
+    pool.query(query1, function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+            response.send(results);
+        }
+    });
+});
 app.get('/addpro', function (request, response) {
     console.log("add pro");
     var name = request.query.productname;

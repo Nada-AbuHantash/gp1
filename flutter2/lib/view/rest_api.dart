@@ -1,14 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter2/models/filtert1.dart';
-import 'package:flutter2/models/filtert1.dart';
-import 'package:flutter2/models/filtert1.dart';
-import 'package:flutter2/view/dilevery/all.dart';
-import 'package:flutter2/view/map/marah.dart';
+
+import 'package:flutter2/models/filtert.dart';
+import 'package:flutter2/view/dilevery/filter.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/filtert1.dart';
+
+import '../models/filtert.dart';
 import '../models/product1.dart';
 
 import '../models/test.dart';
@@ -24,7 +21,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/models/test.dart';
 class utils {
-  static const String basurl = "http://192.168.1.5:3000/";
+  static const String basurl = "http://192.168.62.52:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -648,11 +645,11 @@ Future <List<test11>> test() async {
     }
   }
   //////////////////////////////////////////////////////
-  Future <List<filter1>> filter1() async {
+  Future <List<filter1>> filter() async {
     late  List<filter1> myList2=[];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewcart?email=$A'),
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {

@@ -373,7 +373,7 @@ void initState() {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-      const String basurl = "http://192.168.1.5:3000/";
+      const String basurl = "http://192.168.62.52:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 

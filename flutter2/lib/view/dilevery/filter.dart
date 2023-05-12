@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/view/cart/cart.dart';
 import 'package:flutter2/view/dilevery/all.dart';
 import 'package:flutter2/view/dilevery/markets.dart';
 import 'package:flutter2/view/dilevery/cust.dart';
 import 'package:flutter2/view/test.dart';
 import 'package:flutter2/utils/globalColors.dart';
+
+import '../cart/cart3.dart';
 class filter  extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -45,8 +48,10 @@ class filter  extends StatelessWidget {
           body: TabBarView(
             children: [
               all(),
-              markets(),
-              cust(),
+              cart1(),
+              cart03(),
+              // markets(),
+              // cust(),
             ],
           ),
         )

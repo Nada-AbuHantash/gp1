@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter2/models/filtert1.dart';
+import 'package:flutter2/models/filtert.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter2/view/MyHomePage.dart';
@@ -72,14 +72,14 @@ class _allState extends State<all> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.filter1();
+    myList=await fetch.filter();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
     List<filter1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.filter1();
+      myList=await fetch.filter();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(
@@ -101,7 +101,7 @@ class _allState extends State<all> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          post.productName,
+                          post.userName,
                           // "product name",
                           style:  TextStyle(
                             fontSize: 23, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -223,7 +223,7 @@ class _allState extends State<all> {
 
                       ],
                     ),
-                    Image.asset(post.image,width: 100,height: 100,),
+                    //Image.asset(post.image,width: 100,height: 100,),
                     //  Image.asset('assets/images/p4.jpg',width: 100,height: 100,),
 
 
