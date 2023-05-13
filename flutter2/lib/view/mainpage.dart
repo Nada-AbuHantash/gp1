@@ -16,7 +16,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:get/get.dart';
-import 'package:flutter2/view/login.dart';
+import 'package:flutter2/view/notfications.dart';
 //import 'package:flutter2/view/logintest.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage1> {
         return const homecust();
       case 1:
           // return  orders();
-         return MyMap();
+         return CardInfoPage();
       case 2:
         return  mycart();
       case 3:
