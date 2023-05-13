@@ -228,15 +228,31 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
 });
 app.get('/addorder', function (request, response) {
     console.log("add order");
-    let query =`Select SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' and flag=0`;
+    let query =`Select namesuper, SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' and flag=2 GROUP BY namesuper`;
     pool.query(query,function (error, results) {
         if (error) { response.status(400).send(error); }
+        else if (results.length === 0) {
+            response.status(404).send('No results found');
+          }
         else{
-            console.log(results[0].total_price);
-                   const total=results[0].total_price;
+            console.log(request.query.emailcust);
+            let query1=`SELECT *  FROM customer where useremail='${request.query.emailcust}'`;
+    pool.query(query1,[request.query.emailcust], function (error, results1) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+            console.log(error);
+            const phone=results1[0].userphone;
+            const place=results1[0].userplace;
+            for (let i = 0; i < results.length; i++) {
+                const row = results[i];
+            console.log(row.total_price);
+                   const total=row.total_price;
+                   const superm=row.namesuper;
                    const r="request is done";
-
-let query3=`INSERT INTO \`order\`  (nameuser,orderstatus,orderprice) VALUES('${request.query.name}','${r}','${total}')`;
+                   
+let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket) VALUES('${request.query.name}','${phone}','${place}','${r}','${total}','${superm}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
@@ -247,6 +263,10 @@ pool.query(query3,function (error, results0) {
            
              response.status(200)
         }
+        }
+    });
+            
+    }
     });
 
 });
