@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/mainpage.dart';
 import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/marah1.dart';
@@ -38,22 +39,22 @@ class MyMap extends StatefulWidget {
 }
 
 class _MyMap extends State<MyMap> with WidgetsBindingObserver{
-   Map<String, dynamic>? userMap;
+  Map<String, dynamic>? userMap;
   bool isLoading = false;
- // late final bool isme;
+  // late final bool isme;
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
-void initState() {
+  void initState() {
     super.initState();
-     distance=[];
+    distance=[];
     pos();
     // super.initState();
     fetchAllPoints();
     WidgetsBinding.instance!.addObserver(this);
     setStatus("Online");
-   
+
   }
 
   void setStatus(String status) async {
@@ -61,7 +62,7 @@ void initState() {
       "status": status,
     });
   }
-   @override
+  @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       // online
@@ -81,25 +82,25 @@ void initState() {
     }
   }
 
-  // void onSearch() async {
-  //   FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  void onSearch() async {
+    FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  //   setState(() {
-  //     isLoading = true;
-  //   });
+    setState(() {
+      isLoading = true;
+    });
 
-  //   await _firestore
-  //       .collection('users')
-  //       .where("name", isEqualTo: "ahmad")
-  //       .get()
-  //       .then((value) {
-  //     setState(() {
-  //       userMap = value.docs[0].data();
-  //       isLoading = false;
-  //     });
-  //     print("nnnnnnnnnnnnnnnn");
-  //   });
-  // }
+    await _firestore
+        .collection('users')
+        .where("name", isEqualTo: "ahmad")
+        .get()
+        .then((value) {
+      setState(() {
+        userMap = value.docs[0].data();
+        isLoading = false;
+      });
+      print("nnnnnnnnnnnnnnnn");
+    });
+  }
   bool isChecked = false;
   //fetchData _fetchData = fetchData();
   // TextEditingController _lat = TextEditingController(); //x
@@ -123,7 +124,7 @@ void initState() {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print(position.latitude);
     print(position.longitude);
-    
+
   }
   @override
   List<TaxiModel> _points = []; //x and y points
@@ -136,8 +137,26 @@ void initState() {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-        backgroundColor: globalcolors.besiccolor,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
 
+          elevation: 0,
+          title:
+          Text("Look who's around"),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: globalcolors.textcolor,
+          leading: IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage1()),
+              );
+              // Perform the desired action when the back button is pressed
+            },
+          ),
+        ),
         body: FlutterMap(
           options: new MapOptions(
             center: new LatLng(_latPoint, _longPoint),// my location
@@ -165,23 +184,23 @@ void initState() {
                       color: globalcolors.textcolor, // my icon
                       onPressed: () async {
                         //my notification
- FirebaseFirestore _firestore = FirebaseFirestore.instance;
+                        FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    setState(() {
-      isLoading = true;
-    });
+                        setState(() {
+                          isLoading = true;
+                        });
 
-    await _firestore
-        .collection('users')
-        .where("name", isEqualTo:"Dream Mall")//e.user
-        .get()
-        .then((value) {
-      setState(() {
-        userMap = value.docs[0].data();
-        isLoading = false;
-      });
-      print("nnnnnnnnnnnnnnnn");
-    });
+                        await _firestore
+                            .collection('users')
+                            .where("name", isEqualTo: "ahmad")//e.user
+                            .get()
+                            .then((value) {
+                          setState(() {
+                            userMap = value.docs[0].data();
+                            isLoading = false;
+                          });
+                          print("nnnnnnnnnnnnnnnn");
+                        });
                         addMarker(e.user,e.phone);
                         print('Marker tapped!');
                       }),
@@ -256,7 +275,7 @@ void initState() {
       this._diff= data;
     });
     Calculate_KNN();
-    
+
   }
 
   Future addMarker(String name,String phone) async { // pop //up
@@ -315,8 +334,8 @@ void initState() {
                     SizedBox(
                       height: 20,
                     ),
-                     userMap != null
-                    ?
+                    userMap != null
+                        ?
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1.6,
                       child:  Container(
@@ -337,27 +356,27 @@ void initState() {
                             ),
                           ),
                           //  userMap != null
-                    // ? ListTile():Column()
+                          // ? ListTile():Column()
                           onPressed:()async{
-                            
+
                             // _text ='sms:$phone';
                             // if ( await canLaunch (_text) ){
                             //   await launch(_text);
                             // }
-                             String roomId = chatRoomId(
-                              _auth.currentUser!.displayName!,
-                              userMap!['name']);
+                            String roomId = chatRoomId(
+                                _auth.currentUser!.displayName!,
+                                userMap!['name']);
 
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => ChatRoom(
-                                chatRoomId: roomId,
-                                userMap: userMap!,
-                              //  isme:  _auth.currentUser==userMap!['email'],
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ChatRoom(
+                                  chatRoomId: roomId,
+                                  userMap: userMap!,
+                                  //  isme:  _auth.currentUser==userMap!['email'],
+                                ),
                               ),
-                            ),
-                          );
-                            },
+                            );
+                          },
                         ),
                       ),
 
@@ -373,7 +392,7 @@ void initState() {
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-      const String basurl = "http://192.168.62.52:3000/";
+    const String basurl = "http://192.168.62.52:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
