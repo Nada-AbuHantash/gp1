@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/filtert.dart';
+import '../models/notifi.dart';
 import '../models/product1.dart';
 
 import '../models/test.dart';
@@ -658,6 +659,26 @@ Future <List<test11>> test() async {
       var jsonString = json.decode(res.body);
       List<filter1> list =
       List<filter1>.from(jsonString.map((i) => filter1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+
+  Future <List<String1>> viewnotifi() async {
+    late  List<String1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewnotif'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<String1> list =
+      List<String1>.from(jsonString.map((i) => String1.fromJson(i)));
       myList2 = list;
 
     } else {

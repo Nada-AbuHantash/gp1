@@ -15,13 +15,43 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+import '../models/notifi.dart';
+import 'login.dart';
+  final List<String> cardInfo=[];
+late  List<String1> myList=[];
 class CardInfoPage extends StatelessWidget {
-  final List<String> cardInfo = [
-    'Card 1 Information',
-    'Card 2 Information',
-    'Card 3 Information',
+  void _runFilter(String enteredKeyword) {
+  List<String1> results = [];
+
+  results = myList;
+
+  myList = results;
+}
+ @override
+  void initState() {
+    //super.initState();
+    myList=[];
+   getlistitem();
+   
+   
+  }
+  void getlistitem() async {
+    myList=(await fetch.viewnotifi()).cast<String1>();
+     myList.forEach((post) {
+       cardInfo .add(
+   post.marketName,
     // Add more card information here
-  ];
+       );
+     }
+    );
+  }
+  // final List<String> cardInfo = [
+  //   'Card 1 Information',
+  //   'Card 2 Information',
+  //   'Card 3 Information',
+  //   // Add more card information here
+  // ];
+  
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +61,7 @@ class CardInfoPage extends StatelessWidget {
         child: ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: cardInfo.length,
+          itemCount: myList.length,
           itemBuilder: (context, index) {
             return Card(
               child: ListTile(
@@ -53,7 +83,7 @@ class CardInfoPage extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(cardInfo[index]),
+                              Text(myList[index] as String),
 
                               Text(
                                 // post.productName,
