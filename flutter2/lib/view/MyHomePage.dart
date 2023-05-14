@@ -89,6 +89,8 @@ class _NavDrawerState extends State<NavDrawer> {
             _lights=false;
             }
       },
+            activeColor: globalcolors.textcolor, // Customize the active color
+            inactiveTrackColor: globalcolors.notetcolor,
             secondary: Icon(Icons.language, color: globalcolors.textcolor), value: true,
           ) ,
      //////////////     /////////////////////////////////////////////////////////////
