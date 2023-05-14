@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/utils/globalColors.dart';
-import 'package:flutter2/view/mainpage.dart';
 import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/marah1.dart';
@@ -82,25 +81,25 @@ void initState() {
     }
   }
 
-  void onSearch() async {
-    FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  // void onSearch() async {
+  //   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    setState(() {
-      isLoading = true;
-    });
+  //   setState(() {
+  //     isLoading = true;
+  //   });
 
-    await _firestore
-        .collection('users')
-        .where("name", isEqualTo: "ahmad")
-        .get()
-        .then((value) {
-      setState(() {
-        userMap = value.docs[0].data();
-        isLoading = false;
-      });
-      print("nnnnnnnnnnnnnnnn");
-    });
-  }
+  //   await _firestore
+  //       .collection('users')
+  //       .where("name", isEqualTo: "ahmad")
+  //       .get()
+  //       .then((value) {
+  //     setState(() {
+  //       userMap = value.docs[0].data();
+  //       isLoading = false;
+  //     });
+  //     print("nnnnnnnnnnnnnnnn");
+  //   });
+  // }
   bool isChecked = false;
   //fetchData _fetchData = fetchData();
   // TextEditingController _lat = TextEditingController(); //x
@@ -137,26 +136,8 @@ void initState() {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
+        backgroundColor: globalcolors.besiccolor,
 
-          elevation: 0,
-          title:
-          Text("Look who's around"),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          foregroundColor: globalcolors.textcolor,
-          leading: IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MyHomePage1()),
-              );
-              // Perform the desired action when the back button is pressed
-            },
-          ),
-        ),
         body: FlutterMap(
           options: new MapOptions(
             center: new LatLng(_latPoint, _longPoint),// my location
@@ -192,7 +173,7 @@ void initState() {
 
     await _firestore
         .collection('users')
-        .where("name", isEqualTo:e.user)//e.user
+        .where("name", isEqualTo:"Dream Mall")//e.user
         .get()
         .then((value) {
       setState(() {

@@ -4,13 +4,13 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/cart/cart.dart';
-import '../models/notifi.dart';
-import '../utils/Sharedsession.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter/material.dart';
 
-import '../components/applocal.dart';
+import '../models/notifi.dart';
+
 
 
 
@@ -46,13 +46,13 @@ void _runFilter(String enteredKeyword) {
 
 }
 
-class notfications extends StatefulWidget {
-  const notfications({Key? key}) : super(key: key);
+class notfications1 extends StatefulWidget {
+  const notfications1({Key? key}) : super(key: key);
   @override
-  _notficationsState createState() => _notficationsState();
+  _notfications1State createState() => _notfications1State();
 }
 
-class _notficationsState extends State<notfications> {
+class _notfications1State extends State<notfications1> {
 
   @override
 
@@ -88,11 +88,7 @@ class _notficationsState extends State<notfications> {
   void getlist() async{
     myList=await fetch.viewnotifi();
   }
-  // int daysBetween(DateTime from, DateTime to) {
-  //    from = DateTime(from.year, from.month, from.day);
-  //    to = DateTime(to.year, to.month, to.day);
-  //  return (to.difference(from).inHours / 24).round();
-  // }
+ 
   void getPostsData() async{
 
     List<Widget> listItems = [];
@@ -101,10 +97,6 @@ class _notficationsState extends State<notfications> {
       myList=(await fetch.viewnotifi());
 
     myList.forEach((post) {
-
-// final dd= DateTime(post.exp as int);
-//  final date2 = DateTime.now();
-//    final difference = daysBetween(dd as DateTime, date2);
 
 
       listItems.add(InkWell(
@@ -125,20 +117,17 @@ class _notficationsState extends State<notfications> {
                   children: <Widget>[
 
                     Text(
-                      post.marketName,
+                      post.namepro,
 
                       style:  TextStyle(
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
                     ),
                     Text(
-                      "${post.msg},\n The total price: \₪ ${post.count}",
+                      "${post.msg},\n The current quantity is ${post.count}",
                       style:  TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
 
                     ),
-                    Divider(
-                      color: globalcolors.textcolor, // Specify the color of the line
-                      thickness: 2.0, // Specify the thickness of the line
-                    ),
+                   
                   ],
 
                 ),
