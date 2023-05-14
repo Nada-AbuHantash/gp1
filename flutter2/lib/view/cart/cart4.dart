@@ -253,7 +253,7 @@ class _cart4State extends State<cart4> {
                 height: 12,
               ),
               Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                 ElevatedButton(
                   child: Text('buy'),
