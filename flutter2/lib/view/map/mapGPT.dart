@@ -192,7 +192,7 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
 
                         await _firestore
                             .collection('users')
-                            .where("name", isEqualTo: "ahmad")//e.user
+                            .where("name", isEqualTo: "Dream Moll")//e.user
                             .get()
                             .then((value) {
                           setState(() {
