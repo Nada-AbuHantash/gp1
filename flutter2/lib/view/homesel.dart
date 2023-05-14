@@ -69,7 +69,7 @@ class _homeselState extends State<homesel> {
 
   @override
   rest_api fetch=new rest_api();
-
+int flag=0;
 
   void initState()  {
     super.initState();
@@ -104,7 +104,7 @@ class _homeselState extends State<homesel> {
   }
 
   void getPostsData() async{
-
+int flagg=0;
     List<Widget> listItems = [];
     List<Product> A = [];
     if(myList.isEmpty){
@@ -123,8 +123,8 @@ class _homeselState extends State<homesel> {
 
     myList.forEach((post) {
 
-  if(post.count==0){
-
+  if(post.count==0 && flagg==0){
+flagg=1;
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification? notification = message.notification;

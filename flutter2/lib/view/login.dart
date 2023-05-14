@@ -199,6 +199,7 @@ class _loginState extends State<login> {
                       showSpinner = true;
                     });
                     try {
+                      
                       final user = await _auth.signInWithEmailAndPassword(
                           email: emailcntoraler.text, password: passcntoraler.text,);
                       if (user != null) {
@@ -215,6 +216,9 @@ class _loginState extends State<login> {
                                 : Fluttertoast.showToast(
                                     msg: "${getLang(context, "somefiled")}",
                                     textColor: Color.fromARGB(255, 244, 54, 203));
+                                     setState(() {
+                              showSpinner = false;
+                            });
                           },
                         ),
                       ),
@@ -387,6 +391,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
           setState(() {
                               showSpinner = false;
                             });
+                             
                               setState(() {
                         showSpinner = false;
                       });

@@ -1,5 +1,6 @@
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/cart/cart2.dart';
@@ -7,10 +8,12 @@ import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/cart/mycart.dart';
 import 'package:flutter2/view/map/mapGPT.dart';
 import 'package:flutter2/view/profile.dart';
+import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/test.dart';
 import 'package:flutter2/view/widgets/button.dart';
 import 'package:flutter2/view/widgets/textfiled.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -20,8 +23,11 @@ import 'package:flutter2/view/notfications.dart';
 //import 'package:flutter2/view/logintest.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/applocal.dart';
+import '../main.dart';
+import '../models/notifi.dart';
 import 'MyHomePage.dart';
 import 'chat/chat.dart';
 import 'chat/searchchat.dart';
@@ -32,6 +38,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
+late  List<String1> myList=[];
 
 // class mainpage extends StatelessWidget {
 //   const mainpage({Key? key}) : super(key: key);
@@ -54,8 +61,9 @@ class MyHomePage1 extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage1> {
   int _currentIndex = 0;
-
+ 
   @override
+  
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(

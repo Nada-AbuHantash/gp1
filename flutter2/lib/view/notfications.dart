@@ -4,6 +4,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/cart/cart.dart';
+import '../models/notifi.dart';
 import '../utils/Sharedsession.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter2/view/rest_api.dart';
@@ -24,21 +25,22 @@ TextEditingController productManufactureingController = TextEditingController();
 
 late int count=1;
 
-late  List<Product> myList=[];
+late  List<String1> myList=[];
 
 void _runFilter(String enteredKeyword) {
-  List<Product> results = [];
+  List<String1> results = [];
   if (enteredKeyword.isEmpty) {
     // if the search field is empty or only contains white-space, we'll display all users
     results = myList;
-  } else {
-    results = myList
-        .where((user) => user.productname
-        .toLowerCase()
-        .contains(enteredKeyword.toLowerCase()))
-        .toList();
+  } 
+  // else {
+  //   results = myList
+  //       .where((user) => user.productname
+  //       .toLowerCase()
+  //       .contains(enteredKeyword.toLowerCase()))
+  //       .toList();
 
-  }
+  // }
 
   myList = results;
 
@@ -58,13 +60,6 @@ class _notficationsState extends State<notfications> {
 
   String text = "";
 
-class CardInfoPage extends StatelessWidget {
-  final List<String> cardInfo = [
-    'Card 1 Information',
-    'Card 2 Information',
-    'Card 3 Information',
-    // Add more card information here
-  ];
 
   @override
   rest_api fetch=new rest_api();
@@ -91,7 +86,7 @@ class CardInfoPage extends StatelessWidget {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlist() async{
-    myList=await fetch.most();
+    myList=await fetch.viewnotifi();
   }
   // int daysBetween(DateTime from, DateTime to) {
   //    from = DateTime(from.year, from.month, from.day);
@@ -101,9 +96,9 @@ class CardInfoPage extends StatelessWidget {
   void getPostsData() async{
 
     List<Widget> listItems = [];
-    List<Product> A = [];
+    List<String1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.most();
+     myList=(await fetch.viewnotifi());
 
     myList.forEach((post) {
 
@@ -114,51 +109,45 @@ class CardInfoPage extends StatelessWidget {
 
       listItems.add(InkWell(
 
-      body: SingleChildScrollView(
-        child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: cardInfo.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                //  title: Text(cardInfo[index]),
-                subtitle: Container(
-                    height: 100,
-                    margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    // decoration: BoxDecoration(
-                    //     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    //     color: Colors.white,
-                    //     boxShadow: [
-                    //       BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
-                    //     ]),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 9),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(cardInfo[index]),
+        child: Container(
+          height: 80,
+          width: 330,
+          padding: const EdgeInsets.only(left: 20,right: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
 
-                              Text(
-                                // post.productName,
-                                "custmer name",
-                                style:  TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold,color: Colors.green,),
-                              ),
-                              Text(
-                                // post.productName,
-                                "product name",
-                                style:  TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                              ),
-                              Text(
-                                //   post.marketName,
-                                "supermarket name",
-                                style:  TextStyle(fontSize: 17,color: Colors.red,fontWeight: FontWeight.bold,),
-                              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+               
+                    Text(
+                      post.marketName,
+
+                      style:  TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
+                    ),
+                    Text(
+                       "${post.msg},\n The total price: \₪ ${post.count}",
+                      style:  TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
+                      
+                    ),
+                 Divider(
+                  color: globalcolors.textcolor, // Specify the color of the line
+                  thickness: 1.0, // Specify the thickness of the line
+                ),
+                  ],
+                ),
+               
+
+              ],
+            ),
+          ),
+
+        ),
 
       ));
 
@@ -218,11 +207,13 @@ class CardInfoPage extends StatelessWidget {
               ),
 
               Expanded(
+                
                   child: ListView.builder(
                       controller: controller,
                       itemCount: itemsData.length,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
+                          
                         return Align(
                             heightFactor: 1,
                             alignment: Alignment.topCenter,

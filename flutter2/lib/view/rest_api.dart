@@ -670,7 +670,7 @@ Future <List<test11>> test() async {
     late  List<String1> myList2=[];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewnotif'),
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewnotif?super=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {

@@ -453,7 +453,7 @@ let query1=`Select * from cart where emailcust='${request.query.email}' and flag
 app.get('/viewnotif', function (request, response) {
     console.log("view notification");
    //var supermarket=request.query.suparmarketname;
-let query1=`Select * from notification where supetmarket='${request.query.super}'`;
+let query1=`Select * from notification where supetmarket='${request.query.super}' or namepro='${request.query.super}'`;
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error);
