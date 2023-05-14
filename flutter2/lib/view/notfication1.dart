@@ -123,7 +123,7 @@ class _notfications1State extends State<notfications1> {
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
                     ),
                     Text(
-                      "${post.msg},\n TThe current quantity is ${post.count}",
+                      "${post.msg},\n The current quantity is ${post.count}",
                       style:  TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
 
                     ),

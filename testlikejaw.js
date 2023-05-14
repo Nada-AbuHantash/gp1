@@ -161,7 +161,7 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
         
         } 
             else {
-              
+              var namesu=results[0].selleremail;
                var card=results[0].sellercard;
                console.log(card);
                 if(card>percent){
@@ -217,8 +217,26 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
             
                 });
             }else{
-        
-                response.send("no badget with you");
+                let msg="no badget with you";
+                let person="your wallet";
+                let query3=`INSERT INTO notification (msg,
+                    supetmarket,
+                    count,namepro) VALUES('${msg}','${namesu}','${card}','${person}')`;
+            
+                pool.query(query3,  function (error, data, results) {
+                    console.log("done notifi");
+            
+                    if (error) {
+                        console.log(error);
+                        response.status(400).send('Error');
+                    }
+                    else {
+                        response.send("Success update card");
+            
+                    }
+            
+                });
+               // response.send("no badget with you");
             }
             }
            // console.log(results[0].sellercard);
