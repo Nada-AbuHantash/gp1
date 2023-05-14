@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/mainpage.dart';
 import 'dart:convert';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter2/view/widgets/marah1.dart';
@@ -136,8 +137,26 @@ void initState() {
   Widget build(BuildContext context) {
 
     return new Scaffold(
-        backgroundColor: globalcolors.besiccolor,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
 
+          elevation: 0,
+          title:
+          Text("Look who's around"),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: globalcolors.textcolor,
+          leading: IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyHomePage1()),
+              );
+              // Perform the desired action when the back button is pressed
+            },
+          ),
+        ),
         body: FlutterMap(
           options: new MapOptions(
             center: new LatLng(_latPoint, _longPoint),// my location
