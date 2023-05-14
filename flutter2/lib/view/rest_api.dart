@@ -636,10 +636,24 @@ Future <List<test11>> test() async {
       throw Exception('Failed to load album');
     }
   }
+   
    Future buy(int id)async{
     http.Response res = await http.get(Uri.parse(utils.basurl+'buy?id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
+
+  Future addorder()async{
+  final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl+'addorder?emailcust=$A'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+      
     } else {
 
       throw Exception('Failed to load album');

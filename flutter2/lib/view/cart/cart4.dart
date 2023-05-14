@@ -263,7 +263,7 @@ class _cart4State extends State<cart4> {
                     onSurface: Colors.grey,
                   ),
                   onPressed: () async{
-
+                      addO();
                   },
                 ),
                ]
@@ -285,6 +285,15 @@ class _cart4State extends State<cart4> {
       Fluttertoast.showToast(msg: "delete id done refrch to sure",
           textColor: globalcolors.besiccolor);
     }else{}
+  }
+  
+  Future<void> addO() async {
+Fluttertoast.showToast(msg: "send the request",
+          textColor: globalcolors.notetcolor);
+  var res=  await fetch.addorder();
+
+  
+
   }
 }
 

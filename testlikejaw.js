@@ -228,7 +228,7 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
 });
 app.get('/addorder', function (request, response) {
     console.log("add order");
-    let query =`Select namesuper, SUM(totalprice) as total_price,nameitem from cart where emailcust='${request.query.emailcust}' and flag=2 GROUP BY namesuper`;
+    let query =`Select namesuper, SUM(totalprice) as total_price,nameitem,SUM(numitem)as cc from cart where emailcust='${request.query.emailcust}' and flag=2 GROUP BY namesuper`;
     pool.query(query,function (error, results) {
         if (error) { response.status(400).send(error); }
         else if (results.length === 0) {
@@ -242,17 +242,21 @@ app.get('/addorder', function (request, response) {
             console.log(error);
             response.status(400).send('Error in database operation');
         } else {
-            console.log(error);
+          
+            // const count=results1[0].cc;
+            //   console.log(count);
             const phone=results1[0].userphone;
             const place=results1[0].userplace;
+            const name=results1[0].username
             for (let i = 0; i < results.length; i++) {
                 const row = results[i];
             console.log(row.total_price);
                    const total=row.total_price;
                    const superm=row.namesuper;
+                   const count=row.cc;
                    const r="request is done";
                    
-let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket) VALUES('${request.query.name}','${phone}','${place}','${r}','${total}','${superm}')`;
+let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count) VALUES('${name}','${phone}','${place}','${r}','${total}','${superm}','${count}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
