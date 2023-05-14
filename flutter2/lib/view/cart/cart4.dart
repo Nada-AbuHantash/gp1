@@ -144,7 +144,7 @@ class _cart4State extends State<cart4> {
                                       context: context,
                                       builder: (BuildContext context) =>
                                           AlertDialog(
-title:Text("are you sure delete this itme ?"),
+                           title:Text("are you sure delete this itme ?"),
             titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 20),
             backgroundColor: globalcolors.besiccolor,
                                             actions: [
@@ -249,8 +249,29 @@ title:Text("are you sure delete this itme ?"),
                             alignment: Alignment.topCenter,
                             child: itemsData[index]);
                       })),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                  child: Text('buy'),
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () async{
+
+                  },
+                ),
+               ]
+
+              ),
             ],
           ),
+
         ),
       ),
     );

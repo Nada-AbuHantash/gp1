@@ -4,6 +4,7 @@ import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/cart/cart.dart';
+import 'package:flutter2/view/map/mapGPT.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../utils/Sharedsession.dart';
@@ -237,7 +238,16 @@ class _MyHomePageState extends State<homecust> {
           centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
-
+          leading: IconButton(
+            icon: Icon(Icons.location_pin),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const addBasket()),
+              );
+              // Perform the desired action when the back button is pressed
+            },
+          ),
         ),
         body: Container(
           height: size.height,
