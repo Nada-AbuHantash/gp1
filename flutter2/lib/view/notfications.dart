@@ -32,7 +32,7 @@ void _runFilter(String enteredKeyword) {
   if (enteredKeyword.isEmpty) {
     // if the search field is empty or only contains white-space, we'll display all users
     results = myList;
-  } 
+  }
   // else {
   //   results = myList
   //       .where((user) => user.productname
@@ -98,7 +98,7 @@ class _notficationsState extends State<notfications> {
     List<Widget> listItems = [];
     List<String1> A = [];
     if(myList.isEmpty)
-     myList=(await fetch.viewnotifi());
+      myList=(await fetch.viewnotifi());
 
     myList.forEach((post) {
 
@@ -123,7 +123,7 @@ class _notficationsState extends State<notfications> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-               
+
                     Text(
                       post.marketName,
 
@@ -131,17 +131,21 @@ class _notficationsState extends State<notfications> {
                           fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor),
                     ),
                     Text(
-                       "${post.msg},\n The total price: \₪ ${post.count}",
+                      "${post.msg},\n The total price: \₪ ${post.count}",
                       style:  TextStyle(fontSize: 13, color: globalcolors.textcolor.withOpacity(0.6)),
-                      
+
                     ),
-                 Divider(
-                  color: globalcolors.textcolor, // Specify the color of the line
-                  thickness: 1.0, // Specify the thickness of the line
-                ),
+                    Divider(
+                      color: globalcolors.textcolor, // Specify the color of the line
+                      thickness: 2.0, // Specify the thickness of the line
+                    ),
                   ],
+
                 ),
-               
+                Divider(
+                  color: globalcolors.textcolor, // Specify the color of the line
+                  thickness: 2.0, // Specify the thickness of the line
+                ),
 
               ],
             ),
@@ -207,13 +211,13 @@ class _notficationsState extends State<notfications> {
               ),
 
               Expanded(
-                
+
                   child: ListView.builder(
                       controller: controller,
                       itemCount: itemsData.length,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (context, index) {
-                          
+
                         return Align(
                             heightFactor: 1,
                             alignment: Alignment.topCenter,
