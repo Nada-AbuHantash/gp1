@@ -173,7 +173,7 @@ void initState() {
 
     await _firestore
         .collection('users')
-        .where("name", isEqualTo: "ahmad")//e.user
+        .where("name", isEqualTo:e.user)//e.user
         .get()
         .then((value) {
       setState(() {
