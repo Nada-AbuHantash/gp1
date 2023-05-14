@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
+import 'package:flutter2/view/notfications.dart';
 import 'package:flutter2/view/test.dart';
 import 'package:flutter2/utils/globalColors.dart';
 class orders extends StatelessWidget {
@@ -38,7 +39,7 @@ class orders extends StatelessWidget {
           body: TabBarView(
             children: [
               dil(),
-              MapScreen(),
+              notfications(),
             ],
           ),
         )

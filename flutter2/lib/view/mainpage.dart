@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage1> {
         return const homecust();
       case 1:
           // return  orders();
-         return CardInfoPage();
+         return notfications();
       case 2:
         return  mycart();
       case 3:
