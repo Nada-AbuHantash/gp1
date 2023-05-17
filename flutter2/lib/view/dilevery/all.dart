@@ -3,6 +3,7 @@ import 'package:flutter2/models/filtert.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter2/view/MyHomePage.dart';
+import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
@@ -92,6 +93,12 @@ class _allState extends State<all> {
                   boxShadow: [
                     BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
                   ]),
+              child: GestureDetector(
+                  onTap: () {
+                    // Action to be performed when the container is pressed
+                    print('open this case!');
+                    MaterialPageRoute(builder: (context) =>  dil());
+                  },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                 child: Row(
@@ -107,118 +114,26 @@ class _allState extends State<all> {
                             fontSize: 23, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),
                         Text(
-                          post.marketName,
+                          "Piece: ${ post.marketName}",
+
                           //"supermarket name",
                           style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
                         ),
 
                         Text(
-                          "count: ${post.amount}",
+                          "ID: ${post.amount}",
 
                           // "count: 3",
                           style:  TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),Text(
-                          "price: ${post.price} ₪",
+                          "Total price: ${post.price} ₪",
                           // "price:15 ₪",
                           style:  TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),
 
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[  ElevatedButton(
-                              child: Text('buy'),
-                              style: ElevatedButton.styleFrom(
-                                primary: globalcolors.notetcolor,
-                                onPrimary: Colors.white,
-                                onSurface: Colors.grey,
-                              ),
-                              onPressed: () async{
-                                buy(post.id);
-                                print("marah1");
-                              },
-                            ),
-                              SizedBox(width: 16.0),
-                              ElevatedButton(
-                                child: Text('boke'),
-                                style: ElevatedButton.styleFrom(
-                                  primary: globalcolors.notetcolor,
-                                  onPrimary: Colors.white,
-                                  onSurface: Colors.grey,
-                                ),
-                                onPressed: () async{
-                                  book(post.id);
-                                  print("marah2");
-                                  DateTime now = DateTime.now();
-                                  var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
-                                  print(time);
-                                },
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  showDialog(
 
-                                      context: context,
-                                      builder: (BuildContext context) =>
-                                          AlertDialog(
-                                            title:Text("are you sure delete this itme ?"),
-                                            titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 20),
-                                            backgroundColor: globalcolors.besiccolor,
-                                            actions: [
-                                              const SizedBox(height: 20),
-
-                                              Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-
-                                                    SizedBox(
-                                                      child: ElevatedButton(
-
-                                                        style: ElevatedButton.styleFrom(
-
-                                                          shape: RoundedRectangleBorder(
-
-                                                              borderRadius: BorderRadius.circular(20.0)),
-                                                          foregroundColor: globalcolors.maincolor,
-                                                          backgroundColor: globalcolors.notetcolor,
-                                                          minimumSize: Size(250, 50),
-                                                        ),
-                                                        child: Text("delete",
-
-                                                          style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-                                                        ),
-                                                        onPressed: ()  {
-                                                          delete(post.id);
-                                                          getlistitem();
-                                                          getPostsData();
-                                                          Fluttertoast.showToast(msg: "delete item done refrch to sure",
-                                                              textColor: globalcolors.besiccolor);
-
-                                                        },
-                                                      ),
-                                                    ),
-
-
-                                                  ],
-
-                                                ),
-                                              ),
-
-                                              const SizedBox(height: 20),
-
-                                            ],
-
-                                          )
-
-                                  );
-
-                                },
-                                icon: Icon(Icons.delete_forever,color: globalcolors.textcolor), // The icon to display on the button.
-                              ),
-                            ])
 
 
                       ],
@@ -229,7 +144,7 @@ class _allState extends State<all> {
 
                   ],
                 ),
-              )));
+              )),));
     });
     setState(() {
       itemsData = listItems;
@@ -283,40 +198,8 @@ class _allState extends State<all> {
       ),
     );
   }
-  void delete(int id) async {
-
-    var res=  await fetch.deleteitems(id);
-
-    if(res!=null){
-
-      Fluttertoast.showToast(msg: "delete item done refrch to sure",
-          textColor: globalcolors.besiccolor);
-    }else{}
-  }
-
-  void book(int id) async {
-
-    var res=  await fetch.book(id);
-    if(res!=null){
-
-      Fluttertoast.showToast(msg: "book item done ",
-          textColor: globalcolors.besiccolor);
-    }
-    getlistitem();
-    getPostsData();
-  }
 
 
-  void buy(int id) async {
 
-    var res=  await fetch.buy(id);
-    if(res!=null){
-
-      Fluttertoast.showToast(msg: "ordered done",
-          textColor: globalcolors.besiccolor);
-    }
-    getlistitem();
-    getPostsData();
-  }
 }
 

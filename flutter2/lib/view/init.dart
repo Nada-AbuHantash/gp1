@@ -27,20 +27,10 @@ Widget build(BuildContext context){
         body: Center(
           child: Container(
             color: globalcolors.besiccolor,
-            //child: Lottie.network('https://assets6.lottiefiles.com/packages/lf20_z49WoSvxKM.json'),//start
-             // child: Lottie.network('https://assets8.lottiefiles.com/packages/lf20_CZva9peGiW.json'), //delvry
-              //child: Lottie.network('https://assets6.lottiefiles.com/packages/lf20_yMpiqXia1k.json'),//arbah
-             //child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_lvnzxq3d.json'),//web
              child: Lottie.network('https://assets9.lottiefiles.com/packages/lf20_ardajn6t.json'),//sale
-             // child: Lottie.network('https://assets8.lottiefiles.com/packages/lf20_CZva9peGiW.json'),
             width: double.infinity,
             height: double.infinity,
-           
-            // decoration: BoxDecoration(
-            //   image: DecorationImage(
-            //    image: AssetImage("images/home.jpg"),fit: BoxFit.cover),
-            // ),
-          
+
             ),
         ),
         ),
