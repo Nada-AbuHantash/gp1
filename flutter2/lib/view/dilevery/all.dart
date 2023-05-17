@@ -106,7 +106,7 @@ class _allState extends State<all> {
                   onTap: () {
                     // Action to be performed when the container is pressed
                     print('open this case!');
-                    MaterialPageRoute(builder: (context) =>  dil());
+                    MaterialPageRoute(builder: (context) =>  homedil());
                   },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
