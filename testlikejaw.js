@@ -458,6 +458,34 @@ let query1=`Select * from products where namesupermarket='${request.query.namesu
         }
     });
 });
+app.get('/vieworder1', function (request, response) {
+    console.log("view suprmarkt have order");
+   //var supermarket=request.query.suparmarketname;
+let query1='Select namesupermarket from `order`';
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error)
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/vieworder2', function (request, response) {
+    console.log("view all order to spsifc supermarket");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from \`order\` where namesupermarket='${request.query.name}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
 app.get('/viewcart', function (request, response) {
     console.log("view cart all");
    //var supermarket=request.query.suparmarketname;
@@ -469,6 +497,34 @@ let query1=`Select * from cart where emailcust='${request.query.email}' and flag
         } else {
            // console,log(results)
             response.send(results);
+        }
+    });
+});
+app.get('/viewcartfromorder', function (request, response) {
+    console.log("view cart from order");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from customer where username='${request.query.name}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+            const email=results[0].useremail;
+          
+                console.log("view cart all");
+               //var supermarket=request.query.suparmarketname;
+            let query1=`Select * from cart where emailcust='${email}' and flag=2`;
+                pool.query(query1,function (error, results) {
+                    if (error) {
+                        
+                        response.status(400).send('Error in database operation');
+                    } else {
+                       console,log(results)
+                        response.send(results);
+                    }
+                });
+         
+           // response.send(results);
         }
     });
 });
