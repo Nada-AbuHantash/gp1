@@ -461,7 +461,7 @@ let query1=`Select * from products where namesupermarket='${request.query.namesu
 app.get('/vieworder1', function (request, response) {
     console.log("view suprmarkt have order");
    //var supermarket=request.query.suparmarketname;
-let query1='Select namesupermarket from `order`';
+let query1='Select namesupermarket from `order`GROUP BY namesupermarket';
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error)

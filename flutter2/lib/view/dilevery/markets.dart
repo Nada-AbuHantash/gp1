@@ -8,15 +8,18 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
+import '../../models/supermarket.dart';
+import '../../utils/Sharedsession.dart';
+
 TextEditingController productNameController = TextEditingController();
 
 
 
 
-late  List<Product1> myList=[];
+late  List<super1> myList=[];
 
 void _runFilter(String enteredKeyword) {
-  List<Product1> results = [];
+  List<super1> results = [];
 
   results = myList;
 
@@ -62,22 +65,22 @@ class _marketsState extends State<markets> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.viewbuy();
+    myList=await fetch.allsupermarkt();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
-    List<Product1> A = [];
+    List<super1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.viewbuy();
+      myList=await fetch.allsupermarkt();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(
 
           Container(
 
-              height: 80,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              height: 60,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   color: globalcolors.besiccolor,
@@ -85,11 +88,17 @@ class _marketsState extends State<markets> {
                     BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
                   ]),
               child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     // Action to be performed when the container is pressed
                     print('open this market!');
-
-                    MaterialPageRoute(builder: (context) =>  all());
+Sharedsession shared = new Sharedsession();
+                    await shared.savesavemarkt(post.marketName);
+                   
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => all(data:
+                             post.marketName,
+                             )));
+                    // MaterialPageRoute(builder: (context) => all());
                   },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
@@ -100,7 +109,7 @@ class _marketsState extends State<markets> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          post.productName+", "+post.marketName,
+                          post.marketName,
                           // "product name",
                           style:  TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -150,7 +159,7 @@ class _marketsState extends State<markets> {
                 ],
               ),
               const SizedBox(
-                height: 12,
+                height: 5,
               ),
               Expanded(
                   child: ListView.builder(
@@ -164,7 +173,7 @@ class _marketsState extends State<markets> {
                             child: itemsData[index]);
                       })),
               const SizedBox(
-                height: 12,
+                height: 5,
               ),
 
             ],

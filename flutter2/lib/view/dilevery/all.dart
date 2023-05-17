@@ -8,16 +8,25 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
+import '../../models/odertosuper.dart';
+
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
 TextEditingController productPriceController = TextEditingController();
 TextEditingController productMarketController = TextEditingController();
 TextEditingController productManufactureingController = TextEditingController();
 
-late  List<filter1> myList=[];
+late  List<super2> myList=[];
+class all extends StatefulWidget {
+ 
+  final String data;
+  const all( { required this.data,});
 
+  @override
+  _allState createState() => _allState();
+}
 void _runFilter(String enteredKeyword) {
-  List<filter1> results = [];
+  List<super2> results = [];
 
   results = myList;
 
@@ -26,11 +35,11 @@ void _runFilter(String enteredKeyword) {
 
 
 
-class all extends StatefulWidget {
-  const all({Key? key}) : super(key: key);
-  @override
-  _allState createState() => _allState();
-}
+// class all extends StatefulWidget {
+//   const all({Key? key, required String date}) : super(key: key);
+//   @override
+//   _allState createState() => _allState();
+// }
 
 class _allState extends State<all> {
 
@@ -73,14 +82,14 @@ class _allState extends State<all> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.filter();
+    myList=await fetch.odrdertosupermarkt();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
-    List<filter1> A = [];
+    List<super2> A = [];
     if(myList.isEmpty)
-      myList=await fetch.filter();
+      myList=await fetch.odrdertosupermarkt();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(
@@ -114,18 +123,23 @@ class _allState extends State<all> {
                             fontSize: 23, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),
                         Text(
-                          "Piece: ${ post.marketName}",
+                          "Market name: ${ post.marketName}",
 
                           //"supermarket name",
                           style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
                         ),
-
                         Text(
-                          "ID: ${post.amount}",
+                          "the number of pieces: ${ post.amount}",
+
+                          //"supermarket name",
+                          style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
+                        ),
+                        Text(
+                          "ID: ${post.id}",
 
                           // "count: 3",
                           style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.notetcolor,),
                         ),Text(
                           "Total price: ${post.price} ₪",
                           // "price:15 ₪",

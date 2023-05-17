@@ -7,8 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/filtert.dart';
 import '../models/notifi.dart';
+import '../models/odertosuper.dart';
 import '../models/product1.dart';
 
+import '../models/supermarket.dart';
 import '../models/test.dart';
 import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
@@ -679,7 +681,44 @@ Future <List<test11>> test() async {
       throw Exception('Failed to load album');
     } return myList2;
   }
+   Future <List<super1>> allsupermarkt() async {
+    late  List<super1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder1'),
+        headers: {'Content-Type': 'application/json'});
 
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<super1> list =
+      List<super1>.from(jsonString.map((i) => super1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+ Future <List<super2>> odrdertosupermarkt() async {
+    late  List<super2> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("market").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder2?name=$A'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<super2> list =
+      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
   Future <List<String1>> viewnotifi() async {
     late  List<String1> myList2=[];
     final prefs = await SharedPreferences.getInstance();
