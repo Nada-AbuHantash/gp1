@@ -26,13 +26,16 @@ void _runFilter(String enteredKeyword) {
   myList = results;
 }
 
-
-
 class homedil extends StatefulWidget {
-  const homedil({Key? key}) : super(key: key);
+ 
+  final String data;
+  const homedil({super.key, required this.data});
+
   @override
   _homedilState createState() => _homedilState();
 }
+
+
 
 class _homedilState extends State<homedil> {
   Timer? _timer;
@@ -67,14 +70,14 @@ class _homedilState extends State<homedil> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.viewbuy();
+    myList=await fetch.viewbuysuper();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
     List<Product1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.viewbuy();
+      myList=await fetch.viewbuysuper();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(

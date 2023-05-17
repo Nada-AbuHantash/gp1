@@ -558,6 +558,26 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList2;
   }
+     Future <List<Product1>> viewbuysuper() async {
+    late  List<Product1> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("order").toString();
+    String B = prefs.get("supermarket").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuy2?email=$A&supername=$B'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
   Future <List<Product>> most2(String name) async {
     late  List<Product> myList=[];
 
@@ -703,7 +723,7 @@ Future <List<test11>> test() async {
  Future <List<super2>> odrdertosupermarkt() async {
     late  List<super2> myList2=[];
     final prefs = await SharedPreferences.getInstance();
-    String A = prefs.get("market").toString();
+    String A = prefs.get("supermarket").toString();
     http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder2?name=$A'),
         headers: {'Content-Type': 'application/json'});
 

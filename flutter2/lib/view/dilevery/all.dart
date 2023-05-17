@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
 import '../../models/odertosuper.dart';
+import '../../utils/Sharedsession.dart';
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
@@ -103,10 +104,15 @@ class _allState extends State<all> {
                     BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
                   ]),
               child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     // Action to be performed when the container is pressed
                     print('open this case!');
-                    MaterialPageRoute(builder: (context) =>  homedil());
+                    Sharedsession shared = new Sharedsession();
+                    await shared.saveordername(post.userName);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => homedil(data:
+                             post.userName,
+                             )));
                   },
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),

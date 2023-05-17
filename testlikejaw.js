@@ -570,6 +570,32 @@ let query1=`Select * from cart where emailcust='${request.query.email}' and flag
         }
     });
 });
+app.get('/viewbuy2', function (request, response) {
+    console.log("view cart buy from oredrs");
+   //var supermarket=request.query.suparmarketname;
+   let query1=`Select * from customer where username='${request.query.email}' `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+            const email=results[0].useremail;
+           // console,log(results)
+            // response.send(results);
+            let query1=`Select * from cart where emailcust='${email}' and flag=2 and namesuper='${request.query.supername}' `;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+        }
+    });
+
+});
 /////////////////////////////////////////////////////////////
 app.get('/viewloca', function (request, response) {
     console.log("view ,location");

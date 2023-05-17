@@ -92,7 +92,7 @@ class _marketsState extends State<markets> {
                     // Action to be performed when the container is pressed
                     print('open this market!');
 Sharedsession shared = new Sharedsession();
-                    await shared.savesavemarkt(post.marketName);
+                    await shared.savenamesuper(post.marketName);
                    
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => all(data:
