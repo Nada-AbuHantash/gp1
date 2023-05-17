@@ -273,8 +273,8 @@ app.get('/addorder', function (request, response) {
                    const superm=row.namesuper;
                    const count=row.cc;
                    const r="request is done";
-                   
-let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count) VALUES('${name}','${phone}','${place}','${r}','${total}','${superm}','${count}')`;
+                   const t= total*0.05;
+let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES('${name}','${phone}','${place}','${r}','${total}','${superm}','${count}','${t}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
