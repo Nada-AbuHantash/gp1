@@ -1,103 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter2/models/product1.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
-
+import 'package:flutter2/view/MyHomePage.dart';
+import 'package:flutter2/view/dilevery/orders.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import 'dart:ui';
-import 'package:flutter/material.dart';
+TextEditingController productNameController = TextEditingController();
+TextEditingController productImageURLController = TextEditingController();
+TextEditingController productPriceController = TextEditingController();
+TextEditingController productMarketController = TextEditingController();
+TextEditingController productManufactureingController = TextEditingController();
 
 
 
+late  List<Product1> myList=[];
 
+void _runFilter(String enteredKeyword) {
+  List<Product1> results = [];
 
-class dil extends StatefulWidget {
-  @override
-  _dilState createState() => _dilState();
+  results = myList;
 
-  
+  myList = results;
 }
 
-class _dilState extends State<dil> {
+
+
+class homedil extends StatefulWidget {
+  const homedil({Key? key}) : super(key: key);
+  @override
+  _homedilState createState() => _homedilState();
+}
+
+class _homedilState extends State<homedil> {
+  Timer? _timer;
+  int _elapsedSeconds = 86400;
+  @override
+  TextEditingController _textEditingController = TextEditingController();
+  String text = "";
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+
+  void initState() {
+    super.initState();
 
 
-      ),
-      body:
-      Column(
-        children: [
-      Container(
-        height: 250,
-       // width: 90,
-       // margin:  EdgeInsets.top,
-        child: FlutterMap(
-          options:
-          MapOptions(center: LatLng(32.309718, 35.112541), zoom: 13.0),
-          layers: [
-            TileLayerOptions(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
 
-            MarkerLayerOptions(markers: [
-              Marker(
-                  width: 30.0,
-                  height: 30.0,
-                  point: LatLng(32.309718, 35.112541),
-                  builder: (ctx) => Container(
-                      child: Container(
-                        child: Icon(
-                          Icons.motorcycle,
-                          color: Colors.blue,
-                          size: 60,
-                        ),
-                      ))),
-              Marker(
-                  width: 30.0,
-                  height: 30.0,
-                  point: LatLng(32.309051, 35.114299),
-                  builder: (ctx) => Container(
-                      child: Container(
-                        child: Icon(
-                          Icons.store,
-                          color: Colors.red,
-                          size: 40,
-                        ),
-                      ))),
-              Marker(
-                  width: 30.0,
-                  height: 30.0,
-                  point: LatLng(32.308295, 35.112941),
-                  builder: (ctx) => Container(
-                      child: Container(
-                        child: Icon(
-                          Icons.location_pin,
-                          color: Colors.green,
-                          size: 40,
-                        ),
-                      ))),
-            ])
-          ],
-        ),
-      ),
-        Container(
-              height: 190,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+    _textEditingController.text = text;
+    myList=[];
+    getPostsData();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+
+
+  ScrollController controller = ScrollController();
+
+  bool closeTopContainer = false;
+  double topContainer = 0;
+  List<Widget> itemsData = [];
+  void getlistitem() async {
+    myList=await fetch.viewbuy();
+  }
+
+  void getPostsData() async{
+    List<Widget> listItems = [];
+    List<Product1> A = [];
+    if(myList.isEmpty)
+      myList=await fetch.viewbuy();
+    // future: wish(myList);
+    myList.forEach((post) {
+      listItems.add(
+          Container(
+
+              height: 80,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.white,
+                  color: globalcolors.besiccolor,
                   boxShadow: [
                     BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
                   ]),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 13),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -105,67 +97,120 @@ class _dilState extends State<dil> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                         // post.productName,
-                           "custmer name",
+                          post.productName+", "+post.marketName,
+                          // "product name",
                           style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: Colors.green,),
+                            fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),
-                        Text(
-                          // post.productName,
-                          "product name",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-                        Text(
-                       //   post.marketName,
-                          "supermarket name",
-                          style:  TextStyle(fontSize: 17,color: Colors.red,fontWeight: FontWeight.bold,),
-                        ),
-
-                        Text(
-                        //  "count: ${post.amount}",
-                           "count: 3",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),Text(
-                          //"price: ${post.price} ₪",
-                           "price:15 ₪",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-
                         Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(width: 16.0),
-                              IconButton(
-                                onPressed: () {
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "count: ${post.amount}, price: ${post.price} ₪",
 
-                                },
-                                icon: Icon(Icons.chat,color: globalcolors.textcolor), // The icon to display on the button.
-                              ),
-                              IconButton(
-                                onPressed: () {
+                              // "count: 3",
+                              style:  TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                            ),
+                            SizedBox(width: 20.0),
 
-                                },
-                                icon: Icon(Icons.call,color: globalcolors.textcolor), // The icon to display on the button.
-                              ),
-                            ])
+
+                          ],
+                        ),
+
 
 
                       ],
                     ),
-                   // Image.asset(post.image,width: 100,height: 100,),
-                     // Image.asset('assets/images/p4.jpg',width: 100,height: 100,),
 
 
                   ],
                 ),
-              )),
-      ],
-    ),
+              )));
+    });
+    setState(() {
+      itemsData = listItems;
+    });
+  }
 
 
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double categoryHeight = size.height * 0.30;
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+
+        body: Container(
+          height: size.height,
+          child: Column(
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Expanded(
+                    child: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: kDefaultPadding),
+
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Expanded(
+                  child: ListView.builder(
+                      controller: controller,
+                      itemCount: itemsData.length,
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return Align(
+                            heightFactor: 1,
+                            alignment: Alignment.topCenter,
+                            child: itemsData[index]);
+                      })),
+              const SizedBox(
+                height: 12,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    ElevatedButton(
+                      child: Text('Take the order !'),
+                      style: ElevatedButton.styleFrom(
+                        primary: globalcolors.notetcolor,
+                        onPrimary: Colors.white,
+                        onSurface: Colors.grey,
+                      ),
+                      onPressed: () async{
+                        addO();
+                        MaterialPageRoute(builder: (context) =>  orders());
+                      },
+                    ),
+                  ]
+
+              ),
+            ],
+          ),
+
+        ),
+      ),
     );
   }
+
+
+  Future<void> addO() async {
+    Fluttertoast.showToast(msg: "send the request",
+        textColor: globalcolors.notetcolor);
+    var res=  await fetch.addorder();
+
+
+
+  }
 }
+
