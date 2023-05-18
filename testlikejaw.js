@@ -274,7 +274,7 @@ app.get('/addorder', function (request, response) {
                    const count=row.cc;
                    const r="request is done";
                    const t= total*0.05;
-let query3=`INSERT INTO \`order\`  (nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES('${name}','${phone}','${place}','${r}','${total}','${superm}','${count}','${t}')`;
+let query3=`INSERT INTO \`order\`  (flag,nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES(0,'${name}','${phone}','${place}','${r}','${total}','${superm}','${count}','${t}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
@@ -472,10 +472,24 @@ let query1='Select namesupermarket from `order`GROUP BY namesupermarket';
         }
     });
 });
+app.get('/Takesorder', function (request, response) {
+    console.log("Takes order");
+   //var supermarket=request.query.suparmarketname;
+let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}' where orderid='${request.query.id}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error)
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
 app.get('/vieworder2', function (request, response) {
     console.log("view all order to spsifc supermarket");
    //var supermarket=request.query.suparmarketname;
-let query1=`Select * from \`order\` where namesupermarket='${request.query.name}'`;
+let query1=`Select * from \`order\` where namesupermarket='${request.query.name}' and flag=0`;
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error);

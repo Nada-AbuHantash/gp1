@@ -191,7 +191,7 @@ class _homedilState extends State<homedil> {
                         onSurface: Colors.grey,
                       ),
                       onPressed: () async{
-                        addO();
+                      takeorders();
                         MaterialPageRoute(builder: (context) =>  orders());
                       },
                     ),
@@ -206,14 +206,14 @@ class _homedilState extends State<homedil> {
     );
   }
 
+ 
+  Future<void> takeorders() async {
 
-  Future<void> addO() async {
-    Fluttertoast.showToast(msg: "send the request",
-        textColor: globalcolors.notetcolor);
-    var res=  await fetch.addorder();
-
-
-
+    Fluttertoast.showToast(msg: "Take the order dine ",
+          textColor: globalcolors.notetcolor);
+  var res=  await fetch.takeorder();
+   MaterialPageRoute(builder: (context) =>  orders());
+  
   }
 }
 

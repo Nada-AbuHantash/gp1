@@ -681,11 +681,21 @@ Future <List<test11>> test() async {
       throw Exception('Failed to load album');
     }
   }
+   Future takeorder()async{
+  final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl+'Takesorder?delname=$A&id='),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
   //////////////////////////////////////////////////////
   Future <List<filter1>> filter() async {
     late  List<filter1> myList2=[];
-    final prefs = await SharedPreferences.getInstance();
-    String A = prefs.get("emailemail").toString();
     http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder'),
         headers: {'Content-Type': 'application/json'});
 
@@ -703,8 +713,7 @@ Future <List<test11>> test() async {
   }
    Future <List<super1>> allsupermarkt() async {
     late  List<super1> myList2=[];
-    final prefs = await SharedPreferences.getInstance();
-    String A = prefs.get("emailemail").toString();
+   
     http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder1'),
         headers: {'Content-Type': 'application/json'});
 
