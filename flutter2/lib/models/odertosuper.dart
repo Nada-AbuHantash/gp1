@@ -8,7 +8,7 @@ class super2{
   final int  amount;
   final int id;
   // final String manufacturing;
- // final String image;
+ final String pls;
   // final int productNumber;
 
   final String? description;
@@ -21,7 +21,7 @@ class super2{
     amount: json['count']  == null ? 0 : json['count'] as int,
     price: json['orderprice'] == null ? 0 : json['orderprice'] as int,
     id: json['orderid']  == null ? 0 : json['orderid']as int,
-    //image: json['image']  == null ? '' : json['image']as String,
+    pls: json['orderpercent']  == null ? '' : json['orderpercent']as String,
     // productNumber: json['productNumber']   == null ? 0 : json['productNumber'] as int,
   );
 
@@ -31,7 +31,7 @@ class super2{
     required this.amount,
     required this.price,
     required this.id,
-    //required this.image,
+    required this.pls,
     // required this.productNumber,
     this.description,
     this.inCart = false,
@@ -50,7 +50,7 @@ class super2{
     data['orderprice'] = this.price;
 
     data['orderid'] = this.id;
-    //data['image'] = this.image;
+    data['orderpercent'] = this.pls;
     // data['productNumber'] = this.productNumber;
 
     return data;

@@ -273,7 +273,11 @@ app.get('/addorder', function (request, response) {
                    const superm=row.namesuper;
                    const count=row.cc;
                    const r="request is done";
-                   const t= total*0.05;
+                  let t;
+                   if(total<50){ t=5;}
+                   else if(50<total<100){ t=10;}
+                   else{ t=15;}
+                  
 let query3=`INSERT INTO \`order\`  (flag,nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES(0,'${name}','${phone}','${place}','${r}','${total}','${superm}','${count}','${t}')`;
 pool.query(query3,function (error, results0) {
     if (error) { response.status(400).send(error); }
@@ -474,7 +478,7 @@ let query1='Select namesupermarket from `order`GROUP BY namesupermarket';
 });
 app.get('/Takesorder', function (request, response) {
     console.log("Takes order");
-   //var supermarket=request.query.suparmarketname;
+  
 let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}' where orderid='${request.query.id}'`;
     pool.query(query1,function (error, results) {
         if (error) {
