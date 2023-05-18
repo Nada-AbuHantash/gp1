@@ -105,6 +105,8 @@ class _allState extends State<all> {
                   ]),
               child: GestureDetector(
                   onTap: () async {
+                    int n=(post.pls);
+                   
                     // Action to be performed when the container is pressed
                     print('open this case!');
                     Sharedsession shared = new Sharedsession();
@@ -112,6 +114,9 @@ class _allState extends State<all> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => homedil(data:
                              post.userName,
+                             id:post.id,
+                             namesuper:post.marketName,
+                             price:post.price+n,
                              )));
                   },
               child: Padding(

@@ -681,10 +681,10 @@ Future <List<test11>> test() async {
       throw Exception('Failed to load album');
     }
   }
-   Future takeorder()async{
+   Future takeorder(int id)async{
   final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl+'Takesorder?delname=$A&id='),
+    http.Response res = await http.get(Uri.parse(utils.basurl+'Takesorder?delname=$A&id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
 
@@ -738,6 +738,42 @@ Future <List<test11>> test() async {
 
     if (res.statusCode == 200) {
 
+
+      var jsonString = json.decode(res.body);
+      List<super2> list =
+      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+   Future <List<super2>> trackord() async {
+    late  List<super2> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'trackorder?name=$A'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+      var jsonString = json.decode(res.body);
+      List<super2> list =
+      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+   Future <List<super2>> stateorder(int id) async {
+    late  List<super2> myList2=[];
+    final prefs = await SharedPreferences.getInstance();
+    String A = prefs.get("emailemail").toString();
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'finalorder?name=$A&id=$id'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
 
       var jsonString = json.decode(res.body);
       List<super2> list =

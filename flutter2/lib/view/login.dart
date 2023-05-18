@@ -19,6 +19,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../main.dart';
 import '../utils/Sharedsession.dart';
 import 'addproduct.dart';
+import 'dilevery/dil2.dart';
 rest_api fetch=new rest_api();
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -321,7 +322,7 @@ var res2=await fetch.sellerlogin(email.trim(), pass.trim());
                         showSpinner = false;
                       });
                             Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => home()));
+                                MaterialPageRoute(builder: (_) => dil2()));
               
                           } else {
                             

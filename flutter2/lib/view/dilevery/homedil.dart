@@ -8,6 +8,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
+import 'dil2.dart';
+
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
 TextEditingController productPriceController = TextEditingController();
@@ -29,7 +31,10 @@ void _runFilter(String enteredKeyword) {
 class homedil extends StatefulWidget {
  
   final String data;
-  const homedil({super.key, required this.data});
+  final int id;
+  final String namesuper;
+  final int price;
+  const homedil({super.key, required this.data, required  this.id, required this.namesuper, required this.price});
 
   @override
   _homedilState createState() => _homedilState();
@@ -44,13 +49,12 @@ class _homedilState extends State<homedil> {
   TextEditingController _textEditingController = TextEditingController();
   String text = "";
 
+ 
   @override
 
   void initState() {
     super.initState();
-
-
-
+  
     _textEditingController.text = text;
     myList=[];
     getPostsData();
@@ -109,6 +113,7 @@ class _homedilState extends State<homedil> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
+                             
                               "count: ${post.amount}, price: ${post.price} ₪",
 
                               // "count: 3",
@@ -139,6 +144,9 @@ class _homedilState extends State<homedil> {
 
   @override
   Widget build(BuildContext context) {
+      int widgetId = widget.id;
+      int widgetprice=widget.price;
+      
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
@@ -195,8 +203,9 @@ class _homedilState extends State<homedil> {
                         onSurface: Colors.grey,
                       ),
                       onPressed: () async{
-                      takeorders();
-                        MaterialPageRoute(builder: (context) =>  orders());
+                        print(widgetId);
+                      takeorders(widgetId);
+                        MaterialPageRoute(builder: (context) => dil2());
                       },
                     ),
                   ]
@@ -211,13 +220,14 @@ class _homedilState extends State<homedil> {
   }
 
  
-  Future<void> takeorders() async {
+  Future<void> takeorders(int id) async {
 
     Fluttertoast.showToast(msg: "Take the order dine ",
           textColor: globalcolors.notetcolor);
-  var res=  await fetch.takeorder();
-   MaterialPageRoute(builder: (context) =>  orders());
+
+  var res=  await fetch.takeorder(id);
   
+   MaterialPageRoute(builder: (context) =>  dil2());
   }
 }
 

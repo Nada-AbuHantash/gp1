@@ -102,6 +102,7 @@
 //     }
 //   }
 //
+import 'package:flutter2/models/odertosuper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/models/product1.dart';
@@ -121,20 +122,22 @@ TextEditingController productManufactureingController = TextEditingController();
 
 
 
-late  List<Product1> myList=[];
-
+late  List<super2> myList=[];
+late List<Product1> mylist3=[];
 void _runFilter(String enteredKeyword) {
-  List<Product1> results = [];
-
+  List<super2> results = [];
+List<Product1> res=[];
   results = myList;
-
+res=mylist3;
   myList = results;
+  mylist3=res;
 }
+
 
 class cust extends StatefulWidget {
 
-  final String data;
-  const cust({super.key, required this.data});
+  final int id;
+  const cust({super.key, required this.id});
 
   @override
   _custState createState() => _custState();
@@ -149,17 +152,21 @@ class _custState extends State<cust> {
   @override
   TextEditingController _textEditingController = TextEditingController();
   String text = "";
+  
+  late List<Product1> myList3;
 
   @override
 
   void initState() {
     super.initState();
 
-
+   
 
     _textEditingController.text = text;
     myList=[];
+    myList3=[];
     getPostsData();
+        getPostsData2();
   }
 
   @override
@@ -176,16 +183,19 @@ class _custState extends State<cust> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.viewbuysuper();
+    int widgetId = widget.id;
+    myList=await fetch.stateorder(widgetId);
+    myList3=await fetch.viewbuysuper();
   }
-
-  void getPostsData() async{
+ void getPostsData2() async{
+    int widgetId = widget.id;
     List<Widget> listItems = [];
-    List<Product1> A = [];
-    if(myList.isEmpty)
-      myList=await fetch.viewbuysuper();
+    List<super2> A = [];
+    if(myList3.isEmpty)
+      myList3=await fetch.viewbuysuper();
     // future: wish(myList);
-    myList.forEach((post) {
+    myList3.forEach((post) {
+      
       listItems.add(
           Container(
 
@@ -206,7 +216,58 @@ class _custState extends State<cust> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          post.productName+", "+post.marketName,
+                          "${post.productName}, "+"${post.price}"+"${post.amount}",
+                          // "product name",
+                          style:  TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                        ),
+                       
+
+
+
+                      ],
+                    ),
+
+
+                  ],
+                ),
+              )));
+    });
+    setState(() {
+      itemsData = listItems;
+    });
+  }
+  void getPostsData() async{
+    int widgetId = widget.id;
+    List<Widget> listItems = [];
+    List<super2> A = [];
+    if(myList.isEmpty)
+      myList=await fetch.stateorder(widgetId);
+    // future: wish(myList);
+    myList.forEach((post) {
+      int n= post.pls;
+      int fp=n+post.price;
+      listItems.add(
+          Container(
+
+              height: 80,
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  color: globalcolors.besiccolor,
+                  boxShadow: [
+                    BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "${post. userName}, "+"${fp}",
                           // "product name",
                           style:  TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -368,13 +429,13 @@ class _custState extends State<cust> {
   }
 
 
-  Future<void> takeorders() async {
+  // Future<void> takeorders() async {
 
-    Fluttertoast.showToast(msg: "Take the order dine ",
-        textColor: globalcolors.notetcolor);
-    var res=  await fetch.takeorder();
-    MaterialPageRoute(builder: (context) =>  orders());
+  //   Fluttertoast.showToast(msg: "Take the order dine ",
+  //       textColor: globalcolors.notetcolor);
+  //   var res=  await fetch.takeorder();
+  //   MaterialPageRoute(builder: (context) =>  orders());
 
-  }
+  // }
 }
 

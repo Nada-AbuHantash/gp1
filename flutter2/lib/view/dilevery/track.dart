@@ -9,7 +9,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
-import '../../models/supermarket.dart';
+import '../../models/odertosuper.dart';
+
 import '../../utils/Sharedsession.dart';
 
 TextEditingController productNameController = TextEditingController();
@@ -17,10 +18,10 @@ TextEditingController IDController = TextEditingController();
 
 
 
-late  List<super1> myList=[];
+late  List<super2> myList=[];
 
 void _runFilter(String enteredKeyword) {
-  List<super1> results = [];
+  List<super2> results = [];
 
   results = myList;
 
@@ -66,21 +67,21 @@ class _trackState extends State<track> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   void getlistitem() async {
-    myList=await fetch.allsupermarkt();
+    myList=await fetch.trackord();
   }
 
   void getPostsData() async{
     List<Widget> listItems = [];
-    List<super1> A = [];
+    List<super2> A = [];
     if(myList.isEmpty)
-      myList=await fetch.allsupermarkt();
+      myList=await fetch.trackord();
     // future: wish(myList);
     myList.forEach((post) {
       listItems.add(
 
           Container(
 
-            height: 60,
+            height: 100,
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -92,12 +93,10 @@ class _trackState extends State<track> {
                 onTap: () async {
                   // Action to be performed when the container is pressed
                   print('go order!');
-                  Sharedsession shared = new Sharedsession();
-                  await shared.savenamesuper(post.marketName);
-
+                  
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => cust(data:
-                      post.marketName,
+                      MaterialPageRoute(builder: (_) => cust(id:post.id,
+                      
                       )));
                   // MaterialPageRoute(builder: (context) => all());
                 },
@@ -109,19 +108,19 @@ class _trackState extends State<track> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            post.marketName,
-                            // "product name",
+                          Text("the order have ID ${post.id} is ${post.state} at",
                             style:  TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                              fontSize: 16, color: globalcolors.textcolor,),
                           ),
-
-                          Text(
-                            post.marketName,
-                            // "product name",
+                         Text(" ${post.time}",
                             style:  TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
+                              fontSize: 16, color: globalcolors.textcolor,),
                           ),
+                           Text(" ${post.date}",
+                            style:  TextStyle(
+                              fontSize: 16,color: globalcolors.textcolor,),
+                          )
+                        
 
 
                         ],

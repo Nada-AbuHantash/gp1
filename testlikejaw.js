@@ -478,14 +478,35 @@ let query1='Select namesupermarket from `order`GROUP BY namesupermarket';
 });
 app.get('/Takesorder', function (request, response) {
     console.log("Takes order");
-  
-let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}' where orderid='${request.query.id}'`;
+    let ts = Date.now();
+    let date_ob = new Date(ts);
+
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+    let currentdate=year + "-" + month + "-" + date;
+   
+let hours = date_ob.getHours();
+let minutes = date_ob.getMinutes();
+let seconds = date_ob.getSeconds();
+
+// Format the time values to have two digits if needed
+let formattedHours = hours < 10 ? "0" + hours : hours;
+let formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+let formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+
+// Get the current time in the format "hh:mm:ss"
+let currentTime = formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+
+console.log(currentTime);
+
+let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}',date='${currentdate}',time='${currentTime}' where orderid='${request.query.id}'`;
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error)
             response.status(400).send('Error in database operation');
         } else {
-           // console,log(results)
+           console.log(results)
             response.send(results);
         }
     });
@@ -494,6 +515,34 @@ app.get('/vieworder2', function (request, response) {
     console.log("view all order to spsifc supermarket");
    //var supermarket=request.query.suparmarketname;
 let query1=`Select * from \`order\` where namesupermarket='${request.query.name}' and flag=0`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/trackorder', function (request, response) {
+    console.log("view all order to spsifc supermarket");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from \`order\` where namedelivery='${request.query.name}' and flag=1`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error);
+            response.status(400).send('Error in database operation');
+        } else {
+           // console,log(results)
+            response.send(results);
+        }
+    });
+});
+app.get('/finalorder', function (request, response) {
+    console.log("final order and state");
+   //var supermarket=request.query.suparmarketname;
+let query1=`Select * from \`order\` where orderid='${request.query.id}' and flag=1 and namedelivery='${request.query.name}'`;
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error);
