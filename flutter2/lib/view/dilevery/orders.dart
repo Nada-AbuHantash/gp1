@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter2/view/dilevery/cust.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/dilevery/markets.dart';
+import 'package:flutter2/view/dilevery/track.dart';
 import 'package:flutter2/view/notfications.dart';
 import 'package:flutter2/view/test.dart';
 import 'package:flutter2/utils/globalColors.dart';
@@ -41,7 +42,7 @@ class orders extends StatelessWidget {
           body: TabBarView(
             children: [
               markets(),
-              cust(),
+              track(),
             ],
           ),
         )

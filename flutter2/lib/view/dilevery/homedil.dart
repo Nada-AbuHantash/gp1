@@ -143,8 +143,12 @@ class _homedilState extends State<homedil> {
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
 
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+
+
+        ),
         body: Container(
           height: size.height,
           child: Column(

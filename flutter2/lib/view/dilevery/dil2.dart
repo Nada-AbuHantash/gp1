@@ -2,56 +2,40 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/cart/cart2.dart';
+import 'package:flutter2/view/chat/searchchat.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/cart/mycart.dart';
-import 'package:flutter2/view/map/mapGPT.dart';
-import 'package:flutter2/view/profile.dart';
-import 'package:flutter2/view/rest_api.dart';
-import 'package:flutter2/view/seller.dart';
-import 'package:flutter2/view/test.dart';
-import 'package:flutter2/view/widgets/button.dart';
-import 'package:flutter2/view/widgets/textfiled.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:flutter2/utils/globalColors.dart';
-import 'package:get/get.dart';
+import 'package:flutter2/view/dilevery/orders.dart';
+
 import 'package:flutter2/view/notfications.dart';
 //import 'package:flutter2/view/logintest.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter2/view/homecust.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../components/applocal.dart';
-import '../main.dart';
-import '../models/notifi.dart';
-import 'MyHomePage.dart';
-import 'chat/chat.dart';
-import 'chat/searchchat.dart';
-import 'dilevery/orders.dart';
-import 'home.dart';
+
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
-late  List<String1> myList=[];
 
 
-class MyHomePage1 extends StatefulWidget {
-  const MyHomePage1({Key? key}) : super(key: key);
+
+class dil2 extends StatefulWidget {
+  const dil2({Key? key}) : super(key: key);
   @override
-  State<MyHomePage1> createState() => _MyHomePageState();
+  State<dil2> createState() => _dil2State();
 }
 
-class _MyHomePageState extends State<MyHomePage1> {
+class _dil2State extends State<dil2> {
   int _currentIndex = 0;
- 
+
   @override
-  
+
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
@@ -80,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage1> {
               label:"${getLang(context, "p2")}",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_cart),
-              label: "${getLang(context, "p3")}",
+              icon: const Icon(Icons.location_pin),
+              label: "Location",
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.chat),
@@ -102,19 +86,19 @@ class _MyHomePageState extends State<MyHomePage1> {
   Widget _buildPageContent() {
     switch (_currentIndex) {
       case 0:
-        return const homecust();
+        return  orders();
       case 1:
-          // return  orders();
-         return notfications();
+      // return  orders();
+        return notfications();
       case 2:
-        return  mycart();
+        return  dil();
       case 3:
-      return searchchat();
-       // return const ChatScreen();
+        return searchchat();
+    // return const ChatScreen();
       case 4:
         return  NavDrawer();
       default:
-        return const homecust();
+        return  orders();
     }
   }
 

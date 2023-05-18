@@ -4,6 +4,7 @@ import 'package:flutter2/view/addproduct.dart';
 import 'package:flutter2/view/cart/cart.dart';
 import 'package:flutter2/view/cart/cart2.dart';
 import 'package:flutter2/view/dilevery/cust.dart';
+import 'package:flutter2/view/dilevery/dil2.dart';
 import 'package:flutter2/view/dilevery/filter.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/dilevery/orders.dart';
@@ -106,7 +107,7 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
        // home:addBasket(),//chatGPT
-         home:orders(),
+         home:dil2(),
        
        localizationsDelegates: [
           applocal.delegate,
