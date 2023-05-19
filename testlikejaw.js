@@ -272,17 +272,38 @@ app.get('/addorder', function (request, response) {
                    const total=row.total_price;
                    const superm=row.namesuper;
                    const count=row.cc;
-                   const r="request is done";
+                   const r="submitted";
                   let t;
                    if(total<50){ t=5;}
                    else if(50<total<100){ t=10;}
                    else{ t=15;}
                   
-let query3=`INSERT INTO \`order\`  (flag,nameuser,phoneuser,locationuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES(0,'${name}','${phone}','${place}','${r}','${total}','${superm}','${count}','${t}')`;
-pool.query(query3,function (error, results0) {
+let query3=`INSERT INTO \`order\`  (flag,nameuser,phoneuser,orderstatus,orderprice,namesupermarket,count,orderpercent) VALUES(0,'${name}','${phone}','${r}','${total}','${superm}','${count}','${t}')`;
+pool.query(query3,function (error, results55) {
     if (error) { response.status(400).send(error); }
     else{
-         response.status(200)
+        let query14=`Select * from \`order\` where namesupermarket='${superm}' and orderprice='${total}' and count='${count}'and phoneuser='${phone}'`;  
+          pool.query(query14,function (error, results44) {
+        if (error) {
+            console.log(error)
+            response.status(400).send('Error in database operation');
+        } else {
+        const idd=results44[0].orderid;
+        let tf=t+total;
+        let msg="Your request has been submitted";       
+        let query9 = `INSERT INTO notification (namepro,count,msg,supetmarket,id) VALUES('${request.query.emailcust}','${tf}','${msg}','${superm}','${idd}') `;
+        pool.query(query9,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+        //  response.status(200)
+    }
+
+});
+        //    console.log(results)
+        //     response.send(results);
+        }
+    });
+        //  response.status(200)
     }
 
 });
@@ -508,6 +529,31 @@ let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}
         } else {
            console.log(results)
             response.send(results);
+        }
+    });
+});
+app.get('/updatestate', function (request, response) {
+
+let query1=`update \`order\` orderstatus='${request.query.state}' where orderid='${request.query.id}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error)
+            response.status(400).send('Error in database operation');
+        } else {
+            let query1=`update notification set msg='${request.query.state}'where id='${request.query.id}'`;
+    pool.query(query1,function (error, results) {
+        if (error) {
+            console.log(error)
+            response.status(400).send('Error in database operation');
+        } else {
+
+            
+           console.log(results)
+            response.send(results);
+        }
+    });
+        //    console.log(results)
+        //     response.send(results);
         }
     });
 });

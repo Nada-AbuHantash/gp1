@@ -91,14 +91,15 @@ class _trackState extends State<track> {
                 ]),
             child: GestureDetector(
                 onTap: () async {
-                  // Action to be performed when the container is pressed
+                 
                   print('go order!');
                   
                   Navigator.push(context,
                       MaterialPageRoute(builder: (_) => cust(id:post.id,
-                      
+                      total:post.price+post.pls,
+                      name:post.userName,
                       )));
-                  // MaterialPageRoute(builder: (context) => all());
+              
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),

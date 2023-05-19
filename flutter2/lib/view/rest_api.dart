@@ -693,6 +693,17 @@ Future <List<test11>> test() async {
       throw Exception('Failed to load album');
     }
   }
+    Future upstate(int id ,String st)async{
+ 
+    http.Response res = await http.get(Uri.parse(utils.basurl+'updatestate?state=$st&id=$id'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+
+    } else {
+
+      throw Exception('Failed to load album');
+    }
+  }
   //////////////////////////////////////////////////////
   Future <List<filter1>> filter() async {
     late  List<filter1> myList2=[];

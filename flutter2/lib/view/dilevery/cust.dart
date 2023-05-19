@@ -122,22 +122,24 @@ TextEditingController productManufactureingController = TextEditingController();
 
 
 
-late  List<super2> myList=[];
-late List<Product1> mylist3=[];
+late  List<Product1> myList=[];
+
 void _runFilter(String enteredKeyword) {
-  List<super2> results = [];
+  List<Product1> results = [];
 List<Product1> res=[];
   results = myList;
-res=mylist3;
+
   myList = results;
-  mylist3=res;
+
 }
 
 
 class cust extends StatefulWidget {
 
   final int id;
-  const cust({super.key, required this.id});
+  final int total;
+  final String name;
+  const cust({super.key, required this.id, required this.total, required this.name});
 
   @override
   _custState createState() => _custState();
@@ -164,9 +166,9 @@ class _custState extends State<cust> {
 
     _textEditingController.text = text;
     myList=[];
-    myList3=[];
+  
     getPostsData();
-        getPostsData2();
+       
   }
 
   @override
@@ -184,69 +186,20 @@ class _custState extends State<cust> {
   List<Widget> itemsData = [];
   void getlistitem() async {
     int widgetId = widget.id;
-    myList=await fetch.stateorder(widgetId);
-    myList3=await fetch.viewbuysuper();
+    myList=await fetch.viewbuysuper();
+  
   }
- void getPostsData2() async{
-    int widgetId = widget.id;
-    List<Widget> listItems = [];
-    List<super2> A = [];
-    if(myList3.isEmpty)
-      myList3=await fetch.viewbuysuper();
-    // future: wish(myList);
-    myList3.forEach((post) {
-      
-      listItems.add(
-          Container(
 
-              height: 80,
-              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: globalcolors.besiccolor,
-                  boxShadow: [
-                    BoxShadow(color: globalcolors.notetcolor.withAlpha(100), blurRadius: 10.0),
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "${post.productName}, "+"${post.price}"+"${post.amount}",
-                          // "product name",
-                          style:  TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-                       
-
-
-
-                      ],
-                    ),
-
-
-                  ],
-                ),
-              )));
-    });
-    setState(() {
-      itemsData = listItems;
-    });
-  }
   void getPostsData() async{
     int widgetId = widget.id;
     List<Widget> listItems = [];
-    List<super2> A = [];
+    List<Product1> A = [];
     if(myList.isEmpty)
-      myList=await fetch.stateorder(widgetId);
+    myList=await fetch.viewbuysuper();
     // future: wish(myList);
     myList.forEach((post) {
-      int n= post.pls;
-      int fp=n+post.price;
+     
+     
       listItems.add(
           Container(
 
@@ -267,7 +220,7 @@ class _custState extends State<cust> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "${post. userName}, "+"${fp}",
+                          "${post.productName}, "+"${post.amount}"+"${post.price}",
                           // "product name",
                           style:  TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -306,6 +259,7 @@ class _custState extends State<cust> {
 
   @override
   Widget build(BuildContext context) {
+     int widgetId = widget.id;
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
@@ -357,6 +311,7 @@ class _custState extends State<cust> {
                   ElevatedButton(
                       child: Text('Take the order'),
                       onPressed: () {
+                        fun(1);
                         setState(() {
                           isAnimationVisible = true;
                           Timer(Duration(seconds: 6), () {
@@ -374,6 +329,7 @@ class _custState extends State<cust> {
 
                       child: Text('Order processing ,Your order is on the way'),
                       onPressed: () {
+                        fun(2);
                         setState(() {
                           isAnimationVisible = true;
                           Timer(Duration(seconds: 6), () {
@@ -393,6 +349,7 @@ class _custState extends State<cust> {
 
                       child: Text('Order received successfully'),
                       onPressed: () {
+                        fun(3);
                         setState(() {
                           isAnimationVisible = true;
                           Timer(Duration(seconds: 6), () {
@@ -426,6 +383,16 @@ class _custState extends State<cust> {
         ),
       ),
     );
+  }
+  
+  Future<void> fun(int i) async {
+    String msg;
+    if(i==1){msg="Your order is taken";}
+    else if(i==2){msg="Your order is on the way";}
+    else{msg="Your Order received successfully";}
+  int widgetId=widget.id;
+  var res=  await fetch.upstate(widgetId,msg);
+
   }
 
 
