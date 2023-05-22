@@ -16,6 +16,7 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   late PageController _pageController;
   int _currentPage = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,6 +36,24 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
+    List<DataModel> dataList=
+
+    [
+      DataModel(
+        //"${getLang(context, "m")}",
+          "${getLang(context, "pro")}",
+          "assets/images/shop11.png"),
+
+      DataModel(
+          "advertisement here! The easiest and fastest way to make money ! See how much you can make.",
+          "assets/images/market.png"),
+      DataModel(
+          "Do you have a bike? Take advantage of it with us by delivering orders to your area, take this your opportunity",
+          "assets/images/delivery.png"),
+    ];
+    Widget carouselView(int index) {
+      return carouselCard(dataList[index]);
+    }
     return Scaffold(
       body: Container(
         color: globalcolors.besiccolor,
@@ -74,9 +93,7 @@ class _AboutState extends State<About> {
     );
   }
 
-  Widget carouselView(int index) {
-    return carouselCard(dataList[index]);
-  }
+
 
   Widget carouselCard(DataModel data) {
     return Column(
@@ -117,3 +134,16 @@ class _AboutState extends State<About> {
     );
   }
 }
+class DataModel {
+  final String title;
+  final String imagename;
+  DataModel(
+      this.title,
+      this.imagename,
+      );
+}
+
+
+
+
+
