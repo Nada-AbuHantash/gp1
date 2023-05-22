@@ -112,6 +112,7 @@ class _ProductPageState extends State<ProductPage> {
 
                     Text(
                       'Old Price ${widget.oprice}\₪',
+
                       style: TextStyle(
                          decoration: TextDecoration.lineThrough,
                         fontSize: 20.0,

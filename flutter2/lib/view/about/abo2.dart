@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../components/applocal.dart';
 import '../signup.dart';
-import 'models.dart';
+
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -41,14 +41,14 @@ class _AboutState extends State<About> {
     [
       DataModel(
         //"${getLang(context, "m")}",
-          "${getLang(context, "pro")}",
+          "${getLang(context, "about1")}",
           "assets/images/shop11.png"),
 
       DataModel(
-          "advertisement here! The easiest and fastest way to make money ! See how much you can make.",
+          "${getLang(context, "about2")}",
           "assets/images/market.png"),
       DataModel(
-          "Do you have a bike? Take advantage of it with us by delivering orders to your area, take this your opportunity",
+          "${getLang(context, "about3")}",
           "assets/images/delivery.png"),
     ];
     Widget carouselView(int index) {
@@ -63,10 +63,10 @@ class _AboutState extends State<About> {
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Column(
             children: <Widget>[
-              const Padding(
+               Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
-                  child: Text("Welcome to SALE !",
+                  child: Text("${getLang(context, "home")}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
