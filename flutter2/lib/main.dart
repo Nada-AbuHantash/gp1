@@ -24,7 +24,7 @@ import 'package:flutter2/view/signup.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/seller.dart';
 import 'package:flutter2/view/slider.dart';
-import 'package:flutter2/view/about/about.dart';
+import 'package:flutter2/view/about/abo2.dart';
 import 'package:flutter2/view/test.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -107,7 +107,7 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
        // home:addBasket(),//chatGPT
-         home:dil2(),
+         home:cart2(),
        
        localizationsDelegates: [
           applocal.delegate,

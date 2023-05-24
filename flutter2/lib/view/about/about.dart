@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../components/applocal.dart';
 import '../signup.dart';
-import 'models.dart';
+
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -35,6 +35,24 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget build(BuildContext context) {
      double width=MediaQuery.of(context).size.width;
   double height=MediaQuery.of(context).size.height;
+     List<DataModel> dataList=
+
+     [
+       DataModel(
+
+           "${getLang(context, "about1")}",
+           "assets/images/shop11.png"),
+
+       DataModel(
+           "${getLang(context, "about2")}",
+           "assets/images/market.png"),
+       DataModel(
+           "${getLang(context, "about3")}",
+           "assets/images/delivery.png"),
+     ];
+     Widget carouselView(int index) {
+       return carouselCard(dataList[index]);
+     }
     return Scaffold(
       body: Container(
         color: globalcolors.besiccolor,
@@ -44,10 +62,10 @@ class _AboutScreenState extends State<AboutScreen> {
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Column(
             children: <Widget>[
-              const Padding(
+               Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
-                  child: Text("Welcome to SALE , lets the journey begin !",
+                  child: Text("${getLang(context, "m1")}",
                        textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -99,9 +117,7 @@ fontSize: 16,
     );
   }
 
-  Widget carouselView(int index) {
-    return carouselCard(dataList[index]);
-  }
+
 
   Widget carouselCard(DataModel data) {
     return Column(
@@ -142,3 +158,12 @@ fontSize: 16,
     );
   }
 }
+class DataModel {
+  final String title;
+  final String imagename;
+  DataModel(
+      this.title,
+      this.imagename,
+      );
+}
+

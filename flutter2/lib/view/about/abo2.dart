@@ -4,7 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../components/applocal.dart';
 import '../signup.dart';
-import 'models.dart';
+
 
 class About extends StatefulWidget {
   const About({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class About extends StatefulWidget {
 class _AboutState extends State<About> {
   late PageController _pageController;
   int _currentPage = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,6 +36,24 @@ class _AboutState extends State<About> {
   Widget build(BuildContext context) {
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
+    List<DataModel> dataList=
+
+    [
+      DataModel(
+        //"${getLang(context, "m")}",
+          "${getLang(context, "about1")}",
+          "assets/images/shop11.png"),
+
+      DataModel(
+          "${getLang(context, "about2")}",
+          "assets/images/market.png"),
+      DataModel(
+          "${getLang(context, "about3")}",
+          "assets/images/delivery.png"),
+    ];
+    Widget carouselView(int index) {
+      return carouselCard(dataList[index]);
+    }
     return Scaffold(
       body: Container(
         color: globalcolors.besiccolor,
@@ -44,10 +63,10 @@ class _AboutState extends State<About> {
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Column(
             children: <Widget>[
-              const Padding(
+               Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
-                  child: Text("Welcome to SALE !",
+                  child: Text("${getLang(context, "home")}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -74,9 +93,7 @@ class _AboutState extends State<About> {
     );
   }
 
-  Widget carouselView(int index) {
-    return carouselCard(dataList[index]);
-  }
+
 
   Widget carouselCard(DataModel data) {
     return Column(
@@ -117,3 +134,16 @@ class _AboutState extends State<About> {
     );
   }
 }
+class DataModel {
+  final String title;
+  final String imagename;
+  DataModel(
+      this.title,
+      this.imagename,
+      );
+}
+
+
+
+
+
