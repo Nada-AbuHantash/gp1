@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 var dbb = require('./db.js');
-
+console.log('user');
 router.post('/regstr',(req, res) =>{
 
     var name=req.body.name;
