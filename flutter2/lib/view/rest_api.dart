@@ -24,7 +24,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/models/test.dart';
 class utils {
-  static const String basurl = "http://192.168.62.52:3000/";
+  static const String basurl = "http://192.168.245.52:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -544,6 +544,24 @@ class rest_api{
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuy?email=$A'),
+        headers: {'Content-Type': 'application/json'});
+
+    if (res.statusCode == 200) {
+
+
+      var jsonString = json.decode(res.body);
+      List<Product1> list =
+      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+      myList2 = list;
+
+    } else {
+      throw Exception('Failed to load album');
+    } return myList2;
+  }
+  Future <List<Product1>> viewbuyfromdil(String A) async {
+    late  List<Product1> myList2=[];
+     
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuydil?email=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {

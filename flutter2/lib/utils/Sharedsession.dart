@@ -28,6 +28,7 @@ final prefs = await SharedPreferences.getInstance();
 
 }
 
+
    savepro(String A,String B,int C,int D,String E,String F) async{
 final prefs = await SharedPreferences.getInstance();
  prefs.setString("namepro", A);

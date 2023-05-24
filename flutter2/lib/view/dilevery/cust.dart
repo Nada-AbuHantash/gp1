@@ -150,6 +150,7 @@ class cust extends StatefulWidget {
 class _custState extends State<cust> {
   bool isAnimationVisible = false;
   Timer? _timer;
+
   int _elapsedSeconds = 86400;
   @override
   TextEditingController _textEditingController = TextEditingController();
@@ -186,6 +187,7 @@ class _custState extends State<cust> {
   List<Widget> itemsData = [];
   void getlistitem() async {
     int widgetId = widget.id;
+    // myList=await fetch.viewbuyfromdil();
     myList=await fetch.viewbuysuper();
   
   }
@@ -195,6 +197,7 @@ class _custState extends State<cust> {
     List<Widget> listItems = [];
     List<Product1> A = [];
     if(myList.isEmpty)
+    // myList=await fetch.viewbuyfromdil();
     myList=await fetch.viewbuysuper();
     // future: wish(myList);
     myList.forEach((post) {
@@ -220,7 +223,7 @@ class _custState extends State<cust> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "${post.productName}, "+"${post.amount}"+"${post.price}",
+                          "${post.productName},",
                           // "product name",
                           style:  TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -260,6 +263,8 @@ class _custState extends State<cust> {
   @override
   Widget build(BuildContext context) {
      int widgetId = widget.id;
+     String NAME= widget.name;
+     int to=widget.total;
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
@@ -267,7 +272,7 @@ class _custState extends State<cust> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: globalcolors.notetcolor,
-          title: Text('Track the order !'),
+          title: Text('Track the order ! $NAME, $to'),
         ),
         body: Container(
           height: size.height,
