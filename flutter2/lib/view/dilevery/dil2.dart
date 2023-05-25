@@ -9,6 +9,8 @@ import 'package:flutter2/view/chat/searchchat.dart';
 import 'package:flutter2/view/dil.dart';
 import 'package:flutter2/view/cart/mycart.dart';
 import 'package:flutter2/view/dilevery/orders.dart';
+import 'package:flutter2/view/dilevery/sit.dart';
+import 'package:flutter2/view/map/mapGPT.dart';
 
 import 'package:flutter2/view/notfications.dart';
 //import 'package:flutter2/view/logintest.dart';
@@ -59,10 +61,7 @@ class _dil2State extends State<dil2> {
               icon: const Icon(Icons.home),
               label:"${getLang(context, "p1")}",
             ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.notifications),
-              label:"${getLang(context, "p2")}",
-            ),
+
             BottomNavigationBarItem(
               icon: const Icon(Icons.location_pin),
               label: "Location",
@@ -87,16 +86,14 @@ class _dil2State extends State<dil2> {
     switch (_currentIndex) {
       case 0:
         return  orders();
+
       case 1:
-      // return  orders();
-        return notfications();
+        return  addBasket();
       case 2:
-        return  dil();
-      case 3:
         return searchchat();
     // return const ChatScreen();
-      case 4:
-        return  NavDrawer();
+      case 3:
+        return  sit();
       default:
         return  orders();
     }

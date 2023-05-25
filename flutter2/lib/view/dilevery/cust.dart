@@ -1,118 +1,18 @@
-// import 'package:flutter/material.dart';
-// import 'dart:async';
-// import 'package:flutter/material.dart';
-// import 'package:flutter2/utils/globalColors.dart';
-// import 'package:get/get.dart';
-// import 'package:flutter2/view/login.dart';
-// //import 'package:flutter2/view/logintest.dart';
 
-//
-//
-//
-// class cust extends StatefulWidget {
-//   @override
-//   _custState createState() => _custState();
-// }
-//
-// class _custState extends State<cust> {
-//   bool isAnimationVisible = false;
-//   bool isButtonVisible = true;
-//
-//   @override
-//     Widget build(BuildContext context) {
-//       return Scaffold(
-//
-//         appBar: AppBar(
-//           backgroundColor: globalcolors.notetcolor,
-//           title: Text('Track the order !'),
-//         ),
-//         body: Center(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             children: [
-//
-//                   ElevatedButton(
-//                       child: Text('Take the order'),
-//                     onPressed: () {
-//                       setState(() {
-//                         isAnimationVisible = true;
-//                         Timer(Duration(seconds: 6), () {
-//                           setState(() {
-//                             isAnimationVisible = false;
-//                           });
-//                         });
-//                       });}
-//
-//                   ),
-//
-//
-//                   SizedBox(width: 80),
-//                   ElevatedButton(
-//
-//                       child: Text('Order processing ,Your order is on the way'),
-//                       onPressed: () {
-//                         setState(() {
-//                           isAnimationVisible = true;
-//                           Timer(Duration(seconds: 6), () {
-//                             setState(() {
-//                               isAnimationVisible = false;
-//                             });
-//                           });
-//                         });}
-//
-//                   ),
-//
-//
-//              // SizedBox(height: 40),
-//
-//                   SizedBox(width: 80),
-//                   ElevatedButton(
-//
-//                       child: Text('Order received successfully'),
-//                       onPressed: () {
-//                         setState(() {
-//                           isAnimationVisible = true;
-//                           Timer(Duration(seconds: 6), () {
-//                             setState(() {
-//                               isAnimationVisible = false;
-//                             });
-//                           });
-//                         });}
-//
-//
-//                   ),
-//               SizedBox(height: 80),
-//               Visibility(
-//                 visible: isAnimationVisible,
-//                 child: Lottie.network(
-//                   'https://assets9.lottiefiles.com/packages/lf20_ardajn6t.json',
-//                   height: 200,
-//                   width: 200,
-//                   fit: BoxFit.contain,
-//                 ),
-//
-//               ),
-//
-//                 ],
-//
-//
-//           ),
-//         ),
-//       );
-//     }
-//   }
-//
-import 'package:flutter2/models/odertosuper.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/models/product1.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter2/view/MyHomePage.dart';
-import 'package:flutter2/view/dilevery/orders.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
+
+import 'package:latlong2/latlong.dart';
+
+import 'package:latlong/latlong.dart' as latlong;
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
@@ -156,7 +56,7 @@ class _custState extends State<cust> {
   @override
   TextEditingController _textEditingController = TextEditingController();
   String text = "";
-  
+
   late List<Product1> myList3;
 
   @override
@@ -164,13 +64,13 @@ class _custState extends State<cust> {
   void initState() {
     super.initState();
 
-   
+
 
     _textEditingController.text = text;
     myList=[];
-  
+
     getPostsData();
-       
+
   }
 
   @override
@@ -192,7 +92,7 @@ class _custState extends State<cust> {
     String market=widget.sname;
      myList=await fetch.viewbuyfromdil(nameu,market);
    // myList=await fetch.viewbuysuper();
-  
+
   }
 
   void getPostsData() async{
@@ -203,13 +103,13 @@ class _custState extends State<cust> {
         String market=widget.sname;
 
     if(myList.isEmpty)
-    
+
      myList=await fetch.viewbuyfromdil(nameu,market);
     //myList=await fetch.viewbuysuper();
     // future: wish(myList);
     myList.forEach((post) {
-     
-     
+
+
       listItems.add(
           Container(
 
@@ -279,12 +179,14 @@ class _custState extends State<cust> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: globalcolors.notetcolor,
-          title: Text('Track the order ! $NAME, $to'),
+          title: Text('Track the order !'),
         ),
         body: Container(
           height: size.height,
           child: Column(
             children: <Widget>[
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
@@ -316,10 +218,17 @@ class _custState extends State<cust> {
               const SizedBox(
                 height: 12,
               ),
+
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-
+                  Text(
+                    '$NAME Bill : $to ₪',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,color: globalcolors.textcolor,
+                    ),
+                  ),
                   ElevatedButton(
                       child: Text('Take the order'),
                       onPressed: () {
@@ -396,7 +305,7 @@ class _custState extends State<cust> {
       ),
     );
   }
-  
+
   Future<void> fun(int i) async {
     String msg;
     if(i==1){msg="Your order is taken";}
@@ -417,4 +326,6 @@ class _custState extends State<cust> {
 
   // }
 }
+////////////////////////////////
+
 

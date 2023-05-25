@@ -6,6 +6,7 @@ import 'package:flutter2/view/cart/cart2.dart';
 import 'package:flutter2/view/chat/searchchat.dart';
 import 'package:flutter2/view/dilevery/cust.dart';
 import 'package:flutter2/view/dilevery/dil2.dart';
+import 'package:flutter2/view/dilevery/sit.dart';
 import 'package:flutter2/view/dilevery/filter.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/dilevery/orders.dart';
@@ -18,6 +19,7 @@ import 'package:flutter2/view/mainpage.dart';
 import 'package:flutter2/view/map/map.dart';
 import 'package:flutter2/view/map/mapGPT.dart';
 import 'package:flutter2/view/map/mymap.dart';
+import 'package:flutter2/view/nav2.dart';
 import 'package:flutter2/view/notfications.dart';
 import 'package:flutter2/view/selhom.dart';
 import 'package:flutter2/view/about/about.dart';
@@ -108,7 +110,7 @@ class _MyAppState extends State<MyApp> {
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
        // home:addBasket(),//chatGPT
-         home:login(),
+         home:dil(),
        
        localizationsDelegates: [
           applocal.delegate,
