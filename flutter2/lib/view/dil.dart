@@ -21,6 +21,7 @@ class dil extends StatefulWidget {
 
 class _dilState extends State<dil> {
    final TextEditingController niscntoraler = TextEditingController();
+   String x='0';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,38 +49,38 @@ class _dilState extends State<dil> {
                       color:globalcolors.textcolor,
                       fontWeight:  FontWeight.bold, fontSize: 20,),
                 ),
-                SizedBox(height: 90),
-                Text(
-                  "${getLang(context, "de")}",
-                  style: TextStyle(
-                      color:globalcolors.notetcolor,
-                      fontWeight:  FontWeight.normal, fontSize: 18),
-                ),
-                SizedBox(height: 8,),
-                 Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:<Widget> [
-                   Flexible(
-                 child: Column(
-                    children:<Widget> [
-                      
-                  Container( child:
-                     textfiledformat(
-                    controller: niscntoraler,
-                    text:  "${getLang(context, "d")}",
-                    obscure: false,
-                    textInputType: TextInputType.text,
-                    icon: new Icon(Icons.wallet),
-
-                  ),
-                  )
-                    ],
-                    
-                  ),
-                   ),
-                   
-                ],
-              ),
+                 SizedBox(height: 90),
+                // Text(
+                //   "${getLang(context, "de")}",
+                //   style: TextStyle(
+                //       color:globalcolors.notetcolor,
+                //       fontWeight:  FontWeight.normal, fontSize: 18),
+                // ),
+              //   SizedBox(height: 8,),
+              //    Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children:<Widget> [
+              //      Flexible(
+              //    child: Column(
+              //       children:<Widget> [
+              //
+              //     Container( child:
+              //        textfiledformat(
+              //       controller: niscntoraler,
+              //       text:  "${getLang(context, "d")}",
+              //       obscure: false,
+              //       textInputType: TextInputType.text,
+              //       icon: new Icon(Icons.wallet),
+              //
+              //     ),
+              //     )
+              //       ],
+              //
+              //     ),
+              //      ),
+              //
+              //   ],
+              // ),
                 SizedBox(height: 10,),
                 
                 Padding(
@@ -105,11 +106,10 @@ class _dilState extends State<dil> {
                       onPressed: ()  {  
                        
 
-                         if( niscntoraler.text.isNotEmpty  )
-                       {
-                          putcard(niscntoraler.text);
-      }else{Fluttertoast.showToast(msg: "${getLang(context, "somefiled")}",
-          textColor: globalcolors.besiccolor);}
+
+                          putcard(x);
+
+
                            
                        
               },   

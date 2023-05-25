@@ -28,15 +28,15 @@ rest_api fetch1=new rest_api();
   // var json;
 const List<String> list = <String>['Nablus', 'TulKarm', 'Jenen'];
 
- class profileseller extends StatefulWidget{
+ class profild extends StatefulWidget{
 
-  const profileseller({Key?key}):super(key: key);
+  const profild({Key?key}):super(key: key);
 
   @override
-  State<profileseller> createState() => _profilesellerState();
+  State<profild> createState() => _profildState();
 }
 
-class _profilesellerState extends State<profileseller> {
+class _profildState extends State<profild> {
   
   @override
   void initState() {

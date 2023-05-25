@@ -1,3 +1,6 @@
+import 'package:flutter2/main.dart';
+import 'package:flutter2/utils/Sharedsession.dart';
+import 'package:flutter2/view/profiledelivry.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +16,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
-import '../main.dart';
-import '../utils/Sharedsession.dart';
-import 'about/abo2.dart';
+
 
 rest_api fetch=new rest_api();
 late String cardnada="";
@@ -24,33 +25,33 @@ bool _lights=false;
 var jsonString;
 
 
-class nav2 extends StatefulWidget {
+class sit extends StatefulWidget {
 
 
   @override
-  State<nav2> createState() => _nav2State();
+  State<sit> createState() => _sitState();
 
-  
+
 }
 
-class _nav2State extends State<nav2> {
+class _sitState extends State<sit> {
 
-    @override
+  @override
   void initState() {
     profileseller();
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-    // do something
-     getinfo();
-    print("Build Completed"); 
-  });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // do something
+      getinfo();
+      print("Build Completed");
+    });
   }
-   void getinfo() async {
-jsonString=await fetch.getinfo2();
+  void getinfo() async {
+    jsonString=await fetch.getinfo2();
 
-if(jsonString !=null){
-cardnada=jsonString.elementAt(0)['sellercard'].toString();
-print(cardnada);}
+    if(jsonString !=null){
+      cardnada=jsonString.elementAt(0)['deliverycard'].toString();
+      print(cardnada);}
 
   }
   final TextEditingController niscntoraler = TextEditingController();
@@ -69,7 +70,7 @@ print(cardnada);}
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const profileseller()),
+                MaterialPageRoute(builder: (context) => const profild()),
               )
             },
           ),
@@ -94,24 +95,24 @@ print(cardnada);}
                               children:<Widget> [
                                 Icon(Icons.call,color: globalcolors.textcolor),
                                 SizedBox(width: 5.0),
-                          GestureDetector(
-                            child:
+                                GestureDetector(
+                                  child:
 
-                            Text(
-            " ${getLang(context, "call")}",
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                color: globalcolors.notetcolor,
-                              ),
+                                  Text(
+                                    " ${getLang(context, "call")}",
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      color: globalcolors.notetcolor,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    // Do something when the text is pressed
+                                    _launchPhoneDialer('0592759118');
+                                  },
+                                ),
+                              ],
                             ),
-                            onTap: () {
-                              // Do something when the text is pressed
-                              _launchPhoneDialer('0592759118');
-                            },
                           ),
-            ],
-            ),
-            ),
 
                           const SizedBox(height: 20),
                         ],
@@ -152,70 +153,20 @@ print(cardnada);}
             title: Text(" ${getLang(context, "d")}",style: TextStyle(color: globalcolors.textcolor)),
             onTap: () => {
               showDialog(
-                
+
                   context: context,
                   builder: (BuildContext context) =>
                       AlertDialog(
-                         title: Text(cardnada,),
-                          titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 15),
+
+
+                        title: Text("${getLang(context, "d")}"+ ":"+ cardnada,),
+                        titleTextStyle: TextStyle(color: globalcolors.textcolor,fontSize: 15),
                         actions: [
 
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children:<Widget> [
-                                Flexible(
-                                  child: Column(
-                                    children:<Widget> [
 
-                                      Container( child:
-                                      textfiledformat(
-                                        controller: niscntoraler,
-                                        text: "${getLang(context, "d")}",
-                                        obscure: false,
-                                        textInputType: TextInputType.text,
-                                        icon: new Icon(Icons.wallet),
-
-                                      ),
-                                      )
-                                    ],
-
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
 
                           const SizedBox(height: 20),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                           ElevatedButton(
 
-                            style: ElevatedButton.styleFrom(
-
-                              shape: RoundedRectangleBorder(
-
-                                  borderRadius: BorderRadius.circular(20.0)),
-                              foregroundColor: globalcolors.maincolor,
-                              backgroundColor: globalcolors.notetcolor,
-                              minimumSize:  Size(250, 50),
-                            ),
-                            child: Text("${getLang(context, "selw")}",
-                              style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
-                            ),
-                            onPressed: ()  {
-                              updatecard(niscntoraler.text);
-                            },
-                          ),
-            ],
-
-            ),
-                  ),
                         ],
 
                       )),
@@ -256,7 +207,7 @@ print(cardnada);}
                                       style: TextStyle(color: globalcolors.maincolor,fontSize: 25),
                                     ),
                                     onPressed: ()  {
-                                      navigator?.push(MaterialPageRoute(builder: (_)=>nav2()));
+                                      navigator?.push(MaterialPageRoute(builder: (_)=>sit()));
 
                                     },
                                   ),
@@ -338,32 +289,6 @@ print(cardnada);}
     await shared.savenamesuper("");
     navigator?.push(MaterialPageRoute(builder: (_)=>home()));
   }
-  
-  Future<void> updatecard(String card) async {
 
-    final prefs = await SharedPreferences.getInstance();
-  String A = prefs.get("emailemail").toString();
-var res=await fetch.updatecard(A,card).then((res) {
 
-if(res==null){  print("Duplication");
-AlertDialog alert = const AlertDialog(
-         content: Text("something wrong ,not update the data\n,شيئ ما خطأ, لم يتم تعديل المعلومات "),
-        );
-        
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return alert;
-          },
-        );
-}
-else{
-Fluttertoast.showToast(msg: "${getLang(context, "updatedone")}",
-          textColor: globalcolors.besiccolor);
-          
-
-}
-   
-});
-  }
 }

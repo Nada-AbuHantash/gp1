@@ -93,12 +93,12 @@ class _trackState extends State<track> {
                 onTap: () async {
                  
                   print('go order!');
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => cust(id:post.id,
-                      total:post.price+post.pls,
-                      name:post.userName,
-                      sname:post.marketName,
-                      )));
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (_) => cust(id:post.id,
+                  //     total:post.price+post.pls,
+                  //     name:post.userName,
+                  //     sname:post.marketName,
+                  //     )));
               
                 },
                 child: Padding(
@@ -107,20 +107,36 @@ class _trackState extends State<track> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text("the order have ID ${post.id} is ${post.state} at",
+                          Text("the order have ID ${post.id} is ${post.state} at :",
                             style:  TextStyle(
                               fontSize: 16, color: globalcolors.textcolor,),
                           ),
-                         Text(" ${post.time}",
-                            style:  TextStyle(
-                              fontSize: 16, color: globalcolors.textcolor,),
+                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.access_time_outlined, color: globalcolors.textcolor),
+                              SizedBox(width: 8.0),
+                              Text(" ${post.time}",
+                                style:  TextStyle(
+                                  fontSize: 16, color: globalcolors.textcolor,),
+                              ),
+                            ],
                           ),
-                           Text(" ${post.date}",
-                            style:  TextStyle(
-                              fontSize: 16,color: globalcolors.textcolor,),
-                          )
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.calendar_month, color: globalcolors.textcolor),
+                              SizedBox(width: 8.0),
+                              Text(" ${post.date}",
+                                style:  TextStyle(
+                                  fontSize: 16,color: globalcolors.textcolor,),
+                              )
+                            ],
+                          ),
+
+
                         
 
 
