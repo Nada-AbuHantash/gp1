@@ -81,7 +81,7 @@ class _trackState extends State<track> {
 
           Container(
 
-            height: 100,
+            height: 110,
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),

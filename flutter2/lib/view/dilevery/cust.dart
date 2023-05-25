@@ -10,9 +10,6 @@ import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
-import 'package:latlong2/latlong.dart';
-
-import 'package:latlong/latlong.dart' as latlong;
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();

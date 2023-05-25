@@ -392,7 +392,7 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
         });
   }
   Future<List<TaxiModel>> FetchTaxis() async {
-    const String basurl = "http://192.168.1.4:3000/";
+    const String basurl = "http://192.168.245.52:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 

@@ -1,100 +1,94 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_map/flutter_map.dart';
-// import 'package:latlong2/latlong.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/material.dart';
+
 // import 'package:flutter2/utils/globalColors.dart';
 // import 'dart:ui';
 // import 'package:lottie/lottie.dart';
-// import 'package:flutter/material.dart';
+
+
 // import 'package:flutter2/models/product1.dart';
-// import 'package:flutter2/utils/globalColors.dart';
 // import 'dart:ui';
 // import 'package:flutter2/view/MyHomePage.dart';
 // import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/cupertino.dart';
+
 // import 'dart:async';
-// import 'package:flutter/material.dart';
+// import 'package:lottie/src/model/marker.dart';
 // import 'package:flutter_map/flutter_map.dart';
 // import 'package:latlong2/latlong.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter/material.dart';
+
 // import 'package:flutter2/utils/globalColors.dart';
-//
-// import 'dart:ui';
-//
-//
-// import 'package:flutter/material.dart';
-//
-//
+
+
+
+
+
 // TextEditingController productNameController = TextEditingController();
 // TextEditingController productImageURLController = TextEditingController();
 // TextEditingController productPriceController = TextEditingController();
 // TextEditingController productMarketController = TextEditingController();
 // TextEditingController productManufactureingController = TextEditingController();
-//
-//
-//
+
+
+
 // late  List<Product1> myList=[];
-//
+
 // void _runFilter(String enteredKeyword) {
 //   List<Product1> results = [];
 //   List<Product1> res=[];
 //   results = myList;
-//
+
 //   myList = results;
-//
+
 // }
-//
-//
-//
+
+
+
 // class test1 extends StatefulWidget {
-//
+
 //   late final int id;
 //   late final int total;
 //   late final String name;
 //   late final String sname;
-//   const cust({super.key, required this.id, required this.total, required this.name, required this.sname});
+ 
 //   @override
 //   _test1State createState() => _test1State();
 // }
-//
+
 // class _test1State extends State<test1> {
 //   bool isAnimationVisible = false;
 //   Timer? _timer;
-//
+
 //   int _elapsedSeconds = 86400;
 //   @override
 //   TextEditingController _textEditingController = TextEditingController();
 //   String text = "";
-//
+
 //   late List<Product1> myList3;
-//
+
 //   @override
-//
+
 //   void initState() {
 //     super.initState();
-//
-//
-//
+
+
+
 //     _textEditingController.text = text;
 //     myList=[];
-//
+
 //     getPostsData();
-//
+
 //   }
-//
+
 //   @override
 //   void dispose() {
 //     _timer?.cancel();
 //     super.dispose();
 //   }
-//
-//
-//
+
+
+
 //   ScrollController controller = ScrollController();
-//
+
 //   bool closeTopContainer = false;
 //   double topContainer = 0;
 //   List<Widget> itemsData = [];
@@ -104,27 +98,27 @@
 //     String market=widget.sname;
 //     myList=await fetch.viewbuyfromdil(nameu,market);
 //     // myList=await fetch.viewbuysuper();
-//
+
 //   }
-//
+
 //   void getPostsData() async{
 //     int widgetId = widget.id;
 //     List<Widget> listItems = [];
 //     List<Product1> A = [];
 //     String nameu=widget.name;
 //     String market=widget.sname;
-//
+
 //     if(myList.isEmpty)
-//
+
 //       myList=await fetch.viewbuyfromdil(nameu,market);
 //     //myList=await fetch.viewbuysuper();
 //     // future: wish(myList);
 //     myList.forEach((post) {
-//
-//
+
+
 //       listItems.add(
 //           Container(
-//
+
 //               height: 80,
 //               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
 //               decoration: BoxDecoration(
@@ -152,23 +146,23 @@
 //                           children: [
 //                             Text(
 //                               "count: ${post.amount}, price: ${post.price} ₪",
-//
+
 //                               // "count: 3",
 //                               style:  TextStyle(
 //                                 fontSize: 12, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
 //                             ),
 //                             SizedBox(width: 20.0),
-//
-//
+
+
 //                           ],
 //                         ),
-//
-//
-//
+
+
+
 //                       ],
 //                     ),
-//
-//
+
+
 //                   ],
 //                 ),
 //               )));
@@ -177,7 +171,7 @@
 //       itemsData = listItems;
 //     });
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     int widgetId = widget.id;
@@ -204,11 +198,9 @@
 //               layers: [
 //                 TileLayerOptions(
 //                     urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
-//
-//                 MarkerLayerOptions(markers: [
+
+//                 MarkerLayerOptions(markers: 
 //                   Marker(
-//                       width: 30.0,
-//                       height: 30.0,
 //                       point: LatLng(32.309718, 35.112541),
 //                       builder: (ctx) => Container(
 //                           child: Container(
@@ -218,9 +210,9 @@
 //                               size: 60,
 //                             ),
 //                           ))),
-//
-//
-//                 ])
+
+
+//                 )
 //               ],
 //             ),
 //           ),
@@ -233,7 +225,7 @@
 //                   child: Padding(
 //                     padding: const EdgeInsets.symmetric(
 //                         horizontal: kDefaultPadding),
-//
+
 //                   ),
 //                 ),
 //               ),
@@ -261,7 +253,7 @@
 //           Column(
 //             mainAxisAlignment: MainAxisAlignment.start,
 //             children: [
-//
+
 //               ElevatedButton(
 //                   child: Text('Take the order'),
 //                   onPressed: () {
@@ -274,13 +266,13 @@
 //                         });
 //                       });
 //                     });}
-//
+
 //               ),
-//
-//
+
+
 //               SizedBox(width: 80),
 //               ElevatedButton(
-//
+
 //                   child: Text('Order processing ,Your order is on the way'),
 //                   onPressed: () {
 //                     fun(2);
@@ -292,15 +284,15 @@
 //                         });
 //                       });
 //                     });}
-//
+
 //               ),
-//
-//
+
+
 //               // SizedBox(height: 40),
-//
+
 //               SizedBox(width: 80),
 //               ElevatedButton(
-//
+
 //                   child: Text('Order received successfully'),
 //                   onPressed: () {
 //                     fun(3);
@@ -312,8 +304,8 @@
 //                         });
 //                       });
 //                     });}
-//
-//
+
+
 //               ),
 //               SizedBox(height: 80),
 //               Visibility(
@@ -324,17 +316,17 @@
 //                   width: 200,
 //                   fit: BoxFit.contain,
 //                 ),
-//
+
 //               ),
-//
+
 //             ],
-//
-//
+
+
 //           ),
 //         ],
 //       ),
-//
-//
+
+
 //     );
 //   }
 //   Future<void> fun(int i) async {
@@ -344,7 +336,7 @@
 //     else{msg="Your Order received successfully";}
 //     int widgetId=widget.id;
 //     var res=  await fetch.upstate(widgetId,msg);
-//
+
 //   }
-//
+
 // }

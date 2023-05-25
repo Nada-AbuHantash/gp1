@@ -527,8 +527,40 @@ let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}
             console.log(error)
             response.status(400).send('Error in database operation');
         } else {
-           console.log(results)
-            response.send(results);
+            console.log(11111111112222222222);
+            let query2=`Select * from \`order\`  where orderid='${request.query.id}'`;
+            pool.query(query2,function (error, result1) {
+                if (error) {
+                    console.log(error)
+                    response.status(400).send('Error in database operation');
+                } else {
+                   
+                    const w=Number(result1[0].orderpercent);
+                    console.log(w);
+                    let query3=`Select * from delivery  where deliveryemail='${request.query.delname}'`;
+                    pool.query(query3,function (error, result3) {
+                        if (error) {
+                            console.log(error)
+                            response.status(400).send('Error in database operation');
+                        } else {
+                            
+                          const ww=Number(result3[0].deliverycard);
+                          console.log(ww);
+                          const wallet =w+ww;
+                            let query4=`update delivery set deliverycard='${wallet}' where deliveryemail='${request.query.delname}'`;
+                            pool.query(query4,function (error, result4) {
+                                if (error) {
+                                    console.log(error)
+                                    response.status(400).send('Error in database operation');
+                                } else {
+                                   console.log(wallet)
+                                    //response.send(results4);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         }
     });
 });

@@ -47,7 +47,7 @@ class _sitState extends State<sit> {
     });
   }
   void getinfo() async {
-    jsonString=await fetch.getinfo2();
+    jsonString=await fetch.getinfo3();
 
     if(jsonString !=null){
       cardnada=jsonString.elementAt(0)['deliverycard'].toString();
