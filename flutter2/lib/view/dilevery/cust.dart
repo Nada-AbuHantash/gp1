@@ -139,7 +139,8 @@ class cust extends StatefulWidget {
   final int id;
   final int total;
   final String name;
-  const cust({super.key, required this.id, required this.total, required this.name});
+  final String sname;
+  const cust({super.key, required this.id, required this.total, required this.name, required this.sname});
 
   @override
   _custState createState() => _custState();
@@ -187,8 +188,10 @@ class _custState extends State<cust> {
   List<Widget> itemsData = [];
   void getlistitem() async {
     int widgetId = widget.id;
-    // myList=await fetch.viewbuyfromdil();
-    myList=await fetch.viewbuysuper();
+    String nameu=widget.name;
+    String market=widget.sname;
+     myList=await fetch.viewbuyfromdil(nameu,market);
+   // myList=await fetch.viewbuysuper();
   
   }
 
@@ -196,9 +199,13 @@ class _custState extends State<cust> {
     int widgetId = widget.id;
     List<Widget> listItems = [];
     List<Product1> A = [];
+    String nameu=widget.name;
+        String market=widget.sname;
+
     if(myList.isEmpty)
-    // myList=await fetch.viewbuyfromdil();
-    myList=await fetch.viewbuysuper();
+    
+     myList=await fetch.viewbuyfromdil(nameu,market);
+    //myList=await fetch.viewbuysuper();
     // future: wish(myList);
     myList.forEach((post) {
      

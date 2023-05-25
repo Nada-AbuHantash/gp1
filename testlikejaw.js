@@ -693,7 +693,7 @@ let query1=`Select * from customer where username='${request.query.email}'  `;
             response.status(400).send('Error in database operation');
         } else {
             const e=results[0].useremail;
-            let query1=`Select * from cart where ='${e}' and flag=2 `;
+            let query1=`Select * from cart where emailcust='${e}' and flag=2 and namesuper='${request.query.market}' `;
             pool.query(query1,function (error, results) {
                 if (error) {
                     

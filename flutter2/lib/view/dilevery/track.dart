@@ -97,6 +97,7 @@ class _trackState extends State<track> {
                       MaterialPageRoute(builder: (_) => cust(id:post.id,
                       total:post.price+post.pls,
                       name:post.userName,
+                      sname:post.marketName,
                       )));
               
                 },

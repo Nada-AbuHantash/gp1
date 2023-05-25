@@ -24,7 +24,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/models/test.dart';
 class utils {
-  static const String basurl = "http://192.168.245.52:3000/";
+  static const String basurl = "http://192.168.1.4:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -558,10 +558,10 @@ class rest_api{
       throw Exception('Failed to load album');
     } return myList2;
   }
-  Future <List<Product1>> viewbuyfromdil(String A) async {
+  Future <List<Product1>> viewbuyfromdil(String A ,String B) async {
     late  List<Product1> myList2=[];
      
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuydil?email=$A'),
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuydil?email=$A&market=$B'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
