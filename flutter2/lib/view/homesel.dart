@@ -4,6 +4,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter2/view/notfication1.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -152,7 +153,7 @@ flagg=1;
       print('A new onMessageOpenedApp event was published!');
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
-  //Navigator.push(context,  MaterialPageRoute(builder: (_) => addproduct()));
+  Navigator.push(context,  MaterialPageRoute(builder: (_) => notfications1()));
       if (notification != null && android != null) {
         showDialog(
             context: context,
@@ -171,14 +172,15 @@ flagg=1;
     });
         flutterLocalNotificationsPlugin.show(
         0,
-        "Check the product",
+        "Important message",
         "Some prodcuts do not have enough quantity",
         NotificationDetails(
             android: AndroidNotificationDetails(channel.id, channel.name,
                 importance: Importance.high,
                 color: Colors.blue,
                 playSound: true,
-                icon: '@mipmap/ic_launcher')));
+                icon: '@mipmap/ic_launcher'))
+                );
   
 
 
