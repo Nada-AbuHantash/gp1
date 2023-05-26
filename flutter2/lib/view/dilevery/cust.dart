@@ -10,6 +10,8 @@ import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
 
+import 'package:webview_flutter/webview_flutter.dart';
+
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
@@ -166,6 +168,11 @@ class _custState extends State<cust> {
 
   @override
   Widget build(BuildContext context) {
+    double latitude = 32.309737;
+    double longitude = 35.112546;
+
+    String googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
      int widgetId = widget.id;
      String NAME= widget.name;
      int to=widget.total;
@@ -183,7 +190,13 @@ class _custState extends State<cust> {
           child: Column(
             children: <Widget>[
 
-
+              Container(
+                height: 280,
+                child: WebView(
+                  initialUrl: googleMapsUrl,
+                  javascriptMode: JavascriptMode.unrestricted,
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
