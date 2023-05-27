@@ -9,9 +9,8 @@ import 'dart:ui';
 import 'package:flutter2/view/MyHomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
@@ -39,7 +38,8 @@ class cust extends StatefulWidget {
   final int total;
   final String name;
   final String sname;
-  const cust({super.key, required this.id, required this.total, required this.name, required this.sname});
+   final int phone;
+  const cust({super.key, required this.id, required this.total, required this.name, required this.sname, required this.phone});
 
   @override
   _custState createState() => _custState();
@@ -168,14 +168,15 @@ class _custState extends State<cust> {
 
   @override
   Widget build(BuildContext context) {
-    double latitude = 32.309737;
-    double longitude = 35.112546;
-
-    String googleMapsUrl =
-        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
      int widgetId = widget.id;
      String NAME= widget.name;
      int to=widget.total;
+     int phone1=widget.phone;
+      double latitude = 37.7749;
+    double longitude = -122.4194;
+
+    String googleMapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
@@ -185,133 +186,177 @@ class _custState extends State<cust> {
           backgroundColor: globalcolors.notetcolor,
           title: Text('Track the order !'),
         ),
-        body: Container(
-          height: size.height,
-          child: Column(
-            children: <Widget>[
-
-              Container(
-                height: 280,
-                child: WebView(
-                  initialUrl: googleMapsUrl,
-                  javascriptMode: JavascriptMode.unrestricted,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: kDefaultPadding),
-
+        body: 
+      SingleChildScrollView(
+          child: Container(
+            height: size.height,
+            child: Column(
+              children: <Widget>[
+        
+        
+        // Row(
+        //   children:[
+        //   Container(
+        //     child: WebView(
+        //         initialUrl: googleMapsUrl,
+        //         javascriptMode: JavascriptMode.unrestricted,
+        //       ),
+        //   ),
+        //   ]
+        // ),
+        
+        
+        
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Expanded(
+                      child: SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: kDefaultPadding),
+        
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Expanded(
-                  child: ListView.builder(
-                      controller: controller,
-                      itemCount: itemsData.length,
-                      physics: BouncingScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Align(
-                            heightFactor: 1,
-                            alignment: Alignment.topCenter,
-                            child: itemsData[index]);
-                      })),
-              const SizedBox(
-                height: 12,
-              ),
-
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    '$NAME Bill : $to ₪',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,color: globalcolors.textcolor,
-                    ),
-                  ),
-                  ElevatedButton(
-                      child: Text('Take the order'),
-                      onPressed: () {
-                        fun(1);
-                        setState(() {
-                          isAnimationVisible = true;
-                          Timer(Duration(seconds: 6), () {
-                            setState(() {
-                              isAnimationVisible = false;
-                            });
-                          });
-                        });}
-
-                  ),
-
-
-                  SizedBox(width: 80),
-                  ElevatedButton(
-
-                      child: Text('Order processing ,Your order is on the way'),
-                      onPressed: () {
-                        fun(2);
-                        setState(() {
-                          isAnimationVisible = true;
-                          Timer(Duration(seconds: 6), () {
-                            setState(() {
-                              isAnimationVisible = false;
-                            });
-                          });
-                        });}
-
-                  ),
-
-
-                  // SizedBox(height: 40),
-
-                  SizedBox(width: 80),
-                  ElevatedButton(
-
-                      child: Text('Order received successfully'),
-                      onPressed: () {
-                        fun(3);
-                        setState(() {
-                          isAnimationVisible = true;
-                          Timer(Duration(seconds: 6), () {
-                            setState(() {
-                              isAnimationVisible = false;
-                            });
-                          });
-                        });}
-
-
-                  ),
-                  SizedBox(height: 80),
-                  Visibility(
-                    visible: isAnimationVisible,
-                    child: Lottie.network(
-                      'https://assets9.lottiefiles.com/packages/lf20_ardajn6t.json',
-                      height: 200,
-                      width: 200,
-                      fit: BoxFit.contain,
+                  ],
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Expanded(
+                    child: ListView.builder(
+                        controller: controller,
+                        itemCount: itemsData.length,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Align(
+                              heightFactor: 1,
+                              alignment: Alignment.topCenter,
+                              child: itemsData[index]);
+                        })),
+                const SizedBox(
+                  height: 12,
+                ),
+        
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$NAME Bill : $to ₪  phone is 0$phone1',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,color: globalcolors.textcolor,
+                      ),
                     ),
 
+ 
+
+                      Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                 child: Text('Take the order'),
+                       
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
                   ),
-
-                ],
-
+                  onPressed: () {
+                          fun(1);
+                          setState(() {
+                            isAnimationVisible = true;
+                            Timer(Duration(seconds: 6), () {
+                              setState(() {
+                                isAnimationVisible = false;
+                              });
+                            });
+                          });}
+                ),
+               ]
 
               ),
-            ],
+        
+        
+                    SizedBox(width: 80),
+                    Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                  child: Text('Order processing ,Your order is on the way'),
+                       
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () {
+                          fun(2);
+                          setState(() {
+                            isAnimationVisible = true;
+                            Timer(Duration(seconds: 6), () {
+                              setState(() {
+                                isAnimationVisible = false;
+                              });
+                            });
+                          });}
+                ),
+               ]
+
+              ),
+        
+                    // SizedBox(height: 40),
+        
+                    SizedBox(width: 80),
+                    Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                                        child: Text('Order received successfully'),
+
+                       
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () {
+                          fun(3);
+                          setState(() {
+                            isAnimationVisible = true;
+                            Timer(Duration(seconds: 6), () {
+                              setState(() {
+                                isAnimationVisible = false;
+                              });
+                            });
+                          });}
+                ),
+               ]
+
+              ),
+                    SizedBox(height: 80),
+                    Visibility(
+                      visible: isAnimationVisible,
+                      child: Lottie.network(
+                        'https://assets9.lottiefiles.com/packages/lf20_ardajn6t.json',
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.contain,
+                      ),
+        
+                    ),
+        
+                  ],
+        
+        
+                ),
+              ],
+            ),
+        
           ),
-
         ),
+        
       ),
     );
   }

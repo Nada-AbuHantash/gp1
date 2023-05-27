@@ -24,7 +24,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/models/test.dart';
 class utils {
-  static const String basurl = "http://192.168.245.52:3000/";
+  static const String basurl = "http://172.20.10.9:3000/";
 //var url = Uri.parse('https://example.com');
 }
 class rest_api{
@@ -718,7 +718,6 @@ Future <List<test11>> test() async {
     if (res.statusCode == 200) {
 
     } else {
-
       throw Exception('Failed to load album');
     }
   }

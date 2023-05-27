@@ -154,8 +154,8 @@ class _homedilState extends State<homedil> {
 
         backgroundColor: Colors.white,
         appBar: AppBar(
-
-
+          backgroundColor: globalcolors.notetcolor,
+          title: Text('This order contains'),
         ),
         body: Container(
           height: size.height,

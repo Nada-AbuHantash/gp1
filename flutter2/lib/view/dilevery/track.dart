@@ -93,12 +93,13 @@ class _trackState extends State<track> {
                 onTap: () async {
                  
                   print('go order!');
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => cust(id:post.id,
-                  //     total:post.price+post.pls,
-                  //     name:post.userName,
-                  //     sname:post.marketName,
-                  //     )));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => cust(id:post.id,
+                      total:post.price+post.pls,
+                      name:post.userName,
+                      sname:post.marketName,
+                      phone: post.userphone,
+                      )));
               
                 },
                 child: Padding(

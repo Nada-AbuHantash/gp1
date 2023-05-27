@@ -566,7 +566,7 @@ let query1=`update \`order\` set flag=1 , namedelivery='${request.query.delname}
 });
 app.get('/updatestate', function (request, response) {
 
-let query1=`update \`order\` orderstatus='${request.query.state}' where orderid='${request.query.id}'`;
+let query1=`update \`order\` set orderstatus='${request.query.state}' where orderid='${request.query.id}'`;
     pool.query(query1,function (error, results) {
         if (error) {
             console.log(error)
