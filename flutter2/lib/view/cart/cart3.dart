@@ -6,6 +6,8 @@ import 'package:flutter2/view/MyHomePage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'dart:async';
+import 'package:timezone/timezone.dart';
+import '../editprofile.dart';
 
 TextEditingController productNameController = TextEditingController();
 TextEditingController productImageURLController = TextEditingController();
@@ -36,6 +38,8 @@ class cart03 extends StatefulWidget {
 class _cart03State extends State<cart03> {
   Timer? _timer;
   int _elapsedSeconds = 86400;
+  int _countdown=60;
+
   @override
   TextEditingController _textEditingController = TextEditingController();
   String text = "";
@@ -45,7 +49,7 @@ class _cart03State extends State<cart03> {
   void initState() {
     super.initState();
   
-    _startTimer();
+    // _startTimer();
 
     _textEditingController.text = text;
     myList=[];
@@ -68,7 +72,13 @@ class _cart03State extends State<cart03> {
       });
     });
   }
-
+void _updateCountdown() {
+    setState(() {
+      _countdown--;
+    });if (_countdown == 0) {
+      _timer?.cancel();
+    }
+  }
   String _formatDuration(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, "0");
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
@@ -237,15 +247,24 @@ title:Text("are you sure delete this itme ?"),
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
+          DateTime now = DateTime.now();
+  // var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
+                           //print(time);
+                            var time="remaining time 23:59:50";
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
+        
 
+
+      child: Scaffold(
+        
+        backgroundColor: Colors.white,
         body: Container(
           height: size.height,
           child: Column(
+            
             children: <Widget>[
               Row(
+                
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                  
@@ -264,7 +283,8 @@ title:Text("are you sure delete this itme ?"),
               const SizedBox(
                 height: 12,
               ),
-               
+              
+             
               Expanded(
                   child: ListView.builder(
                       controller: controller,
@@ -280,9 +300,51 @@ title:Text("are you sure delete this itme ?"),
                       )
                       
                       ),
-                        
+                     Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                  
+                  child: Text(time),
+                  
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () async{
+                      book1();
+                     
+                  },
+                ),
+                
+               ]
+
+              ), 
+                        Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                ElevatedButton(
+                  
+                  child: Text('booking'),
+                  
+                  style: ElevatedButton.styleFrom(
+                    primary: globalcolors.notetcolor,
+                    onPrimary: Colors.white,
+                    onSurface: Colors.grey,
+                  ),
+                  onPressed: () async{
+                      book1();
+                     
+                  },
+                ),
+                
+               ]
+
+              ), 
+
             ],
-            
+             
           ),
         ),
       ),
@@ -297,6 +359,16 @@ title:Text("are you sure delete this itme ?"),
       Fluttertoast.showToast(msg: "delete id done refrch to sure",
           textColor: globalcolors.besiccolor);
     }else{}
+  }
+  
+  void book1() {
+
+    _startTimer();
+    // DateTime now = DateTime.now();
+    //                          var time='${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
+    //                        print(time);
+       _timer= Timer.periodic(Duration(seconds: 1), (Timer t) => _updateCountdown());
+
   }
 }
 

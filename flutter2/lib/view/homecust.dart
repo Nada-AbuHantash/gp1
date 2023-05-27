@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/models/product.dart';/////اسم البرودكتس زي مهي بالتيبل عشان تنعرض هون
 import 'package:flutter2/utils/globalColors.dart';
@@ -5,8 +6,10 @@ import 'dart:ui';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter2/view/cart/cart.dart';
 import 'package:flutter2/view/map/mapGPT.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../main.dart';
 import '../utils/Sharedsession.dart';
 import 'about/abo2.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,12 +22,13 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../components/applocal.dart';
+import 'notfication1.dart';
 
 List<String> imagesList = [
-  'assets/images/market.png',
-  'assets/images/shop.png',
-  'assets/images/p1.jpg',
-  'assets/images/p4.jpg',
+  'assets/images/nn.png',
+  'assets/images/nn1.png',
+  'assets/images/nn2.png',
+  'assets/images/nn3.png',
 ];
 int _currentImageIndex = 0;
 const double kDefaultPadding = 10;
@@ -79,6 +83,66 @@ class _MyHomePageState extends State<homecust> {
 
   void initState()  {
     super.initState();
+    
+    
+  //       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     RemoteNotification? notification = message.notification;
+  //     AndroidNotification? android = message.notification?.android;
+  //     if (notification != null && android != null) {
+  //       flutterLocalNotificationsPlugin.show(
+  //           notification.hashCode,
+  //           notification.title,
+  //           notification.body,
+           
+  //           NotificationDetails(
+  //             android: AndroidNotificationDetails(
+  //               channel.id,
+  //               channel.name,
+  //               color: Colors.pink,
+  //               playSound: true,
+  //               icon: '@mipmap/ic_launcher',
+                
+                
+  //             ),
+  //           ));
+  //     }
+  //   });
+  //   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //     print('A new onMessageOpenedApp event was published!');
+  //     RemoteNotification? notification = message.notification;
+  //     AndroidNotification? android = message.notification?.android;
+  // Navigator.push(context,  MaterialPageRoute(builder: (_) => notfications1()));
+  //     if (notification != null && android != null) {
+  //       showDialog(
+  //           context: context,
+  //           builder: (_) {
+  //             return AlertDialog(
+  //               title: Text("${notification.title}"),
+  //               content: SingleChildScrollView(
+  //                 child: Column(
+  //                   crossAxisAlignment: CrossAxisAlignment.start,
+  //                   children: [Text("${notification.body}")],
+  //                 ),
+  //               ),
+  //             );
+  //           });
+  //     }
+  //   });
+  //       flutterLocalNotificationsPlugin.show(
+  //       0,
+  //       "Important message",
+  //       "You have a notice about your order",
+  //       NotificationDetails(
+  //           android: AndroidNotificationDetails(channel.id, channel.name,
+  //               importance: Importance.high,
+  //               color: Colors.blue,
+  //               playSound: true,
+  //               icon: '@mipmap/ic_launcher'))
+  //               );
+  
+
+
+  //       }
     _textEditingController.text = text;
     getPostsData();
     controller.addListener(() {

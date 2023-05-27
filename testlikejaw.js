@@ -217,7 +217,7 @@ let query1=`Select * from sellers where suparmarketname='${request.query.namesup
             
                 });
             }else{
-                let msg="no badget with you";
+                let msg="no budget with you";
                 let person="your wallet";
                 let query3=`INSERT INTO notification (msg,
                     supetmarket,

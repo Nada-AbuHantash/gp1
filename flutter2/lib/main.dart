@@ -109,7 +109,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
       debugShowCheckedModeBanner: false,
-       // home:addBasket(),//chatGPT
+        //home:addBasket(),//chatGPT
          home:login(),
        
        localizationsDelegates: [

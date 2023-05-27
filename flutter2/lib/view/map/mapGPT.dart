@@ -190,17 +190,17 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
                           isLoading = true;
                         });
 
-                        await _firestore
-                            .collection('users')
-                            .where("name", isEqualTo: "Dream Moll")//e.user
-                            .get()
-                            .then((value) {
-                          setState(() {
-                            userMap = value.docs[0].data();
-                            isLoading = false;
-                          });
-                          print("nnnnnnnnnnnnnnnn");
-                        });
+                        // await _firestore
+                        //     .collection('users')
+                        //     .where("name", isEqualTo: "Bravo Mall")//e.user
+                        //     .get()
+                        //     .then((value) {
+                        //   setState(() {
+                        //     userMap = value.docs[0].data();
+                        //     isLoading = false;
+                        //   });
+                        //   print("nnnnnnnnnnnnnnnn");
+                        // });
                         addMarker(e.user,e.phone);
                         print('Marker tapped!');
                       }),
