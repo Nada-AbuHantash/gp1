@@ -34,7 +34,7 @@ dependencies:
   awesome_dialog: ^3.0.2
   location: ^4.4.0
   syncfusion_flutter_maps: ^21.1.39
-
+ 
 
   latlong: ^0.6.1
   flutter_map: ^0.14.0
