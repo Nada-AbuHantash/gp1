@@ -16,6 +16,11 @@ import 'package:geolocator/geolocator.dart';
 
 import '../chat/ChatRoom.dart';
 
+String x0 = 'Unknown';
+String y0 = 'Unknown';
+
+double x1 = 0;
+double x2 = 0;
 
 class addBasket extends StatefulWidget {
   const addBasket({Key? key}) : super(key: key);
@@ -23,9 +28,8 @@ class addBasket extends StatefulWidget {
   _addBasket createState() => _addBasket();
 }
 
-class _addBasket extends State<addBasket> with WidgetsBindingObserver{
+class _addBasket extends State<addBasket> with WidgetsBindingObserver {
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyMap(),
@@ -38,23 +42,47 @@ class MyMap extends StatefulWidget {
   _MyMap createState() => new _MyMap();
 }
 
-class _MyMap extends State<MyMap> with WidgetsBindingObserver{
+class _MyMap extends State<MyMap> with WidgetsBindingObserver {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   // late final bool isme;
+
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   void initState() {
     super.initState();
-    distance=[];
+    _getLocation();
+
+    print(x0);
+    print(y0);
+    x1 = double.parse(x0);
+    x2 = double.parse(y0);
+    print(x1);
+    print("marah");
+    print(x2);
+    //  _latPoint = double.parse(x0);
+    //  _longPoint = double.parse(y0);
+    distance = [];
     pos();
     // super.initState();
     fetchAllPoints();
     WidgetsBinding.instance!.addObserver(this);
     setStatus("Online");
+  }
 
+  Future<void> _getLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      setState(() {
+        x0 = position.latitude.toString();
+        y0 = position.longitude.toString();
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   void setStatus(String status) async {
@@ -62,6 +90,7 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
       "status": status,
     });
   }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
@@ -101,31 +130,21 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
       print("nnnnnnnnnnnnnnnn");
     });
   }
+
   bool isChecked = false;
-  //fetchData _fetchData = fetchData();
-  // TextEditingController _lat = TextEditingController(); //x
-  // TextEditingController _long = TextEditingController(); //y
-  double _latPoint=32.22528;
-  double _longPoint=35.25972;
 
-  // @override
-  // void initState() {
-  //   distance=[];
-  //   pos();
-  //   super.initState();
-  //   fetchAllPoints();
+  double _latPoint = x1;
+  double _longPoint = x2;
+  // double _latPoint = x0;
+  // double _longPoint = y0;
 
-  //   /// connect with database and get all positions
-  // }
-
-  pos() async{
-//     await Geolocator.openAppSettings();
-// await Geolocator.openLocationSettings();
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+  pos() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     print(position.latitude);
     print(position.longitude);
-
   }
+
   @override
   List<TaxiModel> _points = []; //x and y points
   List<TaxiModel> _diff = [];
@@ -135,14 +154,11 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
   late String _call;
   late String _text;
   Widget build(BuildContext context) {
-
     return new Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-
           elevation: 0,
-          title:
-          Text("Look who's around"),
+          title: Text("Look who's around"),
           centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
@@ -159,111 +175,43 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
         ),
         body: FlutterMap(
           options: new MapOptions(
-            center: new LatLng(_latPoint, _longPoint),// my location
+            center: new LatLng(_latPoint, _longPoint), // my location
             minZoom: 7.0,
             zoom: 12,
-
           ),
-
           layers: [
             new TileLayerOptions(
                 urlTemplate:
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c']),
-            MarkerLayerOptions( // taxis
+            MarkerLayerOptions(
+              // taxis
               markers: _points
                   .map((e) => Marker(
+                        width: 45.0,
+                        height: 45.0,
+                        point: LatLng(double.parse(e.lat),
+                            double.parse(e.long)), //no change
+                        builder: (context) => Container(
+                          child: IconButton(
+                              icon: Icon(Icons.store),
+                              color: globalcolors.textcolor, // my icon
+                              onPressed: () async {
+                                //my notification
+                                FirebaseFirestore _firestore =
+                                    FirebaseFirestore.instance;
 
-                width: 45.0,
-                height: 45.0,
-                point:
-                LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-                builder: (context) => Container(
-                  child: IconButton(
-                      icon: Icon(Icons.store),
-                      color: globalcolors.textcolor, // my icon
-                      onPressed: () async {
-                        //my notification
-                        FirebaseFirestore _firestore = FirebaseFirestore.instance;
+                                setState(() {
+                                  isLoading = true;
+                                });
 
-                        setState(() {
-                          isLoading = true;
-                        });
-
-                        // await _firestore
-                        //     .collection('users')
-                        //     .where("name", isEqualTo: "Bravo Mall")//e.user
-                        //     .get()
-                        //     .then((value) {
-                        //   setState(() {
-                        //     userMap = value.docs[0].data();
-                        //     isLoading = false;
-                        //   });
-                        //   print("nnnnnnnnnnnnnnnn");
-                        // });
-                        addMarker(e.user,e.phone);
-                        print('Marker tapped!');
-                      }),
-                ),
-              ))
+                                addMarker(e.user, e.phone);
+                                print('Marker tapped!');
+                              }),
+                        ),
+                      ))
                   .toList(),
             ),
-            // MarkerLayerOptions( // taxis
-            //   markers: _diff.getRange(1,3)
-            //       .map((e) => Marker(
-            //     width: 45.0,
-            //     height: 45.0,
-            //     point:
-            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-            //     builder: (context) => Container(
-            //       child: IconButton(
-            //           icon: Icon(Icons.store),
-            //           color: globalcolors.textcolor,// my icon
-            //           onPressed: () {
-            //             //my notification
-            //             addMarker(e.user,e.phone);
-            //             print('near to you');
-            //           }),
-            //     ),
-            //   ))
-            //       .toList(),
-            // ),
-            // MarkerLayerOptions( // taxis
-            //   markers: _diff.getRange(0,1)
-            //       .map((e) => Marker(
-            //     width: 45.0,
-            //     height: 45.0,
-            //     point:
-            //     LatLng(double.parse(e.lat), double.parse(e.long)), //no change
-            //     builder: (context) => Container(
-            //       child: IconButton(
-            //           icon: Icon(Icons.store),
-            //           color: globalcolors.notetcolor,// my icon
-            //           onPressed: () {
-            //             addMarker(e.user,e.phone);
-            //             //Calculate_KNN();
-            //             print('near to you');
-            //           }),
-            //     ),
-            //   ))
-            //       .toList(),
-            // ),
-            // MarkerLayerOptions( // taxis
-            //     markers: [
-            //       Marker(point: LatLng(_latPoint, _longPoint),
-            //         builder: (context) => Container(
-            //           child: IconButton(
-            //               icon: Icon(Icons.location_pin),
-            //               color: globalcolors.textcolor, // my icon
-            //               onPressed: () {
-            //                 //addMarker();
-            //                 print('My location');
-            //               }),
-            //         ),
-            //       )
-            //     ]
-            // ),
-
           ],
         ));
   }
@@ -272,13 +220,13 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
     var data = await FetchTaxis();
     setState(() {
       this._points = data;
-      this._diff= data;
+      this._diff = data;
     });
     Calculate_KNN();
-
   }
 
-  Future addMarker(String name,String phone) async { // pop //up
+  Future addMarker(String name, String phone) async {
+    // pop //up
     await showDialog(
         context: context,
         barrierDismissible: true,
@@ -291,30 +239,24 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
                 fontSize: 15,
                 package: 'flutter_credit_card',
                 color: Color.fromARGB(255, 26, 47, 99),
-
               ),
               textAlign: TextAlign.center,
             ),
-
             actions: <Widget>[
               Center(
                 child: Column(
                   children: [
-
                     SizedBox(
                       height: 10,
                     ),
-
                     SizedBox(
                       width: MediaQuery.of(context).size.width / 1.6,
-                      child:  Container(
-                        decoration:
-                        ThemeHelper().buttonBoxDecoration(context),
+                      child: Container(
+                        decoration: ThemeHelper().buttonBoxDecoration(context),
                         child: ElevatedButton(
                           style: ThemeHelper().buttonStyle(),
                           child: Padding(
-                            padding:
-                            EdgeInsets.fromLTRB(40, 10, 40, 10),
+                            padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
                             child: Text(
                               'Call',
                               style: TextStyle(
@@ -324,63 +266,62 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
                                   color: Colors.white),
                             ),
                           ),
-                          onPressed:()async{
-                            _call ='tel:$phone';
-                            if ( await canLaunch (_call) ){
+                          onPressed: () async {
+                            _call = 'tel:$phone';
+                            if (await canLaunch(_call)) {
                               await launch(_call);
-                            }},
+                            }
+                          },
                         ),
-                      ),),
+                      ),
+                    ),
                     SizedBox(
                       height: 20,
                     ),
                     userMap != null
-                        ?
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.6,
-                      child:  Container(
-                        decoration:
-                        ThemeHelper().buttonBoxDecoration(context),
-                        child: ElevatedButton(
-                          style: ThemeHelper().buttonStyle(),
-                          child: Padding(
-                            padding:
-                            EdgeInsets.fromLTRB(40, 10, 40, 10),
-                            child: Text(
-                              'Message',
-                              style: TextStyle(
-                                  fontFamily: 'halter',
-                                  fontSize: 18,
-                                  package: 'flutter_credit_card',
-                                  color: Colors.white),
-                            ),
-                          ),
-                          //  userMap != null
-                          // ? ListTile():Column()
-                          onPressed:()async{
-
-                            // _text ='sms:$phone';
-                            // if ( await canLaunch (_text) ){
-                            //   await launch(_text);
-                            // }
-                            String roomId = chatRoomId(
-                                _auth.currentUser!.displayName!,
-                                userMap!['name']);
-
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (_) => ChatRoom(
-                                  chatRoomId: roomId,
-                                  userMap: userMap!,
-                                  //  isme:  _auth.currentUser==userMap!['email'],
+                        ? SizedBox(
+                            width: MediaQuery.of(context).size.width / 1.6,
+                            child: Container(
+                              decoration:
+                                  ThemeHelper().buttonBoxDecoration(context),
+                              child: ElevatedButton(
+                                style: ThemeHelper().buttonStyle(),
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                                  child: Text(
+                                    'Message',
+                                    style: TextStyle(
+                                        fontFamily: 'halter',
+                                        fontSize: 18,
+                                        package: 'flutter_credit_card',
+                                        color: Colors.white),
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
+                                //  userMap != null
+                                // ? ListTile():Column()
+                                onPressed: () async {
+                                  // _text ='sms:$phone';
+                                  // if ( await canLaunch (_text) ){
+                                  //   await launch(_text);
+                                  // }
+                                  String roomId = chatRoomId(
+                                      _auth.currentUser!.displayName!,
+                                      userMap!['name']);
 
-                    ) :Column(),
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (_) => ChatRoom(
+                                        chatRoomId: roomId,
+                                        userMap: userMap!,
+                                        //  isme:  _auth.currentUser==userMap!['email'],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          )
+                        : Column(),
                     SizedBox(
                       height: 20,
                     ),
@@ -391,39 +332,43 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
           );
         });
   }
+
   Future<List<TaxiModel>> FetchTaxis() async {
-    const String basurl = "http://192.168.245.52:3000/";
+    const String basurl = "http://192.168.1.12:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
     return body.map((taxi) => TaxiModel.fromJson(taxi)).toList();
   }
 
-  Future<List<TaxiModel>> Calculate_KNN() async{
+  Future<List<TaxiModel>> Calculate_KNN() async {
     distance.clear();
-    double min=0;
+    double min = 0;
     TaxiModel minSort;
 
-    for(int i=0;i<_points.length;i++){
-      distance.add(calculateDistance(_latPoint, _longPoint,
-          double.parse(_points.elementAt(i).lat), double.parse(_points.elementAt(i).long)));
+    for (int i = 0; i < _points.length; i++) {
+      distance.add(calculateDistance(
+          _latPoint,
+          _longPoint,
+          double.parse(_points.elementAt(i).lat),
+          double.parse(_points.elementAt(i).long)));
     }
 
     print("hi before");
+    print(x0);
+    print(y0);
     print(_points.elementAt(0).lat);
-    for(int i=0;i<_diff.length;i++){
-
-      for(int j=i+1;j<_points.length;j++){
-        if(distance[i]>distance[j]){
-          min=distance[i];
-          distance[i]=distance[j];
-          distance[j]=min;
-          minSort=_diff[i];
-          _diff[i]=_diff[j];
-          _diff[j]=minSort;
+    for (int i = 0; i < _diff.length; i++) {
+      for (int j = i + 1; j < _points.length; j++) {
+        if (distance[i] > distance[j]) {
+          min = distance[i];
+          distance[i] = distance[j];
+          distance[j] = min;
+          minSort = _diff[i];
+          _diff[i] = _diff[j];
+          _diff[j] = minSort;
         }
       }
-
     }
     print("hi after");
     print(_diff.elementAt(0).lat);
@@ -431,12 +376,12 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver{
 
     return _diff;
   }
-  double calculateDistance( lat1, lon1,lat2, lon2){
+
+  double calculateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
-    var a = 0.5 - cos((lat2 - lat1) * p)/2 +
-        cos(lat1 * p) * cos(lat2 * p) *
-            (1 - cos((lon2 - lon1) * p))/2;
+    var a = 0.5 -
+        cos((lat2 - lat1) * p) / 2 +
+        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
-
 }

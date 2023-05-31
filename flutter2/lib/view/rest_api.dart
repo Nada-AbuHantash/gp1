@@ -23,33 +23,35 @@ import '../utils/Sharedsession.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/mudel/pos.dart';
 import 'package:flutter2/models/test.dart';
+
 class utils {
-  static const String basurl = "http://172.20.10.9:3000/";
+  static const String basurl = "http://192.168.1.12:3000/";
 //var url = Uri.parse('https://example.com');
 }
-class rest_api{
-  Future Feedback( rate,String email) async {
+
+class rest_api {
+  Future Feedback(rate, String email) async {
     try {
-      final http.Response use = await http.post(
-          Uri.parse(utils.basurl + 'feedback'),
-          headers: {"Accept": "Application/json"},
-          body: {'email': email, 'rate': rate.toString(),});
+      final http.Response use =
+          await http.post(Uri.parse(utils.basurl + 'feedback'), headers: {
+        "Accept": "Application/json"
+      }, body: {
+        'email': email,
+        'rate': rate.toString(),
+      });
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
-
       } else {
         // show error
         return data;
-
       }
-
-
     } catch (e) {
       print(e);
       print('no00');
     }
   }
+
   Future userlogin(String email, String pass) async {
     try {
       final http.Response use = await http.post(
@@ -71,6 +73,7 @@ class rest_api{
       print('no');
     }
   }
+
   Future deliverylogin(String email, String pass) async {
     var jsonString;
     try {
@@ -96,6 +99,7 @@ class rest_api{
       print('no');
     }
   }
+
   Future sellerlogin(String email, String pass) async {
     //  var namesuper;
     try {
@@ -124,14 +128,17 @@ class rest_api{
       print('no');
     }
   }
-  Future sellercard1(String name, String card,String nameperson) async {
 
+  Future sellercard1(String name, String card, String nameperson) async {
     try {
-      final http.Response use = await http.post(
-          Uri.parse(utils.basurl + 'walletseller'),
-          headers: {"Accept": "Application/json"},
-          body: {'suparmarketname': name, 'sellercard': card,
-            'selleremail':nameperson});
+      final http.Response use = await http
+          .post(Uri.parse(utils.basurl + 'walletseller'), headers: {
+        "Accept": "Application/json"
+      }, body: {
+        'suparmarketname': name,
+        'sellercard': card,
+        'selleremail': nameperson
+      });
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
@@ -145,72 +152,68 @@ class rest_api{
       print("yes ");
 
       ///////////saved////////////
-
     } catch (e) {
       print('no');
     }
   }
-  Future addlocation(String email,double x,double y) async {
-    String  xlocation = x.toString();
-    String  ylocation = y.toString();
+
+  Future addlocation(String email, double x, double y) async {
+    String xlocation = x.toString();
+    String ylocation = y.toString();
     try {
-      final http.Response use = await http.post(
-          Uri.parse(utils.basurl + 'locationseller'),
-          headers: {"Accept": "Application/json"},
-          body: { 'email': email,
-            'xlocation':xlocation,
-            'ylocation':ylocation});
+      final http.Response use = await http
+          .post(Uri.parse(utils.basurl + 'locationseller'), headers: {
+        "Accept": "Application/json"
+      }, body: {
+        'email': email,
+        'xlocation': xlocation,
+        'ylocation': ylocation
+      });
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
         print("Failed to update");
       } else {
-
         return data;
       }
       print("yes ");
 
       ///////////saved////////////
-
     } catch (e) {
       print(e);
       print('no');
     }
   }
 
-  Future deliverycard1(String card,String nameperson) async {
-
+  Future deliverycard1(String card, String nameperson) async {
     try {
       final http.Response use = await http.post(
           Uri.parse(utils.basurl + 'walletdelivery'),
           headers: {"Accept": "Application/json"},
-          body: { 'deliverycard': card,
-            'deliveryemail':nameperson});
+          body: {'deliverycard': card, 'deliveryemail': nameperson});
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
         print("Failed to update");
       } else {
-
         return data;
       }
       print("yes ");
 
       ///////////saved////////////
-
     } catch (e) {
       print('no');
     }
   }
-  Future addcart( int num, String item ,int id) async {
+
+  Future addcart(int num, String item, int id) async {
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     try {
-
-      final http.Response use =
-      await http.get(Uri.parse(utils.basurl + 'addcart?emailcust=$A&nameitem=$item&numitem=$num&id=$id'), headers: {
-        "Accept": "Application/json"
-      });
+      final http.Response use = await http.get(
+          Uri.parse(utils.basurl +
+              'addcart?emailcust=$A&nameitem=$item&numitem=$num&id=$id'),
+          headers: {"Accept": "Application/json"});
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
@@ -225,13 +228,12 @@ class rest_api{
     }
   }
 
-
-  Future usersignup(
-      String name, String email, String pass, String phone, String place) async {
+  Future usersignup(String name, String email, String pass, String phone,
+      String place) async {
     try {
       var s = 200;
       final http.Response use =
-      await http.post(Uri.parse(utils.basurl + 'register'), headers: {
+          await http.post(Uri.parse(utils.basurl + 'register'), headers: {
         "Accept": "Application/json"
       }, body: {
         'username': name,
@@ -254,19 +256,15 @@ class rest_api{
     }
   }
 
-  Future updatecard(
-      String email, String card ) async {
+  Future updatecard(String email, String card) async {
     try {
       var s = 200;
       final http.Response use =
-      await http.post(Uri.parse(utils.basurl + 'updatecard'), headers: {
+          await http.post(Uri.parse(utils.basurl + 'updatecard'), headers: {
         "Accept": "Application/json"
       }, body: {
-
         'email': email,
         'card': card,
-
-
       });
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
@@ -282,12 +280,12 @@ class rest_api{
     }
   }
 
-  Future userupdate(
-      String name, String pass, String phone, String place , String email) async {
+  Future userupdate(String name, String pass, String phone, String place,
+      String email) async {
     try {
       var s = 200;
       final http.Response use =
-      await http.post(Uri.parse(utils.basurl + 'userupdate'), headers: {
+          await http.post(Uri.parse(utils.basurl + 'userupdate'), headers: {
         "Accept": "Application/json"
       }, body: {
         'username': name,
@@ -295,7 +293,6 @@ class rest_api{
         'userpass': pass,
         'userphone': phone,
         'userplace': place,
-
       });
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
@@ -310,12 +307,13 @@ class rest_api{
       print("no register");
     }
   }
-  Future deliverysignup(
-      String name, String email, String pass, String phone, String place) async {
+
+  Future deliverysignup(String name, String email, String pass, String phone,
+      String place) async {
     try {
       var s = 200;
-      final http.Response use =
-      await http.post(Uri.parse(utils.basurl + 'registerdelivery'), headers: {
+      final http.Response use = await http
+          .post(Uri.parse(utils.basurl + 'registerdelivery'), headers: {
         "Accept": "Application/json"
       }, body: {
         'deliveryname': name,
@@ -339,12 +337,12 @@ class rest_api{
     }
   }
 
-  Future sellersignup(
-      String name, String email, String pass, String phone, String place) async {
+  Future sellersignup(String name, String email, String pass, String phone,
+      String place) async {
     try {
       var s = 200;
       final http.Response use =
-      await http.post(Uri.parse(utils.basurl + 'registerseller'), headers: {
+          await http.post(Uri.parse(utils.basurl + 'registerseller'), headers: {
         "Accept": "Application/json"
       }, body: {
         'sellername': name,
@@ -370,37 +368,41 @@ class rest_api{
   }
 
   Future putpro(
-      String count, String namepro, String oldprice, String newprice, String type,String path,String nameperson ,String exp,String per) async {
+      String count,
+      String namepro,
+      String oldprice,
+      String newprice,
+      String type,
+      String path,
+      String nameperson,
+      String exp,
+      String per) async {
     try {
       var s = 200;
-      final http.Response use =
-      await http.get(Uri.parse(utils.basurl + 'addpro?productcount=$count&productname=$namepro&oldprice=$oldprice&newprice=$newprice&producttype=$type&productimage=$path&exp=$exp&per=$per&namesupermarket=$nameperson'), 
-      headers: {
-        "Accept": "Application/json"
-      });
+      final http.Response use = await http.get(
+          Uri.parse(utils.basurl +
+              'addpro?productcount=$count&productname=$namepro&oldprice=$oldprice&newprice=$newprice&producttype=$type&productimage=$path&exp=$exp&per=$per&namesupermarket=$nameperson'),
+          headers: {"Accept": "Application/json"});
       var encodeFirst = json.encode(use.body);
       var data = json.decode(encodeFirst);
       if (use.statusCode == 400) {
-
         print("Failed to update");
       } else {
-
         return data;
       }
     } catch (e) {
       print("no register");
     }
   }
+
   Future getinfo1() async {
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     String B = prefs.get("passpass").toString();
     var jsonString;
     try {
-
       http.Response res = await http.get(
-        Uri.parse(
-            utils.basurl+'editprofile?useremail=$A'),
+        Uri.parse(utils.basurl + 'editprofile?useremail=$A'),
         headers: {'Content-Type': 'application/json'},
         // body: {
         //       'useremail':A,
@@ -408,7 +410,6 @@ class rest_api{
       );
       if (res.statusCode == 200) {
         jsonString = json.decode(res.body) as List;
-
       } else {
         // show error
         print(res.statusCode);
@@ -421,16 +422,15 @@ class rest_api{
     }
     return jsonString;
   }
+
   Future getinfo2() async {
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     String B = prefs.get("passpass").toString();
     var jsonString;
     try {
-
       http.Response res = await http.get(
-        Uri.parse(
-            utils.basurl+'profileseller?useremail=$A'),
+        Uri.parse(utils.basurl + 'profileseller?useremail=$A'),
         headers: {'Content-Type': 'application/json'},
         // body: {
         //       'useremail':A,
@@ -438,7 +438,6 @@ class rest_api{
       );
       if (res.statusCode == 200) {
         jsonString = json.decode(res.body) as List;
-
       } else {
         // show error
         print(res.statusCode);
@@ -451,16 +450,15 @@ class rest_api{
     }
     return jsonString;
   }
+
   Future getinfo3() async {
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
     String B = prefs.get("passpass").toString();
     var jsonString;
     try {
-
       http.Response res = await http.get(
-        Uri.parse(
-            utils.basurl+'profildel?useremail=$A'),
+        Uri.parse(utils.basurl + 'profildel?useremail=$A'),
         headers: {'Content-Type': 'application/json'},
         // body: {
         //       'useremail':A,
@@ -468,7 +466,6 @@ class rest_api{
       );
       if (res.statusCode == 200) {
         jsonString = json.decode(res.body) as List;
-
       } else {
         // show error
         print(res.statusCode);
@@ -481,8 +478,9 @@ class rest_api{
     }
     return jsonString;
   }
-  Future <List<Product>> most() async {
-    late  List<Product> myList=[];
+
+  Future<List<Product>> most() async {
+    late List<Product> myList = [];
 
     http.Response res = await http.get(Uri.parse(utils.basurl + 'viewpro'),
         headers: {'Content-Type': 'application/json'});
@@ -493,159 +491,153 @@ class rest_api{
 
       var jsonString = json.decode(res.body);
       List<Product> list =
-      List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
+          List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
       myList = list;
-
     } else {
-
       throw Exception('Failed to load album');
-    } return myList;
+    }
+    return myList;
   }
-  Future <List<Product1>> cart() async {
-    late  List<Product1> myList2=[];
+
+  Future<List<Product1>> cart() async {
+    late List<Product1> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewcart?email=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewcart?email=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+          List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-  Future <List<Product1>> viewbook() async {
-    late  List<Product1> myList2=[];
+
+  Future<List<Product1>> viewbook() async {
+    late List<Product1> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbook?email=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewbook?email=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+          List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-    Future <List<Product1>> viewbuy() async {
-    late  List<Product1> myList2=[];
+
+  Future<List<Product1>> viewbuy() async {
+    late List<Product1> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuy?email=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewbuy?email=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+          List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-  Future <List<Product1>> viewbuyfromdil(String A ,String B) async {
-    late  List<Product1> myList2=[];
-     
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuydil?email=$A&market=$B'),
+
+  Future<List<Product1>> viewbuyfromdil(String A, String B) async {
+    late List<Product1> myList2 = [];
+
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewbuydil?email=$A&market=$B'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+          List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-     Future <List<Product1>> viewbuysuper() async {
-    late  List<Product1> myList2=[];
+
+  Future<List<Product1>> viewbuysuper() async {
+    late List<Product1> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("order").toString();
     String B = prefs.get("supermarket").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewbuy2?email=$A&supername=$B'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewbuy2?email=$A&supername=$B'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product1> list =
-      List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
+          List<Product1>.from(jsonString.map((i) => Product1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-  Future <List<Product>> most2(String name) async {
-    late  List<Product> myList=[];
 
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewproseller?namesupermarket=$name'),
+  Future<List<Product>> most2(String name) async {
+    late List<Product> myList = [];
+
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewproseller?namesupermarket=$name'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<Product> list =
-      List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
+          List<Product>.from(jsonString.map((i) => Product.fromJson(i)));
 // List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
       myList = list;
-
     } else {
-
       throw Exception('Failed to load album');
-    } return myList;
+    }
+    return myList;
   }
-Future <List<test11>> test() async {
-    late  List<test11> myList=[];
+
+  Future<List<test11>> test() async {
+    late List<test11> myList = [];
 
     http.Response res = await http.get(Uri.parse(utils.basurl + 'viewloca'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<test11> list =
-      List<test11>.from(jsonString.map((i) => test11.fromJson(i)));
+          List<test11>.from(jsonString.map((i) => test11.fromJson(i)));
 // List<Product> products = jsonString.map((jsonMap) => Product.fromJson(jsonMap)).toList();
       myList = list;
-
     } else {
-
       throw Exception('Failed to load album');
-    } return myList;
+    }
+    return myList;
   }
+
   Future<List<TaxiModel>> FetchTaxis() async {
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
-      print(res);
+    print(res);
     var body = json.decode(res.body) as List;
-  
+
     return body.map((i) => TaxiModel.fromJson(i)).toList();
-
   }
-
-   
 
 // Future<void> myAsyncMethod() async {
 //   try {
@@ -655,180 +647,175 @@ Future <List<test11>> test() async {
 //   }
 // }
 
-  Future deleteitems(int id)async{
-  
-    http.Response res = await http.get(Uri.parse(utils.basurl+'deletefromcart?id=$id'),
+  Future deleteitems(int id) async {
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'deletefromcart?id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
     } else {
-
       throw Exception('Failed to load album');
     }
   }
 
-   Future book(int id)async{
-  
-    http.Response res = await http.get(Uri.parse(utils.basurl+'book?id=$id'),
+  Future book(int id) async {
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'book?id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
     } else {
-
-      throw Exception('Failed to load album');
-    }
-  }
-   
-   Future buy(int id)async{
-    http.Response res = await http.get(Uri.parse(utils.basurl+'buy?id=$id'),
-        headers: {'Content-Type': 'application/json'});
-    if (res.statusCode == 200) {
-    } else {
-
       throw Exception('Failed to load album');
     }
   }
 
-  Future addorder()async{
-  final prefs = await SharedPreferences.getInstance();
+  Future buy(int id) async {
+    http.Response res = await http.get(Uri.parse(utils.basurl + 'buy?id=$id'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
+  Future addorder() async {
+    final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl+'addorder?emailcust=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'addorder?emailcust=$A'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
-
     } else {
-
       throw Exception('Failed to load album');
     }
   }
-   Future takeorder(int id)async{
-  final prefs = await SharedPreferences.getInstance();
+
+  Future takeorder(int id) async {
+    final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl+'Takesorder?delname=$A&id=$id'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'Takesorder?delname=$A&id=$id'),
         headers: {'Content-Type': 'application/json'});
     if (res.statusCode == 200) {
-
-    } else {
-
-      throw Exception('Failed to load album');
-    }
-  }
-    Future upstate(int id ,String st)async{
- 
-    http.Response res = await http.get(Uri.parse(utils.basurl+'updatestate?state=$st&id=$id'),
-        headers: {'Content-Type': 'application/json'});
-    if (res.statusCode == 200) {
-
     } else {
       throw Exception('Failed to load album');
     }
   }
+
+  Future upstate(int id, String st) async {
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'updatestate?state=$st&id=$id'),
+        headers: {'Content-Type': 'application/json'});
+    if (res.statusCode == 200) {
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
   //////////////////////////////////////////////////////
-  Future <List<filter1>> filter() async {
-    late  List<filter1> myList2=[];
+  Future<List<filter1>> filter() async {
+    late List<filter1> myList2 = [];
     http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<filter1> list =
-      List<filter1>.from(jsonString.map((i) => filter1.fromJson(i)));
+          List<filter1>.from(jsonString.map((i) => filter1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-   Future <List<super1>> allsupermarkt() async {
-    late  List<super1> myList2=[];
-   
+
+  Future<List<super1>> allsupermarkt() async {
+    late List<super1> myList2 = [];
+
     http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder1'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<super1> list =
-      List<super1>.from(jsonString.map((i) => super1.fromJson(i)));
+          List<super1>.from(jsonString.map((i) => super1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
- Future <List<super2>> odrdertosupermarkt() async {
-    late  List<super2> myList2=[];
+
+  Future<List<super2>> odrdertosupermarkt() async {
+    late List<super2> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("supermarket").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'vieworder2?name=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'vieworder2?name=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<super2> list =
-      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+          List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-   Future <List<super2>> trackord() async {
-    late  List<super2> myList2=[];
+
+  Future<List<super2>> trackord() async {
+    late List<super2> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'trackorder?name=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'trackorder?name=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
       var jsonString = json.decode(res.body);
       List<super2> list =
-      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+          List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-   Future <List<super2>> stateorder(int id) async {
-    late  List<super2> myList2=[];
+
+  Future<List<super2>> stateorder(int id) async {
+    late List<super2> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'finalorder?name=$A&id=$id'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'finalorder?name=$A&id=$id'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
       var jsonString = json.decode(res.body);
       List<super2> list =
-      List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
+          List<super2>.from(jsonString.map((i) => super2.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
-  Future <List<String1>> viewnotifi() async {
-    late  List<String1> myList2=[];
+
+  Future<List<String1>> viewnotifi() async {
+    late List<String1> myList2 = [];
     final prefs = await SharedPreferences.getInstance();
     String A = prefs.get("emailemail").toString();
-    http.Response res = await http.get(Uri.parse(utils.basurl + 'viewnotif?super=$A'),
+    http.Response res = await http.get(
+        Uri.parse(utils.basurl + 'viewnotif?super=$A'),
         headers: {'Content-Type': 'application/json'});
 
     if (res.statusCode == 200) {
-
-
       var jsonString = json.decode(res.body);
       List<String1> list =
-      List<String1>.from(jsonString.map((i) => String1.fromJson(i)));
+          List<String1>.from(jsonString.map((i) => String1.fromJson(i)));
       myList2 = list;
-
     } else {
       throw Exception('Failed to load album');
-    } return myList2;
+    }
+    return myList2;
   }
 }
