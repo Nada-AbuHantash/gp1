@@ -16,11 +16,8 @@ import 'package:geolocator/geolocator.dart';
 
 import '../chat/ChatRoom.dart';
 
-String x0 = 'Unknown';
-String y0 = 'Unknown';
-
-double x1 = 0;
-double x2 = 0;
+double x0 = 0;
+double y0 = 0;
 
 class addBasket extends StatefulWidget {
   const addBasket({Key? key}) : super(key: key);
@@ -46,43 +43,20 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   // late final bool isme;
-
   final TextEditingController _search = TextEditingController();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   @override
   void initState() {
     super.initState();
-    _getLocation();
-
-    print(x0);
-    print(y0);
-    x1 = double.parse(x0);
-    x2 = double.parse(y0);
-    print(x1);
-    print("marah");
-    print(x2);
-    //  _latPoint = double.parse(x0);
-    //  _longPoint = double.parse(y0);
     distance = [];
     pos();
+
+    /// pos();
     // super.initState();
     fetchAllPoints();
     WidgetsBinding.instance!.addObserver(this);
     setStatus("Online");
-  }
-
-  Future<void> _getLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.high);
-      setState(() {
-        x0 = position.latitude.toString();
-        y0 = position.longitude.toString();
-      });
-    } catch (e) {
-      print(e);
-    }
   }
 
   void setStatus(String status) async {
@@ -133,17 +107,8 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
 
   bool isChecked = false;
 
-  double _latPoint = x1;
-  double _longPoint = x2;
-  // double _latPoint = x0;
-  // double _longPoint = y0;
-
-  pos() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(position.latitude);
-    print(position.longitude);
-  }
+  double _latPoint = x0;
+  double _longPoint = y0;
 
   @override
   List<TaxiModel> _points = []; //x and y points
@@ -334,7 +299,7 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
   }
 
   Future<List<TaxiModel>> FetchTaxis() async {
-    const String basurl = "http://192.168.1.12:3000/";
+    const String basurl = "http://192.168.245.52:3000/";
     var res = await http.get(Uri.parse(utils.basurl + "viewloca"));
     var body = jsonDecode(res.body) as List;
 
@@ -353,10 +318,9 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
           double.parse(_points.elementAt(i).lat),
           double.parse(_points.elementAt(i).long)));
     }
-
-    print("hi before");
     print(x0);
     print(y0);
+    print("hi before");
     print(_points.elementAt(0).lat);
     for (int i = 0; i < _diff.length; i++) {
       for (int j = i + 1; j < _points.length; j++) {
@@ -371,7 +335,7 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
       }
     }
     print("hi after");
-    print(_diff.elementAt(0).lat);
+    print(_diff.elementAt(0).long);
     print(distance);
 
     return _diff;
@@ -384,4 +348,13 @@ class _MyMap extends State<MyMap> with WidgetsBindingObserver {
         cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
     return 12742 * asin(sqrt(a));
   }
+}
+
+pos() async {
+  Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.high);
+  print(position.latitude);
+  print(position.longitude);
+  x0 = position.latitude;
+  y0 = position.longitude;
 }
