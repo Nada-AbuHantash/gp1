@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/view/dilevery/cust.dart';
 import 'package:flutter2/view/dilevery/homedil.dart';
 import 'package:flutter2/view/dilevery/markets.dart';
@@ -27,11 +28,11 @@ class orders extends StatelessWidget {
                 labelColor: globalcolors.textcolor,
                 tabs: [
                   Tab(
-                    child: Text("Markets"),
+                    child: Text("${getLang(context,"markets")}"),
                     icon: Icon(Icons.checklist_rtl_sharp),
                   ),
                   Tab(
-                    child: Text("track"),
+                    child: Text("${getLang(context,"track")}"),
                     icon: Icon(Icons.track_changes),
                   ),
                 ],

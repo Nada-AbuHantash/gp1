@@ -40,7 +40,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-SharedPreferences ?mySharedPreferences;
+
+SharedPreferences? mySharedPreferences;
 Sharedsession language = new Sharedsession();
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -57,16 +58,15 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   print('A bg message just showed up : ${message.messageId}');
 }
 
-void main() async{
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-      mySharedPreferences = await SharedPreferences.getInstance();
-     await mySharedPreferences!.setString("translations","en");
-    language.savelang("en");
-    WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  mySharedPreferences = await SharedPreferences.getInstance();
+  await mySharedPreferences!.setString("translations", "en");
+  language.savelang("en");
+  WidgetsFlutterBinding.ensureInitialized();
 
-
-    await Firebase.initializeApp(
+  await Firebase.initializeApp(
     name: 'Sales',
     options: FirebaseOptions(
       apiKey: "XXX",
@@ -81,12 +81,12 @@ void main() async{
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
 
-   await  FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
     sound: true,
   );
-    
+
   runApp(const MyApp());
 }
 
@@ -98,8 +98,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -109,26 +107,27 @@ class _MyAppState extends State<MyApp> {
         )
       ],
       child: GetMaterialApp(
-      debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         //home:addBasket(),//chatGPT
-         home:login(),
-       
-       localizationsDelegates: [
+        home: login(),
+
+        localizationsDelegates: [
           applocal.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
         ],
-         
-         supportedLocales: [
+
+        supportedLocales: [
           const Locale("en", ""),
           const Locale("ar", ""),
         ],
-       localeResolutionCallback: (currentLang, supportLang) {
+        localeResolutionCallback: (currentLang, supportLang) {
           if (currentLang != null) {
             for (Locale locale in supportLang) {
               if (locale.languageCode == currentLang.languageCode) {
-               mySharedPreferences!.setString("translations",currentLang.languageCode); 
+                mySharedPreferences!
+                    .setString("translations", currentLang.languageCode);
                 //  language.savelang(currentLang.languageCode);
                 return currentLang;
               }
@@ -136,13 +135,9 @@ class _MyAppState extends State<MyApp> {
           }
           return supportLang.first;
         },
-    ),
+      ),
     );
   }
 }
 
-
 class ChangeLang with ChangeNotifier {}
-
-
-

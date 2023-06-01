@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/models/product1.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
@@ -114,7 +115,7 @@ class _homedilState extends State<homedil> {
                           children: [
                             Text(
                              
-                              "count: ${post.amount}, price: ${post.price} ₪",
+                              "${getLang(context,"count")}: ${post.amount}, ${getLang(context,"totp")}: ${post.price} ₪",
 
                               // "count: 3",
                               style:  TextStyle(
@@ -155,7 +156,7 @@ class _homedilState extends State<homedil> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: globalcolors.notetcolor,
-          title: Text('This order contains'),
+          title: Text('${getLang(context,"thiso")}'),
         ),
         body: Container(
           height: size.height,
@@ -196,7 +197,7 @@ class _homedilState extends State<homedil> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     ElevatedButton(
-                      child: Text('Take the order !'),
+                      child: Text('${getLang(context,"tr1")}'),
                       style: ElevatedButton.styleFrom(
                         primary: globalcolors.notetcolor,
                         onPrimary: Colors.white,

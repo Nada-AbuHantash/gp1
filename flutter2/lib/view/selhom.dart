@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'package:flutter2/view/addproduct.dart';
+import 'package:flutter2/view/chat/searchchat.dart';
 import 'package:flutter2/view/map/marah.dart';
 import 'package:flutter2/view/homesel.dart';
 import 'package:flutter2/view/map/map.dart';
@@ -119,8 +120,8 @@ class _selhomState extends State<selhom> {
               label: "${getLang(context, "p6")}",
             ),
             BottomNavigationBarItem(
-              icon: const Icon(Icons.location_pin),
-              label: "${getLang(context, "p7")}",
+              icon: const Icon(Icons.chat),
+              label: "${getLang(context, "p4")}",
             ),
 
             BottomNavigationBarItem(
@@ -143,7 +144,7 @@ class _selhomState extends State<selhom> {
       case 2:
         return  addproduct();
       case 3:
-        return  map();
+        return  searchchat();
       case 4:
         return  nav2();
       default:
