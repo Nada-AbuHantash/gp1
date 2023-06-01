@@ -254,7 +254,43 @@ class _cart4State extends State<cart4> {
                         onSurface: Colors.grey,
                       ),
                       onPressed: () async {
-                        addO();
+                        await showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (BuildContext context) {
+                              return new AlertDialog(
+                                title: Text(
+                                  'Your bill will +5₪  if it less than 50₪ , +10₪ if it less than 100 , +20₪ for more .',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color.fromARGB(255, 26, 47, 99),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                actions: <Widget>[
+                                  Center(
+                                    child: Column(
+                                      children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ElevatedButton(
+                                          child: Text('buy'),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: globalcolors.notetcolor,
+                                            onPrimary: Colors.white,
+                                            onSurface: Colors.grey,
+                                          ),
+                                          onPressed: () async {
+                                            addO();
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              );
+                            });
                       },
                     ),
                   ]),
