@@ -295,7 +295,14 @@ pool.query(query3,function (error, results55) {
         pool.query(query9,function (error, results0) {
     if (error) { response.status(400).send(error); }
     else{
-        //  response.status(200)
+        let query10 = `UPDATE cart SET flag=3 WHERE emailcust='${request.query.emailcust}' and flag=2 `;
+        pool.query(query10,function (error, results0) {
+    if (error) { response.status(400).send(error); }
+    else{
+       
+    }
+
+});
     }
 
 });
@@ -725,7 +732,7 @@ let query1=`Select * from customer where username='${request.query.email}'  `;
             response.status(400).send('Error in database operation');
         } else {
             const e=results[0].useremail;
-            let query1=`Select * from cart where emailcust='${e}' and flag=2 and namesuper='${request.query.market}' `;
+            let query1=`Select * from cart where emailcust='${e}' and flag=3 and namesuper='${request.query.market}' `;
             pool.query(query1,function (error, results) {
                 if (error) {
                     
@@ -833,7 +840,7 @@ app.post('/registerdelivery', function (request, response) {
     console.log(request.body.deliveryplace);
     console.log("okkkkkkkkkk");
     let query1 = "INSERT INTO delivery (deliveryname,deliveryemail,deliverypass,deliveryphone,deliveryplace,flag_req) VALUES('" + username
-        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "','"+0+"')";
+        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "','"+1+"')";
     //let query1="Select * from nada where name=? and pass=?";
 
     pool.query(query1, [username, useremail, userpass, userphone, userplace], function (error, data, results) {
@@ -862,7 +869,7 @@ app.post('/registerseller', function (request, response) {
     console.log(request.body.sellerplace);
     console.log("okkkkkkkkkk");
     let query1 = "INSERT INTO sellers (sellername,selleremail,sellerpass,sellerphone,sellerplace,flag_req) VALUES('" + username
-        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "','"+0+"') ";
+        + "','" + useremail + "','" + userpass + "','" + userphone + "','" + userplace + "','"+1+"') ";
     //let query1="Select * from nada where name=? and pass=?";
 
     pool.query(query1, [username, useremail, userpass, userphone, userplace], function (error, data, results) {

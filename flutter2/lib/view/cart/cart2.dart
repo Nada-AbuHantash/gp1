@@ -174,11 +174,11 @@ class _cart2State extends State<cart2> {
                             onPressed: () async {
                               buy(post.id);
                               print("marah1");
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => mycart()),
-                              );
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => mycart()),
+                              // );
                             },
                           ),
                           SizedBox(width: 16.0),
@@ -196,11 +196,11 @@ class _cart2State extends State<cart2> {
                               var time =
                                   '${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}';
                               print(time);
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => mycart()),
-                              );
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) => mycart()),
+                              // );
                             },
                           ),
                           IconButton(

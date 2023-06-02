@@ -193,10 +193,10 @@ class _ProductPageState extends State<ProductPage> {
                   onPressed: () {
                     addtocart(widget.name, _quantity, widget.id);
                     print(_quantity);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => mycart()),
-                    );
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => mycart()),
+                    // );
                   },
                 ),
               ],
