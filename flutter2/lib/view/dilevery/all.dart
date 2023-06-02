@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/models/filtert.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
@@ -34,13 +35,6 @@ void _runFilter(String enteredKeyword) {
   myList = results;
 }
 
-
-
-// class all extends StatefulWidget {
-//   const all({Key? key, required String date}) : super(key: key);
-//   @override
-//   _allState createState() => _allState();
-// }
 
 class _allState extends State<all> {
 
@@ -134,25 +128,25 @@ class _allState extends State<all> {
                             fontSize: 23, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
                         ),
                         Text(
-                          "Market name: ${ post.marketName}",
+                          "${getLang(context,"s4")}: ${ post.marketName}",
 
                           //"supermarket name",
                           style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
                         ),
                         Text(
-                          "the number of pieces: ${ post.amount}",
+                          "${getLang(context,"pic")}: ${ post.amount}",
 
                           //"supermarket name",
                           style:  TextStyle(fontSize: 17,color: globalcolors.textcolor,),
                         ),
                         Text(
-                          "ID: ${post.id}",
+                          "${getLang(context,"id2")}: ${post.id}",
 
                           // "count: 3",
                           style:  TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.notetcolor,),
                         ),Text(
-                          "Total price: ${post.price} ₪",
+                          "${getLang(context,"totp")}: ${post.price} ₪",
                           // "price:15 ₪",
                           style:  TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
@@ -182,9 +176,22 @@ class _allState extends State<all> {
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
+
       child: Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text('${getLang(context,"mypage")}'),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          foregroundColor: globalcolors.textcolor,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
 
+        ),
         body: Container(
           height: size.height,
           child: Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter2/components/applocal.dart';
 import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
@@ -173,7 +174,7 @@ decoration: BoxDecoration(
             children: [
               Icon(Icons.notifications), // Replace 'icon_name' with the desired icon
               SizedBox(width: 8.0), // Add some space between the icon and text
-              Text('Notifications'),
+              Text('${getLang(context,"p2")}'),
             ],
           ),
         ),

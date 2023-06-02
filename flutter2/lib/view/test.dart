@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -43,64 +44,25 @@ class _testState extends State<test> {
         children: [
 
           Container(
-              height: 130,
+              height: 500,
               margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
 
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          // post.productName,
-                          "custmer name",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: Colors.green,),
+                child: Column(
+
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: WebView(
+                          initialUrl: 'https://goo.gl/maps/wwzraUoFRFmLHLXr9',
+                          javascriptMode: JavascriptMode.unrestricted,
                         ),
-                        Text(
-                          // post.productName,
-                          "product name",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-                        Text(
-                          //   post.marketName,
-                          "supermarket name",
-                          style:  TextStyle(fontSize: 17,color: Colors.red,fontWeight: FontWeight.bold,),
-                        ),
-
-                        Text(
-                          //  "count: ${post.amount}",
-                          "count: 3",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),Text(
-                          //"price: ${post.price} ₪",
-                          "price:15 ₪",
-                          style:  TextStyle(
-                            fontSize: 17, fontWeight: FontWeight.bold,color: globalcolors.textcolor,),
-                        ),
-
-
-
-
-                      ],
-                    ),
-                    // Image.asset(post.image,width: 100,height: 100,),
-                    // Image.asset('assets/images/p4.jpg',width: 100,height: 100,),
-
-
-                  ],
-                ),
+                      ),
+                    ]),
 
               )),
-          Divider(
-            color: Colors.black, // Specify the color of the line
-            thickness: 3.0, // Specify the thickness of the line
-          ),
+
         ],
       ),
 

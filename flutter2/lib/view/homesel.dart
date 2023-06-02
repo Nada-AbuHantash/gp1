@@ -4,6 +4,7 @@ import 'package:flutter2/models/product.dart';
 import 'package:flutter2/utils/globalColors.dart';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter2/view/map/map.dart';
 import 'package:flutter2/view/notfication1.dart';
 import 'package:flutter2/view/rest_api.dart';
 import 'package:flutter/material.dart';
@@ -285,6 +286,16 @@ flagg=1;
           centerTitle: true,
           backgroundColor: Colors.white,
           foregroundColor: globalcolors.textcolor,
+          leading: IconButton(
+            icon: Icon(Icons.location_pin),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  map()),
+              );
+              // Perform the desired action when the back button is pressed
+            },
+          ),
           actions: [
             PopupMenuButton<String>(
               icon: Icon(Icons.dehaze, color: globalcolors.textcolor),
