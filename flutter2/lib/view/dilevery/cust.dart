@@ -328,7 +328,8 @@ class _custState extends State<cust> {
                     SizedBox(height: 80),
                     Visibility(
                       visible: isAnimationVisible,
-                      child: Lottie.network(
+                      child:
+                      Lottie.network(
                         'https://assets9.lottiefiles.com/packages/lf20_ardajn6t.json',
                         height: 200,
                         width: 200,
@@ -336,6 +337,7 @@ class _custState extends State<cust> {
                       ),
                     ),
                     SizedBox(height: 80),
+
                   ],
                 ),
               ],

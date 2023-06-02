@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter2/utils/globalColors.dart';
+import 'package:flutter2/view/home.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:hexcolor/hexcolor.dart';
 import '../../components/applocal.dart';
 import '../signup.dart';
-
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -33,40 +33,49 @@ class _AboutScreenState extends State<AboutScreen> {
 
   @override
   Widget build(BuildContext context) {
-     double width=MediaQuery.of(context).size.width;
-  double height=MediaQuery.of(context).size.height;
-     List<DataModel> dataList=
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    List<DataModel> dataList = [
+      DataModel("${getLang(context, "about1")}", "assets/images/shop11.png"),
+      DataModel("${getLang(context, "about2")}", "assets/images/market.png"),
+      DataModel("${getLang(context, "about3")}", "assets/images/delivery.png"),
+    ];
+    Widget carouselView(int index) {
+      return carouselCard(dataList[index]);
+    }
 
-     [
-       DataModel(
-
-           "${getLang(context, "about1")}",
-           "assets/images/shop11.png"),
-
-       DataModel(
-           "${getLang(context, "about2")}",
-           "assets/images/market.png"),
-       DataModel(
-           "${getLang(context, "about3")}",
-           "assets/images/delivery.png"),
-     ];
-     Widget carouselView(int index) {
-       return carouselCard(dataList[index]);
-     }
     return Scaffold(
+      backgroundColor: globalcolors.besiccolor,
+      appBar: AppBar(
+        elevation: 0,
+        title: Text(""),
+        centerTitle: true,
+        backgroundColor: globalcolors.besiccolor,
+        foregroundColor: globalcolors.textcolor,
+        leading: IconButton(
+          icon: Icon(Icons.home),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => home()),
+            );
+            // Perform the desired action when the back button is pressed
+          },
+        ),
+      ),
       body: Container(
         color: globalcolors.besiccolor,
-                width: width,
-                height: height,
+        width: width,
+        height: height,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40),
           child: Column(
             children: <Widget>[
-               Padding(
+              Padding(
                 padding: EdgeInsets.all(40.0),
                 child: Center(
                   child: Text("${getLang(context, "m1")}",
-                       textAlign: TextAlign.center,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 26, 75, 117),
@@ -75,7 +84,6 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               AspectRatio(
                 aspectRatio: 0.90,
-                
                 child: PageView.builder(
                     itemCount: dataList.length,
                     physics: const ClampingScrollPhysics(),
@@ -88,36 +96,35 @@ class _AboutScreenState extends State<AboutScreen> {
           ),
         ),
       ),
-         bottomNavigationBar: Container(
-      height: 70,
-      color: globalcolors.besiccolor,
-      alignment: Alignment.center,
-      child: Row( 
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-         Text("${getLang(context, "m")}",
-        style: TextStyle(color: globalcolors.textcolor,fontSize: 16),),
-        InkWell(
-          onTap: () => {
-             navigator?.pushReplacement(MaterialPageRoute(builder: (_)=>signup()))
-          },
-          
-          child: Text("${getLang(context, "Signup")}",
-          style: TextStyle(
-color: globalcolors.notetcolor,
-fontSize: 16,
-
-          ),
-          ),
-        )
-      ],
-
+      bottomNavigationBar: Container(
+        height: 70,
+        color: globalcolors.besiccolor,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "${getLang(context, "m")}",
+              style: TextStyle(color: globalcolors.textcolor, fontSize: 16),
+            ),
+            InkWell(
+              onTap: () => {
+                navigator?.pushReplacement(
+                    MaterialPageRoute(builder: (_) => signup()))
+              },
+              child: Text(
+                "${getLang(context, "Signup")}",
+                style: TextStyle(
+                  color: globalcolors.notetcolor,
+                  fontSize: 16,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
-    ),
     );
   }
-
-
 
   Widget carouselCard(DataModel data) {
     return Column(
@@ -144,10 +151,10 @@ fontSize: 16,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 30,left: 12,right: 12),
+          padding: const EdgeInsets.only(top: 30, left: 12, right: 12),
           child: Text(
             "${data.title}",
-              textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
             style: const TextStyle(
                 color: Color.fromARGB(255, 26, 75, 117),
                 fontSize: 17,
@@ -158,12 +165,12 @@ fontSize: 16,
     );
   }
 }
+
 class DataModel {
   final String title;
   final String imagename;
   DataModel(
-      this.title,
-      this.imagename,
-      );
+    this.title,
+    this.imagename,
+  );
 }
-
