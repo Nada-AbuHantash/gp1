@@ -240,7 +240,7 @@ class _addproductState extends State<addproduct> {
                                 height: 1,
                                 color: globalcolors.textcolor,
                               ),
-                              enabled: false,
+                              enabled: true,
                             ),
                           ),
                         ),

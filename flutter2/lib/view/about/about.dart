@@ -63,36 +63,39 @@ class _AboutScreenState extends State<AboutScreen> {
           },
         ),
       ),
-      body: Container(
-        color: globalcolors.besiccolor,
-        width: width,
-        height: height,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40),
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(40.0),
-                child: Center(
-                  child: Text("${getLang(context, "m1")}",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 26, 75, 117),
-                          fontSize: 30)),
+      body: SingleChildScrollView(
+        // Wrap the Column in SingleChildScrollView
+        child: Container(
+          color: globalcolors.besiccolor,
+          width: width,
+          height: height,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.all(40.0),
+                  child: Center(
+                    child: Text("${getLang(context, "m1")}",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 26, 75, 117),
+                            fontSize: 30)),
+                  ),
                 ),
-              ),
-              AspectRatio(
-                aspectRatio: 0.90,
-                child: PageView.builder(
-                    itemCount: dataList.length,
-                    physics: const ClampingScrollPhysics(),
-                    controller: _pageController,
-                    itemBuilder: (context, index) {
-                      return carouselView(index);
-                    }),
-              )
-            ],
+                AspectRatio(
+                  aspectRatio: 0.90,
+                  child: PageView.builder(
+                      itemCount: dataList.length,
+                      physics: const ClampingScrollPhysics(),
+                      controller: _pageController,
+                      itemBuilder: (context, index) {
+                        return carouselView(index);
+                      }),
+                )
+              ],
+            ),
           ),
         ),
       ),
